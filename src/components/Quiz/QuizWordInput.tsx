@@ -4,17 +4,18 @@ import { Button } from "@/components/ui/button";
 import { useQuizStore } from "../../stores/quizStore";
 import { useLibraryStore } from "../../stores/libraryStore";
 import { useStreakStore } from "../../stores/streakStore";
+import { StageClearModal } from "./StageClearModal";
 
 export const QuizWordInput = () => {
   const [input, setInput] = useState("");
+  const [showModal, setShowModal] = useState(false);
   const {
     currentWordIndex,
     wordsPerStage,
     currentStage,
     nextWord,
     markCorrect,
-    resetStage,
-    incrementStage,
+    nextStage,
   } = useQuizStore();
   const { addWord } = useLibraryStore();
   const { incrementStreak } = useStreakStore();
@@ -37,26 +38,27 @@ export const QuizWordInput = () => {
 
   useEffect(() => {
     if (isStageComplete) {
-      // ステージクリア → 次ステージ解放
       incrementStreak();
-      resetStage();
-      incrementStage();
+      setShowModal(true);
     }
+    // eslint-disable-next-line
   }, [isStageComplete]);
 
-  if (isStageComplete)
-    return <p className="text-green-600 font-bold">ステージクリア！🎉</p>;
-
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-      <Input
-        placeholder="単語を入力"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <Button type="submit" variant="default">
-        確認
-      </Button>
-    </form>
+    <>
+      {!isStageComplete && (
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+          <Input
+            placeholder="単語を入力"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <Button type="submit" variant="default">
+            確認
+          </Button>
+        </form>
+      )}
+      <StageClearModal isOpen={showModal} onNextStage={nextStage} />
+    </>
   );
 };

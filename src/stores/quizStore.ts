@@ -9,7 +9,7 @@ interface QuizState {
   nextWord: () => void;
   markCorrect: (word: string) => void;
   resetStage: () => void;
-  incrementStage: () => void;
+  nextStage: () => void;
 }
 
 export const useQuizStore = create(
@@ -27,8 +27,13 @@ export const useQuizStore = create(
       markCorrect: (word) =>
         set((state) => ({ correctWords: [...state.correctWords, word] })),
       resetStage: () => set({ currentWordIndex: 0, correctWords: [] }),
-      incrementStage: () =>
-        set((state) => ({ currentStage: state.currentStage + 1 })),
+      nextStage: () => {
+        const { currentStage, wordsPerStage, resetStage } = get();
+        if (currentStage < wordsPerStage.length) {
+          set({ currentStage: currentStage + 1 });
+        }
+        resetStage();
+      },
       getProgress: () => {
         const { currentWordIndex, wordsPerStage, currentStage } = get();
         const total = wordsPerStage[currentStage - 1].length;
