@@ -5,25 +5,32 @@ interface QuizState {
   currentStage: number;
   currentWordIndex: number;
   correctWords: string[];
-  words: string[];
+  wordsPerStage: string[][];
   nextWord: () => void;
   markCorrect: (word: string) => void;
+  resetStage: () => void;
 }
 
 export const useQuizStore = create(
   persist<QuizState>(
-    (set) => ({
+    (set, get) => ({
       currentStage: 1,
       currentWordIndex: 0,
       correctWords: [],
-      words: ["apple", "book", "desk", "pen", "note"], // MVP固定
-      nextWord: () =>
-        set((state) => ({ currentWordIndex: state.currentWordIndex + 1 })),
+      wordsPerStage: [
+        ["apple", "book", "desk", "pen", "note"],
+        ["chair", "table", "lamp", "bag", "clock"],
+      ],
+      nextWord: () => {
+        const { currentWordIndex, wordsPerStage, currentStage } = get();
+        if (currentWordIndex + 1 < wordsPerStage[currentStage - 1].length) {
+          set({ currentWordIndex: currentWordIndex + 1 });
+        }
+      },
       markCorrect: (word) =>
         set((state) => ({ correctWords: [...state.correctWords, word] })),
+      resetStage: () => set({ currentWordIndex: 0, correctWords: [] }),
     }),
-    {
-      name: "quiz-storage", // localStorage key
-    }
+    { name: "quiz-storage" }
   )
 );
