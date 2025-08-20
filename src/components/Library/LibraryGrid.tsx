@@ -1,7 +1,7 @@
 import { useLibraryStore } from "../../stores/libraryStore";
 import { useQuizStore } from "../../stores/quizStore";
 import { AnimatedWordCard } from "./AnimatedWordCard";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 
 export const LibraryGrid = () => {
   const { collectedWords } = useLibraryStore();
