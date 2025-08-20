@@ -9,6 +9,7 @@ interface QuizState {
   nextWord: () => void;
   markCorrect: (word: string) => void;
   resetStage: () => void;
+  incrementStage: () => void;
 }
 
 export const useQuizStore = create(
@@ -21,15 +22,18 @@ export const useQuizStore = create(
         ["apple", "book", "desk", "pen", "note"],
         ["chair", "table", "lamp", "bag", "clock"],
       ],
-      nextWord: () => {
-        const { currentWordIndex, wordsPerStage, currentStage } = get();
-        if (currentWordIndex + 1 < wordsPerStage[currentStage - 1].length) {
-          set({ currentWordIndex: currentWordIndex + 1 });
-        }
-      },
+      nextWord: () =>
+        set((state) => ({ currentWordIndex: state.currentWordIndex + 1 })),
       markCorrect: (word) =>
         set((state) => ({ correctWords: [...state.correctWords, word] })),
       resetStage: () => set({ currentWordIndex: 0, correctWords: [] }),
+      incrementStage: () =>
+        set((state) => ({ currentStage: state.currentStage + 1 })),
+      getProgress: () => {
+        const { currentWordIndex, wordsPerStage, currentStage } = get();
+        const total = wordsPerStage[currentStage - 1].length;
+        return (currentWordIndex / total) * 100;
+      },
     }),
     { name: "quiz-storage" }
   )

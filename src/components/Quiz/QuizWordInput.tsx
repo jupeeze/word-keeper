@@ -14,6 +14,7 @@ export const QuizWordInput = () => {
     nextWord,
     markCorrect,
     resetStage,
+    incrementStage,
   } = useQuizStore();
   const { addWord } = useLibraryStore();
   const { incrementStreak } = useStreakStore();
@@ -39,6 +40,7 @@ export const QuizWordInput = () => {
       // ステージクリア → 次ステージ解放
       incrementStreak();
       resetStage();
+      incrementStage();
     }
   }, [isStageComplete]);
 
