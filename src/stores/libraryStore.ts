@@ -8,13 +8,14 @@ interface LibraryState {
 
 export const useLibraryStore = create(
   persist<LibraryState>(
-    (set) => ({
+    (set, get) => ({
       collectedWords: [],
-      addWord: (word) =>
-        set((state) => ({ collectedWords: [...state.collectedWords, word] })),
+      addWord: (word) => {
+        if (!get().collectedWords.includes(word)) {
+          set({ collectedWords: [...get().collectedWords, word] });
+        }
+      },
     }),
-    {
-      name: "library-storage", // localStorage key
-    }
+    { name: "library-storage" }
   )
 );

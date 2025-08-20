@@ -1,5 +1,5 @@
 import { useQuizStore } from "../../stores/quizStore";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export const StageBackground: React.FC<{ children: React.ReactNode }> = ({
   children,

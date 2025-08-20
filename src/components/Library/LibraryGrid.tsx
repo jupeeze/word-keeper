@@ -1,24 +1,24 @@
 import { useLibraryStore } from "../../stores/libraryStore";
-import { Card, CardContent } from "@/components/ui/card";
+import { useQuizStore } from "../../stores/quizStore";
+import { AnimatedWordCard } from "./AnimatedWordCard";
+import { motion, AnimatePresence } from "motion/react";
 
 export const LibraryGrid = () => {
   const { collectedWords } = useLibraryStore();
-  const allWords = ["apple", "book", "desk", "pen", "note"];
+  const { wordsPerStage } = useQuizStore();
+
+  // 全単語リストを平坦化
+  const allWords = wordsPerStage.flat();
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <motion.div className="grid grid-cols-3 gap-4">
       {allWords.map((word) => (
-        <Card
+        <AnimatedWordCard
           key={word}
-          className={
-            collectedWords.includes(word) ? "bg-yellow-200" : "bg-gray-300"
-          }
-        >
-          <CardContent className="text-center">
-            {collectedWords.includes(word) ? word : "???"}
-          </CardContent>
-        </Card>
+          word={word}
+          collected={collectedWords.includes(word)}
+        />
       ))}
-    </div>
+    </motion.div>
   );
 };
