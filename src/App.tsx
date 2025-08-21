@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Dashboard } from "./pages/Dashboard";
 import { QuizPage } from "./pages/QuizPage";
 import { LibraryPage } from "./pages/LibraryPage";
+import { DungeonPage } from "./pages/DungeonPage";
 
 function App() {
   const [currentPage, setCurrentPage] = useState<
-    "dashboard" | "quiz" | "library"
+    "dashboard" | "quiz" | "library" | "dungeon"
   >("dashboard");
 
   return (
@@ -13,6 +14,7 @@ function App() {
       {currentPage === "dashboard" && <Dashboard setPage={setCurrentPage} />}
       {currentPage === "quiz" && <QuizPage setPage={setCurrentPage} />}
       {currentPage === "library" && <LibraryPage setPage={setCurrentPage} />}
+      {currentPage === "dungeon" && <DungeonPage setPage={setCurrentPage} />}
     </div>
   );
 }

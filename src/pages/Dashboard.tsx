@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { useStreakStore } from "../stores/streakStore";
 
-type Props = { setPage: (page: "quiz" | "library" | "dashboard") => void };
+type Props = {
+  setPage: (page: "quiz" | "library" | "dashboard" | "dungeon") => void;
+};
 
 export const Dashboard = ({ setPage }: Props) => {
   const { streak } = useStreakStore();
@@ -14,6 +16,9 @@ export const Dashboard = ({ setPage }: Props) => {
       </p>
       <Button onClick={() => setPage("quiz")} variant="default">
         今日のクイズに挑戦する
+      </Button>
+      <Button onClick={() => setPage("dungeon")} variant="destructive">
+        忘却の遺跡に挑む
       </Button>
       <Button onClick={() => setPage("library")} variant="outline">
         図鑑を見る
