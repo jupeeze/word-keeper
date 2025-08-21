@@ -2,8 +2,8 @@ import { Progress } from "@/components/ui/progress";
 import { useQuizStore } from "../../stores/quizStore";
 
 export const QuizProgress = () => {
-  const { currentWordIndex, wordsPerStage, currentStage } = useQuizStore();
-  const total = wordsPerStage[currentStage - 1].length;
+  const { currentWordIndex, words } = useQuizStore();
+  const total = words.length;
   const progress = (currentWordIndex / total) * 100;
 
   return (

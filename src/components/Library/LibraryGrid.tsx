@@ -5,14 +5,11 @@ import { motion } from "motion/react";
 
 export const LibraryGrid = () => {
   const { collectedWords } = useLibraryStore();
-  const { wordsPerStage } = useQuizStore();
-
-  // 全単語リストを平坦化
-  const allWords = wordsPerStage.flat();
+  const { words } = useQuizStore();
 
   return (
     <motion.div className="grid grid-cols-3 gap-4">
-      {allWords.map((word) => (
+      {words.map((word) => (
         <AnimatedWordCard
           key={word}
           word={word}

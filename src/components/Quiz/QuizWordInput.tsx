@@ -4,28 +4,21 @@ import { Button } from "@/components/ui/button";
 import { useQuizStore } from "../../stores/quizStore";
 import { useLibraryStore } from "../../stores/libraryStore";
 import { useStreakStore } from "../../stores/streakStore";
-import { StageClearModal } from "./StageClearModal";
+import { QuizClearModal } from "./QuizClearModal";
 
 export const QuizWordInput = () => {
   const [input, setInput] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const {
-    currentWordIndex,
-    wordsPerStage,
-    currentStage,
-    nextWord,
-    markCorrect,
-    nextStage,
-  } = useQuizStore();
+  const { currentWordIndex, words, nextWord, markCorrect, resetQuiz } =
+    useQuizStore();
   const { addWord } = useLibraryStore();
   const { incrementStreak } = useStreakStore();
 
-  const currentWords = wordsPerStage[currentStage - 1];
-  const isStageComplete = currentWordIndex >= currentWords.length;
+  const isQuizComplete = currentWordIndex >= words.length;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const correctWord = currentWords[currentWordIndex];
+    const correctWord = words[currentWordIndex];
     if (input.toLowerCase() === correctWord.toLowerCase()) {
       markCorrect(correctWord);
       addWord(correctWord);
@@ -37,28 +30,37 @@ export const QuizWordInput = () => {
   };
 
   useEffect(() => {
-    if (isStageComplete) {
+    if (isQuizComplete) {
       incrementStreak();
       setShowModal(true);
     }
     // eslint-disable-next-line
-  }, [isStageComplete]);
+  }, [isQuizComplete]);
+
+  const handleEndQuiz = () => {
+    setShowModal(false);
+    resetQuiz();
+    // ここではダッシュボードに戻るなどの処理を想定
+  };
 
   return (
     <>
-      {!isStageComplete && (
+      {!isQuizComplete && (
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+          <p className="text-center text-4xl font-bold tracking-widest my-4">
+            {words[currentWordIndex]}
+          </p>
           <Input
-            placeholder="単語を入力"
+            placeholder="スペルを詠唱せよ"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
           <Button type="submit" variant="default">
-            確認
+            詠唱
           </Button>
         </form>
       )}
-      <StageClearModal isOpen={showModal} onNextStage={nextStage} />
+      <QuizClearModal isOpen={showModal} onEndQuiz={handleEndQuiz} />
     </>
   );
 };

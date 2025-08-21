@@ -10,18 +10,18 @@ export const Dashboard = ({ setPage }: Props) => {
 
   return (
     <div className="p-4 flex flex-col items-center gap-4">
-      <h1 className="text-2xl font-bold">記憶図書館</h1>
+      <h1 className="text-2xl font-bold">魔法言語学者の書斎</h1>
       <p className="text-lg">
-        連続学習日数: <span className="font-bold">{streak}</span> 日
+        連続研究日数: <span className="font-bold">{streak}</span> 日
       </p>
       <Button onClick={() => setPage("quiz")} variant="default">
-        今日のクイズに挑戦する
+        今日の古文書を解読する
       </Button>
       <Button onClick={() => setPage("dungeon")} variant="destructive">
         忘却の遺跡に挑む
       </Button>
       <Button onClick={() => setPage("library")} variant="outline">
-        図鑑を見る
+        ワーズ・グリモワールを見る
       </Button>
     </div>
   );
