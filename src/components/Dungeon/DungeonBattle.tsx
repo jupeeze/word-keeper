@@ -3,13 +3,8 @@ import { useDungeonStore } from "@/stores/dungeonStore";
 import { useLibraryStore } from "@/stores/libraryStore";
 
 export const DungeonBattle = () => {
-  const {
-    monster,
-    playerHp,
-    challengeWord,
-    dealDamage,
-    handleIncorrectAnswer,
-  } = useDungeonStore();
+  const { monster, challengeWord, dealDamage, handleIncorrectAnswer } =
+    useDungeonStore();
   const { collectedWords } = useLibraryStore();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -56,15 +51,6 @@ export const DungeonBattle = () => {
         />
         <Button type="submit">攻撃</Button>
       </form>
-      <div className="text-center">
-        <h2 className="text-lg font-bold">プレイヤー</h2>
-        <p>HP: {playerHp} / 100</p>
-        <progress
-          value={playerHp}
-          max={100}
-          className="w-full h-4 accent-green-500"
-        ></progress>
-      </div>
     </div>
   );
 };

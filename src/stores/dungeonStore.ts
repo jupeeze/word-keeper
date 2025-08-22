@@ -10,8 +10,6 @@ interface Monster {
 
 // ダンジョンモードの状態管理
 interface DungeonState {
-  playerHp: number;
-  setPlayerHp: (hp: number) => void;
   monster: Monster | null;
   setMonster: (monster: Monster) => void;
   challengeWord: string; // 出題される単語
@@ -36,7 +34,6 @@ const initialMonster: Monster = {
 };
 
 export const useDungeonStore = create<DungeonState>((set, get) => ({
-  playerHp: 100,
   monster: null,
   challengeWord: "",
   timeLimit: 30,
@@ -44,7 +41,6 @@ export const useDungeonStore = create<DungeonState>((set, get) => ({
   isGameOver: false,
   incorrectWord: null,
 
-  setPlayerHp: (hp) => set({ playerHp: hp }),
   setMonster: (monster) => set({ monster }),
   setChallengeWord: (word) => set({ challengeWord: word }),
   setTimeLimit: (time) => set({ timeLimit: time }),
@@ -57,7 +53,6 @@ export const useDungeonStore = create<DungeonState>((set, get) => ({
       isBattle: true,
       isGameOver: false,
       incorrectWord: null,
-      playerHp: 100,
       monster: { ...initialMonster },
       challengeWord: randomWord,
       timeLimit: 30,
