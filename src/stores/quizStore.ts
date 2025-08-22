@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import wordData from "../data/word_data.json";
 
 interface QuizState {
   currentWordIndex: number;
@@ -16,18 +17,7 @@ export const useQuizStore = create(
     (set, get) => ({
       currentWordIndex: 0,
       correctWords: [],
-      words: [
-        "apple",
-        "book",
-        "desk",
-        "pen",
-        "note",
-        "chair",
-        "table",
-        "lamp",
-        "bag",
-        "clock",
-      ],
+      words: wordData.map((data) => data.word),
       nextWord: () =>
         set((state) => ({ currentWordIndex: state.currentWordIndex + 1 })),
       markCorrect: (word) =>
