@@ -2,8 +2,8 @@
   {
     "word": "the",
     "Rank": 1,
-    "part_of_speech": "副",
-    "translation": "かえって、ますます",
+    "part_of_speech": "定",
+    "translation": "その、例の",
     "pronunciation": "ザ"
   },
   {
@@ -16690,9 +16690,9 @@
   {
     "word": "dialog",
     "Rank": 2387,
-    "part_of_speech": null,
-    "translation": null,
-    "pronunciation": null
+    "part_of_speech": "名",
+    "translation": "〔複数の人の〕対話、会話",
+    "pronunciation": "ダイアログ"
   },
   {
     "word": "cream",

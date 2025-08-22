@@ -1,4 +1,11 @@
 import { create } from "zustand";
+import wordData from "../data/word_data.json";
+
+// 単語の型定義
+interface Word {
+  word: string;
+  translation: string;
+}
 
 // モンスターの型定義
 interface Monster {
@@ -12,15 +19,15 @@ interface Monster {
 interface DungeonState {
   monster: Monster | null;
   setMonster: (monster: Monster) => void;
-  challengeWord: string; // 出題される単語
-  setChallengeWord: (word: string) => void;
-  timeLimit: number; // 制限時間（秒）
-  setTimeLimit: (time: number) => void;
+  challengeWord: Word | null; // 出題される単語（和訳を含む）
+  setChallengeWord: (word: Word) => void;
+  choices: string[]; // 選択肢
   isBattle: boolean;
   isGameOver: boolean;
   incorrectWord: string | null;
   startBattle: (words: string[]) => void;
   endBattle: () => void;
+  handleCorrectAnswer: (words: string[]) => void;
   handleIncorrectAnswer: (word: string) => void;
   dealDamage: (damage: number) => void;
 }
@@ -33,34 +40,74 @@ const initialMonster: Monster = {
   image: "/assets/monster1.png", // 仮の画像パス
 };
 
+const getWordDataByWord = (word: string): Word | undefined => {
+  return wordData.find((data) => data.word === word);
+};
+
+// 選択肢を生成するヘルパー関数
+const generateChoices = (correctWord: string, allWords: string[]): string[] => {
+  const choices = [correctWord];
+  const distractors = allWords.filter((word) => word !== correctWord);
+  while (choices.length < 4) {
+    const randomIndex = Math.floor(Math.random() * distractors.length);
+    const randomWord = distractors.splice(randomIndex, 1)[0];
+    if (!choices.includes(randomWord)) {
+      choices.push(randomWord);
+    }
+  }
+  return choices.sort(() => Math.random() - 0.5); // シャッフル
+};
+
 export const useDungeonStore = create<DungeonState>((set, get) => ({
   monster: null,
-  challengeWord: "",
-  timeLimit: 30,
+  challengeWord: null,
+  choices: [],
   isBattle: false,
   isGameOver: false,
   incorrectWord: null,
 
   setMonster: (monster) => set({ monster }),
   setChallengeWord: (word) => set({ challengeWord: word }),
-  setTimeLimit: (time) => set({ timeLimit: time }),
 
   // 戦闘開始処理
   startBattle: (words) => {
-    // 利用可能な単語リストからランダムに単語を選ぶ
-    const randomWord = words[Math.floor(Math.random() * words.length)];
+    if (words.length < 4) return;
+    const randomWordStr = words[Math.floor(Math.random() * words.length)];
+    const randomWord = getWordDataByWord(randomWordStr);
+    if (!randomWord) return;
+
     set({
       isBattle: true,
       isGameOver: false,
       incorrectWord: null,
-      monster: { ...initialMonster },
+      monster: { ...initialMonster, hp: 100 },
       challengeWord: randomWord,
-      timeLimit: 30,
+      choices: generateChoices(randomWord.word, words),
     });
   },
 
   // 戦闘終了処理
   endBattle: () => set({ isBattle: false }),
+
+  handleCorrectAnswer: (words) => {
+    const currentMonster = get().monster;
+    if (currentMonster && currentMonster.hp - 20 <= 0) {
+      set({ isBattle: false, isGameOver: false }); // クリア処理
+      return;
+    }
+
+    const randomWordStr = words[Math.floor(Math.random() * words.length)];
+    const randomWord = getWordDataByWord(randomWordStr);
+    if (!randomWord) return;
+
+    set((state) => ({
+      monster: state.monster
+        ? { ...state.monster, hp: state.monster.hp - 20 }
+        : null,
+      challengeWord: randomWord,
+      choices: generateChoices(randomWord.word, words),
+    }));
+  },
 
   handleIncorrectAnswer: (word) => {
     set({ isBattle: false, isGameOver: true, incorrectWord: word });

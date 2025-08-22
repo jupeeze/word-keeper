@@ -24,10 +24,10 @@ export const DungeonPage = ({ setPage }: Props) => {
           <p>集めた言葉の力で、忘却の獣に立ち向かえ！</p>
           <Button
             onClick={() => startBattle(collectedWords)}
-            disabled={collectedWords.length === 0}
+            disabled={collectedWords.length < 4}
           >
-            {collectedWords.length === 0
-              ? "先に単語を収集してください"
+            {collectedWords.length < 4
+              ? "単語を4つ以上収集してください"
               : "挑戦する"}
           </Button>
           <Button onClick={() => setPage("dashboard")} variant="secondary">
