@@ -1,7 +1,9 @@
 import { LibraryGrid } from "../components/Library/LibraryGrid";
 import { Button } from "@/components/ui/button";
 
-type Props = { setPage: (page: "quiz" | "library" | "dashboard") => void };
+import type { PageName } from "../App";
+
+type Props = { setPage: (page: PageName) => void };
 
 export const LibraryPage = ({ setPage }: Props) => {
   return (

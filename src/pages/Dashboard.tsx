@@ -1,9 +1,11 @@
+// src/pages/Dashboard.tsx
+
 import { Button } from "@/components/ui/button";
 import { useStreakStore } from "../stores/streakStore";
 
-type Props = {
-  setPage: (page: "quiz" | "library" | "dashboard" | "dungeon") => void;
-};
+import type { PageName } from "../App";
+
+type Props = { setPage: (page: PageName) => void };
 
 export const Dashboard = ({ setPage }: Props) => {
   const { streak } = useStreakStore();
@@ -22,6 +24,9 @@ export const Dashboard = ({ setPage }: Props) => {
       </Button>
       <Button onClick={() => setPage("library")} variant="outline">
         ワーズ・グリモワールを見る
+      </Button>
+      <Button onClick={() => setPage("lyricPlayer")} variant="outline">
+        歌詞同期プレイヤー (K-Pop)
       </Button>
     </div>
   );

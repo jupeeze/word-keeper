@@ -2,7 +2,9 @@ import { QuizWordInput } from "../components/Quiz/QuizWordInput";
 import { Button } from "@/components/ui/button";
 import { QuizProgress } from "../components/Quiz/QuizProgress";
 
-type Props = { setPage: (page: "quiz" | "library" | "dashboard") => void };
+import type { PageName } from "../App";
+
+type Props = { setPage: (page: PageName) => void };
 
 export const QuizPage = ({ setPage }: Props) => {
   return (

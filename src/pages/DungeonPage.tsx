@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { useDungeonStore } from "@/stores/dungeonStore";
 import { useLibraryStore } from "@/stores/libraryStore";
 
-type Props = {
-  setPage: (page: "quiz" | "library" | "dashboard" | "dungeon") => void;
-};
+import type { PageName } from "../App";
+
+type Props = { setPage: (page: PageName) => void };
 
 export const DungeonPage = ({ setPage }: Props) => {
   const { startBattle, isBattle, isGameOver } = useDungeonStore();
