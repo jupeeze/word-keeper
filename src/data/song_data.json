@@ -1,0 +1,133 @@
+{
+  "youtubeUrl": "https://www.youtube.com/watch?v=tIRul7vW_b0",
+  "lyrics": [
+    {
+      "startTime": 16.0,
+      "text": "반짝반짝 작은 별",
+      "reading": "パンチャッパンチャッ チャグン ピョル",
+      "translation": "きらきら 小さな星",
+      "vocabulary": [
+        {
+          "word": "반짝반짝",
+          "reading": "パンチャッパンチャッ",
+          "meaning": "きらきら"
+        },
+        {
+          "word": "작은",
+          "reading": "チャグン",
+          "meaning": "小さい"
+        },
+        {
+          "word": "별",
+          "reading": "ビョル",
+          "meaning": "星"
+        }
+      ]
+    },
+    {
+      "startTime": 20.0,
+      "text": "아름답게 비치네",
+      "reading": "アルムダプケ ピチネ",
+      "translation": "美しく輝いてるね",
+      "vocabulary": [
+        {
+          "word": "아름답게",
+          "reading": "アルムダプケ",
+          "meaning": "美しく"
+        },
+        {
+          "word": "비치네",
+          "reading": "ピチネ",
+          "meaning": "輝いてるね"
+        }
+      ]
+    },
+    {
+      "startTime": 24.0,
+      "text": "동쪽 하늘에서도",
+      "reading": "トンチョッ ハヌレソド",
+      "translation": "東の空でも",
+      "vocabulary": [
+        {
+          "word": "동쪽",
+          "reading": "トンチョッ",
+          "meaning": "東"
+        },
+        {
+          "word": "하늘",
+          "reading": "ハヌル",
+          "meaning": "空"
+        },
+        {
+          "word": "에서도",
+          "reading": "エソド",
+          "meaning": "～でも"
+        }
+      ]
+    },
+    {
+      "startTime": 28.0,
+      "text": "서쪽 하늘에서도",
+      "reading": "ソチョッ ハヌレソド",
+      "translation": "西の空でも",
+      "vocabulary": [
+        {
+          "word": "서쪽",
+          "reading": "ソチョッ",
+          "meaning": "西"
+        },
+        {
+          "word": "하늘",
+          "reading": "ハヌル",
+          "meaning": "空"
+        },
+        {
+          "word": "에서도",
+          "reading": "エソド",
+          "meaning": "～でも"
+        }
+      ]
+    },
+    {
+      "startTime": 32.0,
+      "text": "반짝반짝 작은 별",
+      "reading": "パンチャッパンチャッ チャグン ピョル",
+      "translation": "きらきら 小さな星",
+      "vocabulary": [
+        {
+          "word": "반짝반짝",
+          "reading": "パンチャッパンチャッ",
+          "meaning": "きらきら"
+        },
+        {
+          "word": "작은",
+          "reading": "チャグン",
+          "meaning": "小さな"
+        },
+        {
+          "word": "별",
+          "reading": "ピョル",
+          "meaning": "星"
+        }
+      ]
+    },
+    {
+      "startTime": 36.0,
+      "text": "아름답게 비치네",
+      "reading": "アルムダプケ ピチネ",
+      "translation": "美しく輝いてるね",
+      "vocabulary": [
+        {
+          "word": "아름답게",
+          "reading": "アルムダプケ",
+          "meaning": "美しく"
+        },
+        {
+          "word": "비치네",
+          "reading": "ピチネ",
+          "meaning": "輝いてるね"
+        }
+      ]
+    }
+  ]
+}
