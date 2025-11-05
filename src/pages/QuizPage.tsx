@@ -1,13 +1,10 @@
 import { QuizWordInput } from "../components/Quiz/QuizWordInput";
 import { Button } from "@/components/ui/button";
 import { QuizProgress } from "../components/Quiz/QuizProgress";
-import { useQuizStore } from "../stores/quizStore";
 
 type Props = { setPage: (page: "quiz" | "library" | "dashboard") => void };
 
 export const QuizPage = ({ setPage }: Props) => {
-  const { words } = useQuizStore();
-
   return (
     <div
       className="min-h-screen p-4 bg-yellow-100 bg-cover bg-center"
@@ -20,13 +17,6 @@ export const QuizPage = ({ setPage }: Props) => {
         <p className="text-center">
           今日のスペルを詠唱し、グリモワールに刻もう。
         </p>
-        <div className="grid grid-cols-5 gap-2 my-4 text-center">
-          {words.map((word) => (
-            <div key={word} className="p-2 bg-gray-200/50 rounded text-sm">
-              {word}
-            </div>
-          ))}
-        </div>
         <div className="border-t-2 pt-4">
           <QuizProgress />
           <QuizWordInput />
