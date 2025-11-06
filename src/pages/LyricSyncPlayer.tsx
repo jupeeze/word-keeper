@@ -10,7 +10,6 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import songData from "../data/song_data.json";
-import { Divide } from "lucide-react";
 
 type Props = {
   setPage: (page: PageName) => void;
@@ -68,7 +67,7 @@ export const LyricSyncPlayer = ({ setPage }: Props) => {
         </CardHeader>
         <CardContent>
           {/* React Player */}
-          <div className="aspect-video w-full mb-4 bg-gray-200 rounded-md overflow-hidden">
+          <div className="aspect-video mb-4 rounded-md overflow-hidden">
             <ReactPlayer
               ref={playerRef}
               style={{ width: "100%", height: "auto", aspectRatio: "16/9" }}
@@ -84,8 +83,16 @@ export const LyricSyncPlayer = ({ setPage }: Props) => {
             {playing ? "一時停止" : "再生"}
           </Button>
 
+          <Button
+            onClick={() => setPage("lyricQuiz")}
+            variant="default"
+            className="w-full mb-4 bg-green-600 hover:bg-green-700"
+          >
+            翻訳クイズに挑戦する
+          </Button>
+
           {/* 歌詞表示エリア */}
-          <div className="h-64 overflow-y-auto p-4 border rounded-md bg-gray-50">
+          <div className="h-64 overflow-y-auto p-4 border rounded-md bg-gray-100">
             {currentLyricIndex === -1 && (
               <p
                 className={`text-lg text-center p-2 transition-all font-bold text-blue-600 scale-105`}
@@ -96,34 +103,17 @@ export const LyricSyncPlayer = ({ setPage }: Props) => {
             {songData.lyrics.map((line, index) => (
               <div key={index} className="p-2 items-center flex justify-center">
                 {line.vocabulary.map((vocab, vocabIdx) => (
-                  <div key={vocabIdx} className="px-2 text-center">
-                    <p
-                      className={`text-xs transition-all ${
-                        index <= currentLyricIndex
-                          ? "font-bold text-blue-600 scale-105"
-                          : "text-gray-500"
-                      }`}
-                    >
-                      {vocab.reading}
-                    </p>
-                    <p
-                      className={`text-lg transition-all ${
-                        index <= currentLyricIndex
-                          ? "font-bold text-blue-600 scale-105"
-                          : "text-gray-500"
-                      }`}
-                    >
-                      {vocab.word}
-                    </p>
-                    <p
-                      className={`text-sm transition-all ${
-                        index <= currentLyricIndex
-                          ? "font-bold text-blue-600 scale-105"
-                          : "text-gray-500"
-                      }`}
-                    >
-                      {vocab.meaning}
-                    </p>
+                  <div
+                    key={vocabIdx}
+                    className={`px-2 text-center transition-all  ${
+                      index <= currentLyricIndex
+                        ? "font-bold text-blue-600 scale-105"
+                        : "text-gray-500"
+                    }`}
+                  >
+                    <p className={`text-xs`}>{vocab.reading}</p>
+                    <p className={`text-lg`}>{vocab.word}</p>
+                    <p className={`text-sm`}>{vocab.meaning}</p>
                   </div>
                 ))}
               </div>
