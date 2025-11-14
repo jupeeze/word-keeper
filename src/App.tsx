@@ -7,6 +7,7 @@ import { LibraryPage } from "./pages/LibraryPage";
 import { DungeonPage } from "./pages/DungeonPage";
 import { LyricSyncPlayer } from "./pages/LyricSyncPlayer";
 import { LyricQuizPage } from "./pages/LyricQuizPage";
+import { SpeedReadingTrainer } from "./pages/SpeedReadingTrainer";
 
 export type PageName =
   | "dashboard"
@@ -14,7 +15,8 @@ export type PageName =
   | "library"
   | "dungeon"
   | "lyricPlayer"
-  | "lyricQuiz";
+  | "lyricQuiz"
+  | "speedReadingTrainer";
 
 function App() {
   const [currentPage, setCurrentPage] = useState<PageName>("dashboard");
@@ -31,6 +33,9 @@ function App() {
       {currentPage === "dungeon" && <DungeonPage setPage={setPage} />}
       {currentPage === "lyricPlayer" && <LyricSyncPlayer setPage={setPage} />}
       {currentPage === "lyricQuiz" && <LyricQuizPage setPage={setPage} />}
+      {currentPage === "speedReadingTrainer" && (
+        <SpeedReadingTrainer setPage={setPage} />
+      )}
     </div>
   );
 }
