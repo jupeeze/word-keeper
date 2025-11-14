@@ -14,7 +14,10 @@ import {
 import { Progress } from "@/components/ui/progress";
 
 // データソースのインポート
-import songData from "../data/song_data.json"; //
+import songData from "../data/song_data.json";
+import type { PageName } from "../App";
+
+type Props = { setPage: (page: PageName) => void };
 
 // 型定義
 interface Vocabulary {
@@ -27,11 +30,6 @@ interface HistoryItem {
   word: string;
   isCorrect: boolean;
   reactionTime: number; // ms
-}
-
-interface Props {
-  timeLimit?: number; // 1問あたりの制限時間 (秒)
-  questionCount?: number; // 問題数
 }
 
 // 語彙データを読み込み、重複を排除
@@ -65,10 +63,9 @@ const speakKorean = (text: string) => {
   window.speechSynthesis.speak(utterance);
 };
 
-export const SpeedReadingTrainer: React.FC<Props> = ({
-  timeLimit = 3, // デフォルト3秒
-  questionCount = 10, // デフォルト10問
-}) => {
+export const SpeedReadingTrainer = ({ setPage }: Props) => {
+  let timeLimit = 3; // デフォルト3秒
+  let questionCount = 10; // デフォルト10問
   const [quizData, setQuizData] = useState<Vocabulary[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState<Vocabulary | null>(
