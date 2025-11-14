@@ -1,6 +1,6 @@
 // src/App.tsx
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dashboard } from "./pages/Dashboard";
 import { QuizPage } from "./pages/QuizPage";
 import { LibraryPage } from "./pages/LibraryPage";
@@ -20,6 +20,10 @@ export type PageName =
 
 function App() {
   const [currentPage, setCurrentPage] = useState<PageName>("dashboard");
+
+  useEffect(() => {
+    console.log(`Current page: ${currentPage}`);
+  }, [currentPage]);
 
   const setPage = (page: PageName) => {
     setCurrentPage(page);
