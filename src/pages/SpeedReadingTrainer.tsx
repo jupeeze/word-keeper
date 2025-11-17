@@ -1,7 +1,5 @@
-import * as React from "react";
 import { useState, useEffect, useRef, useCallback } from "react";
 
-// shadcn/ui コンポーネントのインポート（実際のパスに合わせてください）
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -64,8 +62,9 @@ const speakKorean = (text: string) => {
 };
 
 export const SpeedReadingTrainer = ({ setPage }: Props) => {
-  let timeLimit = 3; // デフォルト3秒
-  let questionCount = 10; // デフォルト10問
+  const timeLimit = 3; // デフォルト3秒
+  const questionCount = 10; // デフォルト10問
+
   const [quizData, setQuizData] = useState<Vocabulary[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState<Vocabulary | null>(
@@ -235,6 +234,12 @@ export const SpeedReadingTrainer = ({ setPage }: Props) => {
           )}
           <Button onClick={startQuiz} className="w-full text-lg py-6">
             {quizData.length > 0 ? "もう一度挑戦" : "クイズ開始"}
+          </Button>
+          <Button
+            onClick={() => setPage("dashboard")}
+            className="w-full text-lg py-6"
+          >
+            ダッシュボードに戻る
           </Button>
         </CardContent>
       ) : (
