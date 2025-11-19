@@ -6,7 +6,7 @@ import { defineConfig } from "vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "./", // この行を追加
+  base: "/word-keeper/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
