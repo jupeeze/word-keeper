@@ -18,6 +18,9 @@ export const Dashboard = ({ setPage }: Props) => {
       <Button onClick={() => setPage("speedReadingTrainer")} variant="outline">
         スピード単語クイズ (韓国語)
       </Button>
+      <Button onClick={() => setPage("library")} variant="outline">
+        単語辞書
+      </Button>
     </div>
   );
 };

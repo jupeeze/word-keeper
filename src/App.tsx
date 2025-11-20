@@ -5,6 +5,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { LyricSyncPlayer } from "./pages/LyricSyncPlayer";
 import { LyricQuizPage } from "./pages/LyricQuizPage";
 import { SpeedReadingTrainer } from "./pages/SpeedReadingTrainer";
+import { LibraryPage } from "./pages/LibraryPage";
 
 export type PageName =
   | "dashboard"
@@ -34,6 +35,7 @@ function App() {
       {currentPage === "speedReadingTrainer" && (
         <SpeedReadingTrainer setPage={setPage} />
       )}
+      {currentPage === "library" && <LibraryPage setPage={setPage} />}
     </div>
   );
 }
