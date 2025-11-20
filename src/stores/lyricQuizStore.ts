@@ -1,13 +1,7 @@
 import { create } from "zustand";
 import songData from "../data/song_data.json";
-
-interface LyricLine {
-  startTime: number;
-  text: string;
-  reading: string;
-  translation: string;
-  vocabulary: { word: string; reading: string; meaning: string }[];
-}
+import type { LyricLine } from "@/types";
+import { generateChoices } from "@/utils/vocabularyUtils";
 
 interface LyricQuizState {
   lyrics: LyricLine[];
@@ -24,29 +18,6 @@ interface LyricQuizState {
 // すべての翻訳をリスト化
 const allTranslations = songData.lyrics.map((l) => l.translation);
 
-// 選択肢を生成するヘルパー関数
-const generateChoices = (correctTranslation: string): string[] => {
-  const choices = [correctTranslation];
-  // 正解以外の翻訳（ダミー選択肢）
-  const distractors = allTranslations.filter((t) => t !== correctTranslation);
-
-  // 4つの選択肢になるまでダミー選択肢を追加
-  while (choices.length < 4 && distractors.length > 0) {
-    const randomIndex = Math.floor(Math.random() * distractors.length);
-    const randomTranslation = distractors.splice(randomIndex, 1)[0];
-    if (!choices.includes(randomTranslation)) {
-      choices.push(randomTranslation);
-    }
-  }
-
-  // もし翻訳の種類が4つ未満の場合、ダミーデータを追加（今回は不要そうですが念のため）
-  while (choices.length < 4) {
-    choices.push("ダミーの翻訳" + choices.length);
-  }
-
-  return choices.sort(() => Math.random() - 0.5); // 選択肢をシャッフル
-};
-
 export const useLyricQuizStore = create<LyricQuizState>((set, get) => ({
   lyrics: songData.lyrics,
   currentLyricIndex: -1,
@@ -60,7 +31,7 @@ export const useLyricQuizStore = create<LyricQuizState>((set, get) => ({
     set({
       currentLyricIndex: 0,
       currentQuestion: firstQuestion,
-      choices: generateChoices(firstQuestion.translation),
+      choices: generateChoices(firstQuestion.translation, allTranslations),
       isQuizComplete: false,
       score: 0,
     });
@@ -77,7 +48,7 @@ export const useLyricQuizStore = create<LyricQuizState>((set, get) => ({
       set({
         currentLyricIndex: nextIndex,
         currentQuestion: nextQuestion,
-        choices: generateChoices(nextQuestion.translation),
+        choices: generateChoices(nextQuestion.translation, allTranslations),
       });
     }
   },
@@ -93,3 +64,4 @@ export const useLyricQuizStore = create<LyricQuizState>((set, get) => ({
     return correct;
   },
 }));
+

@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import type { PageName } from "../App";
+import type { PageNavigationProps, LyricLine } from "@/types";
 import ReactPlayer from "react-player";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,23 +16,17 @@ import { useLibraryStore } from "@/stores/libraryStore";
 // ※トースト通知用の簡易コンポーネントやライブラリがない場合はconsole.logで代用しますが、
 // ここではユーザー体験のために「保存しました」というフィードバックを出す処理を想定します。
 
-type Props = {
-  setPage: (page: PageName) => void;
-};
+interface PlayerState {
+  playing: boolean;
+}
 
-export const LyricSyncPlayer = ({ setPage }: Props) => {
+export const LyricSyncPlayer = ({ setPage }: PageNavigationProps) => {
   const playerRef = useRef<HTMLVideoElement | null>(null);
   const { addWord } = useLibraryStore();
 
-  const initialState = {
+  const [state, setState] = useState<PlayerState>({
     playing: false,
-  };
-
-  type PlayerState = Omit<typeof initialState, "src"> & {
-    src?: string;
-  };
-
-  const [state, setState] = useState<PlayerState>(initialState);
+  });
   const [currentLyricIndex, setCurrentLyricIndex] = useState(-1);
 
   const handlePlayPause = () => {
@@ -62,11 +56,10 @@ export const LyricSyncPlayer = ({ setPage }: Props) => {
     word: string,
     reading: string,
     meaning: string,
-    lyricLine: (typeof songData.lyrics)[0]
+    lyricLine: LyricLine
   ) => {
     // ストアに保存
     addWord(word, meaning, reading, {
-      // song_data.jsonに追加した型定義が必要ですが、一旦キャストまたは補完します
       songTitle: songData.title || "Unknown Title",
       artistName: songData.artist || "Unknown Artist",
       youtubeUrl: songData.youtubeUrl,
@@ -75,6 +68,7 @@ export const LyricSyncPlayer = ({ setPage }: Props) => {
     });
 
     // 簡易的なフィードバック（本来はToastコンポーネント推奨）
+    console.log(`「${word}」を単語帳に保存しました！📖`);
     alert(`「${word}」を単語帳に保存しました！📖`);
   };
   // --------------------------------

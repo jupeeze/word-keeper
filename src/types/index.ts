@@ -15,3 +15,33 @@ export interface SavedWord {
   masteryLevel: number; // 習熟度 (例: 0=未習得, 1=学習中, 2=覚えた)
   registeredAt: string; // 日付 (JSON保存用にstring型)
 }
+
+// 語彙データの型定義
+export interface Vocabulary {
+  word: string;
+  reading: string;
+  meaning: string;
+}
+
+// 歌詞行の型定義
+export interface LyricLine {
+  startTime: number;
+  text: string;
+  reading: string;
+  translation: string;
+  vocabulary: Vocabulary[];
+}
+
+// ページナビゲーション用のProps型
+export type PageName =
+  | "dashboard"
+  | "quiz"
+  | "library"
+  | "dungeon"
+  | "lyricPlayer"
+  | "lyricQuiz"
+  | "speedReadingTrainer";
+
+export interface PageNavigationProps {
+  setPage: (page: PageName) => void;
+}

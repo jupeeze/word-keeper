@@ -13,16 +13,10 @@ import { Progress } from "@/components/ui/progress";
 
 // データソースのインポート
 import songData from "../data/song_data.json";
-import type { PageName } from "../App";
-
-type Props = { setPage: (page: PageName) => void };
-
-// 型定義
-interface Vocabulary {
-  word: string;
-  reading: string;
-  meaning: string;
-}
+import type { PageNavigationProps, Vocabulary } from "@/types";
+import { shuffleArray } from "@/utils/arrayUtils";
+import { speakKorean, initializeSpeech } from "@/utils/speechUtils";
+import { extractUniqueVocabulary } from "@/utils/vocabularyUtils";
 
 interface HistoryItem {
   word: string;
@@ -31,37 +25,9 @@ interface HistoryItem {
 }
 
 // 語彙データを読み込み、重複を排除
-const allVocabulary: Vocabulary[] = [];
-const wordSet = new Set<string>();
+const allVocabulary: Vocabulary[] = extractUniqueVocabulary(songData);
 
-songData.lyrics.forEach((lyric) => {
-  lyric.vocabulary.forEach((vocab) => {
-    if (!wordSet.has(vocab.word)) {
-      wordSet.add(vocab.word);
-      allVocabulary.push(vocab as Vocabulary);
-    }
-  });
-});
-
-// 配列をシャッフルするヘルパー関数
-const shuffleArray = <T,>(array: T[]): T[] => {
-  return [...array].sort(() => Math.random() - 0.5);
-};
-
-// 韓国語の音声合成を実行する関数
-const speakKorean = (text: string) => {
-  if (typeof window.speechSynthesis === "undefined") {
-    console.warn("音声合成はサポートされていません。");
-    return;
-  }
-  window.speechSynthesis.cancel(); // 既存の発話をキャンセル
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "ko-KR"; // 韓国語に設定
-  utterance.rate = 0.9; // 少しゆっくり
-  window.speechSynthesis.speak(utterance);
-};
-
-export const SpeedReadingTrainer = ({ setPage }: Props) => {
+export const SpeedReadingTrainer = ({ setPage }: PageNavigationProps) => {
   const timeLimit = 3; // デフォルト3秒
   const questionCount = 10; // デフォルト10問
 
@@ -141,9 +107,7 @@ export const SpeedReadingTrainer = ({ setPage }: Props) => {
   // クイズ開始処理
   const startQuiz = () => {
     // ユーザーのインタラクションをトリガーに無音の音声を再生（iOS/Chromeの自動再生ポリシー対策）
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance("");
-    synth.speak(utterance);
+    initializeSpeech();
 
     const shuffledData = shuffleArray(allVocabulary).slice(0, questionCount);
     setQuizData(shuffledData);
@@ -306,9 +270,8 @@ export const SpeedReadingTrainer = ({ setPage }: Props) => {
             {history.map((item, index) => (
               <li
                 key={index}
-                className={`flex justify-between text-sm ${
-                  item.isCorrect ? "text-green-600" : "text-red-600"
-                }`}
+                className={`flex justify-between text-sm ${item.isCorrect ? "text-green-600" : "text-red-600"
+                  }`}
               >
                 <span>{item.word}</span>
                 <span>

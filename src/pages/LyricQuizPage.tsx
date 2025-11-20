@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { PageName } from "../App";
+import type { PageNavigationProps } from "@/types";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,11 +10,7 @@ import {
 } from "@/components/ui/card";
 import { useLyricQuizStore } from "../stores/lyricQuizStore";
 
-type Props = {
-  setPage: (page: PageName) => void;
-};
-
-export const LyricQuizPage = ({ setPage }: Props) => {
+export const LyricQuizPage = ({ setPage }: PageNavigationProps) => {
   const {
     startQuiz,
     currentQuestion,

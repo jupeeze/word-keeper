@@ -1,11 +1,9 @@
 // src/pages/Dashboard.tsx
 
 import { Button } from "@/components/ui/button";
-import type { PageName } from "../App";
+import type { PageNavigationProps } from "@/types";
 
-type Props = { setPage: (page: PageName) => void };
-
-export const Dashboard = ({ setPage }: Props) => {
+export const Dashboard = ({ setPage }: PageNavigationProps) => {
   return (
     <div className="p-4 flex flex-col items-center gap-4">
       <h1 className="text-2xl font-bold">ダッシュボード</h1>
