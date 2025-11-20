@@ -1,5 +1,3 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,166 +8,33 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-
-// データソースのインポート
-import songData from "../data/song_data.json";
-import type { PageNavigationProps, Vocabulary } from "@/types";
-import { shuffleArray } from "@/utils/arrayUtils";
-import { speakKorean, initializeSpeech } from "@/utils/speechUtils";
-import { extractUniqueVocabulary } from "@/utils/vocabularyUtils";
-
-interface HistoryItem {
-  word: string;
-  isCorrect: boolean;
-  reactionTime: number; // ms
-}
-
-// 語彙データを読み込み、重複を排除
-const allVocabulary: Vocabulary[] = extractUniqueVocabulary(songData);
+import type { PageNavigationProps } from "@/types";
+import { useSpeedReadingQuiz } from "@/hooks/useSpeedReadingQuiz";
+import { QuizFeedback } from "@/components/Quiz/QuizFeedback";
+import { QuizChoiceGrid } from "@/components/Quiz/QuizChoiceGrid";
+import { QuizTimer } from "@/components/Quiz/QuizTimer";
+import { calculateProgress } from "@/utils/quizUtils";
 
 export const SpeedReadingTrainer = ({ setPage }: PageNavigationProps) => {
-  const timeLimit = 3; // デフォルト3秒
-  const questionCount = 10; // デフォルト10問
-
-  const [quizData, setQuizData] = useState<Vocabulary[]>([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState<Vocabulary | null>(
-    null
-  );
-  const [choices, setChoices] = useState<string[]>([]);
-  const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(timeLimit);
-  const [history, setHistory] = useState<HistoryItem[]>([]);
-  const [isQuizRunning, setIsQuizRunning] = useState(false);
-  const [feedback, setFeedback] = useState<
-    "correct" | "incorrect" | "timeout" | null
-  >(null);
-  const [startTime, setStartTime] = useState<number>(0);
-
-  const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  // 制限時間タイマーのロジック
-  useEffect(() => {
-    if (isQuizRunning && feedback === null) {
-      timerIntervalRef.current = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 0.1) {
-            clearInterval(timerIntervalRef.current!);
-            handleAnswer(null); // タイムアウト処理
-            return 0;
-          }
-          return prev - 0.1;
-        });
-      }, 100);
-    } else if (timerIntervalRef.current) {
-      clearInterval(timerIntervalRef.current);
-    }
-    return () => {
-      if (timerIntervalRef.current) {
-        clearInterval(timerIntervalRef.current);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isQuizRunning, feedback]);
-
-  // 次の問題を設定する関数
-  const setupQuestion = useCallback(
-    (index: number) => {
-      if (index >= quizData.length) {
-        // クイズ終了
-        setIsQuizRunning(false);
-        return;
-      }
-
-      const question = quizData[index];
-      setCurrentQuestion(question);
-
-      // 4択の選択肢を作成
-      const correctMeaning = question.meaning;
-      const distractors = shuffleArray(allVocabulary)
-        .filter((v) => v.meaning !== correctMeaning)
-        .slice(0, 3)
-        .map((v) => v.meaning);
-
-      setChoices(shuffleArray([correctMeaning, ...distractors]));
-
-      // リセット
-      setTimeLeft(timeLimit);
-      setFeedback(null);
-      setStartTime(Date.now()); // 反応時間計測開始
-
-      // 音声再生
-      speakKorean(question.word);
-    },
-    [quizData, timeLimit]
-  );
-
-  // クイズ開始処理
-  const startQuiz = () => {
-    // ユーザーのインタラクションをトリガーに無音の音声を再生（iOS/Chromeの自動再生ポリシー対策）
-    initializeSpeech();
-
-    const shuffledData = shuffleArray(allVocabulary).slice(0, questionCount);
-    setQuizData(shuffledData);
-    setCurrentQuestionIndex(0);
-    setScore(0);
-    setHistory([]);
-    setIsQuizRunning(true);
-    setupQuestion(0);
-  };
-
-  // 次の問題へ進む
-  const nextQuestion = () => {
-    const nextIndex = currentQuestionIndex + 1;
-    setCurrentQuestionIndex(nextIndex);
-    setupQuestion(nextIndex);
-  };
-
-  // 回答処理
-  const handleAnswer = (selectedMeaning: string | null) => {
-    if (feedback) return; // 既に回答済みの場合は無視
-
-    const reactionTime = (Date.now() - startTime) / 1000; // 秒に変換
-
-    let isCorrect = false;
-    if (selectedMeaning === null) {
-      setFeedback("timeout");
-    } else if (selectedMeaning === currentQuestion?.meaning) {
-      setFeedback("correct");
-      setScore((prev) => prev + 1);
-      isCorrect = true;
-    } else {
-      setFeedback("incorrect");
-    }
-
-    setHistory((prev) =>
-      [
-        {
-          word: currentQuestion?.word || "",
-          isCorrect,
-          reactionTime: parseFloat(reactionTime.toFixed(2)),
-        },
-        ...prev,
-      ].slice(0, 5)
-    ); // 直近5件の履歴を保持
-
-    // 1秒のインターバルの後に次の問題へ
-    setTimeout(() => {
-      nextQuestion();
-    }, 1000);
-  };
+  const {
+    quizData,
+    currentQuestionIndex,
+    currentQuestion,
+    choices,
+    score,
+    timeLeft,
+    history,
+    isQuizRunning,
+    feedback,
+    startQuiz,
+    handleAnswer,
+  } = useSpeedReadingQuiz();
 
   // 進行状況の計算
-  const overallProgress = (currentQuestionIndex / questionCount) * 100;
-  const timerProgress = (timeLeft / timeLimit) * 100;
-
-  // フィードバックのスタイル
-  const getFeedbackClasses = () => {
-    if (!feedback) return "opacity-0";
-    if (feedback === "correct") return "opacity-100 text-green-500";
-    if (feedback === "incorrect") return "opacity-100 text-red-500";
-    if (feedback === "timeout") return "opacity-100 text-yellow-500";
-  };
+  const overallProgress = calculateProgress(
+    currentQuestionIndex,
+    quizData.length || 10
+  );
 
   return (
     <Card className="w-full max-w-lg mx-auto shadow-lg">
@@ -192,7 +57,7 @@ export const SpeedReadingTrainer = ({ setPage }: PageNavigationProps) => {
             <div className="text-center">
               <h3 className="text-4xl font-bold">終了！</h3>
               <p className="text-2xl mt-4">
-                スコア: {score} / {questionCount}
+                スコア: {score} / {quizData.length}
               </p>
             </div>
           )}
@@ -214,24 +79,18 @@ export const SpeedReadingTrainer = ({ setPage }: PageNavigationProps) => {
             <div className="flex justify-between items-center mb-2">
               <span className="text-lg font-semibold">スコア: {score}</span>
               <span className="text-lg text-gray-500">
-                {currentQuestionIndex + 1} / {questionCount}
+                {currentQuestionIndex + 1} / {quizData.length}
               </span>
             </div>
             <Progress value={overallProgress} className="h-2" />
 
             {/* 2. 制限時間バー */}
-            <Progress value={timerProgress} className="h-4 mt-4" />
+            <QuizTimer timeLeft={timeLeft} timeLimit={quizData.length > 0 ? 3 : 0} className="mt-4" />
 
             {/* 3. 問題表示エリア */}
             <div className="my-8 text-center min-h-[150px]">
               {/* フィードバック (正解/不正解/時間切れ) */}
-              <div
-                className={`text-3xl font-bold transition-opacity duration-300 ${getFeedbackClasses()}`}
-              >
-                {feedback === "correct" && "正解！"}
-                {feedback === "incorrect" && "不正解"}
-                {feedback === "timeout" && "時間切れ"}
-              </div>
+              <QuizFeedback feedback={feedback} />
 
               {/* 問題の単語 */}
               {!feedback && (
@@ -245,19 +104,11 @@ export const SpeedReadingTrainer = ({ setPage }: PageNavigationProps) => {
             </div>
 
             {/* 4. 選択肢ボタン */}
-            <div className="grid grid-cols-2 gap-3">
-              {choices.map((meaning) => (
-                <Button
-                  key={meaning}
-                  variant="outline"
-                  className="text-base p-6 h-auto whitespace-normal"
-                  onClick={() => handleAnswer(meaning)}
-                  disabled={!!feedback}
-                >
-                  {meaning}
-                </Button>
-              ))}
-            </div>
+            <QuizChoiceGrid
+              choices={choices}
+              onChoiceClick={handleAnswer}
+              disabled={!!feedback}
+            />
           </CardContent>
         )
       )}

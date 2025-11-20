@@ -45,3 +45,28 @@ export type PageName =
 export interface PageNavigationProps {
   setPage: (page: PageName) => void;
 }
+
+// クイズ関連の共通型定義
+
+/**
+ * フィードバックの種類
+ */
+export type FeedbackType = "correct" | "incorrect" | "timeout";
+
+/**
+ * クイズ履歴アイテム
+ */
+export interface QuizHistoryItem {
+  word: string;
+  isCorrect: boolean;
+  reactionTime: number; // 秒単位
+}
+
+/**
+ * クイズ設定
+ */
+export interface QuizConfig {
+  timeLimit?: number; // 秒単位
+  questionCount?: number;
+  choiceCount?: number;
+}

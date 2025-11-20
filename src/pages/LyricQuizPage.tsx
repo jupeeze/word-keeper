@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { PageNavigationProps } from "@/types";
+import type { PageNavigationProps, FeedbackType } from "@/types";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,6 +9,9 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { useLyricQuizStore } from "../stores/lyricQuizStore";
+import { QuizFeedback } from "@/components/Quiz/QuizFeedback";
+import { QuizChoiceGrid } from "@/components/Quiz/QuizChoiceGrid";
+import { FEEDBACK_CONFIG } from "@/constants/quiz";
 
 export const LyricQuizPage = ({ setPage }: PageNavigationProps) => {
   const {
@@ -22,9 +25,7 @@ export const LyricQuizPage = ({ setPage }: PageNavigationProps) => {
   } = useLyricQuizStore();
 
   // 正解・不正解のフィードバックを一時的に表示するためのstate
-  const [feedback, setFeedback] = useState<"correct" | "incorrect" | null>(
-    null
-  );
+  const [feedback, setFeedback] = useState<FeedbackType | null>(null);
 
   // ページ読み込み時にクイズを開始
   useEffect(() => {
@@ -35,8 +36,8 @@ export const LyricQuizPage = ({ setPage }: PageNavigationProps) => {
     const isCorrect = handleAnswer(translation);
     // フィードバックを表示
     setFeedback(isCorrect ? "correct" : "incorrect");
-    // 1秒後にフィードバックを非表示
-    setTimeout(() => setFeedback(null), 1000);
+    // 設定された時間後にフィードバックを非表示
+    setTimeout(() => setFeedback(null), FEEDBACK_CONFIG.DISPLAY_DURATION_MS);
   };
 
   return (
@@ -63,30 +64,14 @@ export const LyricQuizPage = ({ setPage }: PageNavigationProps) => {
             </div>
 
             {/* 選択肢ボタン */}
-            <div className="grid grid-cols-1 gap-3">
-              {choices.map((choice, index) => (
-                <Button
-                  key={index}
-                  onClick={() => onAnswerClick(choice)}
-                  variant="outline"
-                  className="text-lg p-6 h-auto whitespace-normal"
-                >
-                  {choice}
-                </Button>
-              ))}
-            </div>
+            <QuizChoiceGrid
+              choices={choices}
+              onChoiceClick={onAnswerClick}
+              className="grid-cols-1"
+            />
 
             {/* 正解・不正解のフィードバック */}
-            {feedback === "correct" && (
-              <p className="text-green-500 text-center font-bold text-xl">
-                正解！
-              </p>
-            )}
-            {feedback === "incorrect" && (
-              <p className="text-red-500 text-center font-bold text-xl">
-                不正解...
-              </p>
-            )}
+            <QuizFeedback feedback={feedback} className="text-xl" />
           </CardContent>
         ) : (
           // クイズ完了時の表示

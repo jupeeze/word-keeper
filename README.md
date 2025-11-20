@@ -1,69 +1,107 @@
-# React + TypeScript + Vite
+# Word Keeper - 韓国語学習アプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+K-Popの歌詞を使って楽しく韓国語を学習できるWebアプリケーションです。
 
-Currently, two official plugins are available:
+## 主な機能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 📺 歌詞同期プレイヤー
+- YouTubeの動画と歌詞を同期して表示
+- 単語をクリックして単語帳に保存
+- リアルタイムで歌詞がハイライト表示
 
-## Expanding the ESLint configuration
+### 📝 歌詞翻訳クイズ
+- 歌詞の翻訳を4択から選ぶクイズ
+- 即座にフィードバックを表示
+- スコア記録機能
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### ⚡ スピード単語クイズ
+- 制限時間内に単語の意味を当てるクイズ
+- 反応時間を記録
+- 履歴表示機能
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 📚 単語辞書
+- 保存した単語を一覧表示
+- 音声再生機能
+- 習熟度管理
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 技術スタック
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **フレームワーク**: React 18 + TypeScript
+- **ビルドツール**: Vite
+- **状態管理**: Zustand
+- **UIコンポーネント**: shadcn/ui
+- **スタイリング**: Tailwind CSS
+- **動画プレイヤー**: react-player
+
+## プロジェクト構造
+
+```
+src/
+├── components/          # 再利用可能なUIコンポーネント
+│   ├── Quiz/           # クイズ関連コンポーネント
+│   │   ├── QuizFeedback.tsx      # フィードバック表示
+│   │   ├── QuizChoiceGrid.tsx    # 選択肢グリッド
+│   │   ├── QuizTimer.tsx         # タイマー表示
+│   │   └── ...
+│   ├── LyricPlayer/    # 歌詞プレイヤー関連コンポーネント
+│   │   ├── LyricLineDisplay.tsx  # 歌詞行表示
+│   │   ├── VocabularyWord.tsx    # 単語表示
+│   │   └── ...
+│   ├── Library/        # 単語辞書関連コンポーネント
+│   └── ui/             # 基本UIコンポーネント (shadcn/ui)
+├── pages/              # ページコンポーネント
+│   ├── Dashboard.tsx
+│   ├── SpeedReadingTrainer.tsx
+│   ├── LyricQuizPage.tsx
+│   └── LyricSyncPlayer.tsx
+├── hooks/              # カスタムフック
+│   ├── useSpeedReadingQuiz.ts
+│   └── useWordAction.ts
+├── stores/             # Zustand状態管理
+│   ├── lyricQuizStore.ts
+│   ├── libraryStore.ts
+│   └── ...
+├── utils/              # ユーティリティ関数
+│   ├── arrayUtils.ts         # 配列操作
+│   ├── vocabularyUtils.ts    # 語彙データ処理
+│   ├── speechUtils.ts        # 音声合成
+│   └── quizUtils.ts          # クイズ関連ユーティリティ
+├── constants/          # 定数定義
+│   ├── quiz.ts              # クイズ設定
+│   └── ui.ts                # UI設定
+├── types/              # TypeScript型定義
+│   └── index.ts
+└── data/               # データファイル
+    └── song_data.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 開発ガイドライン
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### コーディング規約
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **型安全性**: すべての関数とコンポーネントに適切な型を定義
+2. **コンポーネント設計**: 単一責任の原則に従い、再利用可能なコンポーネントを作成
+3. **定数管理**: マジックナンバーを避け、`constants/`ディレクトリで管理
+4. **ユーティリティ関数**: 共通ロジックは`utils/`ディレクトリに抽出
+5. **JSDocコメント**: 公開関数には必ずJSDocコメントを追加
+
+### セットアップ
+
+```bash
+# 依存関係のインストール
+npm install
+
+# 開発サーバーの起動
+npm run dev
+
+# ビルド
+npm run build
+
+# プレビュー
+npm run preview
 ```
+
+## ライセンス
+
+MIT
+
