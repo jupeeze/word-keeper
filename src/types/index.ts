@@ -40,7 +40,8 @@ export type PageName =
   | "dungeon"
   | "lyricPlayer"
   | "lyricQuiz"
-  | "speedReadingTrainer";
+  | "speedReadingTrainer"
+  | "lyricProgress";
 
 export interface PageNavigationProps {
   setPage: (page: PageName) => void;
@@ -69,4 +70,42 @@ export interface QuizConfig {
   timeLimit?: number; // 秒単位
   questionCount?: number;
   choiceCount?: number;
+}
+
+// 歌詞進行型学習モード用の型定義
+
+/**
+ * 歌詞行の習得状態
+ */
+export interface LyricLineProgress {
+  lineIndex: number;
+  isStudied: boolean; // フラッシュカードで学習完了
+  isTested: boolean; // テストで全単語正解
+  isPuzzleCompleted: boolean; // 並べ替えパズル完了
+  isCompleted: boolean; // 全ステップ完了（報酬受け取り済み）
+  completedAt?: string;
+  testAttempts: number; // テスト試行回数
+  puzzleAttempts: number; // パズル試行回数
+}
+
+/**
+ * 単語の習得状態（個別）
+ */
+export interface WordMasteryState {
+  word: string;
+  isMemorized: boolean; // フラッシュカードで覚えた
+  correctCount: number; // テストで正解した回数
+  incorrectCount: number; // テストで不正解だった回数
+  lastTestedAt?: string;
+}
+
+/**
+ * 歌詞進行学習の全体状態
+ */
+export interface LyricProgressState {
+  songId: string; // 曲のID（将来的に複数曲対応）
+  currentLineIndex: number; // 現在学習中の行
+  lineProgress: LyricLineProgress[]; // 各行の進行状態
+  wordMastery: Record<string, WordMasteryState>; // 単語ごとの習得状態
+  totalCompletedLines: number;
 }

@@ -6,6 +6,7 @@ import { LyricSyncPlayer } from "./pages/LyricSyncPlayer";
 import { LyricQuizPage } from "./pages/LyricQuizPage";
 import { SpeedReadingTrainer } from "./pages/SpeedReadingTrainer";
 import { LibraryPage } from "./pages/LibraryPage";
+import { LyricProgressPage } from "./pages/LyricProgressPage";
 import type { PageName } from "@/types";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <SpeedReadingTrainer setPage={setPage} />
       )}
       {currentPage === "library" && <LibraryPage setPage={setPage} />}
+      {currentPage === "lyricProgress" && <LyricProgressPage setPage={setPage} />}
     </div>
   );
 }
