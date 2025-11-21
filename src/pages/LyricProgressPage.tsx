@@ -1,23 +1,27 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLyricProgressStore } from "@/stores/lyricProgressStore";
+import { useSongStore } from "@/stores/songStore";
 import { FlashcardStudy } from "@/components/LyricProgress/FlashcardStudy";
 import { VocabularyTest } from "@/components/LyricProgress/VocabularyTest";
 import { SentenceReorderPuzzle } from "@/components/LyricProgress/SentenceReorderPuzzle";
 import { RewardVideoPlayer } from "@/components/LyricProgress/RewardVideoPlayer";
-import songData from "@/data/song_data.json";
 import type { PageNavigationProps } from "@/types";
-import { CheckCircle2, Circle, Lock } from "lucide-react";
+import { CheckCircle2, Circle, Lock, ArrowLeft } from "lucide-react";
 
 type LearningStep = "study" | "test" | "puzzle" | "reward";
 
-export const LyricProgressPage = ({ setPage }: PageNavigationProps) => {
+interface LyricProgressPageProps extends PageNavigationProps {
+    currentSongId?: string;
+}
+
+export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageProps) => {
+    const { getSongById } = useSongStore();
     const {
-        currentLineIndex,
-        totalCompletedLines,
         initializeProgress,
+        getCurrentProgress,
         markLineStudied,
         markLineTested,
         markPuzzleCompleted,
@@ -29,13 +33,17 @@ export const LyricProgressPage = ({ setPage }: PageNavigationProps) => {
 
     const [currentStep, setCurrentStep] = useState<LearningStep>("study");
 
-    const currentLyric = songData.lyrics[currentLineIndex];
+    // Get song data
+    const song = currentSongId ? getSongById(currentSongId) : null;
+    const progress = getCurrentProgress();
     const currentProgress = getCurrentLine();
 
     // Initialize progress on mount
     useEffect(() => {
-        initializeProgress();
-    }, [initializeProgress]);
+        if (currentSongId && song) {
+            initializeProgress(currentSongId, song);
+        }
+    }, [currentSongId, song, initializeProgress]);
 
     // Determine current step based on progress
     useEffect(() => {
@@ -51,6 +59,39 @@ export const LyricProgressPage = ({ setPage }: PageNavigationProps) => {
             }
         }
     }, [currentProgress]);
+
+    // Handle no song selected
+    if (!currentSongId || !song) {
+        return (
+            <div className="min-h-screen flex items-center justify-center p-4">
+                <Card className="max-w-lg w-full">
+                    <CardHeader>
+                        <CardTitle className="text-center text-2xl">曲が選択されていません</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-center">
+                        <Button onClick={() => setPage("songList")} size="lg">
+                            曲一覧に戻る
+                        </Button>
+                    </CardContent>
+                </Card>
+            </div>
+        );
+    }
+
+    if (!progress) {
+        return (
+            <div className="min-h-screen flex items-center justify-center">
+                <p>読み込み中...</p>
+            </div>
+        );
+    }
+
+    const currentLineIndex = progress.currentLineIndex;
+    const currentLyric = song.lyrics[currentLineIndex];
+    const progressPercentage = (progress.totalCompletedLines / song.lyrics.length) * 100;
+
+    // Check if all lines are completed
+    const allCompleted = progress.totalCompletedLines === song.lyrics.length;
 
     const handleStudyComplete = () => {
         markLineStudied(currentLineIndex);
@@ -73,16 +114,10 @@ export const LyricProgressPage = ({ setPage }: PageNavigationProps) => {
         setCurrentStep("study");
     };
 
-    const progressPercentage =
-        (totalCompletedLines / songData.lyrics.length) * 100;
-
-    // Check if all lines are completed
-    const allCompleted = totalCompletedLines === songData.lyrics.length;
-
     if (allCompleted) {
         return (
-            <div className="min-h-screen flex items-center justify-center p-4">
-                <Card className="max-w-lg w-full">
+            <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+                <Card className="max-w-lg w-full shadow-2xl">
                     <CardHeader>
                         <CardTitle className="text-center text-3xl">🎉 完了！</CardTitle>
                     </CardHeader>
@@ -91,22 +126,21 @@ export const LyricProgressPage = ({ setPage }: PageNavigationProps) => {
                             すべての歌詞行をマスターしました！
                         </p>
                         <p className="text-gray-600">
-                            {songData.title} の全 {songData.lyrics.length}{" "}
-                            行を完全に習得しました。
+                            {song.title} の全 {song.lyrics.length} 行を完全に習得しました。
                         </p>
                         <div className="flex gap-4 mt-6">
                             <Button
-                                onClick={() => setPage("library")}
+                                onClick={() => setPage("songList")}
                                 variant="outline"
                                 className="flex-1"
                             >
-                                図鑑を見る
+                                曲一覧へ
                             </Button>
                             <Button
-                                onClick={() => setPage("dashboard")}
+                                onClick={() => setPage("library")}
                                 className="flex-1"
                             >
-                                ダッシュボードへ
+                                図鑑を見る
                             </Button>
                         </div>
                     </CardContent>
@@ -121,9 +155,19 @@ export const LyricProgressPage = ({ setPage }: PageNavigationProps) => {
                 {/* Header */}
                 <Card>
                     <CardHeader>
-                        <CardTitle className="text-center">
-                            🎵 {songData.title}
-                        </CardTitle>
+                        <div className="flex items-center gap-3">
+                            <Button
+                                onClick={() => setPage("songList")}
+                                variant="ghost"
+                                size="sm"
+                                className="hover:bg-purple-100"
+                            >
+                                <ArrowLeft className="w-4 h-4" />
+                            </Button>
+                            <CardTitle className="text-center flex-1">
+                                🎵 {song.title}
+                            </CardTitle>
+                        </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         {/* Overall progress */}
@@ -131,7 +175,7 @@ export const LyricProgressPage = ({ setPage }: PageNavigationProps) => {
                             <div className="flex justify-between text-sm text-gray-600 mb-2">
                                 <span>全体の進行状況</span>
                                 <span>
-                                    {totalCompletedLines} / {songData.lyrics.length} 行完了
+                                    {progress.totalCompletedLines} / {song.lyrics.length} 行完了
                                 </span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-3">
@@ -214,7 +258,7 @@ export const LyricProgressPage = ({ setPage }: PageNavigationProps) => {
                         )}
                         {currentStep === "reward" && (
                             <RewardVideoPlayer
-                                youtubeUrl={songData.youtubeUrl}
+                                youtubeUrl={song.youtubeUrl}
                                 startTime={currentLyric.startTime}
                                 lyricText={currentLyric.text}
                                 translation={currentLyric.translation}
@@ -223,17 +267,6 @@ export const LyricProgressPage = ({ setPage }: PageNavigationProps) => {
                         )}
                     </motion.div>
                 </AnimatePresence>
-
-                {/* Back button */}
-                <div className="flex justify-center">
-                    <Button
-                        onClick={() => setPage("dashboard")}
-                        variant="outline"
-                        size="lg"
-                    >
-                        ダッシュボードに戻る
-                    </Button>
-                </div>
             </div>
         </div>
     );
@@ -255,10 +288,10 @@ const StepIndicator = ({
         <div className="flex flex-col items-center">
             <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${isComplete
-                    ? "bg-green-500 text-white"
-                    : isActive
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200 text-gray-400"
+                        ? "bg-green-500 text-white"
+                        : isActive
+                            ? "bg-blue-500 text-white"
+                            : "bg-gray-200 text-gray-400"
                     }`}
             >
                 {isComplete ? (

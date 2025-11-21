@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import type { PageNavigationProps } from "@/types";
 import { useWordAction } from "@/hooks/useWordAction";
+import { useSongStore } from "@/stores/songStore";
 import ReactPlayer from "react-player";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,23 +13,27 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { LyricLineDisplay } from "@/components/LyricPlayer/LyricLineDisplay";
-import songData from "../data/song_data.json";
-
-// ※トースト通知用の簡易コンポーネントやライブラリがない場合はconsole.logで代用しますが、
-// ここではユーザー体験のために「保存しました」というフィードバックを出す処理を想定します。
+import { ArrowLeft } from "lucide-react";
 
 interface PlayerState {
   playing: boolean;
 }
 
-export const LyricSyncPlayer = ({ setPage }: PageNavigationProps) => {
+interface LyricSyncPlayerProps extends PageNavigationProps {
+  currentSongId?: string;
+}
+
+export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps) => {
   const playerRef = useRef<HTMLVideoElement | null>(null);
-  const { handleWordClick } = useWordAction();
+  const { handleWordClick } = useWordAction(currentSongId);
+  const { getSongById } = useSongStore();
 
   const [state, setState] = useState<PlayerState>({
     playing: false,
   });
   const [currentLyricIndex, setCurrentLyricIndex] = useState(-1);
+
+  const song = currentSongId ? getSongById(currentSongId) : null;
 
   const handlePlayPause = () => {
     setState((prevState) => ({ ...prevState, playing: !prevState.playing }));
@@ -42,27 +47,54 @@ export const LyricSyncPlayer = ({ setPage }: PageNavigationProps) => {
   };
 
   const handleTimeUpdate = (event: React.SyntheticEvent<HTMLVideoElement>) => {
+    if (!song) return;
+
     const playedSeconds = (event.target as HTMLVideoElement).currentTime;
-    const nextLineIdx = songData.lyrics.findIndex(
+    const nextLineIdx = song.lyrics.findIndex(
       (lyric) => lyric.startTime > playedSeconds
     );
 
     const currentLineIdx =
-      nextLineIdx >= 0 ? nextLineIdx - 1 : songData.lyrics.length - 1;
+      nextLineIdx >= 0 ? nextLineIdx - 1 : song.lyrics.length - 1;
     setCurrentLyricIndex(currentLineIdx);
   };
 
-
+  if (!currentSongId || !song) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <Card className="max-w-lg w-full">
+          <CardHeader>
+            <CardTitle className="text-center text-2xl">曲が選択されていません</CardTitle>
+          </CardHeader>
+          <CardContent className="text-center">
+            <Button onClick={() => setPage("songList")} size="lg">
+              曲一覧に戻る
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   const { playing } = state;
 
   return (
     <div className="p-4 flex flex-col items-center gap-4 max-w-lg mx-auto">
-      <h1 className="text-2xl font-bold">歌詞同期プレイヤー</h1>
+      <div className="flex items-center gap-3 w-full">
+        <Button
+          onClick={() => setPage("songList")}
+          variant="ghost"
+          size="sm"
+        >
+          <ArrowLeft className="w-4 h-4" />
+        </Button>
+        <h1 className="text-2xl font-bold flex-1">歌詞同期プレイヤー</h1>
+      </div>
 
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>K-Pop Player</CardTitle>
+          <CardTitle>{song.title}</CardTitle>
+          <p className="text-sm text-gray-600">{song.artist}</p>
         </CardHeader>
         <CardContent>
           {/* React Player */}
@@ -70,7 +102,7 @@ export const LyricSyncPlayer = ({ setPage }: PageNavigationProps) => {
             <ReactPlayer
               ref={playerRef}
               style={{ width: "100%", height: "auto", aspectRatio: "16/9" }}
-              src={songData.youtubeUrl}
+              src={song.youtubeUrl}
               playing={playing}
               onStart={handleStart}
               onTimeUpdate={handleTimeUpdate}
@@ -83,14 +115,6 @@ export const LyricSyncPlayer = ({ setPage }: PageNavigationProps) => {
             {playing ? "一時停止" : "再生"}
           </Button>
 
-          <Button
-            onClick={() => setPage("lyricQuiz")}
-            variant="default"
-            className="w-full mb-4 bg-green-600 hover:bg-green-700"
-          >
-            翻訳クイズに挑戦する
-          </Button>
-
           {/* 歌詞表示エリア */}
           <ScrollArea className="h-64 overflow-y-auto p-4 border rounded-md bg-gray-100">
             {currentLyricIndex === -1 && (
@@ -98,7 +122,7 @@ export const LyricSyncPlayer = ({ setPage }: PageNavigationProps) => {
                 再生を開始してください...
               </p>
             )}
-            {songData.lyrics.map((line, index) => (
+            {song.lyrics.map((line, index) => (
               <LyricLineDisplay
                 key={index}
                 line={line}
@@ -110,11 +134,11 @@ export const LyricSyncPlayer = ({ setPage }: PageNavigationProps) => {
         </CardContent>
         <CardFooter>
           <Button
-            onClick={() => setPage("dashboard")}
+            onClick={() => setPage("songList")}
             variant="secondary"
             className="w-full"
           >
-            戻る
+            曲一覧に戻る
           </Button>
         </CardFooter>
       </Card>

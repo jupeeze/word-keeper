@@ -1,31 +1,45 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import songData from "../data/song_data.json";
 import type {
-    LyricProgressState,
     LyricLineProgress,
     WordMasteryState,
+    Song,
 } from "@/types";
 
-interface LyricProgressStore extends LyricProgressState {
+// 曲ごとの進捗状態
+interface SongProgress {
+    songId: string;
+    currentLineIndex: number;
+    lineProgress: LyricLineProgress[];
+    wordMastery: Record<string, WordMasteryState>;
+    totalCompletedLines: number;
+}
+
+interface LyricProgressStore {
+    // 全曲の進捗を保持
+    progressBySong: Record<string, SongProgress>;
+    currentSongId: string | null;
+
     // Actions
-    initializeProgress: () => void;
+    initializeProgress: (songId: string, song: Song) => void;
+    switchSong: (songId: string) => void;
     markLineStudied: (lineIndex: number) => void;
     markLineTested: (lineIndex: number) => void;
     markPuzzleCompleted: (lineIndex: number) => void;
     markLineCompleted: (lineIndex: number) => void;
     moveToNextLine: () => void;
     updateWordMastery: (word: string, isCorrect: boolean) => void;
-    resetProgress: () => void;
+    resetProgress: (songId: string) => void;
 
     // Getters
+    getCurrentProgress: () => SongProgress | null;
     getCurrentLine: () => LyricLineProgress | null;
     getLineProgress: (lineIndex: number) => LyricLineProgress | null;
     isLineUnlocked: (lineIndex: number) => boolean;
 }
 
-const createInitialLineProgress = (): LyricLineProgress[] => {
-    return songData.lyrics.map((_, index) => ({
+const createInitialLineProgress = (lyricsCount: number): LyricLineProgress[] => {
+    return Array.from({ length: lyricsCount }, (_, index) => ({
         lineIndex: index,
         isStudied: false,
         isTested: false,
@@ -36,163 +50,275 @@ const createInitialLineProgress = (): LyricLineProgress[] => {
     }));
 };
 
+const createInitialSongProgress = (songId: string, song: Song): SongProgress => ({
+    songId,
+    currentLineIndex: 0,
+    lineProgress: createInitialLineProgress(song.lyrics.length),
+    wordMastery: {},
+    totalCompletedLines: 0,
+});
+
 export const useLyricProgressStore = create(
     persist<LyricProgressStore>(
         (set, get) => ({
             // Initial state
-            songId: "twinkle-twinkle-korean",
-            currentLineIndex: 0,
-            lineProgress: createInitialLineProgress(),
-            wordMastery: {},
-            totalCompletedLines: 0,
+            progressBySong: {},
+            currentSongId: null,
 
             // Actions
-            initializeProgress: () => {
+            initializeProgress: (songId, song) => {
                 const state = get();
-                if (state.lineProgress.length === 0) {
+                if (!state.progressBySong[songId]) {
                     set({
-                        lineProgress: createInitialLineProgress(),
-                        currentLineIndex: 0,
-                        totalCompletedLines: 0,
+                        progressBySong: {
+                            ...state.progressBySong,
+                            [songId]: createInitialSongProgress(songId, song),
+                        },
+                        currentSongId: songId,
                     });
+                } else {
+                    set({ currentSongId: songId });
                 }
             },
 
+            switchSong: (songId) => {
+                set({ currentSongId: songId });
+            },
+
+            getCurrentProgress: () => {
+                const state = get();
+                if (!state.currentSongId) return null;
+                return state.progressBySong[state.currentSongId] || null;
+            },
+
             markLineStudied: (lineIndex) => {
-                set((state) => ({
-                    lineProgress: state.lineProgress.map((line) =>
-                        line.lineIndex === lineIndex ? { ...line, isStudied: true } : line
-                    ),
-                }));
+                const state = get();
+                const songId = state.currentSongId;
+                if (!songId) return;
+
+                const progress = state.progressBySong[songId];
+                if (!progress) return;
+
+                set({
+                    progressBySong: {
+                        ...state.progressBySong,
+                        [songId]: {
+                            ...progress,
+                            lineProgress: progress.lineProgress.map((line) =>
+                                line.lineIndex === lineIndex
+                                    ? { ...line, isStudied: true }
+                                    : line
+                            ),
+                        },
+                    },
+                });
             },
 
             markLineTested: (lineIndex) => {
-                set((state) => ({
-                    lineProgress: state.lineProgress.map((line) =>
-                        line.lineIndex === lineIndex
-                            ? {
-                                ...line,
-                                isTested: true,
-                                testAttempts: line.testAttempts + 1,
-                            }
-                            : line
-                    ),
-                }));
+                const state = get();
+                const songId = state.currentSongId;
+                if (!songId) return;
+
+                const progress = state.progressBySong[songId];
+                if (!progress) return;
+
+                set({
+                    progressBySong: {
+                        ...state.progressBySong,
+                        [songId]: {
+                            ...progress,
+                            lineProgress: progress.lineProgress.map((line) =>
+                                line.lineIndex === lineIndex
+                                    ? {
+                                        ...line,
+                                        isTested: true,
+                                        testAttempts: line.testAttempts + 1,
+                                    }
+                                    : line
+                            ),
+                        },
+                    },
+                });
             },
 
             markPuzzleCompleted: (lineIndex) => {
-                set((state) => ({
-                    lineProgress: state.lineProgress.map((line) =>
-                        line.lineIndex === lineIndex
-                            ? {
-                                ...line,
-                                isPuzzleCompleted: true,
-                                puzzleAttempts: line.puzzleAttempts + 1,
-                            }
-                            : line
-                    ),
-                }));
+                const state = get();
+                const songId = state.currentSongId;
+                if (!songId) return;
+
+                const progress = state.progressBySong[songId];
+                if (!progress) return;
+
+                set({
+                    progressBySong: {
+                        ...state.progressBySong,
+                        [songId]: {
+                            ...progress,
+                            lineProgress: progress.lineProgress.map((line) =>
+                                line.lineIndex === lineIndex
+                                    ? {
+                                        ...line,
+                                        isPuzzleCompleted: true,
+                                        puzzleAttempts: line.puzzleAttempts + 1,
+                                    }
+                                    : line
+                            ),
+                        },
+                    },
+                });
             },
 
             markLineCompleted: (lineIndex) => {
-                set((state) => {
-                    const updatedProgress = state.lineProgress.map((line) =>
-                        line.lineIndex === lineIndex
-                            ? {
-                                ...line,
-                                isCompleted: true,
-                                completedAt: new Date().toISOString(),
-                            }
-                            : line
-                    );
+                const state = get();
+                const songId = state.currentSongId;
+                if (!songId) return;
 
-                    const completedCount = updatedProgress.filter(
-                        (line) => line.isCompleted
-                    ).length;
+                const progress = state.progressBySong[songId];
+                if (!progress) return;
 
-                    return {
-                        lineProgress: updatedProgress,
-                        totalCompletedLines: completedCount,
-                    };
+                const updatedProgress = progress.lineProgress.map((line) =>
+                    line.lineIndex === lineIndex
+                        ? {
+                            ...line,
+                            isCompleted: true,
+                            completedAt: new Date().toISOString(),
+                        }
+                        : line
+                );
+
+                const completedCount = updatedProgress.filter(
+                    (line) => line.isCompleted
+                ).length;
+
+                set({
+                    progressBySong: {
+                        ...state.progressBySong,
+                        [songId]: {
+                            ...progress,
+                            lineProgress: updatedProgress,
+                            totalCompletedLines: completedCount,
+                        },
+                    },
                 });
             },
 
             moveToNextLine: () => {
-                set((state) => {
-                    const nextIndex = state.currentLineIndex + 1;
-                    if (nextIndex < songData.lyrics.length) {
-                        return { currentLineIndex: nextIndex };
-                    }
-                    return state;
-                });
+                const state = get();
+                const songId = state.currentSongId;
+                if (!songId) return;
+
+                const progress = state.progressBySong[songId];
+                if (!progress) return;
+
+                const nextIndex = progress.currentLineIndex + 1;
+                if (nextIndex < progress.lineProgress.length) {
+                    set({
+                        progressBySong: {
+                            ...state.progressBySong,
+                            [songId]: {
+                                ...progress,
+                                currentLineIndex: nextIndex,
+                            },
+                        },
+                    });
+                }
             },
 
             updateWordMastery: (word, isCorrect) => {
-                set((state) => {
-                    const currentMastery = state.wordMastery[word] || {
-                        word,
-                        isMemorized: false,
-                        correctCount: 0,
-                        incorrectCount: 0,
-                    };
+                const state = get();
+                const songId = state.currentSongId;
+                if (!songId) return;
 
-                    const updatedMastery: WordMasteryState = {
-                        ...currentMastery,
-                        correctCount: isCorrect
-                            ? currentMastery.correctCount + 1
-                            : currentMastery.correctCount,
-                        incorrectCount: !isCorrect
-                            ? currentMastery.incorrectCount + 1
-                            : currentMastery.incorrectCount,
-                        lastTestedAt: new Date().toISOString(),
-                        isMemorized:
-                            isCorrect && currentMastery.correctCount + 1 >= 2
-                                ? true
-                                : currentMastery.isMemorized,
-                    };
+                const progress = state.progressBySong[songId];
+                if (!progress) return;
 
-                    return {
-                        wordMastery: {
-                            ...state.wordMastery,
-                            [word]: updatedMastery,
+                const currentMastery = progress.wordMastery[word] || {
+                    word,
+                    isMemorized: false,
+                    correctCount: 0,
+                    incorrectCount: 0,
+                };
+
+                const updatedMastery: WordMasteryState = {
+                    ...currentMastery,
+                    correctCount: isCorrect
+                        ? currentMastery.correctCount + 1
+                        : currentMastery.correctCount,
+                    incorrectCount: !isCorrect
+                        ? currentMastery.incorrectCount + 1
+                        : currentMastery.incorrectCount,
+                    lastTestedAt: new Date().toISOString(),
+                    isMemorized:
+                        isCorrect && currentMastery.correctCount + 1 >= 2
+                            ? true
+                            : currentMastery.isMemorized,
+                };
+
+                set({
+                    progressBySong: {
+                        ...state.progressBySong,
+                        [songId]: {
+                            ...progress,
+                            wordMastery: {
+                                ...progress.wordMastery,
+                                [word]: updatedMastery,
+                            },
                         },
-                    };
+                    },
                 });
             },
 
-            resetProgress: () => {
+            resetProgress: (songId) => {
+                const state = get();
+                const progress = state.progressBySong[songId];
+                if (!progress) return;
+
                 set({
-                    currentLineIndex: 0,
-                    lineProgress: createInitialLineProgress(),
-                    wordMastery: {},
-                    totalCompletedLines: 0,
+                    progressBySong: {
+                        ...state.progressBySong,
+                        [songId]: {
+                            ...progress,
+                            currentLineIndex: 0,
+                            lineProgress: createInitialLineProgress(
+                                progress.lineProgress.length
+                            ),
+                            wordMastery: {},
+                            totalCompletedLines: 0,
+                        },
+                    },
                 });
             },
 
             // Getters
             getCurrentLine: () => {
-                const state = get();
+                const progress = get().getCurrentProgress();
+                if (!progress) return null;
+
                 return (
-                    state.lineProgress.find(
-                        (line) => line.lineIndex === state.currentLineIndex
+                    progress.lineProgress.find(
+                        (line) => line.lineIndex === progress.currentLineIndex
                     ) || null
                 );
             },
 
             getLineProgress: (lineIndex) => {
-                const state = get();
+                const progress = get().getCurrentProgress();
+                if (!progress) return null;
+
                 return (
-                    state.lineProgress.find((line) => line.lineIndex === lineIndex) ||
+                    progress.lineProgress.find((line) => line.lineIndex === lineIndex) ||
                     null
                 );
             },
 
             isLineUnlocked: (lineIndex) => {
-                const state = get();
+                const progress = get().getCurrentProgress();
+                if (!progress) return false;
+
                 // 最初の行は常にアンロック
                 if (lineIndex === 0) return true;
                 // 前の行が完了していればアンロック
-                const previousLine = state.lineProgress.find(
+                const previousLine = progress.lineProgress.find(
                     (line) => line.lineIndex === lineIndex - 1
                 );
                 return previousLine?.isCompleted || false;

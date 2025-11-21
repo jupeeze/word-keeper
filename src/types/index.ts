@@ -1,4 +1,17 @@
+// 曲データの型定義
+export interface Song {
+  id: string;
+  title: string;
+  artist: string;
+  coverImage: string;
+  difficulty: "beginner" | "intermediate" | "advanced";
+  language: string;
+  youtubeUrl: string;
+  lyrics: LyricLine[];
+}
+
 export interface SavedWordContext {
+  songId: string; // 曲のID
   songTitle: string;
   artistName: string;
   youtubeUrl: string;
@@ -34,6 +47,7 @@ export interface LyricLine {
 
 // ページナビゲーション用のProps型
 export type PageName =
+  | "songList"
   | "dashboard"
   | "quiz"
   | "library"
@@ -41,8 +55,10 @@ export type PageName =
   | "lyricProgress";
 
 export interface PageNavigationProps {
-  setPage: (page: PageName) => void;
+  setPage: (page: PageName, songId?: string) => void;
+  currentSongId?: string;
 }
+
 
 // クイズ関連の共通型定義
 

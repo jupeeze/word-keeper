@@ -1,135 +1,284 @@
-{
-  "title": "Twinkle Twinkle Little Star (Korean Ver.)",
-  "artist": "Traditional",
-  "youtubeUrl": "https://open.spotify.com/track/6Ihdn6wW2UBhfTKWbP29KA",
-  "lyrics": [
-    {
-      "startTime": 16.0,
-      "text": "반짝반짝 작은 별",
-      "reading": "パンチャッパンチャッ チャグン ピョル",
-      "translation": "きらきら 小さな星",
-      "vocabulary": [
-        {
-          "word": "반짝반짝",
-          "reading": "パンチャッパンチャッ",
-          "meaning": "きらきら"
-        },
-        {
-          "word": "작은",
-          "reading": "チャグン",
-          "meaning": "小さい"
-        },
-        {
-          "word": "별",
-          "reading": "ビョル",
-          "meaning": "星"
-        }
-      ]
-    },
-    {
-      "startTime": 20.0,
-      "text": "아름답게 비치네",
-      "reading": "アルムダプケ ピチネ",
-      "translation": "美しく輝いてるね",
-      "vocabulary": [
-        {
-          "word": "아름답게",
-          "reading": "アルムダプケ",
-          "meaning": "美しく"
-        },
-        {
-          "word": "비치네",
-          "reading": "ピチネ",
-          "meaning": "輝いてるね"
-        }
-      ]
-    },
-    {
-      "startTime": 24.0,
-      "text": "동쪽 하늘에서도",
-      "reading": "トンチョッ ハヌレソド",
-      "translation": "東の空でも",
-      "vocabulary": [
-        {
-          "word": "동쪽",
-          "reading": "トンチョッ",
-          "meaning": "東"
-        },
-        {
-          "word": "하늘",
-          "reading": "ハヌル",
-          "meaning": "空"
-        },
-        {
-          "word": "에서도",
-          "reading": "エソド",
-          "meaning": "～でも"
-        }
-      ]
-    },
-    {
-      "startTime": 28.0,
-      "text": "서쪽 하늘에서도",
-      "reading": "ソチョッ ハヌレソド",
-      "translation": "西の空でも",
-      "vocabulary": [
-        {
-          "word": "서쪽",
-          "reading": "ソチョッ",
-          "meaning": "西"
-        },
-        {
-          "word": "하늘",
-          "reading": "ハヌル",
-          "meaning": "空"
-        },
-        {
-          "word": "에서도",
-          "reading": "エソド",
-          "meaning": "～でも"
-        }
-      ]
-    },
-    {
-      "startTime": 32.0,
-      "text": "반짝반짝 작은 별",
-      "reading": "パンチャッパンチャッ チャグン ピョル",
-      "translation": "きらきら 小さな星",
-      "vocabulary": [
-        {
-          "word": "반짝반짝",
-          "reading": "パンチャッパンチャッ",
-          "meaning": "きらきら"
-        },
-        {
-          "word": "작은",
-          "reading": "チャグン",
-          "meaning": "小さい"
-        },
-        {
-          "word": "별",
-          "reading": "ビョル",
-          "meaning": "星"
-        }
-      ]
-    },
-    {
-      "startTime": 36.0,
-      "text": "아름답게 비치네",
-      "reading": "アルムダプケ ピチネ",
-      "translation": "美しく輝いてるね",
-      "vocabulary": [
-        {
-          "word": "아름답게",
-          "reading": "アルムダプケ",
-          "meaning": "美しく"
-        },
-        {
-          "word": "비치네",
-          "reading": "ピチネ",
-          "meaning": "輝いてるね"
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": "twinkle-twinkle-korean",
+    "title": "Twinkle Twinkle Little Star (Korean Ver.)",
+    "artist": "Traditional",
+    "coverImage": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80",
+    "difficulty": "beginner",
+    "language": "Korean",
+    "youtubeUrl": "https://open.spotify.com/track/6Ihdn6wW2UBhfTKWbP29KA",
+    "lyrics": [
+      {
+        "startTime": 16.0,
+        "text": "반짝반짝 작은 별",
+        "reading": "パンチャッパンチャッ チャグン ピョル",
+        "translation": "きらきら 小さな星",
+        "vocabulary": [
+          {
+            "word": "반짝반짝",
+            "reading": "パンチャッパンチャッ",
+            "meaning": "きらきら"
+          },
+          {
+            "word": "작은",
+            "reading": "チャグン",
+            "meaning": "小さい"
+          },
+          {
+            "word": "별",
+            "reading": "ビョル",
+            "meaning": "星"
+          }
+        ]
+      },
+      {
+        "startTime": 20.0,
+        "text": "아름답게 비치네",
+        "reading": "アルムダプケ ピチネ",
+        "translation": "美しく輝いてるね",
+        "vocabulary": [
+          {
+            "word": "아름답게",
+            "reading": "アルムダプケ",
+            "meaning": "美しく"
+          },
+          {
+            "word": "비치네",
+            "reading": "ピチネ",
+            "meaning": "輝いてるね"
+          }
+        ]
+      },
+      {
+        "startTime": 24.0,
+        "text": "동쪽 하늘에서도",
+        "reading": "トンチョッ ハヌレソド",
+        "translation": "東の空でも",
+        "vocabulary": [
+          {
+            "word": "동쪽",
+            "reading": "トンチョッ",
+            "meaning": "東"
+          },
+          {
+            "word": "하늘",
+            "reading": "ハヌル",
+            "meaning": "空"
+          },
+          {
+            "word": "에서도",
+            "reading": "エソド",
+            "meaning": "～でも"
+          }
+        ]
+      },
+      {
+        "startTime": 28.0,
+        "text": "서쪽 하늘에서도",
+        "reading": "ソチョッ ハヌレソド",
+        "translation": "西の空でも",
+        "vocabulary": [
+          {
+            "word": "서쪽",
+            "reading": "ソチョッ",
+            "meaning": "西"
+          },
+          {
+            "word": "하늘",
+            "reading": "ハヌル",
+            "meaning": "空"
+          },
+          {
+            "word": "에서도",
+            "reading": "エソド",
+            "meaning": "～でも"
+          }
+        ]
+      },
+      {
+        "startTime": 32.0,
+        "text": "반짝반짝 작은 별",
+        "reading": "パンチャッパンチャッ チャグン ピョル",
+        "translation": "きらきら 小さな星",
+        "vocabulary": [
+          {
+            "word": "반짝반짝",
+            "reading": "パンチャッパンチャッ",
+            "meaning": "きらきら"
+          },
+          {
+            "word": "작은",
+            "reading": "チャグン",
+            "meaning": "小さい"
+          },
+          {
+            "word": "별",
+            "reading": "ビョル",
+            "meaning": "星"
+          }
+        ]
+      },
+      {
+        "startTime": 36.0,
+        "text": "아름답게 비치네",
+        "reading": "アルムダプケ ピチネ",
+        "translation": "美しく輝いてるね",
+        "vocabulary": [
+          {
+            "word": "아름답게",
+            "reading": "アルムダプケ",
+            "meaning": "美しく"
+          },
+          {
+            "word": "비치네",
+            "reading": "ピチネ",
+            "meaning": "輝いてるね"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "spring-day-bts",
+    "title": "봄날 (Spring Day)",
+    "artist": "BTS",
+    "coverImage": "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800&q=80",
+    "difficulty": "intermediate",
+    "language": "Korean",
+    "youtubeUrl": "https://www.youtube.com/watch?v=xEeFrLSkMm8",
+    "lyrics": [
+      {
+        "startTime": 45.0,
+        "text": "보고 싶다",
+        "reading": "ポゴ シプタ",
+        "translation": "会いたい",
+        "vocabulary": [
+          {
+            "word": "보고 싶다",
+            "reading": "ポゴ シプタ",
+            "meaning": "会いたい"
+          }
+        ]
+      },
+      {
+        "startTime": 49.0,
+        "text": "이렇게 말하니까",
+        "reading": "イロッケ マラニカ",
+        "translation": "こう言うと",
+        "vocabulary": [
+          {
+            "word": "이렇게",
+            "reading": "イロッケ",
+            "meaning": "こう、このように"
+          },
+          {
+            "word": "말하니까",
+            "reading": "マラニカ",
+            "meaning": "言うと"
+          }
+        ]
+      },
+      {
+        "startTime": 52.0,
+        "text": "더 보고 싶다",
+        "reading": "ト ポゴ シプタ",
+        "translation": "もっと会いたい",
+        "vocabulary": [
+          {
+            "word": "더",
+            "reading": "ト",
+            "meaning": "もっと"
+          },
+          {
+            "word": "보고 싶다",
+            "reading": "ポゴ シプタ",
+            "meaning": "会いたい"
+          }
+        ]
+      },
+      {
+        "startTime": 56.0,
+        "text": "너를 보고 있어도",
+        "reading": "ノルル ポゴ イッソド",
+        "translation": "君を見ていても",
+        "vocabulary": [
+          {
+            "word": "너를",
+            "reading": "ノルル",
+            "meaning": "君を"
+          },
+          {
+            "word": "보고 있어도",
+            "reading": "ポゴ イッソド",
+            "meaning": "見ていても"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "dynamite-bts",
+    "title": "Dynamite",
+    "artist": "BTS",
+    "coverImage": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
+    "difficulty": "beginner",
+    "language": "English",
+    "youtubeUrl": "https://www.youtube.com/watch?v=gdZLi9oWNZg",
+    "lyrics": [
+      {
+        "startTime": 18.0,
+        "text": "Cause I, I, I'm in the stars tonight",
+        "reading": "コーズ アイ アイ アイム イン ザ スターズ トゥナイト",
+        "translation": "だって僕は今夜、星の中にいるから",
+        "vocabulary": [
+          {
+            "word": "stars",
+            "reading": "スターズ",
+            "meaning": "星"
+          },
+          {
+            "word": "tonight",
+            "reading": "トゥナイト",
+            "meaning": "今夜"
+          }
+        ]
+      },
+      {
+        "startTime": 21.0,
+        "text": "So watch me bring the fire",
+        "reading": "ソー ウォッチ ミー ブリング ザ ファイア",
+        "translation": "だから見てて、僕が火をつけるところを",
+        "vocabulary": [
+          {
+            "word": "watch",
+            "reading": "ウォッチ",
+            "meaning": "見る"
+          },
+          {
+            "word": "fire",
+            "reading": "ファイア",
+            "meaning": "火"
+          }
+        ]
+      },
+      {
+        "startTime": 23.0,
+        "text": "And set the night alight",
+        "reading": "アンド セット ザ ナイト アライト",
+        "translation": "そして夜を照らす",
+        "vocabulary": [
+          {
+            "word": "night",
+            "reading": "ナイト",
+            "meaning": "夜"
+          },
+          {
+            "word": "alight",
+            "reading": "アライト",
+            "meaning": "照らす"
+          }
+        ]
+      }
+    ]
+  }
+]
