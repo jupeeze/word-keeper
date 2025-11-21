@@ -45,7 +45,7 @@ export const FlashcardStudy = ({
     const handleReset = () => {
         setCurrentIndex(0);
         setIsFlipped(false);
-        setViewedCards(new Set());
+        // Don't clear viewedCards - preserve the history
     };
 
     return (
@@ -142,33 +142,25 @@ export const FlashcardStudy = ({
                 >
                     <RotateCcw className="w-4 h-4" />
                 </Button>
-                <Button
-                    onClick={handleNext}
-                    disabled={currentIndex === vocabulary.length - 1 || !viewedCards.has(currentIndex)}
-                    variant="outline"
-                    className="flex-1 glass-panel hover:bg-white/60 transition-all duration-300"
-                >
-                    次へ
-                    <ChevronRight className="w-4 h-4 ml-2" />
-                </Button>
-            </div>
-
-            {/* Complete button */}
-            {allViewed && (
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="w-full"
-                >
+                {allViewed ? (
                     <Button
                         onClick={onComplete}
-                        className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                        size="lg"
+                        className="flex-1 h-full text-base font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                         学習完了 ✓
                     </Button>
-                </motion.div>
-            )}
+                ) : (
+                    <Button
+                        onClick={handleNext}
+                        disabled={currentIndex === vocabulary.length - 1 || !viewedCards.has(currentIndex)}
+                        variant="outline"
+                        className="flex-1 glass-panel hover:bg-white/60 transition-all duration-300"
+                    >
+                        次へ
+                        <ChevronRight className="w-4 h-4 ml-2" />
+                    </Button>
+                )}
+            </div>
         </div>
     );
 };
