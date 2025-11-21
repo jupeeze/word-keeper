@@ -7,8 +7,8 @@ import ReactPlayer from "react-player";
 
 interface RewardVideoPlayerProps {
     youtubeUrl: string;
-    startTime: number; // 開始時刻（秒）
-    duration?: number; // 再生時間（秒）デフォルト: 4秒
+    startTime: number;
+    nextStartTime: number;
     lyricText: string;
     translation: string;
     onNext: () => void;
@@ -17,30 +17,30 @@ interface RewardVideoPlayerProps {
 export const RewardVideoPlayer = ({
     youtubeUrl,
     startTime,
-    duration = 4,
+    nextStartTime,
     lyricText,
     translation,
     onNext,
 }: RewardVideoPlayerProps) => {
     const [isPlaying, setIsPlaying] = useState(true);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const playerRef = useRef<any>(null);
+    const playerRef = useRef<HTMLVideoElement>(null);
 
-    const endTime = startTime + duration;
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleProgress = (state: any) => {
-        // Stop playing when reaching end time
-        if (state.playedSeconds >= endTime) {
+    const handleTimeUpdate = () => {
+        if (!playerRef.current) return;
+        if (playerRef.current.currentTime >= nextStartTime) {
             setIsPlaying(false);
+        }
+    };
+
+    const handleStart = () => {
+        if (playerRef.current) {
+            playerRef.current.currentTime = startTime;
         }
     };
 
     const handleReplay = () => {
         setIsPlaying(true);
-        if (playerRef.current) {
-            playerRef.current.seekTo(startTime, "seconds");
-        }
+        handleStart();
     };
 
     return (
@@ -80,10 +80,11 @@ export const RewardVideoPlayer = ({
                             ref={playerRef}
                             src={youtubeUrl}
                             playing={isPlaying}
-                            controls={true}
+                            controls={false}
                             width="100%"
                             height="100%"
-                            onProgress={handleProgress}
+                            onStart={handleStart}
+                            onTimeUpdate={handleTimeUpdate}
                         />
                     </div>
                 </CardContent>

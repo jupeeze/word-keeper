@@ -306,6 +306,11 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                             <RewardVideoPlayer
                                 youtubeUrl={song.youtubeUrl}
                                 startTime={currentLyric.startTime}
+                                nextStartTime={
+                                    currentLineIndex + 1 < song.lyrics.length
+                                        ? song.lyrics[currentLineIndex + 1].startTime
+                                        : undefined
+                                }
                                 lyricText={currentLyric.text}
                                 translation={currentLyric.translation}
                                 onNext={handleRewardComplete}
@@ -338,10 +343,10 @@ const StepIndicator = ({
         >
             <div
                 className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${isComplete
-                        ? "bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg shadow-green-500/50"
-                        : isActive
-                            ? "bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-purple-500/50 animate-pulse"
-                            : "glass-panel text-gray-400"
+                    ? "bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg shadow-green-500/50"
+                    : isActive
+                        ? "bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-purple-500/50 animate-pulse"
+                        : "glass-panel text-gray-400"
                     }`}
             >
                 {isComplete ? (
