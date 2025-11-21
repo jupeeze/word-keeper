@@ -45,25 +45,6 @@ export const RewardVideoPlayer = ({
 
     return (
         <div className="flex flex-col items-center gap-6 w-full max-w-2xl mx-auto">
-            {/* Congratulations message */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="w-full"
-            >
-                <Card className="bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-300">
-                    <CardContent className="p-6 text-center">
-                        <p className="text-3xl mb-2">🎉</p>
-                        <h3 className="text-2xl font-bold text-orange-800 mb-2">
-                            おめでとうございます！
-                        </h3>
-                        <p className="text-gray-700">
-                            この歌詞行を完全にマスターしました！
-                        </p>
-                    </CardContent>
-                </Card>
-            </motion.div>
-
             {/* Lyric display */}
             <Card className="w-full">
                 <CardContent className="p-6 text-center">
