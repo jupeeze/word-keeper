@@ -44,17 +44,15 @@ export const RewardVideoPlayer = ({
 
     return (
         <div className="flex flex-col items-center gap-6 w-full max-w-2xl mx-auto">
-            {/* Lyric display */}
             <Card className="w-full">
                 <CardContent className="p-6 text-center">
-                    <p className="text-2xl font-bold text-blue-800 mb-2">{lyricText}</p>
-                    <p className="text-lg text-gray-600">{translation}</p>
-                </CardContent>
-            </Card>
+                    {/* Lyric display */}
+                    <div className="my-2">
+                        <p className="text-2xl font-bold text-blue-800">{lyricText}</p>
+                        <p className="text-lg text-gray-600">{translation}</p>
+                    </div>
 
-            {/* Video player */}
-            <Card className="w-full overflow-hidden">
-                <CardContent className="p-0">
+                    {/* Video player */}
                     <div className="relative aspect-video">
                         <ReactPlayer
                             ref={playerRef}
