@@ -7,18 +7,28 @@ import { QuizFeedback } from "@/components/Quiz/QuizFeedback";
 import { FEEDBACK_CONFIG } from "@/constants/quiz";
 import type { Vocabulary, FeedbackType } from "@/types";
 import { generateChoices } from "@/utils/vocabularyUtils";
+import { useLibraryStore } from "@/stores/libraryStore";
+import { useSongStore } from "@/stores/songStore";
 
 interface VocabularyTestProps {
     vocabulary: Vocabulary[];
     onComplete: () => void;
     onUpdateMastery: (word: string, isCorrect: boolean) => void;
+    currentSongId?: string;
+    currentLyricText?: string;
+    currentLyricStartTime?: number;
 }
 
 export const VocabularyTest = ({
     vocabulary,
     onComplete,
     onUpdateMastery,
+    currentSongId,
+    currentLyricText,
+    currentLyricStartTime,
 }: VocabularyTestProps) => {
+    const { addWord } = useLibraryStore();
+    const { getSongById } = useSongStore();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [choices, setChoices] = useState<string[]>([]);
     const [feedback, setFeedback] = useState<FeedbackType | null>(null);
@@ -41,6 +51,26 @@ export const VocabularyTest = ({
         onUpdateMastery(currentWord.word, isCorrect);
 
         if (isCorrect) {
+            // Register word to library when answered correctly
+            if (currentSongId && currentLyricText !== undefined && currentLyricStartTime !== undefined) {
+                const song = getSongById(currentSongId);
+                if (song) {
+                    addWord(
+                        currentWord.word,
+                        currentWord.meaning,
+                        currentWord.reading,
+                        {
+                            songId: currentSongId,
+                            songTitle: song.title,
+                            artistName: song.artist,
+                            youtubeUrl: song.youtubeUrl,
+                            timestamp: currentLyricStartTime,
+                            sourceLyric: currentLyricText,
+                        }
+                    );
+                }
+            }
+
             // Show correct feedback
             setFeedback("correct");
             setTimeout(() => {

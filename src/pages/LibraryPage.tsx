@@ -7,7 +7,7 @@ export const LibraryPage = ({ setPage }: PageNavigationProps) => {
         <div className="p-4 flex flex-col gap-4">
             <h2 className="text-xl font-bold">図鑑</h2>
             <LibraryGrid />
-            <Button onClick={() => setPage("dashboard")} variant="secondary">
+            <Button onClick={() => setPage("songList")} variant="secondary">
                 戻る
             </Button>
         </div>

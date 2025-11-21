@@ -81,9 +81,6 @@ export const SentenceReorderPuzzle = ({
                     <h3 className="text-lg font-bold text-indigo-800 mb-2">
                         🧩 正しい順序に並べてください
                     </h3>
-                    <p className="text-sm text-gray-600 mb-2">
-                        目標: <span className="font-bold">{sentence}</span>
-                    </p>
                     <p className="text-sm text-gray-500">意味: {translation}</p>
                 </CardContent>
             </Card>

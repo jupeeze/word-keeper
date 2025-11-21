@@ -48,8 +48,6 @@ export interface LyricLine {
 // ページナビゲーション用のProps型
 export type PageName =
   | "songList"
-  | "dashboard"
-  | "quiz"
   | "library"
   | "lyricPlayer"
   | "lyricProgress";

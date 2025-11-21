@@ -186,18 +186,6 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                             </div>
                         </div>
 
-                        {/* Current lyric line */}
-                        <div className="p-6 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg">
-                            <p className="text-sm text-gray-600 mb-2">現在の歌詞行:</p>
-                            <p className="text-3xl font-bold text-indigo-800 mb-2">
-                                {currentLyric.text}
-                            </p>
-                            <p className="text-lg text-indigo-600 mb-1">
-                                ({currentLyric.reading})
-                            </p>
-                            <p className="text-gray-700">{currentLyric.translation}</p>
-                        </div>
-
                         {/* Step progress */}
                         <div className="flex items-center justify-center gap-2">
                             <StepIndicator
@@ -247,6 +235,9 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                                 vocabulary={currentLyric.vocabulary}
                                 onComplete={handleTestComplete}
                                 onUpdateMastery={updateWordMastery}
+                                currentSongId={currentSongId}
+                                currentLyricText={currentLyric.text}
+                                currentLyricStartTime={currentLyric.startTime}
                             />
                         )}
                         {currentStep === "puzzle" && (
@@ -288,10 +279,10 @@ const StepIndicator = ({
         <div className="flex flex-col items-center">
             <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${isComplete
-                        ? "bg-green-500 text-white"
-                        : isActive
-                            ? "bg-blue-500 text-white"
-                            : "bg-gray-200 text-gray-400"
+                    ? "bg-green-500 text-white"
+                    : isActive
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-200 text-gray-400"
                     }`}
             >
                 {isComplete ? (

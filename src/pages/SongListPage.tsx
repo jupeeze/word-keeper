@@ -178,13 +178,6 @@ export const SongListPage = ({ setPage }: PageNavigationProps) => {
                     >
                         📚 単語辞書
                     </Button>
-                    <Button
-                        onClick={() => setPage("dashboard")}
-                        variant="outline"
-                        className="rounded-full px-8 hover:scale-105 transition-transform"
-                    >
-                        🎯 ダッシュボード
-                    </Button>
                 </motion.div>
             </div>
         </div>

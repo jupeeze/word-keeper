@@ -1,7 +1,6 @@
 // src/App.tsx
 
 import { useState, useEffect, useCallback } from "react";
-import { Dashboard } from "./pages/Dashboard";
 import { LyricSyncPlayer } from "./pages/LyricSyncPlayer";
 import { LibraryPage } from "./pages/LibraryPage";
 import { LyricProgressPage } from "./pages/LyricProgressPage";
@@ -26,7 +25,6 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       {currentPage === "songList" && <SongListPage setPage={setPage} />}
-      {currentPage === "dashboard" && <Dashboard setPage={setPage} />}
       {currentPage === "lyricPlayer" && (
         <LyricSyncPlayer setPage={setPage} currentSongId={currentSongId || undefined} />
       )}
