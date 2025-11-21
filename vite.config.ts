@@ -7,6 +7,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   base: "/word-keeper/",
   plugins: [react(), tailwindcss()],
+  base: "/word-keeper/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

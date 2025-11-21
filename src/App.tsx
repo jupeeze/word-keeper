@@ -1,22 +1,40 @@
-import { useState } from "react";
-import { Dashboard } from "./pages/Dashboard";
-import { QuizPage } from "./pages/QuizPage";
+// src/App.tsx
+
+import { useState, useEffect, useCallback } from "react";
+import { LyricSyncPlayer } from "./pages/LyricSyncPlayer";
 import { LibraryPage } from "./pages/LibraryPage";
-import { DungeonPage } from "./pages/DungeonPage";
+import { LyricProgressPage } from "./pages/LyricProgressPage";
+import { SongListPage } from "./pages/SongListPage";
+import type { PageName } from "@/types";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<
-    "dashboard" | "quiz" | "library" | "dungeon"
-  >("dashboard");
+  const [currentPage, setCurrentPage] = useState<PageName>("songList");
+  const [currentSongId, setCurrentSongId] = useState<string | null>(null);
+
+  useEffect(() => {
+    console.log(`Current page: ${currentPage}, Song ID: ${currentSongId}`);
+  }, [currentPage, currentSongId]);
+
+  const setPage = useCallback((page: PageName, songId?: string) => {
+    setCurrentPage(page);
+    if (songId) {
+      setCurrentSongId(songId);
+    }
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      {currentPage === "dashboard" && <Dashboard setPage={setCurrentPage} />}
-      {currentPage === "quiz" && <QuizPage setPage={setCurrentPage} />}
-      {currentPage === "library" && <LibraryPage setPage={setCurrentPage} />}
-      {currentPage === "dungeon" && <DungeonPage setPage={setCurrentPage} />}
+    <div className="min-h-screen bg-gray-100">
+      {currentPage === "songList" && <SongListPage setPage={setPage} />}
+      {currentPage === "lyricPlayer" && (
+        <LyricSyncPlayer setPage={setPage} currentSongId={currentSongId || undefined} />
+      )}
+      {currentPage === "library" && <LibraryPage setPage={setPage} />}
+      {currentPage === "lyricProgress" && (
+        <LyricProgressPage setPage={setPage} currentSongId={currentSongId || undefined} />
+      )}
     </div>
   );
 }
 
 export default App;
+
