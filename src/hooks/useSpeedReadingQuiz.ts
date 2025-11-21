@@ -5,7 +5,7 @@ import { speakKorean, initializeSpeech } from "@/utils/speechUtils";
 import { extractUniqueVocabulary, generateChoices } from "@/utils/vocabularyUtils";
 import { formatReactionTime } from "@/utils/quizUtils";
 import { DEFAULT_QUIZ_CONFIG, TIMER_CONFIG, FEEDBACK_CONFIG } from "@/constants/quiz";
-import songData from "../data/song_data.json";
+import songData from "../data/songIndex";
 
 // 語彙データを読み込み、重複を排除
 const allVocabulary: Vocabulary[] = extractUniqueVocabulary(songData);

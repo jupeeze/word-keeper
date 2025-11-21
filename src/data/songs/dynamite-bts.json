@@ -1,0 +1,65 @@
+{
+  "id": "dynamite-bts",
+  "title": "Dynamite",
+  "artist": "BTS",
+  "coverImage": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
+  "difficulty": "beginner",
+  "language": "English",
+  "youtubeUrl": "https://www.youtube.com/watch?v=gdZLi9oWNZg",
+  "lyrics": [
+    {
+      "startTime": 18,
+      "text": "Cause I, I, I'm in the stars tonight",
+      "reading": "コーズ アイ アイ アイム イン ザ スターズ トゥナイト",
+      "translation": "だって僕は今夜、星の中にいるから",
+      "vocabulary": [
+        {
+          "word": "stars",
+          "reading": "スターズ",
+          "meaning": "星"
+        },
+        {
+          "word": "tonight",
+          "reading": "トゥナイト",
+          "meaning": "今夜"
+        }
+      ]
+    },
+    {
+      "startTime": 21,
+      "text": "So watch me bring the fire",
+      "reading": "ソー ウォッチ ミー ブリング ザ ファイア",
+      "translation": "だから見てて、僕が火をつけるところを",
+      "vocabulary": [
+        {
+          "word": "watch",
+          "reading": "ウォッチ",
+          "meaning": "見る"
+        },
+        {
+          "word": "fire",
+          "reading": "ファイア",
+          "meaning": "火"
+        }
+      ]
+    },
+    {
+      "startTime": 23,
+      "text": "And set the night alight",
+      "reading": "アンド セット ザ ナイト アライト",
+      "translation": "そして夜を照らす",
+      "vocabulary": [
+        {
+          "word": "night",
+          "reading": "ナイト",
+          "meaning": "夜"
+        },
+        {
+          "word": "alight",
+          "reading": "アライト",
+          "meaning": "照らす"
+        }
+      ]
+    }
+  ]
+}

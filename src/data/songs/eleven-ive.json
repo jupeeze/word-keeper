@@ -1,0 +1,429 @@
+{
+  "id": "eleven-ive",
+  "title": "ELEVEN",
+  "artist": "IVE",
+  "coverImage": "https://ive-official.jp/img/1/kiji/1/DIS/COG/RAP/DISCOGRAPHY_154826_1_jpg.jpg",
+  "difficulty": "beginner",
+  "language": "Korean",
+  "youtubeUrl": "https://youtu.be/--FmExEAsM8",
+  "lyrics": [
+    {
+      "startTime": 9.73,
+      "text": "따분한 나의 눈빛이",
+      "reading": "ったぶんなん なえ ぬんびち",
+      "translation": "退屈な眼差し",
+      "vocabulary": [
+        {
+          "word": "따분한",
+          "reading": "ったぶん",
+          "meaning": "退屈な"
+        },
+        {
+          "word": "나",
+          "reading": "な",
+          "meaning": "私"
+        },
+        {
+          "word": "의",
+          "reading": "え",
+          "meaning": "の"
+        },
+        {
+          "word": "눈빛",
+          "reading": "ぬんびt",
+          "meaning": "眼差し"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "が"
+        }
+      ]
+    },
+    {
+      "startTime": 13.88,
+      "text": "무표정했던 얼굴이",
+      "reading": "むぴょじょんへっとん おるぐるり",
+      "translation": "無表情だったあの日",
+      "vocabulary": [
+        {
+          "word": "무표정",
+          "reading": "むぴょじょん",
+          "meaning": "無表情"
+        },
+        {
+          "word": "했던",
+          "reading": "へっとん",
+          "meaning": "〜だった"
+        },
+        {
+          "word": "얼굴",
+          "reading": "おるぐr",
+          "meaning": "顔"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "が"
+        }
+      ]
+    },
+    {
+      "startTime": 17.81,
+      "text": "널 보며 빛나고 있어",
+      "reading": "のる ぼみょ びんなご いっそ",
+      "translation": "照らす光 back in force",
+      "vocabulary": [
+        {
+          "word": "널",
+          "reading": "のる",
+          "meaning": "君を"
+        },
+        {
+          "word": "보며",
+          "reading": "ぼみょ",
+          "meaning": "見て"
+        },
+        {
+          "word": "빛나고",
+          "reading": "びんなご",
+          "meaning": "輝いて"
+        },
+        {
+          "word": "있어",
+          "reading": "いっそ",
+          "meaning": "いる"
+        }
+      ]
+    },
+    {
+      "startTime": 21.74,
+      "text": "널 담은 눈동자는 odd",
+      "reading": "のる たむん ぬんとんじゃぬん odd",
+      "translation": "瞳の中は odd",
+      "vocabulary": [
+        {
+          "word": "널",
+          "reading": "のる",
+          "meaning": "君を"
+        },
+        {
+          "word": "담은",
+          "reading": "たむん",
+          "meaning": "映した"
+        },
+        {
+          "word": "눈동자",
+          "reading": "ぬんとんじゃ",
+          "meaning": "瞳"
+        },
+        {
+          "word": "는",
+          "reading": "ぬん",
+          "meaning": "は"
+        }
+      ]
+    },
+    {
+      "startTime": 24.82,
+      "text": "내 안에 빼곡하게 피어나는 blue",
+      "reading": "ね あね っぺごかげ ぴおなぬん blue",
+      "translation": "芽生え咲き乱れてくの blue",
+      "vocabulary": [
+        {
+          "word": "내",
+          "reading": "ね",
+          "meaning": "私の"
+        },
+        {
+          "word": "안",
+          "reading": "あん",
+          "meaning": "中"
+        },
+        {
+          "word": "에",
+          "reading": "え",
+          "meaning": "に"
+        },
+        {
+          "word": "빼곡하게",
+          "reading": "っぺごかげ",
+          "meaning": "いっぱいに"
+        },
+        {
+          "word": "피어나는",
+          "reading": "ぴおなぬん",
+          "meaning": "咲く"
+        }
+      ]
+    },
+    {
+      "startTime": 28.51,
+      "text": "내가 지금 느끼는 이 감정들은 true",
+      "reading": "ねが ちぐむ ぬっきぬん い かむじょんどぅるん true",
+      "translation": "あたしが抱いてる感情は true",
+      "vocabulary": [
+        {
+          "word": "내가",
+          "reading": "ねが",
+          "meaning": "私が"
+        },
+        {
+          "word": "지금",
+          "reading": "ちぐむ",
+          "meaning": "今"
+        },
+        {
+          "word": "느끼는",
+          "reading": "ぬっきぬん",
+          "meaning": "感じる"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "この"
+        },
+        {
+          "word": "감정들",
+          "reading": "かむじょんどぅ",
+          "meaning": "感情たち"
+        },
+        {
+          "word": "은",
+          "reading": "るん",
+          "meaning": "は"
+        }
+      ]
+    },
+    {
+      "startTime": 32.56,
+      "text": "내 입술을 간지럽힌 낯선 그 이름",
+      "reading": "ね いっするる かんじろぴん なっそん く いるむ",
+      "translation": "その名前呟く度にキュン",
+      "vocabulary": [
+        {
+          "word": "내",
+          "reading": "ね",
+          "meaning": "私の"
+        },
+        {
+          "word": "입술",
+          "reading": "いっす",
+          "meaning": "唇"
+        },
+        {
+          "word": "을",
+          "reading": "る",
+          "meaning": "を"
+        },
+        {
+          "word": "간지럽힌",
+          "reading": "かんじろぴん",
+          "meaning": "くすぐった"
+        },
+        {
+          "word": "낯선",
+          "reading": "なっそん",
+          "meaning": "慣れない"
+        },
+        {
+          "word": "그",
+          "reading": "く",
+          "meaning": "その"
+        },
+        {
+          "word": "이름",
+          "reading": "いるむ",
+          "meaning": "名前"
+        }
+      ]
+    },
+    {
+      "startTime": 37.16,
+      "text": "난 몰랐어 내 맘이 이리 다채로운지",
+      "reading": "なん もるらっそ ね まみ いり だちぇろうんじ",
+      "translation": "こっから先はカラフルな暗示",
+      "vocabulary": [
+        {
+          "word": "난",
+          "reading": "なん",
+          "meaning": "私は"
+        },
+        {
+          "word": "몰랐어",
+          "reading": "もるらっそ",
+          "meaning": "知らなかった"
+        },
+        {
+          "word": "내",
+          "reading": "ね",
+          "meaning": "私の"
+        },
+        {
+          "word": "맘",
+          "reading": "まm",
+          "meaning": "心"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "が"
+        },
+        {
+          "word": "이리",
+          "reading": "いり",
+          "meaning": "こんなに"
+        },
+        {
+          "word": "다채로운지",
+          "reading": "だちぇろうんじ",
+          "meaning": "色鮮やかだなんて"
+        }
+      ]
+    },
+    {
+      "startTime": 41.75,
+      "text": "긴 꿈을 꾸게 해 이 방은 작은 heaven",
+      "reading": "きん っくむる っくげ へ い ばんうん ちゃぐん heaven",
+      "translation": "夢見させて この部屋は heaven",
+      "vocabulary": [
+        {
+          "word": "긴",
+          "reading": "きん",
+          "meaning": "長い"
+        },
+        {
+          "word": "꿈",
+          "reading": "っくむ",
+          "meaning": "夢"
+        },
+        {
+          "word": "을",
+          "reading": "うる",
+          "meaning": "を"
+        },
+        {
+          "word": "꾸게 해",
+          "reading": "っくげ へ",
+          "meaning": "見させる"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "この"
+        },
+        {
+          "word": "방",
+          "reading": "ばん",
+          "meaning": "部屋"
+        },
+        {
+          "word": "은",
+          "reading": "うん",
+          "meaning": "は"
+        },
+        {
+          "word": "작은",
+          "reading": "ちゃぐん",
+          "meaning": "小さな"
+        }
+      ]
+    },
+    {
+      "startTime": 45.91,
+      "text": "춤을 추곤 해 실컷 어지러울 만큼",
+      "reading": "ちゅむる ちゅごね しるこっ おじろうる まんくむ",
+      "translation": "目が回って でも止まないダンス",
+      "vocabulary": [
+        {
+          "word": "춤",
+          "reading": "ちゅm",
+          "meaning": "ダンス"
+        },
+        {
+          "word": "을",
+          "reading": "うる",
+          "meaning": "を"
+        },
+        {
+          "word": "추곤 해",
+          "reading": "ちゅごね",
+          "meaning": "踊ったりする"
+        },
+        {
+          "word": "실컷",
+          "reading": "しるこっ",
+          "meaning": "思う存分"
+        },
+        {
+          "word": "어지러울",
+          "reading": "おじろうる",
+          "meaning": "めまいがする"
+        },
+        {
+          "word": "만큼",
+          "reading": "まんくむ",
+          "meaning": "ほど"
+        }
+      ]
+    },
+    {
+      "startTime": 49.98,
+      "text": "Oh my, oh my god 한 칸 더 채우고 있어",
+      "reading": "Oh my, oh my god はん かん と ちぇうご いっそ",
+      "translation": "Oh my, oh my god 君と染める色",
+      "vocabulary": [
+        {
+          "word": "한",
+          "reading": "はん",
+          "meaning": "一"
+        },
+        {
+          "word": "칸",
+          "reading": "かん",
+          "meaning": "間（スペース）"
+        },
+        {
+          "word": "더",
+          "reading": "と",
+          "meaning": "もっと"
+        },
+        {
+          "word": "채우고",
+          "reading": "ちぇうご",
+          "meaning": "満たして"
+        },
+        {
+          "word": "있어",
+          "reading": "いっそ",
+          "meaning": "いる"
+        }
+      ]
+    },
+    {
+      "startTime": 53.32,
+      "text": "잘 봐 1, 2, 3, 4, 5, 6, 7",
+      "reading": "ちゃる ば 1, 2, 3, 4, 5, 6, 7",
+      "translation": "ほら one, two, three, four, five, six, seven",
+      "vocabulary": [
+        {
+          "word": "잘",
+          "reading": "ちゃる",
+          "meaning": "よく"
+        },
+        {
+          "word": "봐",
+          "reading": "ば",
+          "meaning": "見て"
+        }
+      ]
+    },
+    {
+      "startTime": 56.49,
+      "text": "You make me feel like eleven",
+      "reading": "You make me feel like eleven",
+      "translation": "You make me feel like eleven",
+      "vocabulary": []
+    }
+  ]
+}

@@ -7,27 +7,27 @@ import { shuffleArray } from "./arrayUtils";
 
 /**
  * 歌詞データから重複のない語彙リストを抽出する
- * @param songData 歌詞データ
+ * @param songData 歌詞データ（単一の曲オブジェクトまたは曲の配列）
  * @returns 重複のない語彙の配列
  */
-export const extractUniqueVocabulary = (songData: {
-    lyrics: Array<{
-        vocabulary: Array<{
-            word: string;
-            reading: string;
-            meaning: string;
-        }>;
-    }>;
-}): Vocabulary[] => {
+export const extractUniqueVocabulary = (songData:
+    | { lyrics: Array<{ vocabulary: Array<{ word: string; reading: string; meaning: string; }>; }>; }
+    | Array<{ lyrics: Array<{ vocabulary: Array<{ word: string; reading: string; meaning: string; }>; }>; }>
+): Vocabulary[] => {
     const allVocabulary: Vocabulary[] = [];
     const wordSet = new Set<string>();
 
-    songData.lyrics.forEach((lyric) => {
-        lyric.vocabulary.forEach((vocab) => {
-            if (!wordSet.has(vocab.word)) {
-                wordSet.add(vocab.word);
-                allVocabulary.push(vocab as Vocabulary);
-            }
+    // 配列かどうかをチェック
+    const songs = Array.isArray(songData) ? songData : [songData];
+
+    songs.forEach((song) => {
+        song.lyrics.forEach((lyric) => {
+            lyric.vocabulary.forEach((vocab) => {
+                if (!wordSet.has(vocab.word)) {
+                    wordSet.add(vocab.word);
+                    allVocabulary.push(vocab as Vocabulary);
+                }
+            });
         });
     });
 

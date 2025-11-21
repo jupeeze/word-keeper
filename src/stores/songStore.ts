@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import songsData from "@/data/song_data.json";
+import songsData from "@/data/songIndex";
 import type { Song } from "@/types";
 
 interface SongStore {
