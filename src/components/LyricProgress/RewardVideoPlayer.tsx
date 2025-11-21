@@ -8,7 +8,7 @@ import ReactPlayer from "react-player";
 interface RewardVideoPlayerProps {
     youtubeUrl: string;
     startTime: number;
-    nextStartTime: number;
+    nextStartTime?: number;
     lyricText: string;
     translation: string;
     onNext: () => void;
@@ -27,7 +27,7 @@ export const RewardVideoPlayer = ({
 
     const handleTimeUpdate = () => {
         if (!playerRef.current) return;
-        if (playerRef.current.currentTime >= nextStartTime) {
+        if (nextStartTime && playerRef.current.currentTime >= nextStartTime) {
             setIsPlaying(false);
         }
     };

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useQuizStore } from "../../stores/quizStore";
-import { useLibraryStore } from "../../stores/libraryStore";
 import { useStreakStore } from "../../stores/streakStore";
 import { QuizClearModal } from "./QuizClearModal";
 
@@ -11,7 +10,6 @@ export const QuizWordInput = () => {
   const [showModal, setShowModal] = useState(false);
   const { currentWordIndex, words, nextWord, markCorrect, resetQuiz } =
     useQuizStore();
-  const { addWord } = useLibraryStore();
   const { incrementStreak } = useStreakStore();
 
   const isQuizComplete = currentWordIndex >= words.length;
@@ -21,7 +19,6 @@ export const QuizWordInput = () => {
     const correctWord = words[currentWordIndex];
     if (input.toLowerCase() === correctWord.toLowerCase()) {
       markCorrect(correctWord);
-      addWord(correctWord);
       setInput("");
       nextWord();
     } else {
