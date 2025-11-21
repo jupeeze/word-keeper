@@ -38,7 +38,6 @@ export type PageName =
   | "quiz"
   | "library"
   | "lyricPlayer"
-  | "speedReadingTrainer"
   | "lyricProgress";
 
 export interface PageNavigationProps {
