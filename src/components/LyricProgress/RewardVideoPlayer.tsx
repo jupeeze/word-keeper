@@ -75,24 +75,15 @@ export const RewardVideoPlayer = ({
             {/* Video player */}
             <Card className="w-full overflow-hidden">
                 <CardContent className="p-0">
-                    <div className="relative aspect-video bg-black">
+                    <div className="relative aspect-video">
                         <ReactPlayer
                             ref={playerRef}
-                            url={youtubeUrl}
+                            src={youtubeUrl}
                             playing={isPlaying}
-                            controls={false}
+                            controls={true}
                             width="100%"
                             height="100%"
                             onProgress={handleProgress}
-                            config={{
-                                youtube: {
-                                    playerVars: {
-                                        start: Math.floor(startTime),
-                                        modestbranding: 1,
-                                        rel: 0,
-                                    } as any,
-                                },
-                            }}
                         />
                     </div>
                 </CardContent>
