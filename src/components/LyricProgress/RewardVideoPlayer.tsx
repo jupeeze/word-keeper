@@ -59,8 +59,12 @@ export const RewardVideoPlayer = ({
                             src={youtubeUrl}
                             playing={isPlaying}
                             controls={false}
-                            width="100%"
-                            height="100%"
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: "1rem",
+                                overflow: "hidden",
+                            }}
                             onStart={handleStart}
                             onTimeUpdate={handleTimeUpdate}
                         />
