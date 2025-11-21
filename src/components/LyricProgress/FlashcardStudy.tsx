@@ -144,7 +144,7 @@ export const FlashcardStudy = ({
                 </Button>
                 <Button
                     onClick={handleNext}
-                    disabled={currentIndex === vocabulary.length - 1}
+                    disabled={currentIndex === vocabulary.length - 1 || !viewedCards.has(currentIndex)}
                     variant="outline"
                     className="flex-1 glass-panel hover:bg-white/60 transition-all duration-300"
                 >
