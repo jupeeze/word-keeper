@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Dashboard } from "./pages/Dashboard";
 import { LyricSyncPlayer } from "./pages/LyricSyncPlayer";
-import { LyricQuizPage } from "./pages/LyricQuizPage";
 import { SpeedReadingTrainer } from "./pages/SpeedReadingTrainer";
 import { LibraryPage } from "./pages/LibraryPage";
 import { LyricProgressPage } from "./pages/LyricProgressPage";
@@ -24,7 +23,6 @@ function App() {
     <div className="min-h-screen bg-gray-100 p-4">
       {currentPage === "dashboard" && <Dashboard setPage={setPage} />}
       {currentPage === "lyricPlayer" && <LyricSyncPlayer setPage={setPage} />}
-      {currentPage === "lyricQuiz" && <LyricQuizPage setPage={setPage} />}
       {currentPage === "speedReadingTrainer" && (
         <SpeedReadingTrainer setPage={setPage} />
       )}

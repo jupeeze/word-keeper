@@ -37,9 +37,7 @@ export type PageName =
   | "dashboard"
   | "quiz"
   | "library"
-  | "dungeon"
   | "lyricPlayer"
-  | "lyricQuiz"
   | "speedReadingTrainer"
   | "lyricProgress";
 
