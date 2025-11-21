@@ -116,33 +116,74 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
 
     if (allCompleted) {
         return (
-            <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
-                <Card className="max-w-lg w-full shadow-2xl">
-                    <CardHeader>
-                        <CardTitle className="text-center text-3xl">🎉 完了！</CardTitle>
+            <div className="min-h-screen gradient-primary flex items-center justify-center p-4 relative overflow-hidden">
+                {/* Animated Background */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <motion.div
+                        animate={{
+                            scale: [1, 1.3, 1],
+                            rotate: [0, 180, 0],
+                        }}
+                        transition={{ duration: 10, repeat: Infinity }}
+                        className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-purple-400/40 to-pink-400/40 rounded-full blur-3xl"
+                    />
+                    <motion.div
+                        animate={{
+                            scale: [1.3, 1, 1.3],
+                            rotate: [180, 0, 180],
+                        }}
+                        transition={{ duration: 10, repeat: Infinity }}
+                        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-blue-400/40 to-purple-400/40 rounded-full blur-3xl"
+                    />
+                </div>
+
+                <Card className="max-w-lg w-full glass-card border-0 shadow-2xl relative">
+                    <CardHeader className="text-center pb-4">
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ type: "spring", duration: 0.6 }}
+                            className="text-6xl mb-4"
+                        >
+                            🎉
+                        </motion.div>
+                        <CardTitle className="text-4xl font-bold text-gradient-primary">
+                            完了！
+                        </CardTitle>
                     </CardHeader>
-                    <CardContent className="text-center space-y-4">
-                        <p className="text-xl font-bold">
-                            すべての歌詞行をマスターしました！
-                        </p>
-                        <p className="text-gray-600">
-                            {song.title} の全 {song.lyrics.length} 行を完全に習得しました。
-                        </p>
-                        <div className="flex gap-4 mt-6">
+                    <CardContent className="text-center space-y-6 px-8 pb-8">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                        >
+                            <p className="text-2xl font-bold text-gray-800 mb-2">
+                                すべての歌詞行をマスターしました！
+                            </p>
+                            <p className="text-gray-600 text-lg">
+                                {song.title} の全 {song.lyrics.length} 行を完全に習得しました。
+                            </p>
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="flex gap-4 mt-8"
+                        >
                             <Button
                                 onClick={() => setPage("songList")}
                                 variant="outline"
-                                className="flex-1"
+                                className="flex-1 h-12 glass-panel hover:bg-white/40 transition-all duration-300"
                             >
                                 曲一覧へ
                             </Button>
                             <Button
                                 onClick={() => setPage("library")}
-                                className="flex-1"
+                                className="flex-1 h-12 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
                             >
                                 図鑑を見る
                             </Button>
-                        </div>
+                        </motion.div>
                     </CardContent>
                 </Card>
             </div>
@@ -150,21 +191,33 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-4">
-            <div className="max-w-4xl mx-auto space-y-6">
+        <div className="min-h-screen gradient-secondary p-4 relative overflow-hidden">
+            {/* Animated Background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <motion.div
+                    animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.3, 0.5, 0.3],
+                    }}
+                    transition={{ duration: 15, repeat: Infinity }}
+                    className="absolute -top-1/4 -right-1/4 w-1/2 h-1/2 bg-gradient-to-br from-blue-300/30 to-purple-300/30 rounded-full blur-3xl"
+                />
+            </div>
+
+            <div className="relative max-w-4xl mx-auto space-y-6">
                 {/* Header */}
-                <Card>
+                <Card className="glass-card border-0 shadow-lg">
                     <CardHeader>
                         <div className="flex items-center gap-3">
                             <Button
                                 onClick={() => setPage("songList")}
                                 variant="ghost"
                                 size="sm"
-                                className="hover:bg-purple-100"
+                                className="glass-panel hover:bg-white/40 transition-all duration-300"
                             >
                                 <ArrowLeft className="w-4 h-4" />
                             </Button>
-                            <CardTitle className="text-center flex-1">
+                            <CardTitle className="text-center flex-1 text-2xl">
                                 🎵 {song.title}
                             </CardTitle>
                         </div>
@@ -173,39 +226,41 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                         {/* Overall progress */}
                         <div>
                             <div className="flex justify-between text-sm text-gray-600 mb-2">
-                                <span>全体の進行状況</span>
-                                <span>
+                                <span className="font-semibold">全体の進行状況</span>
+                                <span className="font-bold text-purple-600">
                                     {progress.totalCompletedLines} / {song.lyrics.length} 行完了
                                 </span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-3">
-                                <div
-                                    className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500"
-                                    style={{ width: `${progressPercentage}%` }}
+                            <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden shadow-inner">
+                                <motion.div
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${progressPercentage}%` }}
+                                    transition={{ duration: 0.5 }}
+                                    className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-4 rounded-full shadow-glow"
                                 />
                             </div>
                         </div>
 
                         {/* Step progress */}
-                        <div className="flex items-center justify-center gap-2">
+                        <div className="flex items-center justify-center gap-2 py-4">
                             <StepIndicator
                                 label="学習"
                                 isComplete={currentProgress?.isStudied || false}
                                 isActive={currentStep === "study"}
                             />
-                            <div className="w-8 h-0.5 bg-gray-300" />
+                            <div className="w-12 h-1 bg-gradient-to-r from-gray-300 to-gray-300 rounded-full" />
                             <StepIndicator
                                 label="テスト"
                                 isComplete={currentProgress?.isTested || false}
                                 isActive={currentStep === "test"}
                             />
-                            <div className="w-8 h-0.5 bg-gray-300" />
+                            <div className="w-12 h-1 bg-gradient-to-r from-gray-300 to-gray-300 rounded-full" />
                             <StepIndicator
                                 label="パズル"
                                 isComplete={currentProgress?.isPuzzleCompleted || false}
                                 isActive={currentStep === "puzzle"}
                             />
-                            <div className="w-8 h-0.5 bg-gray-300" />
+                            <div className="w-12 h-1 bg-gradient-to-r from-gray-300 to-gray-300 rounded-full" />
                             <StepIndicator
                                 label="報酬"
                                 isComplete={currentProgress?.isCompleted || false}
@@ -276,13 +331,17 @@ const StepIndicator = ({
     isActive,
 }: StepIndicatorProps) => {
     return (
-        <div className="flex flex-col items-center">
+        <motion.div
+            className="flex flex-col items-center"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+        >
             <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${isComplete
-                    ? "bg-green-500 text-white"
-                    : isActive
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200 text-gray-400"
+                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${isComplete
+                        ? "bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg shadow-green-500/50"
+                        : isActive
+                            ? "bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-purple-500/50 animate-pulse"
+                            : "glass-panel text-gray-400"
                     }`}
             >
                 {isComplete ? (
@@ -294,11 +353,11 @@ const StepIndicator = ({
                 )}
             </div>
             <p
-                className={`text-xs mt-1 font-medium ${isActive ? "text-blue-600" : "text-gray-500"
+                className={`text-xs mt-2 font-semibold transition-colors ${isActive ? "text-purple-700" : "text-gray-500"
                     }`}
             >
                 {label}
             </p>
-        </div>
+        </motion.div>
     );
 };
