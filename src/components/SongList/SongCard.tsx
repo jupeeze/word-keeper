@@ -38,8 +38,6 @@ export const SongCard = ({ song, progress = 0, onClick }: SongCardProps) => {
                         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                         style={{ backgroundImage: `url(${song.coverImage})` }}
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${difficultyColors[song.difficulty]} opacity-60 mix-blend-multiply`} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
                     {/* Difficulty Badge */}
                     <div className="absolute top-3 right-3">
