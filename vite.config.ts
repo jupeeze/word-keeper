@@ -5,6 +5,7 @@ import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/word-keeper/",
   plugins: [react(), tailwindcss()],
   base: "/word-keeper/",
   resolve: {
