@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import type { Vocabulary } from "@/types";
+import { speakKorean } from "@/utils/speechUtils";
 
 interface FlashcardStudyProps {
     vocabulary: Vocabulary[];
@@ -20,6 +21,12 @@ export const FlashcardStudy = ({
 
     const currentWord = vocabulary[currentIndex];
     const allViewed = viewedCards.size === vocabulary.length;
+
+    useEffect(() => {
+        if (!isFlipped) {
+            speakKorean(currentWord.word);
+        }
+    }, [currentIndex, isFlipped]);
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
