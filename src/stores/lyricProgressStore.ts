@@ -25,6 +25,7 @@ interface LyricProgressStore {
     switchSong: (songId: string) => void;
     markLineStudied: (lineIndex: number) => void;
     markLineTested: (lineIndex: number) => void;
+    markSingingCompleted: (lineIndex: number) => void;
     markPuzzleCompleted: (lineIndex: number) => void;
     markLineCompleted: (lineIndex: number) => void;
     moveToNextLine: () => void;
@@ -43,6 +44,7 @@ const createInitialLineProgress = (lyricsCount: number): LyricLineProgress[] => 
         lineIndex: index,
         isStudied: false,
         isTested: false,
+        isSingingCompleted: false,
         isPuzzleCompleted: false,
         isCompleted: false,
         testAttempts: 0,
@@ -134,6 +136,29 @@ export const useLyricProgressStore = create(
                                         isTested: true,
                                         testAttempts: line.testAttempts + 1,
                                     }
+                                    : line
+                            ),
+                        },
+                    },
+                });
+            },
+
+            markSingingCompleted: (lineIndex) => {
+                const state = get();
+                const songId = state.currentSongId;
+                if (!songId) return;
+
+                const progress = state.progressBySong[songId];
+                if (!progress) return;
+
+                set({
+                    progressBySong: {
+                        ...state.progressBySong,
+                        [songId]: {
+                            ...progress,
+                            lineProgress: progress.lineProgress.map((line) =>
+                                line.lineIndex === lineIndex
+                                    ? { ...line, isSingingCompleted: true }
                                     : line
                             ),
                         },

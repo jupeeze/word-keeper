@@ -8,10 +8,11 @@ import { FlashcardStudy } from "@/components/LyricProgress/FlashcardStudy";
 import { VocabularyTest } from "@/components/LyricProgress/VocabularyTest";
 import { SentenceReorderPuzzle } from "@/components/LyricProgress/SentenceReorderPuzzle";
 import { RewardVideoPlayer } from "@/components/LyricProgress/RewardVideoPlayer";
+import { SingingChallenge } from "@/components/LyricProgress/SingingChallenge";
 import type { PageNavigationProps } from "@/types";
-import { CheckCircle2, Circle, Lock, ArrowLeft } from "lucide-react";
+import { CheckCircle2, Circle, Lock, ArrowLeft, Mic } from "lucide-react";
 
-type LearningStep = "study" | "test" | "puzzle" | "reward";
+type LearningStep = "study" | "singing" | "test" | "puzzle" | "reward";
 
 interface LyricProgressPageProps extends PageNavigationProps {
     currentSongId?: string;
@@ -23,6 +24,7 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
         initializeProgress,
         getCurrentProgress,
         markLineStudied,
+        markSingingCompleted,
         markLineTested,
         markPuzzleCompleted,
         markLineCompleted,
@@ -50,6 +52,8 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
         if (currentProgress) {
             if (!currentProgress.isStudied) {
                 setCurrentStep("study");
+            } else if (!currentProgress.isSingingCompleted) {
+                setCurrentStep("singing");
             } else if (!currentProgress.isTested) {
                 setCurrentStep("test");
             } else if (!currentProgress.isPuzzleCompleted) {
@@ -95,6 +99,11 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
 
     const handleStudyComplete = () => {
         markLineStudied(currentLineIndex);
+        setCurrentStep("singing");
+    };
+
+    const handleSingingComplete = () => {
+        markSingingCompleted(currentLineIndex);
         setCurrentStep("test");
     };
 
@@ -250,6 +259,13 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                             />
                             <div className="w-12 h-1 bg-gradient-to-r from-gray-300 to-gray-300 rounded-full" />
                             <StepIndicator
+                                label="歌唱"
+                                isComplete={currentProgress?.isSingingCompleted || false}
+                                isActive={currentStep === "singing"}
+                                icon={<Mic className="w-5 h-5" />}
+                            />
+                            <div className="w-12 h-1 bg-gradient-to-r from-gray-300 to-gray-300 rounded-full" />
+                            <StepIndicator
                                 label="テスト"
                                 isComplete={currentProgress?.isTested || false}
                                 isActive={currentStep === "test"}
@@ -283,6 +299,14 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                             <FlashcardStudy
                                 vocabulary={currentLyric.vocabulary}
                                 onComplete={handleStudyComplete}
+                            />
+                        )}
+                        {currentStep === "singing" && (
+                            <SingingChallenge
+                                lyricText={currentLyric.text}
+                                reading={currentLyric.reading}
+                                translation={currentLyric.translation}
+                                onComplete={handleSingingComplete}
                             />
                         )}
                         {currentStep === "test" && (
@@ -328,12 +352,14 @@ interface StepIndicatorProps {
     label: string;
     isComplete: boolean;
     isActive: boolean;
+    icon?: React.ReactNode;
 }
 
 const StepIndicator = ({
     label,
     isComplete,
     isActive,
+    icon,
 }: StepIndicatorProps) => {
     return (
         <motion.div
@@ -354,7 +380,7 @@ const StepIndicator = ({
                 ) : isActive ? (
                     <Circle className="w-6 h-6 fill-current" />
                 ) : (
-                    <Lock className="w-5 h-5" />
+                    icon || <Lock className="w-5 h-5" />
                 )}
             </div>
             <p

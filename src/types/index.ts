@@ -93,6 +93,7 @@ export interface LyricLineProgress {
   isStudied: boolean; // フラッシュカードで学習完了
   isTested: boolean; // テストで全単語正解
   isPuzzleCompleted: boolean; // 並べ替えパズル完了
+  isSingingCompleted: boolean; // 歌唱チャレンジ完了
   isCompleted: boolean; // 全ステップ完了（報酬受け取り済み）
   completedAt?: string;
   testAttempts: number; // テスト試行回数
