@@ -123,6 +123,10 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
         setCurrentStep("study");
     };
 
+    const handleBackToStudy = () => {
+        setCurrentStep("study");
+    };
+
     if (allCompleted) {
         return (
             <div className="min-h-screen gradient-primary flex items-center justify-center p-4 relative overflow-hidden">
@@ -314,6 +318,7 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                                 vocabulary={currentLyric.vocabulary}
                                 onComplete={handleTestComplete}
                                 onUpdateMastery={updateWordMastery}
+                                onBackToStudy={handleBackToStudy}
                                 currentSongId={currentSongId}
                                 currentLyricText={currentLyric.text}
                                 currentLyricStartTime={currentLyric.startTime}

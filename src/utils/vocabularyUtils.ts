@@ -47,16 +47,36 @@ export const generateChoices = (
     count: number = 4
 ): string[] => {
     const choices = [correctAnswer];
+    const correctAnswerLength = correctAnswer.length;
 
     // 正解以外の選択肢（ダミー選択肢）
     const distractors = allOptions.filter((option) => option !== correctAnswer);
 
-    // 指定された数の選択肢になるまでダミー選択肢を追加
-    while (choices.length < count && distractors.length > 0) {
-        const randomIndex = Math.floor(Math.random() * distractors.length);
-        const randomOption = distractors.splice(randomIndex, 1)[0];
-        if (!choices.includes(randomOption)) {
-            choices.push(randomOption);
+    // 同じ文字数の選択肢を優先的に選択
+    const sameLengthDistractors = distractors.filter(
+        (option) => option.length === correctAnswerLength
+    );
+    const otherDistractors = distractors.filter(
+        (option) => option.length !== correctAnswerLength
+    );
+
+    // シャッフルして順序をランダムにする
+    const shuffledSameLength = shuffleArray([...sameLengthDistractors]);
+    const shuffledOthers = shuffleArray([...otherDistractors]);
+
+    // まず同じ文字数の選択肢から追加
+    for (const option of shuffledSameLength) {
+        if (choices.length >= count) break;
+        if (!choices.includes(option)) {
+            choices.push(option);
+        }
+    }
+
+    // 足りない場合は他の文字数の選択肢から追加
+    for (const option of shuffledOthers) {
+        if (choices.length >= count) break;
+        if (!choices.includes(option)) {
+            choices.push(option);
         }
     }
 

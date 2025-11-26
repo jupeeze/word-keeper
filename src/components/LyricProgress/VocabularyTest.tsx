@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,11 +9,13 @@ import type { Vocabulary, FeedbackType } from "@/types";
 import { generateChoices } from "@/utils/vocabularyUtils";
 import { useLibraryStore } from "@/stores/libraryStore";
 import { useSongStore } from "@/stores/songStore";
+import { BookOpen, RotateCcw } from "lucide-react";
 
 interface VocabularyTestProps {
     vocabulary: Vocabulary[];
     onComplete: () => void;
     onUpdateMastery: (word: string, isCorrect: boolean) => void;
+    onBackToStudy?: () => void;
     currentSongId?: string;
     currentLyricText?: string;
     currentLyricStartTime?: number;
@@ -23,6 +25,7 @@ export const VocabularyTest = ({
     vocabulary,
     onComplete,
     onUpdateMastery,
+    onBackToStudy,
     currentSongId,
     currentLyricText,
     currentLyricStartTime,
@@ -35,14 +38,26 @@ export const VocabularyTest = ({
     const [incorrectWords, setIncorrectWords] = useState<string[]>([]);
 
     const currentWord = vocabulary[currentQuestionIndex];
-    const allMeanings = vocabulary.map((v) => v.word);
+
+    // Get all vocabulary from the entire song (memoized to avoid recalculation)
+    const allMeanings = useMemo(() => {
+        if (currentSongId) {
+            const song = getSongById(currentSongId);
+            if (song) {
+                const allSongVocabulary = song.lyrics.flatMap(lyric => lyric.vocabulary);
+                return allSongVocabulary.map((v) => v.word);
+            }
+        }
+        // Fallback to current vocabulary if song not found
+        return vocabulary.map((v) => v.word);
+    }, [currentSongId, getSongById, vocabulary]);
 
     // Generate choices when question changes
     useEffect(() => {
         if (currentWord) {
             setChoices(generateChoices(currentWord.word, allMeanings, 4));
         }
-    }, [currentQuestionIndex, currentWord]);
+    }, [currentQuestionIndex, currentWord, allMeanings]);
 
     const handleAnswer = (selectedWord: string) => {
         const isCorrect = selectedWord === currentWord.word;
@@ -157,15 +172,38 @@ export const VocabularyTest = ({
                 </motion.div>
             </AnimatePresence>
 
-            {/* Restart button */}
-            <Button onClick={handleRestart} variant="outline" className="w-full">
-                最初からやり直す
-            </Button>
+
+            {/* Action buttons */}
+            <div className="w-full flex gap-3">
+                {onBackToStudy && (
+                    <Button
+                        onClick={onBackToStudy}
+                        variant="outline"
+                        className="flex-1 glass-panel hover:bg-white/40 transition-all duration-300"
+                    >
+                        <BookOpen className="w-4 h-4 mr-2" />
+                        学習に戻る
+                    </Button>
+                )}
+                <Button
+                    onClick={handleRestart}
+                    variant="outline"
+                    className={`${onBackToStudy ? 'flex-1' : 'w-full'} glass-panel hover:bg-white/40 transition-all duration-300`}
+                >
+                    <RotateCcw className="w-4 h-4 mr-2" />
+                    最初からやり直す
+                </Button>
+            </div>
 
             {/* Instructions */}
-            <div className="text-center text-sm text-gray-500">
+            <div className="text-center text-sm text-gray-500 space-y-1">
                 <p>💡 全問正解で次のステップへ進めます</p>
                 <p>間違えると最初からやり直しになります</p>
+                {onBackToStudy && (
+                    <p className="text-purple-600 font-semibold">
+                        📚 わからない単語があれば学習フェーズに戻れます
+                    </p>
+                )}
             </div>
         </div>
     );
