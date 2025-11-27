@@ -11,22 +11,25 @@ export interface Song {
 }
 
 export interface SavedWordContext {
+  id: string; // コンテキストのユニークID
   songId: string; // 曲のID
   songTitle: string;
   artistName: string;
   youtubeUrl: string;
-  timestamp: number; // 再生開始位置（秒）
+  timestamp: number; // 再生開始位置(秒)
   sourceLyric: string; // その単語が使われている行
+  addedAt: string; // このコンテキストが追加された日時
 }
 
 export interface SavedWord {
-  id: string; // ユニークID
+  id: string; // 単語自体のユニークID (word文字列をベースに生成)
   word: string; // 韓国語単語
   meaning: string; // 日本語の意味
   pronunciation: string; // ルビ
-  context: SavedWordContext; // 文脈情報
+  contexts: SavedWordContext[]; // 複数のコンテキストを配列で保持
   masteryLevel: number; // 習熟度 (例: 0=未習得, 1=学習中, 2=覚えた)
-  registeredAt: string; // 日付 (JSON保存用にstring型)
+  registeredAt: string; // 最初に登録された日時 (JSON保存用にstring型)
+  lastUpdatedAt: string; // 最後にコンテキストが追加された日時
 }
 
 // 語彙データの型定義

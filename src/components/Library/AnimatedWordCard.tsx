@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { PlayCircle, Trash2 } from "lucide-react";
+import { PlayCircle, Trash2, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import type { SavedWord } from "@/types";
@@ -11,6 +11,9 @@ interface Props {
 }
 
 export const AnimatedWordCard = ({ data, onPlay, onDelete }: Props) => {
+  const contextCount = data.contexts.length;
+  const firstContext = data.contexts[0];
+
   return (
     <motion.div
       layout
@@ -34,10 +37,16 @@ export const AnimatedWordCard = ({ data, onPlay, onDelete }: Props) => {
             {data.meaning}
           </p>
 
-          {/* 文脈（曲名） */}
+          {/* 文脈(曲名) */}
           <div className="text-xs text-gray-500 glass-panel p-2 rounded-lg">
             <span className="block font-semibold text-purple-600 mb-1">SOURCE:</span>
-            <span className="truncate block">{data.context.songTitle}</span>
+            <span className="truncate block">{firstContext.songTitle}</span>
+            {contextCount > 1 && (
+              <div className="mt-2 flex items-center justify-center gap-1 text-pink-600 font-semibold">
+                <MapPin className="w-3 h-3" />
+                <span>+{contextCount - 1}箇所で使用</span>
+              </div>
+            )}
           </div>
         </CardContent>
 
