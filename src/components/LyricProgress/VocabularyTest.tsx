@@ -140,23 +140,6 @@ export const VocabularyTest = ({
 
     return (
         <div className="flex flex-col items-center gap-6 w-full max-w-md mx-auto">
-            {/* Progress */}
-            <div className="w-full">
-                <div className="flex justify-between text-sm text-gray-600 mb-2">
-                    <span>
-                        問題 {currentQuestionIndex + 1} / {vocabulary.length}
-                    </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                        className="bg-green-500 h-2 rounded-full transition-all duration-300"
-                        style={{
-                            width: `${((currentQuestionIndex + 1) / vocabulary.length) * 100}%`,
-                        }}
-                    />
-                </div>
-            </div>
-
             {/* Question card */}
             <AnimatePresence mode="wait">
                 <motion.div
@@ -168,6 +151,24 @@ export const VocabularyTest = ({
                     className="w-full"
                 >
                     <Card className="w-full shadow-lg">
+                        <CardContent>
+                            {/* Progress */}
+                            <div className="w-full">
+                                <div className="flex justify-between text-sm text-gray-600 mb-2">
+                                    <span>
+                                        問題 {currentQuestionIndex + 1} / {vocabulary.length}
+                                    </span>
+                                </div>
+                                <div className="w-full bg-gray-200 rounded-full h-2">
+                                    <div
+                                        className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                                        style={{
+                                            width: `${((currentQuestionIndex + 1) / vocabulary.length) * 100}%`,
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </CardContent>
                         <CardContent className="p-8">
                             <p className="text-center text-sm text-gray-600 mb-4">
                                 この意味の韓国語を選んでください
