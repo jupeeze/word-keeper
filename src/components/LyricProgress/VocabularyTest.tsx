@@ -11,6 +11,16 @@ import { useLibraryStore } from "@/stores/libraryStore";
 import { useSongStore } from "@/stores/songStore";
 import { BookOpen, RotateCcw } from "lucide-react";
 
+// Fisher-Yates shuffle algorithm
+const shuffleArray = <T,>(array: T[]): T[] => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+};
+
 interface VocabularyTestProps {
     vocabulary: Vocabulary[];
     onComplete: () => void;
@@ -32,12 +42,20 @@ export const VocabularyTest = ({
 }: VocabularyTestProps) => {
     const { addWord } = useLibraryStore();
     const { getSongById } = useSongStore();
+    // Initialize with shuffled vocabulary
+    const [shuffledVocabulary, setShuffledVocabulary] = useState(() => shuffleArray(vocabulary));
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [choices, setChoices] = useState<string[]>([]);
     const [feedback, setFeedback] = useState<FeedbackType | null>(null);
     const [incorrectWords, setIncorrectWords] = useState<string[]>([]);
 
-    const currentWord = vocabulary[currentQuestionIndex];
+    // Update shuffled vocabulary when prop changes
+    useEffect(() => {
+        setShuffledVocabulary(shuffleArray(vocabulary));
+        setCurrentQuestionIndex(0);
+    }, [vocabulary]);
+
+    const currentWord = shuffledVocabulary[currentQuestionIndex];
 
     // Get all vocabulary from the entire song (memoized to avoid recalculation)
     const allMeanings = useMemo(() => {
@@ -108,6 +126,7 @@ export const VocabularyTest = ({
                 // Restart from beginning on incorrect answer
                 setCurrentQuestionIndex(0);
                 setIncorrectWords([]);
+                setShuffledVocabulary(shuffleArray(vocabulary));
             }, FEEDBACK_CONFIG.DISPLAY_DURATION_MS * 2);
         }
     };
@@ -116,6 +135,7 @@ export const VocabularyTest = ({
         setCurrentQuestionIndex(0);
         setIncorrectWords([]);
         setFeedback(null);
+        setShuffledVocabulary(shuffleArray(vocabulary));
     };
 
     return (
