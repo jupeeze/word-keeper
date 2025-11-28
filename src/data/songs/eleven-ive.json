@@ -184,13 +184,18 @@
           "meaning": "この"
         },
         {
-          "word": "감정들",
-          "reading": "かむじょんどぅ",
-          "meaning": "感情たち"
+          "word": "감정",
+          "reading": "かむじょん",
+          "meaning": "感情"
+        },
+        {
+          "word": "들",
+          "reading": "どぅr",
+          "meaning": "〜たち"
         },
         {
           "word": "은",
-          "reading": "るん",
+          "reading": "うん",
           "meaning": "は"
         }
       ]
