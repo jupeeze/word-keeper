@@ -260,6 +260,7 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                                 label="学習"
                                 isComplete={currentProgress?.isStudied || false}
                                 isActive={currentStep === "study"}
+                                onClick={() => currentProgress?.isStudied && setCurrentStep("study")}
                             />
                             <div className="w-12 h-1 bg-gradient-to-r from-gray-300 to-gray-300 rounded-full" />
                             <StepIndicator
@@ -267,24 +268,28 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                                 isComplete={currentProgress?.isSingingCompleted || false}
                                 isActive={currentStep === "singing"}
                                 icon={<Mic className="w-5 h-5" />}
+                                onClick={() => currentProgress?.isSingingCompleted && setCurrentStep("singing")}
                             />
                             <div className="w-12 h-1 bg-gradient-to-r from-gray-300 to-gray-300 rounded-full" />
                             <StepIndicator
                                 label="テスト"
                                 isComplete={currentProgress?.isTested || false}
                                 isActive={currentStep === "test"}
+                                onClick={() => currentProgress?.isTested && setCurrentStep("test")}
                             />
                             <div className="w-12 h-1 bg-gradient-to-r from-gray-300 to-gray-300 rounded-full" />
                             <StepIndicator
                                 label="パズル"
                                 isComplete={currentProgress?.isPuzzleCompleted || false}
                                 isActive={currentStep === "puzzle"}
+                                onClick={() => currentProgress?.isPuzzleCompleted && setCurrentStep("puzzle")}
                             />
                             <div className="w-12 h-1 bg-gradient-to-r from-gray-300 to-gray-300 rounded-full" />
                             <StepIndicator
                                 label="報酬"
                                 isComplete={currentProgress?.isCompleted || false}
                                 isActive={currentStep === "reward"}
+                                onClick={() => currentProgress?.isCompleted && setCurrentStep("reward")}
                             />
                         </div>
                     </CardContent>
@@ -358,6 +363,7 @@ interface StepIndicatorProps {
     isComplete: boolean;
     isActive: boolean;
     icon?: React.ReactNode;
+    onClick?: () => void;
 }
 
 const StepIndicator = ({
@@ -365,12 +371,17 @@ const StepIndicator = ({
     isComplete,
     isActive,
     icon,
+    onClick,
 }: StepIndicatorProps) => {
+    const isClickable = isComplete && onClick;
+
     return (
         <motion.div
-            className="flex flex-col items-center"
-            whileHover={{ scale: 1.05 }}
+            className={`flex flex-col items-center ${isClickable ? "cursor-pointer" : ""}`}
+            whileHover={{ scale: isClickable ? 1.1 : 1.05 }}
+            whileTap={isClickable ? { scale: 0.95 } : {}}
             transition={{ type: "spring", stiffness: 300 }}
+            onClick={onClick}
         >
             <div
                 className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${isComplete
