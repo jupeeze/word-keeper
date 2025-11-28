@@ -9,7 +9,7 @@ import { VocabularyTest } from "@/components/LyricProgress/VocabularyTest";
 import { SentenceReorderPuzzle } from "@/components/LyricProgress/SentenceReorderPuzzle";
 import { RewardVideoPlayer } from "@/components/LyricProgress/RewardVideoPlayer";
 import { SingingChallenge } from "@/components/LyricProgress/SingingChallenge";
-import type { PageNavigationProps } from "@/types";
+import type { PageNavigationProps, Vocabulary } from "@/types";
 import { CheckCircle2, Circle, Lock, ArrowLeft, Mic } from "lucide-react";
 
 type LearningStep = "study" | "singing" | "test" | "puzzle" | "reward";
@@ -34,6 +34,7 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
     } = useLyricProgressStore();
 
     const [currentStep, setCurrentStep] = useState<LearningStep>("study");
+    const [incorrectWord, setIncorrectWord] = useState<Vocabulary | null>(null);
 
     // Get song data
     const song = currentSongId ? getSongById(currentSongId) : null;
@@ -118,6 +119,7 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
     const allCompleted = progress.totalCompletedLines === song.lyrics.length;
 
     const handleStudyComplete = () => {
+        setIncorrectWord(null); // Reset incorrect word after completing review
         markLineStudied(currentLineIndex);
         setCurrentStep("singing");
     };
@@ -144,6 +146,12 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
     };
 
     const handleBackToStudy = () => {
+        setIncorrectWord(null);
+        setCurrentStep("study");
+    };
+
+    const handleIncorrectAnswer = (word: Vocabulary) => {
+        setIncorrectWord(word);
         setCurrentStep("study");
     };
 
@@ -327,7 +335,7 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                     >
                         {currentStep === "study" && (
                             <FlashcardStudy
-                                vocabulary={currentLyric.vocabulary}
+                                vocabulary={incorrectWord ? [incorrectWord] : currentLyric.vocabulary}
                                 onComplete={handleStudyComplete}
                                 isReviewMode={currentProgress?.isStudied || false}
                             />
@@ -346,6 +354,7 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                                 onComplete={handleTestComplete}
                                 onUpdateMastery={updateWordMastery}
                                 onBackToStudy={handleBackToStudy}
+                                onIncorrectAnswer={handleIncorrectAnswer}
                                 currentSongId={currentSongId}
                                 currentLyricText={currentLyric.text}
                                 currentLyricStartTime={currentLyric.startTime}

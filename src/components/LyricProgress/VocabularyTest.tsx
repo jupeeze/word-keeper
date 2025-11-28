@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { QuizChoiceGrid } from "@/components/Quiz/QuizChoiceGrid";
 import { QuizFeedback } from "@/components/Quiz/QuizFeedback";
@@ -9,7 +8,6 @@ import type { Vocabulary, FeedbackType } from "@/types";
 import { generateChoices } from "@/utils/vocabularyUtils";
 import { useLibraryStore } from "@/stores/libraryStore";
 import { useSongStore } from "@/stores/songStore";
-import { BookOpen, RotateCcw } from "lucide-react";
 
 // Fisher-Yates shuffle algorithm
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -26,6 +24,7 @@ interface VocabularyTestProps {
     onComplete: () => void;
     onUpdateMastery: (word: string, isCorrect: boolean) => void;
     onBackToStudy?: () => void;
+    onIncorrectAnswer?: (word: Vocabulary) => void;
     currentSongId?: string;
     currentLyricText?: string;
     currentLyricStartTime?: number;
@@ -36,6 +35,7 @@ export const VocabularyTest = ({
     onComplete,
     onUpdateMastery,
     onBackToStudy,
+    onIncorrectAnswer,
     currentSongId,
     currentLyricText,
     currentLyricStartTime,
@@ -121,6 +121,11 @@ export const VocabularyTest = ({
             setFeedback("incorrect");
             setIncorrectWords([...incorrectWords, currentWord.word]);
 
+            // Notify parent about incorrect answer
+            if (onIncorrectAnswer) {
+                onIncorrectAnswer(currentWord);
+            }
+
             setTimeout(() => {
                 setFeedback(null);
                 // Restart from beginning on incorrect answer
@@ -129,13 +134,6 @@ export const VocabularyTest = ({
                 setShuffledVocabulary(shuffleArray(vocabulary));
             }, FEEDBACK_CONFIG.DISPLAY_DURATION_MS * 2);
         }
-    };
-
-    const handleRestart = () => {
-        setCurrentQuestionIndex(0);
-        setIncorrectWords([]);
-        setFeedback(null);
-        setShuffledVocabulary(shuffleArray(vocabulary));
     };
 
     return (
