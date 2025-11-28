@@ -149,7 +149,7 @@ export const FlashcardStudy = ({
                 >
                     <RotateCcw className="w-4 h-4" />
                 </Button>
-                {allViewed ? (
+                {allViewed && currentIndex === vocabulary.length - 1 ? (
                     <Button
                         onClick={onComplete}
                         className="flex-1 h-full text-base font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
