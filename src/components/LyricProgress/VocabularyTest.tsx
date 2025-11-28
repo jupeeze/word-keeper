@@ -193,29 +193,6 @@ export const VocabularyTest = ({
                 </motion.div>
             </AnimatePresence>
 
-
-            {/* Action buttons */}
-            <div className="w-full flex gap-3">
-                {onBackToStudy && (
-                    <Button
-                        onClick={onBackToStudy}
-                        variant="outline"
-                        className="flex-1 glass-panel hover:bg-white/40 transition-all duration-300"
-                    >
-                        <BookOpen className="w-4 h-4 mr-2" />
-                        学習に戻る
-                    </Button>
-                )}
-                <Button
-                    onClick={handleRestart}
-                    variant="outline"
-                    className={`${onBackToStudy ? 'flex-1' : 'w-full'} glass-panel hover:bg-white/40 transition-all duration-300`}
-                >
-                    <RotateCcw className="w-4 h-4 mr-2" />
-                    最初からやり直す
-                </Button>
-            </div>
-
             {/* Instructions */}
             <div className="text-center text-sm text-gray-500 space-y-1">
                 <p>💡 全問正解で次のステップへ進めます</p>
