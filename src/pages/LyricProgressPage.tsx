@@ -354,7 +354,7 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                         {currentStep === "puzzle" && (
                             <SentenceReorderPuzzle
                                 sentence={currentLyric.text}
-                                translation={currentLyric.translation}
+                                vocabulary={currentLyric.vocabulary}
                                 onComplete={handlePuzzleComplete}
                             />
                         )}
@@ -409,12 +409,12 @@ const StepIndicator = ({
         >
             <div
                 className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 mx-1 ${isComplete
-                        ? "bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg shadow-green-500/50"
-                        : isActive
-                            ? "bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-purple-500/50 animate-pulse"
-                            : isAccessible
-                                ? "bg-gradient-to-br from-gray-300 to-gray-400 text-gray-600 shadow-md hover:from-gray-400 hover:to-gray-500"
-                                : "glass-panel text-gray-400"
+                    ? "bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg shadow-green-500/50"
+                    : isActive
+                        ? "bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-purple-500/50 animate-pulse"
+                        : isAccessible
+                            ? "bg-gradient-to-br from-gray-300 to-gray-400 text-gray-600 shadow-md hover:from-gray-400 hover:to-gray-500"
+                            : "glass-panel text-gray-400"
                     }`}
             >
                 {isComplete ? (

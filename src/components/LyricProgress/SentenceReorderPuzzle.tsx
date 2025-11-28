@@ -5,17 +5,25 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Lightbulb, RotateCcw, CheckCircle2 } from "lucide-react";
 import { shuffleArray } from "@/utils/arrayUtils";
 
+interface Vocabulary {
+    word: string;
+    reading: string;
+    meaning: string;
+}
+
 interface SentenceReorderPuzzleProps {
     sentence: string; // 正しい文章（スペース区切り）
-    translation: string; // 日本語訳
+    vocabulary: Vocabulary[]; // 語彙データ
     onComplete: () => void;
 }
 
 export const SentenceReorderPuzzle = ({
     sentence,
-    translation,
+    vocabulary,
     onComplete,
 }: SentenceReorderPuzzleProps) => {
+    // 語彙の意味を正しい語順で並べた文章を作成
+    const meaningText = vocabulary.map(v => v.meaning).join(' ');
     const [words, setWords] = useState<string[]>([]);
     const [selectedWords, setSelectedWords] = useState<string[]>([]);
     const [showHint, setShowHint] = useState(false);
@@ -81,7 +89,7 @@ export const SentenceReorderPuzzle = ({
                     <h3 className="text-lg font-bold text-indigo-800 mb-2">
                         🧩 正しい順序に並べてください
                     </h3>
-                    <p className="text-sm text-gray-500">意味: {translation}</p>
+                    <p className="text-sm text-gray-500">意味: {meaningText}</p>
                 </CardContent>
             </Card>
 
