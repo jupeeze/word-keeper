@@ -9,15 +9,23 @@ import { speakKorean } from "@/utils/speechUtils";
 interface FlashcardStudyProps {
     vocabulary: Vocabulary[];
     onComplete: () => void;
+    isReviewMode?: boolean; // If true, all cards are pre-marked as viewed
 }
 
 export const FlashcardStudy = ({
     vocabulary,
     onComplete,
+    isReviewMode = false,
 }: FlashcardStudyProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
-    const [viewedCards, setViewedCards] = useState<Set<number>>(new Set());
+    const [viewedCards, setViewedCards] = useState<Set<number>>(() => {
+        // In review mode, mark all cards as viewed from the start
+        if (isReviewMode) {
+            return new Set(vocabulary.map((_, index) => index));
+        }
+        return new Set();
+    });
 
     const currentWord = vocabulary[currentIndex];
     const allViewed = viewedCards.size === vocabulary.length;

@@ -94,6 +94,26 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
     const currentLyric = song.lyrics[currentLineIndex];
     const progressPercentage = (progress.totalCompletedLines / song.lyrics.length) * 100;
 
+    // Helper functions to determine if a step is accessible
+    const isStepAccessible = (step: LearningStep): boolean => {
+        if (!currentProgress) return false;
+
+        switch (step) {
+            case "study":
+                return true; // Study is always accessible
+            case "singing":
+                return currentProgress.isStudied; // Can access if studied
+            case "test":
+                return currentProgress.isSingingCompleted; // Can access if singing completed
+            case "puzzle":
+                return currentProgress.isTested; // Can access if tested
+            case "reward":
+                return currentProgress.isPuzzleCompleted; // Can access if puzzle completed
+            default:
+                return false;
+        }
+    };
+
     // Check if all lines are completed
     const allCompleted = progress.totalCompletedLines === song.lyrics.length;
 
@@ -260,32 +280,37 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                                 label="学習"
                                 isComplete={currentProgress?.isStudied || false}
                                 isActive={currentStep === "study"}
-                                onClick={() => currentProgress?.isStudied && setCurrentStep("study")}
+                                isAccessible={isStepAccessible("study")}
+                                onClick={() => isStepAccessible("study") && setCurrentStep("study")}
                             />
                             <StepIndicator
                                 label="歌唱"
                                 isComplete={currentProgress?.isSingingCompleted || false}
                                 isActive={currentStep === "singing"}
+                                isAccessible={isStepAccessible("singing")}
                                 icon={<Mic className="w-5 h-5" />}
-                                onClick={() => currentProgress?.isSingingCompleted && setCurrentStep("singing")}
+                                onClick={() => isStepAccessible("singing") && setCurrentStep("singing")}
                             />
                             <StepIndicator
                                 label="テスト"
                                 isComplete={currentProgress?.isTested || false}
                                 isActive={currentStep === "test"}
-                                onClick={() => currentProgress?.isTested && setCurrentStep("test")}
+                                isAccessible={isStepAccessible("test")}
+                                onClick={() => isStepAccessible("test") && setCurrentStep("test")}
                             />
                             <StepIndicator
                                 label="パズル"
                                 isComplete={currentProgress?.isPuzzleCompleted || false}
                                 isActive={currentStep === "puzzle"}
-                                onClick={() => currentProgress?.isPuzzleCompleted && setCurrentStep("puzzle")}
+                                isAccessible={isStepAccessible("puzzle")}
+                                onClick={() => isStepAccessible("puzzle") && setCurrentStep("puzzle")}
                             />
                             <StepIndicator
                                 label="報酬"
                                 isComplete={currentProgress?.isCompleted || false}
                                 isActive={currentStep === "reward"}
-                                onClick={() => currentProgress?.isCompleted && setCurrentStep("reward")}
+                                isAccessible={isStepAccessible("reward")}
+                                onClick={() => isStepAccessible("reward") && setCurrentStep("reward")}
                             />
                         </div>
                     </CardContent>
@@ -304,6 +329,7 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                             <FlashcardStudy
                                 vocabulary={currentLyric.vocabulary}
                                 onComplete={handleStudyComplete}
+                                isReviewMode={currentProgress?.isStudied || false}
                             />
                         )}
                         {currentStep === "singing" && (
@@ -358,6 +384,7 @@ interface StepIndicatorProps {
     label: string;
     isComplete: boolean;
     isActive: boolean;
+    isAccessible: boolean;
     icon?: React.ReactNode;
     onClick?: () => void;
 }
@@ -366,10 +393,11 @@ const StepIndicator = ({
     label,
     isComplete,
     isActive,
+    isAccessible,
     icon,
     onClick,
 }: StepIndicatorProps) => {
-    const isClickable = isComplete && onClick;
+    const isClickable = isAccessible && onClick;
 
     return (
         <motion.div
@@ -381,10 +409,12 @@ const StepIndicator = ({
         >
             <div
                 className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 mx-1 ${isComplete
-                    ? "bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg shadow-green-500/50"
-                    : isActive
-                        ? "bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-purple-500/50 animate-pulse"
-                        : "glass-panel text-gray-400"
+                        ? "bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg shadow-green-500/50"
+                        : isActive
+                            ? "bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-purple-500/50 animate-pulse"
+                            : isAccessible
+                                ? "bg-gradient-to-br from-gray-300 to-gray-400 text-gray-600 shadow-md hover:from-gray-400 hover:to-gray-500"
+                                : "glass-panel text-gray-400"
                     }`}
             >
                 {isComplete ? (
@@ -396,7 +426,7 @@ const StepIndicator = ({
                 )}
             </div>
             <p
-                className={`text-xs mt-2 font-semibold transition-colors ${isActive ? "text-purple-700" : "text-gray-500"
+                className={`text-xs mt-2 font-semibold transition-colors ${isActive ? "text-purple-700" : isAccessible ? "text-gray-600" : "text-gray-500"
                     }`}
             >
                 {label}
