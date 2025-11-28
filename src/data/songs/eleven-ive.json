@@ -121,6 +121,10 @@
           "word": "는",
           "reading": "ぬん",
           "meaning": "は"
+        },
+        {
+          "word": "odd",
+          "meaning": "odd"
         }
       ]
     },
@@ -154,6 +158,10 @@
           "word": "피어나는",
           "reading": "ぴおなぬん",
           "meaning": "咲く"
+        },
+        {
+          "word": "blue",
+          "meaning": "blue"
         }
       ]
     },
@@ -197,6 +205,10 @@
           "word": "은",
           "reading": "うん",
           "meaning": "は"
+        },
+        {
+          "word": "true",
+          "meaning": "true"
         }
       ]
     },
@@ -331,6 +343,10 @@
           "word": "작은",
           "reading": "ちゃぐん",
           "meaning": "小さな"
+        },
+        {
+          "word": "heaven",
+          "meaning": "heaven"
         }
       ]
     },
@@ -374,10 +390,14 @@
     },
     {
       "startTime": 49.98,
-      "text": "Oh my, oh my god 한 칸 더 채우고 있어",
-      "reading": "Oh my, oh my god はん かん と ちぇうご いっそ",
+      "text": "Ohmy,ohmygod 한 칸 더 채우고 있어",
+      "reading": "Ohmy,ohmygod はん かん と ちぇうご いっそ",
       "translation": "Oh my, oh my god 君と染める色",
       "vocabulary": [
+        {
+          "word": "Ohmy,ohmygod",
+          "meaning": "Ohmy,ohmygod"
+        },
         {
           "word": "한",
           "reading": "はん",
@@ -407,8 +427,8 @@
     },
     {
       "startTime": 53.32,
-      "text": "잘 봐 1, 2, 3, 4, 5, 6, 7",
-      "reading": "ちゃる ば 1, 2, 3, 4, 5, 6, 7",
+      "text": "잘 봐 1,2,3,4,5,6,7",
+      "reading": "ちゃる ば 1,2,3,4,5,6,7",
       "translation": "ほら one, two, three, four, five, six, seven",
       "vocabulary": [
         {
@@ -420,6 +440,10 @@
           "word": "봐",
           "reading": "ば",
           "meaning": "見て"
+        },
+        {
+          "word": "1,2,3,4,5,6,7",
+          "meaning": "1,2,3,4,5,6,7"
         }
       ]
     },

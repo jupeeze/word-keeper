@@ -17,18 +17,21 @@ export const FlashcardStudy = ({
     onComplete,
     isReviewMode = false,
 }: FlashcardStudyProps) => {
+    // Filter out words without reading property
+    const filteredVocabulary = vocabulary.filter(word => word.reading);
+
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
     const [viewedCards, setViewedCards] = useState<Set<number>>(() => {
         // In review mode, mark all cards as viewed from the start
         if (isReviewMode) {
-            return new Set(vocabulary.map((_, index) => index));
+            return new Set(filteredVocabulary.map((_, index) => index));
         }
         return new Set();
     });
 
-    const currentWord = vocabulary[currentIndex];
-    const allViewed = viewedCards.size === vocabulary.length;
+    const currentWord = filteredVocabulary[currentIndex];
+    const allViewed = viewedCards.size === filteredVocabulary.length;
 
     useEffect(() => {
         if (!isFlipped) {
@@ -44,7 +47,7 @@ export const FlashcardStudy = ({
     };
 
     const handleNext = () => {
-        if (currentIndex < vocabulary.length - 1) {
+        if (currentIndex < filteredVocabulary.length - 1) {
             setCurrentIndex(currentIndex + 1);
             setIsFlipped(false);
         }
@@ -69,16 +72,16 @@ export const FlashcardStudy = ({
             <div className="w-full glass-card p-4 rounded-2xl">
                 <div className="flex justify-between text-sm text-gray-700 font-semibold mb-3">
                     <span>
-                        単語 {currentIndex + 1} / {vocabulary.length}
+                        単語 {currentIndex + 1} / {filteredVocabulary.length}
                     </span>
                     <span className="text-purple-600">
-                        確認済み: {viewedCards.size} / {vocabulary.length}
+                        確認済み: {viewedCards.size} / {filteredVocabulary.length}
                     </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
                     <motion.div
                         initial={{ width: 0 }}
-                        animate={{ width: `${((currentIndex + 1) / vocabulary.length) * 100}%` }}
+                        animate={{ width: `${((currentIndex + 1) / filteredVocabulary.length) * 100}%` }}
                         transition={{ duration: 0.5 }}
                         className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 h-3 rounded-full shadow-glow"
                     />
@@ -157,7 +160,7 @@ export const FlashcardStudy = ({
                 >
                     <RotateCcw className="w-4 h-4" />
                 </Button>
-                {allViewed && currentIndex === vocabulary.length - 1 ? (
+                {allViewed && currentIndex === filteredVocabulary.length - 1 ? (
                     <Button
                         onClick={onComplete}
                         className="flex-1 h-full text-base font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
@@ -167,7 +170,7 @@ export const FlashcardStudy = ({
                 ) : (
                     <Button
                         onClick={handleNext}
-                        disabled={currentIndex === vocabulary.length - 1 || !viewedCards.has(currentIndex)}
+                        disabled={currentIndex === filteredVocabulary.length - 1 || !viewedCards.has(currentIndex)}
                         variant="outline"
                         className="flex-1 glass-panel hover:bg-white/60 transition-all duration-300"
                     >
