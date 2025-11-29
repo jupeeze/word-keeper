@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import type { Vocabulary } from "@/types";
 import { speakKorean } from "@/utils/speechUtils";
+import { Progress } from "@/components/ui/progress";
 
 interface FlashcardStudyProps {
     vocabulary: Vocabulary[];
@@ -87,6 +88,8 @@ export const FlashcardStudy = ({
                     />
                 </div>
             </div>
+
+            <Progress current={currentIndex + 1} total={filteredVocabulary.length} label="単語"></Progress>
 
             {/* Flashcard */}
             <div
