@@ -7,9 +7,9 @@ export const QuizProgress = () => {
   const progress = (currentWordIndex / total) * 100;
 
   return (
-    <div className="w-full my-2">
+    <div className="my-2 w-full">
       <Progress value={progress} className="h-4 rounded-lg" />
-      <p className="text-sm mt-1 text-right">
+      <p className="mt-1 text-right text-sm">
         {currentWordIndex} / {total} 単語
       </p>
     </div>

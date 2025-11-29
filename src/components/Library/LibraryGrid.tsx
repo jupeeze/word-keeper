@@ -27,8 +27,8 @@ export const LibraryGrid = () => {
 
   if (savedWords.length === 0) {
     return (
-      <div className="text-center py-20 text-gray-500">
-        <p className="text-xl font-bold mb-2">グリモワールはまだ白紙です</p>
+      <div className="py-20 text-center text-gray-500">
+        <p className="mb-2 text-xl font-bold">グリモワールはまだ白紙です</p>
         <p>「歌詞同期プレイヤー」から単語を採集しましょう！</p>
       </div>
     );
@@ -36,7 +36,7 @@ export const LibraryGrid = () => {
 
   return (
     <>
-      <motion.div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      <motion.div className="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4">
         <AnimatePresence mode="popLayout">
           {savedWords.map((item) => (
             <AnimatedWordCard

@@ -1,266 +1,266 @@
 {
-    "id": "what-makes-you-beautiful-one-direction",
-    "title": "What Makes You Beautiful",
-    "artist": "One Direction",
-    "coverImage": "https://cdn-images.dzcdn.net/images/cover/95f254f5a4b63ed50250e64386343ec8/1900x1900-000000-80-0-0.jpg",
-    "difficulty": "beginner",
-    "language": "English",
-    "youtubeUrl": "https://youtu.be/QJO3ROT-A4E",
-    "lyrics": [
+  "id": "what-makes-you-beautiful-one-direction",
+  "title": "What Makes You Beautiful",
+  "artist": "One Direction",
+  "coverImage": "https://cdn-images.dzcdn.net/images/cover/95f254f5a4b63ed50250e64386343ec8/1900x1900-000000-80-0-0.jpg",
+  "difficulty": "beginner",
+  "language": "English",
+  "youtubeUrl": "https://youtu.be/QJO3ROT-A4E",
+  "lyrics": [
+    {
+      "startTime": 1.89,
+      "text": "You're insecure, don't know what for",
+      "reading": "ユア インセキュア ドント ノウ ホワット フォー",
+      "translation": "君は自信がなくて、その理由もわかっていない",
+      "vocabulary": [
         {
-            "startTime": 1.89,
-            "text": "You're insecure, don't know what for",
-            "reading": "ユア インセキュア ドント ノウ ホワット フォー",
-            "translation": "君は自信がなくて、その理由もわかっていない",
-            "vocabulary": [
-                {
-                    "word": "insecure",
-                    "reading": "インセキュア",
-                    "meaning": "自信がない、不安定な"
-                },
-                {
-                    "word": "what for",
-                    "reading": "ホワット フォー",
-                    "meaning": "何のために、なぜ"
-                }
-            ]
+          "word": "insecure",
+          "reading": "インセキュア",
+          "meaning": "自信がない、不安定な"
         },
         {
-            "startTime": 12.82,
-            "text": "You're turning heads when you walk through the door",
-            "reading": "ユア ターニング ヘッズ ウェン ユー ウォーク スルー ザ ドア",
-            "translation": "ドアを通って入ってくると、みんなが振り返る",
-            "vocabulary": [
-                {
-                    "word": "turn heads",
-                    "reading": "ターン ヘッズ",
-                    "meaning": "（人を）振り向かせる、注目を集める"
-                },
-                {
-                    "word": "walk through",
-                    "reading": "ウォーク スルー",
-                    "meaning": "通り抜ける、歩いて入る"
-                }
-            ]
-        },
-        {
-            "startTime": 16.68,
-            "text": "Don't need makeup to cover up, huh",
-            "reading": "ドント ニード メイクアップ トゥ カバー アップ ハ",
-            "translation": "隠すためのメイクなんて必要ないよ",
-            "vocabulary": [
-                {
-                    "word": "makeup",
-                    "reading": "メイクアップ",
-                    "meaning": "化粧"
-                },
-                {
-                    "word": "cover up",
-                    "reading": "カバー アップ",
-                    "meaning": "隠す、覆い隠す"
-                }
-            ]
-        },
-        {
-            "startTime": 19.95,
-            "text": "Bein' the way that you are is enough",
-            "reading": "ビーイング ザ ウェイ ザット ユー アー イズ イナフ",
-            "translation": "ありのままの君で十分なんだ",
-            "vocabulary": [
-                {
-                    "word": "the way you are",
-                    "reading": "ザ ウェイ ユー アー",
-                    "meaning": "ありのままの君、君のあり方"
-                },
-                {
-                    "word": "enough",
-                    "reading": "イナフ",
-                    "meaning": "十分な"
-                }
-            ]
-        },
-        {
-            "startTime": 25.02,
-            "text": "Everyone else in the room can see it",
-            "reading": "エヴリワン エルス イン ザ ルーム キャン シー イット",
-            "translation": "部屋にいる他の誰もがそれに気づいている",
-            "vocabulary": [
-                {
-                    "word": "everyone else",
-                    "reading": "エヴリワン エルス",
-                    "meaning": "他の全員"
-                },
-                {
-                    "word": "room",
-                    "reading": "ルーム",
-                    "meaning": "部屋"
-                }
-            ]
-        },
-        {
-            "startTime": 28.71,
-            "text": "Everyone else but you",
-            "reading": "エヴリワン エルス バット ユー",
-            "translation": "君以外の全員がね",
-            "vocabulary": [
-                {
-                    "word": "but",
-                    "reading": "バット",
-                    "meaning": "～以外（ここではexceptの意味）"
-                }
-            ]
-        },
-        {
-            "startTime": 32.12,
-            "text": "Baby, you light up my world like nobody else",
-            "reading": "ベイビー ユー ライト アップ マイ ワールド ライク ノーバディ エルス",
-            "translation": "ベイビー、君は他の誰よりも僕の世界を照らしてくれる",
-            "vocabulary": [
-                {
-                    "word": "light up",
-                    "reading": "ライト アップ",
-                    "meaning": "照らす、明るくする"
-                },
-                {
-                    "word": "nobody else",
-                    "reading": "ノーバディ エルス",
-                    "meaning": "他の誰も～ない"
-                }
-            ]
-        },
-        {
-            "startTime": 35.89,
-            "text": "The way that you flip your hair gets me overwhelmed",
-            "reading": "ザ ウェイ ザット ユー フリップ ユア ヘア ゲッツ ミー オーヴァーウェルムド",
-            "translation": "髪をかき上げる仕草に僕は参ってしまうよ",
-            "vocabulary": [
-                {
-                    "word": "flip",
-                    "reading": "フリップ",
-                    "meaning": "はじく、サッとかき上げる"
-                },
-                {
-                    "word": "overwhelmed",
-                    "reading": "オーヴァーウェルムド",
-                    "meaning": "圧倒された、参った"
-                }
-            ]
-        },
-        {
-            "startTime": 40.17,
-            "text": "But when you smile at the ground, it ain't hard to tell",
-            "reading": "バット ウェン ユー スマイル アット ザ グラウンド イット エイント ハード トゥ テル",
-            "translation": "でも君がうつむいて微笑む時、すぐにわかるんだ",
-            "vocabulary": [
-                {
-                    "word": "ground",
-                    "reading": "グラウンド",
-                    "meaning": "地面"
-                },
-                {
-                    "word": "hard to tell",
-                    "reading": "ハード トゥ テル",
-                    "meaning": "見分けるのが難しい（ここでは否定なので「簡単だ」）"
-                }
-            ]
-        },
-        {
-            "startTime": 43.85,
-            "text": "You don't know, oh-oh, you don't know you're beautiful",
-            "reading": "ユー ドント ノウ オーオー ユー ドント ノウ ユア ビューティフル",
-            "translation": "君は気づいていない、自分が美しいってことを",
-            "vocabulary": [
-                {
-                    "word": "beautiful",
-                    "reading": "ビューティフル",
-                    "meaning": "美しい"
-                }
-            ]
-        },
-        {
-            "startTime": 48.34,
-            "text": "If only you saw what I can see",
-            "reading": "イフ オンリー ユー ソー ホワット アイ キャン シー",
-            "translation": "僕に見えているものが君にも見えればいいのに",
-            "vocabulary": [
-                {
-                    "word": "if only",
-                    "reading": "イフ オンリー",
-                    "meaning": "ただ～でさえあれば、～ならいいのに"
-                },
-                {
-                    "word": "saw",
-                    "reading": "ソー",
-                    "meaning": "見た（seeの過去形）"
-                }
-            ]
-        },
-        {
-            "startTime": 51.41,
-            "text": "You'll understand why I want you so desperately",
-            "reading": "ユール アンダースタンド ホワイ アイ ウォント ユー ソー デスパレートリー",
-            "translation": "なぜ僕がこんなにも君を求めているのかわかるはずさ",
-            "vocabulary": [
-                {
-                    "word": "understand",
-                    "reading": "アンダースタンド",
-                    "meaning": "理解する"
-                },
-                {
-                    "word": "desperately",
-                    "reading": "デスパレートリー",
-                    "meaning": "必死に、どうしても"
-                }
-            ]
-        },
-        {
-            "startTime": 54.95,
-            "text": "Right now I'm lookin' at you and I can't believe",
-            "reading": "ライト ナウ アイム ルッキング アット ユー アンド アイ キャント ビリーヴ",
-            "translation": "今こうして君を見ていると、信じられないよ",
-            "vocabulary": [
-                {
-                    "word": "right now",
-                    "reading": "ライト ナウ",
-                    "meaning": "たった今、現在"
-                },
-                {
-                    "word": "believe",
-                    "reading": "ビリーヴ",
-                    "meaning": "信じる"
-                }
-            ]
-        },
-        {
-            "startTime": 58.60,
-            "text": "You don't know, oh-oh, you don't know you're beautiful, oh-oh",
-            "reading": "ユー ドント ノウ オーオー ユー ドント ノウ ユア ビューティフル オーオー",
-            "translation": "君は気づいていない、自分が美しいってことを",
-            "vocabulary": [
-                {
-                    "word": "know",
-                    "reading": "ノウ",
-                    "meaning": "知る、気づく"
-                }
-            ]
-        },
-        {
-            "startTime": 65.18,
-            "text": "That's what makes you beautiful",
-            "reading": "ザッツ ホワット メイクス ユー ビューティフル",
-            "translation": "それこそが君を美しくしているんだ",
-            "vocabulary": [
-                {
-                    "word": "make",
-                    "reading": "メイク",
-                    "meaning": "～にする、作る"
-                },
-                {
-                    "word": "that's what",
-                    "reading": "ザッツ ホワット",
-                    "meaning": "それが～なことだ"
-                }
-            ]
+          "word": "what for",
+          "reading": "ホワット フォー",
+          "meaning": "何のために、なぜ"
         }
-    ]
+      ]
+    },
+    {
+      "startTime": 12.82,
+      "text": "You're turning heads when you walk through the door",
+      "reading": "ユア ターニング ヘッズ ウェン ユー ウォーク スルー ザ ドア",
+      "translation": "ドアを通って入ってくると、みんなが振り返る",
+      "vocabulary": [
+        {
+          "word": "turn heads",
+          "reading": "ターン ヘッズ",
+          "meaning": "（人を）振り向かせる、注目を集める"
+        },
+        {
+          "word": "walk through",
+          "reading": "ウォーク スルー",
+          "meaning": "通り抜ける、歩いて入る"
+        }
+      ]
+    },
+    {
+      "startTime": 16.68,
+      "text": "Don't need makeup to cover up, huh",
+      "reading": "ドント ニード メイクアップ トゥ カバー アップ ハ",
+      "translation": "隠すためのメイクなんて必要ないよ",
+      "vocabulary": [
+        {
+          "word": "makeup",
+          "reading": "メイクアップ",
+          "meaning": "化粧"
+        },
+        {
+          "word": "cover up",
+          "reading": "カバー アップ",
+          "meaning": "隠す、覆い隠す"
+        }
+      ]
+    },
+    {
+      "startTime": 19.95,
+      "text": "Bein' the way that you are is enough",
+      "reading": "ビーイング ザ ウェイ ザット ユー アー イズ イナフ",
+      "translation": "ありのままの君で十分なんだ",
+      "vocabulary": [
+        {
+          "word": "the way you are",
+          "reading": "ザ ウェイ ユー アー",
+          "meaning": "ありのままの君、君のあり方"
+        },
+        {
+          "word": "enough",
+          "reading": "イナフ",
+          "meaning": "十分な"
+        }
+      ]
+    },
+    {
+      "startTime": 25.02,
+      "text": "Everyone else in the room can see it",
+      "reading": "エヴリワン エルス イン ザ ルーム キャン シー イット",
+      "translation": "部屋にいる他の誰もがそれに気づいている",
+      "vocabulary": [
+        {
+          "word": "everyone else",
+          "reading": "エヴリワン エルス",
+          "meaning": "他の全員"
+        },
+        {
+          "word": "room",
+          "reading": "ルーム",
+          "meaning": "部屋"
+        }
+      ]
+    },
+    {
+      "startTime": 28.71,
+      "text": "Everyone else but you",
+      "reading": "エヴリワン エルス バット ユー",
+      "translation": "君以外の全員がね",
+      "vocabulary": [
+        {
+          "word": "but",
+          "reading": "バット",
+          "meaning": "～以外（ここではexceptの意味）"
+        }
+      ]
+    },
+    {
+      "startTime": 32.12,
+      "text": "Baby, you light up my world like nobody else",
+      "reading": "ベイビー ユー ライト アップ マイ ワールド ライク ノーバディ エルス",
+      "translation": "ベイビー、君は他の誰よりも僕の世界を照らしてくれる",
+      "vocabulary": [
+        {
+          "word": "light up",
+          "reading": "ライト アップ",
+          "meaning": "照らす、明るくする"
+        },
+        {
+          "word": "nobody else",
+          "reading": "ノーバディ エルス",
+          "meaning": "他の誰も～ない"
+        }
+      ]
+    },
+    {
+      "startTime": 35.89,
+      "text": "The way that you flip your hair gets me overwhelmed",
+      "reading": "ザ ウェイ ザット ユー フリップ ユア ヘア ゲッツ ミー オーヴァーウェルムド",
+      "translation": "髪をかき上げる仕草に僕は参ってしまうよ",
+      "vocabulary": [
+        {
+          "word": "flip",
+          "reading": "フリップ",
+          "meaning": "はじく、サッとかき上げる"
+        },
+        {
+          "word": "overwhelmed",
+          "reading": "オーヴァーウェルムド",
+          "meaning": "圧倒された、参った"
+        }
+      ]
+    },
+    {
+      "startTime": 40.17,
+      "text": "But when you smile at the ground, it ain't hard to tell",
+      "reading": "バット ウェン ユー スマイル アット ザ グラウンド イット エイント ハード トゥ テル",
+      "translation": "でも君がうつむいて微笑む時、すぐにわかるんだ",
+      "vocabulary": [
+        {
+          "word": "ground",
+          "reading": "グラウンド",
+          "meaning": "地面"
+        },
+        {
+          "word": "hard to tell",
+          "reading": "ハード トゥ テル",
+          "meaning": "見分けるのが難しい（ここでは否定なので「簡単だ」）"
+        }
+      ]
+    },
+    {
+      "startTime": 43.85,
+      "text": "You don't know, oh-oh, you don't know you're beautiful",
+      "reading": "ユー ドント ノウ オーオー ユー ドント ノウ ユア ビューティフル",
+      "translation": "君は気づいていない、自分が美しいってことを",
+      "vocabulary": [
+        {
+          "word": "beautiful",
+          "reading": "ビューティフル",
+          "meaning": "美しい"
+        }
+      ]
+    },
+    {
+      "startTime": 48.34,
+      "text": "If only you saw what I can see",
+      "reading": "イフ オンリー ユー ソー ホワット アイ キャン シー",
+      "translation": "僕に見えているものが君にも見えればいいのに",
+      "vocabulary": [
+        {
+          "word": "if only",
+          "reading": "イフ オンリー",
+          "meaning": "ただ～でさえあれば、～ならいいのに"
+        },
+        {
+          "word": "saw",
+          "reading": "ソー",
+          "meaning": "見た（seeの過去形）"
+        }
+      ]
+    },
+    {
+      "startTime": 51.41,
+      "text": "You'll understand why I want you so desperately",
+      "reading": "ユール アンダースタンド ホワイ アイ ウォント ユー ソー デスパレートリー",
+      "translation": "なぜ僕がこんなにも君を求めているのかわかるはずさ",
+      "vocabulary": [
+        {
+          "word": "understand",
+          "reading": "アンダースタンド",
+          "meaning": "理解する"
+        },
+        {
+          "word": "desperately",
+          "reading": "デスパレートリー",
+          "meaning": "必死に、どうしても"
+        }
+      ]
+    },
+    {
+      "startTime": 54.95,
+      "text": "Right now I'm lookin' at you and I can't believe",
+      "reading": "ライト ナウ アイム ルッキング アット ユー アンド アイ キャント ビリーヴ",
+      "translation": "今こうして君を見ていると、信じられないよ",
+      "vocabulary": [
+        {
+          "word": "right now",
+          "reading": "ライト ナウ",
+          "meaning": "たった今、現在"
+        },
+        {
+          "word": "believe",
+          "reading": "ビリーヴ",
+          "meaning": "信じる"
+        }
+      ]
+    },
+    {
+      "startTime": 58.6,
+      "text": "You don't know, oh-oh, you don't know you're beautiful, oh-oh",
+      "reading": "ユー ドント ノウ オーオー ユー ドント ノウ ユア ビューティフル オーオー",
+      "translation": "君は気づいていない、自分が美しいってことを",
+      "vocabulary": [
+        {
+          "word": "know",
+          "reading": "ノウ",
+          "meaning": "知る、気づく"
+        }
+      ]
+    },
+    {
+      "startTime": 65.18,
+      "text": "That's what makes you beautiful",
+      "reading": "ザッツ ホワット メイクス ユー ビューティフル",
+      "translation": "それこそが君を美しくしているんだ",
+      "vocabulary": [
+        {
+          "word": "make",
+          "reading": "メイク",
+          "meaning": "～にする、作る"
+        },
+        {
+          "word": "that's what",
+          "reading": "ザッツ ホワット",
+          "meaning": "それが～なことだ"
+        }
+      ]
+    }
+  ]
 }

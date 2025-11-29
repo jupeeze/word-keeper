@@ -4,12 +4,7 @@ import { useWordAction } from "@/hooks/useWordAction";
 import { useSongStore } from "@/stores/songStore";
 import ReactPlayer from "react-player";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { LyricLineDisplay } from "@/components/LyricPlayer/LyricLineDisplay";
 import { ArrowLeft, Play, Pause, Music2, Sparkles } from "lucide-react";
@@ -23,7 +18,10 @@ interface LyricSyncPlayerProps extends PageNavigationProps {
   currentSongId?: string;
 }
 
-export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps) => {
+export const LyricSyncPlayer = ({
+  setPage,
+  currentSongId,
+}: LyricSyncPlayerProps) => {
   const playerRef = useRef<HTMLVideoElement | null>(null);
   const { handleWordClick } = useWordAction(currentSongId);
   const { getSongById } = useSongStore();
@@ -51,7 +49,7 @@ export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps
 
     const playedSeconds = (event.target as HTMLVideoElement).currentTime;
     const nextLineIdx = song.lyrics.findIndex(
-      (lyric) => lyric.startTime > playedSeconds
+      (lyric) => lyric.startTime > playedSeconds,
     );
 
     const currentLineIdx =
@@ -61,13 +59,19 @@ export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps
 
   if (!currentSongId || !song) {
     return (
-      <div className="min-h-screen gradient-primary flex items-center justify-center p-4">
-        <Card className="max-w-lg w-full glass-card">
+      <div className="gradient-primary flex min-h-screen items-center justify-center p-4">
+        <Card className="glass-card w-full max-w-lg">
           <CardHeader>
-            <CardTitle className="text-center text-2xl">曲が選択されていません</CardTitle>
+            <CardTitle className="text-center text-2xl">
+              曲が選択されていません
+            </CardTitle>
           </CardHeader>
           <CardContent className="text-center">
-            <Button onClick={() => setPage("songList")} size="lg" className="btn-premium">
+            <Button
+              onClick={() => setPage("songList")}
+              size="lg"
+              className="btn-premium"
+            >
               曲一覧に戻る
             </Button>
           </CardContent>
@@ -79,9 +83,9 @@ export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps
   const { playing } = state;
 
   return (
-    <div className="min-h-screen gradient-primary relative overflow-hidden">
+    <div className="gradient-primary relative min-h-screen overflow-hidden">
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -89,7 +93,7 @@ export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps
             opacity: [0.3, 0.5, 0.3],
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-purple-300/30 to-pink-300/30 rounded-full blur-3xl"
+          className="absolute -top-1/4 -left-1/4 h-1/2 w-1/2 rounded-full bg-gradient-to-br from-purple-300/30 to-pink-300/30 blur-3xl"
         />
         <motion.div
           animate={{
@@ -98,11 +102,11 @@ export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps
             opacity: [0.5, 0.3, 0.5],
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-blue-300/30 to-purple-300/30 rounded-full blur-3xl"
+          className="absolute -right-1/4 -bottom-1/4 h-1/2 w-1/2 rounded-full bg-gradient-to-tl from-blue-300/30 to-purple-300/30 blur-3xl"
         />
       </div>
 
-      <div className="relative max-w-6xl mx-auto p-6 space-y-6">
+      <div className="relative mx-auto max-w-6xl space-y-6 p-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -114,39 +118,45 @@ export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps
             onClick={() => setPage("songList")}
             variant="ghost"
             size="sm"
-            className="glass-panel hover:bg-white/40 transition-all duration-300"
+            className="glass-panel transition-all duration-300 hover:bg-white/40"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="h-4 w-4" />
           </Button>
-          <div className="flex items-center gap-3 flex-1">
-            <Sparkles className="w-6 h-6 text-purple-600" />
-            <h1 className="text-3xl font-bold text-gradient-primary">歌詞同期プレイヤー</h1>
+          <div className="flex flex-1 items-center gap-3">
+            <Sparkles className="h-6 w-6 text-purple-600" />
+            <h1 className="text-gradient-primary text-3xl font-bold">
+              歌詞同期プレイヤー
+            </h1>
           </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid gap-6 lg:grid-cols-2">
           {/* Video Player Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <Card className="glass-card border-0 overflow-hidden hover-lift">
+            <Card className="glass-card hover-lift overflow-hidden border-0">
               <CardHeader className="bg-gradient-to-r from-purple-500/10 to-pink-500/10">
                 <div className="flex items-center gap-3">
-                  <Music2 className="w-6 h-6 text-purple-600" />
+                  <Music2 className="h-6 w-6 text-purple-600" />
                   <div className="flex-1">
                     <CardTitle className="text-2xl">{song.title}</CardTitle>
-                    <p className="text-sm text-gray-600 mt-1">{song.artist}</p>
+                    <p className="mt-1 text-sm text-gray-600">{song.artist}</p>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="p-6 space-y-4">
+              <CardContent className="space-y-4 p-6">
                 {/* React Player */}
-                <div className="aspect-video rounded-xl overflow-hidden shadow-2xl ring-2 ring-purple-200/50">
+                <div className="aspect-video overflow-hidden rounded-xl shadow-2xl ring-2 ring-purple-200/50">
                   <ReactPlayer
                     ref={playerRef}
-                    style={{ width: "100%", height: "auto", aspectRatio: "16/9" }}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      aspectRatio: "16/9",
+                    }}
                     src={song.youtubeUrl}
                     playing={playing}
                     onStart={handleStart}
@@ -158,16 +168,16 @@ export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps
                 {/* Play/Pause Control */}
                 <Button
                   onClick={handlePlayPause}
-                  className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  className="h-14 w-full bg-gradient-to-r from-purple-600 to-pink-600 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-purple-700 hover:to-pink-700 hover:shadow-xl"
                 >
                   {playing ? (
                     <>
-                      <Pause className="w-5 h-5 mr-2" />
+                      <Pause className="mr-2 h-5 w-5" />
                       一時停止
                     </>
                   ) : (
                     <>
-                      <Play className="w-5 h-5 mr-2" />
+                      <Play className="mr-2 h-5 w-5" />
                       再生
                     </>
                   )}
@@ -182,7 +192,7 @@ export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <Card className="glass-card border-0 h-full flex flex-col">
+            <Card className="glass-card flex h-full flex-col border-0">
               <CardHeader className="bg-gradient-to-r from-blue-500/10 to-purple-500/10">
                 <CardTitle className="flex items-center gap-2">
                   <span className="text-2xl">🎵</span>
@@ -195,11 +205,11 @@ export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps
                     <motion.div
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="text-center py-20"
+                      className="py-20 text-center"
                     >
-                      <div className="inline-block p-6 glass-panel rounded-2xl">
-                        <Play className="w-16 h-16 mx-auto mb-4 text-purple-600 animate-pulse" />
-                        <p className="text-gray-600 text-lg font-medium">
+                      <div className="glass-panel inline-block rounded-2xl p-6">
+                        <Play className="mx-auto mb-4 h-16 w-16 animate-pulse text-purple-600" />
+                        <p className="text-lg font-medium text-gray-600">
                           再生を開始してください...
                         </p>
                       </div>
@@ -237,9 +247,9 @@ export const LyricSyncPlayer = ({ setPage, currentSongId }: LyricSyncPlayerProps
           <Button
             onClick={() => setPage("songList")}
             variant="outline"
-            className="glass-panel hover:bg-white/40 px-8 rounded-full transition-all duration-300 hover:scale-105"
+            className="glass-panel rounded-full px-8 transition-all duration-300 hover:scale-105 hover:bg-white/40"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className="mr-2 h-4 w-4" />
             曲一覧に戻る
           </Button>
         </motion.div>

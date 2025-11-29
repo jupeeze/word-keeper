@@ -2,7 +2,11 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { nanoid } from "nanoid";
 import type { SavedWord, SavedWordContext } from "../types";
-import { generateWordId, migrateOldWordData, isSameContext } from "../utils/wordUtils";
+import {
+  generateWordId,
+  migrateOldWordData,
+  isSameContext,
+} from "../utils/wordUtils";
 
 interface LibraryState {
   savedWords: SavedWord[];
@@ -10,7 +14,7 @@ interface LibraryState {
     word: string,
     meaning: string,
     pronunciation: string,
-    context: Omit<SavedWordContext, 'id' | 'addedAt'>
+    context: Omit<SavedWordContext, "id" | "addedAt">,
   ) => void;
   removeWord: (id: string) => void;
   removeContext: (wordId: string, contextId: string) => void;
@@ -38,7 +42,7 @@ export const useLibraryStore = create(
           // 既に同じ単語が存在する場合
           // 同じコンテキストが既に登録されていないかチェック
           const contextExists = existingWord.contexts.some((ctx) =>
-            isSameContext(ctx, context)
+            isSameContext(ctx, context),
           );
 
           if (contextExists) return; // 重複登録を防ぐ
@@ -48,11 +52,11 @@ export const useLibraryStore = create(
             savedWords: get().savedWords.map((w) =>
               w.id === wordId
                 ? {
-                  ...w,
-                  contexts: [...w.contexts, newContext],
-                  lastUpdatedAt: newContext.addedAt,
-                }
-                : w
+                    ...w,
+                    contexts: [...w.contexts, newContext],
+                    lastUpdatedAt: newContext.addedAt,
+                  }
+                : w,
             ),
           });
         } else {
@@ -80,11 +84,11 @@ export const useLibraryStore = create(
 
       removeContext: (wordId, contextId) => {
         set({
-          savedWords: get().savedWords
-            .map((w) => {
+          savedWords: get()
+            .savedWords.map((w) => {
               if (w.id === wordId) {
                 const updatedContexts = w.contexts.filter(
-                  (ctx) => ctx.id !== contextId
+                  (ctx) => ctx.id !== contextId,
                 );
                 // コンテキストが0個になったら単語自体を削除
                 if (updatedContexts.length === 0) {
@@ -106,10 +110,10 @@ export const useLibraryStore = create(
           savedWords: get().savedWords.map((w) =>
             w.id === id
               ? {
-                ...w,
-                masteryLevel: w.masteryLevel >= 2 ? 0 : w.masteryLevel + 1,
-              }
-              : w
+                  ...w,
+                  masteryLevel: w.masteryLevel >= 2 ? 0 : w.masteryLevel + 1,
+                }
+              : w,
           ),
         });
       },
@@ -121,12 +125,12 @@ export const useLibraryStore = create(
         if (persistedState && persistedState.savedWords) {
           // 古い形式のデータを新しい形式に変換
           persistedState.savedWords = migrateOldWordData(
-            persistedState.savedWords
+            persistedState.savedWords,
           );
         }
         return persistedState as LibraryState;
       },
       version: 1,
-    }
-  )
+    },
+  ),
 );

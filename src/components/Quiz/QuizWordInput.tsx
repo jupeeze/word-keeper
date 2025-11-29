@@ -44,7 +44,7 @@ export const QuizWordInput = () => {
     <>
       {!isQuizComplete && (
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-          <p className="text-center text-4xl font-bold tracking-widest my-4">
+          <p className="my-4 text-center text-4xl font-bold tracking-widest">
             {words[currentWordIndex]}
           </p>
           <Input

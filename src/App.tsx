@@ -26,15 +26,20 @@ function App() {
     <div className="min-h-screen bg-gray-100">
       {currentPage === "songList" && <SongListPage setPage={setPage} />}
       {currentPage === "lyricPlayer" && (
-        <LyricSyncPlayer setPage={setPage} currentSongId={currentSongId || undefined} />
+        <LyricSyncPlayer
+          setPage={setPage}
+          currentSongId={currentSongId || undefined}
+        />
       )}
       {currentPage === "library" && <LibraryPage setPage={setPage} />}
       {currentPage === "lyricProgress" && (
-        <LyricProgressPage setPage={setPage} currentSongId={currentSongId || undefined} />
+        <LyricProgressPage
+          setPage={setPage}
+          currentSongId={currentSongId || undefined}
+        />
       )}
     </div>
   );
 }
 
 export default App;
-

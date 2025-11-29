@@ -8,11 +8,7 @@ interface ProgressProps {
   label: string;
 }
 
-export const Progress = ({
-  current,
-  total,
-  label,
-}: ProgressProps) => {
+export const Progress = ({ current, total, label }: ProgressProps) => {
   const progressPercentage = (current / total) * 100;
 
   return (

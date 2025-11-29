@@ -7,8 +7,8 @@
  * @param array シャッフルする配列
  * @returns シャッフルされた新しい配列
  */
-export const shuffleArray = <T,>(array: T[]): T[] => {
-    return [...array].sort(() => Math.random() - 0.5);
+export const shuffleArray = <T>(array: T[]): T[] => {
+  return [...array].sort(() => Math.random() - 0.5);
 };
 
 /**
@@ -17,6 +17,6 @@ export const shuffleArray = <T,>(array: T[]): T[] => {
  * @param count 取得する要素数
  * @returns ランダムに選ばれた要素の配列
  */
-export const getRandomItems = <T,>(array: T[], count: number): T[] => {
-    return shuffleArray(array).slice(0, count);
+export const getRandomItems = <T>(array: T[], count: number): T[] => {
+  return shuffleArray(array).slice(0, count);
 };

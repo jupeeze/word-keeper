@@ -12,8 +12,8 @@ import { FEEDBACK_CLASSES } from "@/constants/ui";
  * @returns 進行状況のパーセンテージ（0-100）
  */
 export const calculateProgress = (current: number, total: number): number => {
-    if (total === 0) return 0;
-    return (current / total) * 100;
+  if (total === 0) return 0;
+  return (current / total) * 100;
 };
 
 /**
@@ -21,11 +21,9 @@ export const calculateProgress = (current: number, total: number): number => {
  * @param feedback フィードバックタイプ
  * @returns CSSクラス名の文字列
  */
-export const getFeedbackClassName = (
-    feedback: FeedbackType | null
-): string => {
-    if (!feedback) return "opacity-0";
-    return FEEDBACK_CLASSES[feedback];
+export const getFeedbackClassName = (feedback: FeedbackType | null): string => {
+  if (!feedback) return "opacity-0";
+  return FEEDBACK_CLASSES[feedback];
 };
 
 /**
@@ -35,9 +33,9 @@ export const getFeedbackClassName = (
  * @returns フォーマットされた秒数
  */
 export const formatReactionTime = (
-    milliseconds: number,
-    decimalPlaces: number = 2
+  milliseconds: number,
+  decimalPlaces: number = 2,
 ): number => {
-    const seconds = milliseconds / 1000;
-    return parseFloat(seconds.toFixed(decimalPlaces));
+  const seconds = milliseconds / 1000;
+  return parseFloat(seconds.toFixed(decimalPlaces));
 };

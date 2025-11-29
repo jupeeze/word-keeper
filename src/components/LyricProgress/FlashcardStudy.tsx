@@ -8,163 +8,172 @@ import { speakKorean } from "@/utils/speechUtils";
 import { Progress } from "@/components/ui/progress";
 
 interface FlashcardStudyProps {
-    vocabulary: Vocabulary[];
-    onComplete: () => void;
-    isReviewMode?: boolean; // If true, all cards are pre-marked as viewed
+  vocabulary: Vocabulary[];
+  onComplete: () => void;
+  isReviewMode?: boolean; // If true, all cards are pre-marked as viewed
 }
 
 export const FlashcardStudy = ({
-    vocabulary,
-    onComplete,
-    isReviewMode = false,
+  vocabulary,
+  onComplete,
+  isReviewMode = false,
 }: FlashcardStudyProps) => {
-    // Filter out words without reading property
-    const filteredVocabulary = vocabulary.filter(word => word.reading);
+  // Filter out words without reading property
+  const filteredVocabulary = vocabulary.filter((word) => word.reading);
 
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [isFlipped, setIsFlipped] = useState(false);
-    const [viewedCards, setViewedCards] = useState<Set<number>>(() => {
-        // In review mode, mark all cards as viewed from the start
-        if (isReviewMode) {
-            return new Set(filteredVocabulary.map((_, index) => index));
-        }
-        return new Set();
-    });
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [viewedCards, setViewedCards] = useState<Set<number>>(() => {
+    // In review mode, mark all cards as viewed from the start
+    if (isReviewMode) {
+      return new Set(filteredVocabulary.map((_, index) => index));
+    }
+    return new Set();
+  });
 
-    const currentWord = filteredVocabulary[currentIndex];
-    const allViewed = viewedCards.size === filteredVocabulary.length;
+  const currentWord = filteredVocabulary[currentIndex];
+  const allViewed = viewedCards.size === filteredVocabulary.length;
 
-    useEffect(() => {
-        if (!isFlipped) {
-            speakKorean(currentWord.word);
-        }
-    }, [currentIndex, isFlipped]);
+  useEffect(() => {
+    if (!isFlipped) {
+      speakKorean(currentWord.word);
+    }
+  }, [currentIndex, isFlipped]);
 
-    const handleFlip = () => {
-        setIsFlipped(!isFlipped);
-        if (!isFlipped) {
-            setViewedCards((prev) => new Set(prev).add(currentIndex));
-        }
-    };
+  const handleFlip = () => {
+    setIsFlipped(!isFlipped);
+    if (!isFlipped) {
+      setViewedCards((prev) => new Set(prev).add(currentIndex));
+    }
+  };
 
-    const handleNext = () => {
-        if (currentIndex < filteredVocabulary.length - 1) {
-            setCurrentIndex(currentIndex + 1);
-            setIsFlipped(false);
-        }
-    };
+  const handleNext = () => {
+    if (currentIndex < filteredVocabulary.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      setIsFlipped(false);
+    }
+  };
 
-    const handlePrevious = () => {
-        if (currentIndex > 0) {
-            setCurrentIndex(currentIndex - 1);
-            setIsFlipped(false);
-        }
-    };
+  const handlePrevious = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      setIsFlipped(false);
+    }
+  };
 
-    const handleReset = () => {
-        setCurrentIndex(0);
-        setIsFlipped(false);
-        // Don't clear viewedCards - preserve the history
-    };
+  const handleReset = () => {
+    setCurrentIndex(0);
+    setIsFlipped(false);
+    // Don't clear viewedCards - preserve the history
+  };
 
-    return (
-        <div className="flex flex-col items-center gap-6 w-full max-w-md mx-auto">
-            {/* Progress indicator */}
-            <div className="w-full px-4">
-                <Progress current={currentIndex + 1} total={filteredVocabulary.length} label="単語" />
-            </div>
+  return (
+    <div className="mx-auto flex w-full max-w-md flex-col items-center gap-6">
+      {/* Progress indicator */}
+      <div className="w-full px-4">
+        <Progress
+          current={currentIndex + 1}
+          total={filteredVocabulary.length}
+          label="単語"
+        />
+      </div>
 
-            {/* Flashcard */}
-            <div
-                className="relative w-full h-80 cursor-pointer perspective-1000"
-                onClick={handleFlip}
-            >
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={isFlipped ? "back" : "front"}
-                        initial={{ rotateY: 90, opacity: 0 }}
-                        animate={{ rotateY: 0, opacity: 1 }}
-                        exit={{ rotateY: -90, opacity: 0 }}
-                        transition={{ duration: 0.4, type: "spring" }}
-                        className="w-full h-full"
-                    >
-                        <Card className="w-full h-full glass-card border-0 shadow-2xl hover:shadow-glow transition-all duration-300">
-                            <CardContent className="flex flex-col items-center justify-center h-full p-8">
-                                {!isFlipped ? (
-                                    // Front: Korean word
-                                    <>
-                                        <p className="text-6xl font-bold text-gradient-primary mb-4">
-                                            {currentWord.word}
-                                        </p>
-                                        <p className="text-3xl text-purple-600 mb-8 font-medium">
-                                            ({currentWord.reading})
-                                        </p>
-                                        <div className="glass-panel px-6 py-3 rounded-full">
-                                            <p className="text-gray-600 text-sm font-medium">
-                                                タップして意味を見る
-                                            </p>
-                                        </div>
-                                    </>
-                                ) : (
-                                    // Back: Japanese meaning
-                                    <>
-                                        <p className="text-sm text-gray-500 mb-4 font-semibold">意味</p>
-                                        <p className="text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-4">
-                                            {currentWord.meaning}
-                                        </p>
-                                        <div className="mt-8 glass-panel p-6 rounded-2xl w-full">
-                                            <p className="text-2xl text-purple-700 font-bold mb-2">
-                                                {currentWord.word}
-                                            </p>
-                                            <p className="text-lg text-purple-500">
-                                                ({currentWord.reading})
-                                            </p>
-                                        </div>
-                                    </>
-                                )}
-                            </CardContent>
-                        </Card>
-                    </motion.div>
-                </AnimatePresence>
-            </div>
-
-            {/* Navigation buttons */}
-            <div className="flex gap-4 w-full">
-                <Button
-                    onClick={handlePrevious}
-                    disabled={currentIndex === 0}
-                    variant="outline"
-                    className="flex-1 glass-panel hover:bg-white/60 transition-all duration-300"
-                >
-                    <ChevronLeft className="w-4 h-4 mr-2" />
-                    前へ
-                </Button>
-                <Button
-                    onClick={handleReset}
-                    variant="outline"
-                    className="glass-panel hover:bg-white/60 transition-all duration-300"
-                >
-                    <RotateCcw className="w-4 h-4" />
-                </Button>
-                {allViewed && currentIndex === filteredVocabulary.length - 1 ? (
-                    <Button
-                        onClick={onComplete}
-                        className="flex-1 h-full text-base font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                    >
-                        学習完了 ✓
-                    </Button>
+      {/* Flashcard */}
+      <div
+        className="perspective-1000 relative h-80 w-full cursor-pointer"
+        onClick={handleFlip}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={isFlipped ? "back" : "front"}
+            initial={{ rotateY: 90, opacity: 0 }}
+            animate={{ rotateY: 0, opacity: 1 }}
+            exit={{ rotateY: -90, opacity: 0 }}
+            transition={{ duration: 0.4, type: "spring" }}
+            className="h-full w-full"
+          >
+            <Card className="glass-card hover:shadow-glow h-full w-full border-0 shadow-2xl transition-all duration-300">
+              <CardContent className="flex h-full flex-col items-center justify-center p-8">
+                {!isFlipped ? (
+                  // Front: Korean word
+                  <>
+                    <p className="text-gradient-primary mb-4 text-6xl font-bold">
+                      {currentWord.word}
+                    </p>
+                    <p className="mb-8 text-3xl font-medium text-purple-600">
+                      ({currentWord.reading})
+                    </p>
+                    <div className="glass-panel rounded-full px-6 py-3">
+                      <p className="text-sm font-medium text-gray-600">
+                        タップして意味を見る
+                      </p>
+                    </div>
+                  </>
                 ) : (
-                    <Button
-                        onClick={handleNext}
-                        disabled={currentIndex === filteredVocabulary.length - 1 || !viewedCards.has(currentIndex)}
-                        variant="outline"
-                        className="flex-1 glass-panel hover:bg-white/60 transition-all duration-300"
-                    >
-                        次へ
-                        <ChevronRight className="w-4 h-4 ml-2" />
-                    </Button>
+                  // Back: Japanese meaning
+                  <>
+                    <p className="mb-4 text-sm font-semibold text-gray-500">
+                      意味
+                    </p>
+                    <p className="mb-4 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-5xl font-bold text-transparent">
+                      {currentWord.meaning}
+                    </p>
+                    <div className="glass-panel mt-8 w-full rounded-2xl p-6">
+                      <p className="mb-2 text-2xl font-bold text-purple-700">
+                        {currentWord.word}
+                      </p>
+                      <p className="text-lg text-purple-500">
+                        ({currentWord.reading})
+                      </p>
+                    </div>
+                  </>
                 )}
-            </div>
-        </div>
-    );
+              </CardContent>
+            </Card>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Navigation buttons */}
+      <div className="flex w-full gap-4">
+        <Button
+          onClick={handlePrevious}
+          disabled={currentIndex === 0}
+          variant="outline"
+          className="glass-panel flex-1 transition-all duration-300 hover:bg-white/60"
+        >
+          <ChevronLeft className="mr-2 h-4 w-4" />
+          前へ
+        </Button>
+        <Button
+          onClick={handleReset}
+          variant="outline"
+          className="glass-panel transition-all duration-300 hover:bg-white/60"
+        >
+          <RotateCcw className="h-4 w-4" />
+        </Button>
+        {allViewed && currentIndex === filteredVocabulary.length - 1 ? (
+          <Button
+            onClick={onComplete}
+            className="h-full flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:from-purple-700 hover:to-pink-700 hover:shadow-xl"
+          >
+            学習完了 ✓
+          </Button>
+        ) : (
+          <Button
+            onClick={handleNext}
+            disabled={
+              currentIndex === filteredVocabulary.length - 1 ||
+              !viewedCards.has(currentIndex)
+            }
+            variant="outline"
+            className="glass-panel flex-1 transition-all duration-300 hover:bg-white/60"
+          >
+            次へ
+            <ChevronRight className="ml-2 h-4 w-4" />
+          </Button>
+        )}
+      </div>
+    </div>
+  );
 };

@@ -19,6 +19,6 @@ export const useStreakStore = create(
         }
       },
     }),
-    { name: "streak-storage" }
-  )
+    { name: "streak-storage" },
+  ),
 );

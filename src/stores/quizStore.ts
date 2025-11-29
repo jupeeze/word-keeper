@@ -28,6 +28,6 @@ export const useQuizStore = create(
         return (currentWordIndex / total) * 100;
       },
     }),
-    { name: "quiz-storage" }
-  )
+    { name: "quiz-storage" },
+  ),
 );

@@ -23,39 +23,41 @@ export const AnimatedWordCard = ({ data, onPlay, onDelete }: Props) => {
       whileHover={{ scale: 1.05, y: -5 }}
       transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
     >
-      <Card className="h-full flex flex-col justify-between overflow-hidden glass-card border-0 shadow-lg hover:shadow-glow transition-all duration-300 group">
+      <Card className="glass-card hover:shadow-glow group flex h-full flex-col justify-between overflow-hidden border-0 shadow-lg transition-all duration-300">
         {/* Gradient accent bar */}
         <div className="h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500" />
 
-        <CardContent className="p-4 pt-6 text-center flex-1">
+        <CardContent className="flex-1 p-4 pt-6 text-center">
           {/* 単語と意味 */}
-          <h3 className="text-2xl font-bold mb-1 text-gradient-primary group-hover:scale-110 transition-transform">
+          <h3 className="text-gradient-primary mb-1 text-2xl font-bold transition-transform group-hover:scale-110">
             {data.word}
           </h3>
-          <p className="text-xs text-gray-500 mb-2">{data.pronunciation}</p>
-          <p className="text-sm font-medium text-gray-700 mb-4">
+          <p className="mb-2 text-xs text-gray-500">{data.pronunciation}</p>
+          <p className="mb-4 text-sm font-medium text-gray-700">
             {data.meaning}
           </p>
 
           {/* 文脈(曲名) */}
-          <div className="text-xs text-gray-500 glass-panel p-2 rounded-lg">
-            <span className="block font-semibold text-purple-600 mb-1">SOURCE:</span>
-            <span className="truncate block">{firstContext.songTitle}</span>
+          <div className="glass-panel rounded-lg p-2 text-xs text-gray-500">
+            <span className="mb-1 block font-semibold text-purple-600">
+              SOURCE:
+            </span>
+            <span className="block truncate">{firstContext.songTitle}</span>
             {contextCount > 1 && (
-              <div className="mt-2 flex items-center justify-center gap-1 text-pink-600 font-semibold">
-                <MapPin className="w-3 h-3" />
+              <div className="mt-2 flex items-center justify-center gap-1 font-semibold text-pink-600">
+                <MapPin className="h-3 w-3" />
                 <span>+{contextCount - 1}箇所で使用</span>
               </div>
             )}
           </div>
         </CardContent>
 
-        <CardFooter className="p-2 bg-gradient-to-r from-purple-50/50 to-pink-50/50 flex gap-2 justify-center">
+        <CardFooter className="flex justify-center gap-2 bg-gradient-to-r from-purple-50/50 to-pink-50/50 p-2">
           {/* 再生ボタン */}
           <Button
             variant="default"
             size="sm"
-            className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white gap-2 shadow-md hover:shadow-lg transition-all duration-300"
+            className="flex-1 gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md transition-all duration-300 hover:from-purple-700 hover:to-pink-700 hover:shadow-lg"
             onClick={() => onPlay(data)}
           >
             <PlayCircle size={16} />
@@ -66,7 +68,7 @@ export const AnimatedWordCard = ({ data, onPlay, onDelete }: Props) => {
           <Button
             variant="ghost"
             size="icon"
-            className="text-red-400 hover:text-red-600 hover:bg-red-50 transition-all duration-300"
+            className="text-red-400 transition-all duration-300 hover:bg-red-50 hover:text-red-600"
             onClick={() => onDelete(data.id)}
           >
             <Trash2 size={16} />

@@ -1,714 +1,714 @@
 {
-    "id": "fiesta-iz*one",
-    "title": "Fiesta",
-    "artist": "IZ*ONE",
-    "coverImage": "https://pbs.twimg.com/media/EPx3XDrU8AAb9Ey?format=jpg&name=large",
-    "difficulty": "beginner",
-    "language": "Korean",
-    "youtubeUrl": "https://youtu.be/eDEFolvLn0A",
-    "lyrics": [
+  "id": "fiesta-iz*one",
+  "title": "Fiesta",
+  "artist": "IZ*ONE",
+  "coverImage": "https://pbs.twimg.com/media/EPx3XDrU8AAb9Ey?format=jpg&name=large",
+  "difficulty": "beginner",
+  "language": "Korean",
+  "youtubeUrl": "https://youtu.be/eDEFolvLn0A",
+  "lyrics": [
+    {
+      "startTime": 15.96,
+      "text": "때가 왔어 오랜 기다림을 끝내",
+      "reading": "ってが わっそ おれん きだりむr っくんね",
+      "translation": "時が来たわ 長い間待ち焦がれた時間を終え",
+      "vocabulary": [
         {
-            "startTime": 15.96,
-            "text": "때가 왔어 오랜 기다림을 끝내",
-            "reading": "ってが わっそ おれん きだりむr っくんね",
-            "translation": "時が来たわ 長い間待ち焦がれた時間を終え",
-            "vocabulary": [
-                {
-                    "word": "때",
-                    "reading": "って",
-                    "meaning": "時"
-                },
-                {
-                    "word": "가",
-                    "reading": "が",
-                    "meaning": "が"
-                },
-                {
-                    "word": "왔어",
-                    "reading": "わっそ",
-                    "meaning": "来た"
-                },
-                {
-                    "word": "오랜",
-                    "reading": "おれん",
-                    "meaning": "長い"
-                },
-                {
-                    "word": "기다림",
-                    "reading": "きだりm",
-                    "meaning": "待ち"
-                },
-                {
-                    "word": "을",
-                    "reading": "うr",
-                    "meaning": "を"
-                },
-                {
-                    "word": "끝내",
-                    "reading": "っくんね",
-                    "meaning": "終えて"
-                }
-            ]
+          "word": "때",
+          "reading": "って",
+          "meaning": "時"
         },
         {
-            "startTime": 19.81,
-            "text": "움츠렸던 맘을 일으켜 활짝 기지개를 켜 난 ah",
-            "reading": "うmちゅりょっとん まむr いるきょ ふぁrっちゃk きじけるr きょ なん ah",
-            "translation": "縮こまっていた心を起こして 大きく伸びをする私は",
-            "vocabulary": [
-                {
-                    "word": "움츠렸던",
-                    "reading": "うmちゅりょっとん",
-                    "meaning": "縮こまっていた"
-                },
-                {
-                    "word": "맘",
-                    "reading": "まm",
-                    "meaning": "心"
-                },
-                {
-                    "word": "을",
-                    "reading": "うr",
-                    "meaning": "を"
-                },
-                {
-                    "word": "일으켜",
-                    "reading": "いるきょ",
-                    "meaning": "起こして"
-                },
-                {
-                    "word": "활짝",
-                    "reading": "ふぁrっちゃk",
-                    "meaning": "ぱっと/大きく"
-                },
-                {
-                    "word": "기지개",
-                    "reading": "きじげ",
-                    "meaning": "伸び"
-                },
-                {
-                    "word": "를",
-                    "reading": "るr",
-                    "meaning": "を"
-                },
-                {
-                    "word": "켜",
-                    "reading": "きょ",
-                    "meaning": "する(つける)"
-                },
-                {
-                    "word": "난",
-                    "reading": "なん",
-                    "meaning": "私は"
-                }
-            ]
+          "word": "가",
+          "reading": "が",
+          "meaning": "が"
         },
         {
-            "startTime": 25.08,
-            "text": "눈빛은 어느샌가 짙어져 있는 걸",
-            "reading": "ぬんぴちゅん おぬせんが ちちょじょ いんぬん ごr",
-            "translation": "視線はいつの間にか深くなっているのを",
-            "vocabulary": [
-                {
-                    "word": "눈빛",
-                    "reading": "ぬんぴt",
-                    "meaning": "眼差し"
-                },
-                {
-                    "word": "은",
-                    "reading": "うん",
-                    "meaning": "は"
-                },
-                {
-                    "word": "어느샌가",
-                    "reading": "おぬせんが",
-                    "meaning": "いつの間にか"
-                },
-                {
-                    "word": "짙어져",
-                    "reading": "ちちょじょ",
-                    "meaning": "濃くなって"
-                },
-                {
-                    "word": "있는",
-                    "reading": "いんぬん",
-                    "meaning": "いる"
-                },
-                {
-                    "word": "걸",
-                    "reading": "ごr",
-                    "meaning": "ことを"
-                }
-            ]
+          "word": "왔어",
+          "reading": "わっそ",
+          "meaning": "来た"
         },
         {
-            "startTime": 29.27,
-            "text": "나의 시간이 됐어",
-            "reading": "なえ しがに とぇっそ",
-            "translation": "私の時間がきた",
-            "vocabulary": [
-                {
-                    "word": "나",
-                    "reading": "な",
-                    "meaning": "私"
-                },
-                {
-                    "word": "의",
-                    "reading": "え",
-                    "meaning": "の"
-                },
-                {
-                    "word": "시간",
-                    "reading": "しがん",
-                    "meaning": "時間"
-                },
-                {
-                    "word": "이",
-                    "reading": "い",
-                    "meaning": "が"
-                },
-                {
-                    "word": "됐어",
-                    "reading": "とぇっそ",
-                    "meaning": "なった(来た)"
-                }
-            ]
+          "word": "오랜",
+          "reading": "おれん",
+          "meaning": "長い"
         },
         {
-            "startTime": 31.69,
-            "text": "아침에게 말해 oh 오늘이 좋을 것 같아",
-            "reading": "あちめげ まれ oh おぬり ちょうr ごっ かた",
-            "translation": "朝に言って 今日が良さそう",
-            "vocabulary": [
-                {
-                    "word": "아침",
-                    "reading": "あちm",
-                    "meaning": "朝"
-                },
-                {
-                    "word": "에게",
-                    "reading": "えげ",
-                    "meaning": "に"
-                },
-                {
-                    "word": "말해",
-                    "reading": "まれ",
-                    "meaning": "言って"
-                },
-                {
-                    "word": "오늘",
-                    "reading": "おぬr",
-                    "meaning": "今日"
-                },
-                {
-                    "word": "이",
-                    "reading": "い",
-                    "meaning": "が"
-                },
-                {
-                    "word": "좋을 것 같아",
-                    "reading": "ちょうr ごっ かた",
-                    "meaning": "良さそう"
-                }
-            ]
+          "word": "기다림",
+          "reading": "きだりm",
+          "meaning": "待ち"
         },
         {
-            "startTime": 35.31,
-            "text": "이젠 아득했던 꿈들이 멀지가 않아",
-            "reading": "いじぇん あとぅけっとん っくmどぅり もrちが あな",
-            "translation": "もう果てなく遠かった夢たちが遠くはないわ",
-            "vocabulary": [
-                {
-                    "word": "이젠",
-                    "reading": "いじぇん",
-                    "meaning": "もう"
-                },
-                {
-                    "word": "아득했던",
-                    "reading": "あとぅけっとん",
-                    "meaning": "遥かだった"
-                },
-                {
-                    "word": "꿈",
-                    "reading": "っくm",
-                    "meaning": "夢"
-                },
-                {
-                    "word": "들",
-                    "reading": "どぅr",
-                    "meaning": "たち"
-                },
-                {
-                    "word": "이",
-                    "reading": "い",
-                    "meaning": "が"
-                },
-                {
-                    "word": "멀지",
-                    "reading": "もrち",
-                    "meaning": "遠く"
-                },
-                {
-                    "word": "않아",
-                    "reading": "あな",
-                    "meaning": "ない"
-                }
-            ]
+          "word": "을",
+          "reading": "うr",
+          "meaning": "を"
         },
         {
-            "startTime": 39.20,
-            "text": "오직 나를 위한 ooh 축제를 열어볼 거야",
-            "reading": "おじk なるr うぃはん Woo ちゅkちぇるr よろぼr こや",
-            "translation": "ひたすら私のために お祭りを開いてみるよ",
-            "vocabulary": [
-                {
-                    "word": "오직",
-                    "reading": "おじk",
-                    "meaning": "ただ/ひたすら"
-                },
-                {
-                    "word": "나",
-                    "reading": "な",
-                    "meaning": "私"
-                },
-                {
-                    "word": "를",
-                    "reading": "るr",
-                    "meaning": "を"
-                },
-                {
-                    "word": "위한",
-                    "reading": "うぃはん",
-                    "meaning": "ための"
-                },
-                {
-                    "word": "축제",
-                    "reading": "ちゅkちぇ",
-                    "meaning": "祭り"
-                },
-                {
-                    "word": "를",
-                    "reading": "るr",
-                    "meaning": "を"
-                },
-                {
-                    "word": "열어볼 거야",
-                    "reading": "よろぼr こや",
-                    "meaning": "開いてみるよ"
-                }
-            ]
-        },
-        {
-            "startTime": 43.12,
-            "text": "좋을 때란 거 그것 역시 내가 정해",
-            "reading": "ちょうr ってらん ご くごっ よkし ねが ちょんへ",
-            "translation": "いい時ってこと それもやっぱり私が決めるわ",
-            "vocabulary": [
-                {
-                    "word": "좋을",
-                    "reading": "ちょうr",
-                    "meaning": "良い"
-                },
-                {
-                    "word": "때",
-                    "reading": "って",
-                    "meaning": "時"
-                },
-                {
-                    "word": "란 거",
-                    "reading": "らん ご",
-                    "meaning": "というのは"
-                },
-                {
-                    "word": "그것",
-                    "reading": "くごっ",
-                    "meaning": "それ"
-                },
-                {
-                    "word": "역시",
-                    "reading": "よkし",
-                    "meaning": "やはり"
-                },
-                {
-                    "word": "내가",
-                    "reading": "ねが",
-                    "meaning": "私が"
-                },
-                {
-                    "word": "정해",
-                    "reading": "ちょんへ",
-                    "meaning": "決める"
-                }
-            ]
-        },
-        {
-            "startTime": 47.59,
-            "text": "색색의 꽃을 피우고 꽃가루가 흩날리면",
-            "reading": "せkせげ っこちゅr ぴうご っこっかるが ふっなrりみょん",
-            "translation": "色とりどりの花を咲かせ 花粉が舞い散ると",
-            "vocabulary": [
-                {
-                    "word": "색색",
-                    "reading": "せkせk",
-                    "meaning": "色とりどり"
-                },
-                {
-                    "word": "의",
-                    "reading": "え",
-                    "meaning": "の"
-                },
-                {
-                    "word": "꽃",
-                    "reading": "っこっ",
-                    "meaning": "花"
-                },
-                {
-                    "word": "을",
-                    "reading": "うr",
-                    "meaning": "を"
-                },
-                {
-                    "word": "피우고",
-                    "reading": "ぴうご",
-                    "meaning": "咲かせて"
-                },
-                {
-                    "word": "꽃가루",
-                    "reading": "っこっかる",
-                    "meaning": "花粉"
-                },
-                {
-                    "word": "가",
-                    "reading": "が",
-                    "meaning": "が"
-                },
-                {
-                    "word": "흩날리면",
-                    "reading": "ふっなrりみょん",
-                    "meaning": "舞い散れば"
-                }
-            ]
-        },
-        {
-            "startTime": 51.56,
-            "text": "축제는 절정인 걸 끝나지 않을 이건 climax",
-            "reading": "ちゅkちぇぬん ちょrじょんいん ごr くんなじ あぬr いごん Climax",
-            "translation": "お祭りはピークなのよ 終わらないこれは、最高潮",
-            "vocabulary": [
-                {
-                    "word": "축제",
-                    "reading": "ちゅkちぇ",
-                    "meaning": "祭り"
-                },
-                {
-                    "word": "는",
-                    "reading": "ぬん",
-                    "meaning": "は"
-                },
-                {
-                    "word": "절정",
-                    "reading": "ちょrじょん",
-                    "meaning": "絶頂(ピーク)"
-                },
-                {
-                    "word": "인 걸",
-                    "reading": "いん ごr",
-                    "meaning": "なのを(だよ)"
-                },
-                {
-                    "word": "끝나지",
-                    "reading": "くんなじ",
-                    "meaning": "終わら"
-                },
-                {
-                    "word": "않을",
-                    "reading": "あぬr",
-                    "meaning": "ない"
-                },
-                {
-                    "word": "이건",
-                    "reading": "いごん",
-                    "meaning": "これは"
-                }
-            ]
-        },
-        {
-            "startTime": 55.62,
-            "text": "나의 모든 순간이 아름답고 눈부셔",
-            "reading": "なえ もどぅん すんがに あるmたpこ ぬんぶしょ",
-            "translation": "私の全ての瞬間が美しく眩しい",
-            "vocabulary": [
-                {
-                    "word": "나",
-                    "reading": "な",
-                    "meaning": "私"
-                },
-                {
-                    "word": "의",
-                    "reading": "え",
-                    "meaning": "の"
-                },
-                {
-                    "word": "모든",
-                    "reading": "もどぅん",
-                    "meaning": "全ての"
-                },
-                {
-                    "word": "순간",
-                    "reading": "すんがん",
-                    "meaning": "瞬間"
-                },
-                {
-                    "word": "이",
-                    "reading": "い",
-                    "meaning": "が"
-                },
-                {
-                    "word": "아름답고",
-                    "reading": "あるmたpこ",
-                    "meaning": "美しくて"
-                },
-                {
-                    "word": "눈부셔",
-                    "reading": "ぬんぶしょ",
-                    "meaning": "眩しい"
-                }
-            ]
-        },
-        {
-            "startTime": 59.63,
-            "text": "이거 하나만 기억해 지금이라고",
-            "reading": "いご はなまん きおけ ちぐみらご",
-            "translation": "これ一つだけ覚えていてね 今だって",
-            "vocabulary": [
-                {
-                    "word": "이거",
-                    "reading": "いご",
-                    "meaning": "これ"
-                },
-                {
-                    "word": "하나",
-                    "reading": "はな",
-                    "meaning": "一つ"
-                },
-                {
-                    "word": "만",
-                    "reading": "まん",
-                    "meaning": "だけ"
-                },
-                {
-                    "word": "기억해",
-                    "reading": "きおけ",
-                    "meaning": "覚えて"
-                },
-                {
-                    "word": "지금",
-                    "reading": "ちぐm",
-                    "meaning": "今"
-                },
-                {
-                    "word": "이라고",
-                    "reading": "いらご",
-                    "meaning": "だと(だって)"
-                }
-            ]
-        },
-        {
-            "startTime": 65.35,
-            "text": "Fiesta 내 맘에 태양을 꾹 삼킨 채",
-            "reading": "Fiesta ね まめ てやんうr っくっ さmきん ちぇ",
-            "translation": "祝祭よ 私の心に太陽をぎゅっと飲み込んだまま",
-            "vocabulary": [
-                {
-                    "word": "내",
-                    "reading": "ね",
-                    "meaning": "私の"
-                },
-                {
-                    "word": "맘",
-                    "reading": "まm",
-                    "meaning": "心"
-                },
-                {
-                    "word": "에",
-                    "reading": "え",
-                    "meaning": "に"
-                },
-                {
-                    "word": "태양",
-                    "reading": "てやん",
-                    "meaning": "太陽"
-                },
-                {
-                    "word": "을",
-                    "reading": "うr",
-                    "meaning": "を"
-                },
-                {
-                    "word": "꾹",
-                    "reading": "っくっ",
-                    "meaning": "ぎゅっと"
-                },
-                {
-                    "word": "삼킨",
-                    "reading": "さmきん",
-                    "meaning": "飲み込んだ"
-                },
-                {
-                    "word": "채",
-                    "reading": "ちぇ",
-                    "meaning": "まま"
-                }
-            ]
-        },
-        {
-            "startTime": 69.00,
-            "text": "영원토록 뜨겁게 지지 않을게 이 모든 계절",
-            "reading": "よんうぉんとろk っとぅごpけ ちち あぬrけ い もどぅん けじょr",
-            "translation": "永遠に熱く負けないよ この全ての季節",
-            "vocabulary": [
-                {
-                    "word": "영원토록",
-                    "reading": "よんうぉんとろk",
-                    "meaning": "永遠に"
-                },
-                {
-                    "word": "뜨겁게",
-                    "reading": "っとぅごpけ",
-                    "meaning": "熱く"
-                },
-                {
-                    "word": "지지 않을게",
-                    "reading": "ちち あぬrけ",
-                    "meaning": "負けないよ"
-                },
-                {
-                    "word": "이",
-                    "reading": "い",
-                    "meaning": "この"
-                },
-                {
-                    "word": "모든",
-                    "reading": "もどぅん",
-                    "meaning": "全ての"
-                },
-                {
-                    "word": "계절",
-                    "reading": "けじょr",
-                    "meaning": "季節"
-                }
-            ]
-        },
-        {
-            "startTime": 73.61,
-            "text": "나의 모든 계절 매일 화려한 이 축제",
-            "reading": "なえ もどぅん けじょr めいr ふぁりょはん い ちゅkちぇ",
-            "translation": "私の全ての季節 毎日華やかなこのお祭り",
-            "vocabulary": [
-                {
-                    "word": "나",
-                    "reading": "な",
-                    "meaning": "私"
-                },
-                {
-                    "word": "의",
-                    "reading": "え",
-                    "meaning": "の"
-                },
-                {
-                    "word": "모든",
-                    "reading": "もどぅん",
-                    "meaning": "全ての"
-                },
-                {
-                    "word": "계절",
-                    "reading": "けじょr",
-                    "meaning": "季節"
-                },
-                {
-                    "word": "매일",
-                    "reading": "めいr",
-                    "meaning": "毎日"
-                },
-                {
-                    "word": "화려한",
-                    "reading": "ふぁりょはん",
-                    "meaning": "華やかな"
-                },
-                {
-                    "word": "이",
-                    "reading": "い",
-                    "meaning": "この"
-                },
-                {
-                    "word": "축제",
-                    "reading": "ちゅkちぇ",
-                    "meaning": "祭り"
-                }
-            ]
-        },
-        {
-            "startTime": 77.24,
-            "text": "한 번쯤은 꼭 놀러 와 it's my fiesta",
-            "reading": "はん ぼんっちゅむん っこっ のrろ わ It's my fiesta",
-            "translation": "一度くらいは必ず遊びに来てね ここは私の祝祭よ",
-            "vocabulary": [
-                {
-                    "word": "한 번",
-                    "reading": "はん ぼん",
-                    "meaning": "一度"
-                },
-                {
-                    "word": "쯤",
-                    "reading": "っちゅm",
-                    "meaning": "くらい"
-                },
-                {
-                    "word": "은",
-                    "reading": "うん",
-                    "meaning": "は"
-                },
-                {
-                    "word": "꼭",
-                    "reading": "っこっ",
-                    "meaning": "必ず"
-                },
-                {
-                    "word": "놀러 와",
-                    "reading": "のrろ わ",
-                    "meaning": "遊びに来て"
-                }
-            ]
-        },
-        {
-            "startTime": 87.60,
-            "text": "온통 축제니까",
-            "reading": "おんとん ちゅkちぇにっか",
-            "translation": "すっかりお祭りだから",
-            "vocabulary": [
-                {
-                    "word": "온통",
-                    "reading": "おんとん",
-                    "meaning": "すっかり/全て"
-                },
-                {
-                    "word": "축제",
-                    "reading": "ちゅkちぇ",
-                    "meaning": "祭り"
-                },
-                {
-                    "word": "니까",
-                    "reading": "にっか",
-                    "meaning": "だから"
-                }
-            ]
-        },
-        {
-            "startTime": 93.94,
-            "text": "It's my fiesta",
-            "reading": "It's my fiesta",
-            "translation": "ここは私の祝祭よ",
-            "vocabulary": []
+          "word": "끝내",
+          "reading": "っくんね",
+          "meaning": "終えて"
         }
-    ]
+      ]
+    },
+    {
+      "startTime": 19.81,
+      "text": "움츠렸던 맘을 일으켜 활짝 기지개를 켜 난 ah",
+      "reading": "うmちゅりょっとん まむr いるきょ ふぁrっちゃk きじけるr きょ なん ah",
+      "translation": "縮こまっていた心を起こして 大きく伸びをする私は",
+      "vocabulary": [
+        {
+          "word": "움츠렸던",
+          "reading": "うmちゅりょっとん",
+          "meaning": "縮こまっていた"
+        },
+        {
+          "word": "맘",
+          "reading": "まm",
+          "meaning": "心"
+        },
+        {
+          "word": "을",
+          "reading": "うr",
+          "meaning": "を"
+        },
+        {
+          "word": "일으켜",
+          "reading": "いるきょ",
+          "meaning": "起こして"
+        },
+        {
+          "word": "활짝",
+          "reading": "ふぁrっちゃk",
+          "meaning": "ぱっと/大きく"
+        },
+        {
+          "word": "기지개",
+          "reading": "きじげ",
+          "meaning": "伸び"
+        },
+        {
+          "word": "를",
+          "reading": "るr",
+          "meaning": "を"
+        },
+        {
+          "word": "켜",
+          "reading": "きょ",
+          "meaning": "する(つける)"
+        },
+        {
+          "word": "난",
+          "reading": "なん",
+          "meaning": "私は"
+        }
+      ]
+    },
+    {
+      "startTime": 25.08,
+      "text": "눈빛은 어느샌가 짙어져 있는 걸",
+      "reading": "ぬんぴちゅん おぬせんが ちちょじょ いんぬん ごr",
+      "translation": "視線はいつの間にか深くなっているのを",
+      "vocabulary": [
+        {
+          "word": "눈빛",
+          "reading": "ぬんぴt",
+          "meaning": "眼差し"
+        },
+        {
+          "word": "은",
+          "reading": "うん",
+          "meaning": "は"
+        },
+        {
+          "word": "어느샌가",
+          "reading": "おぬせんが",
+          "meaning": "いつの間にか"
+        },
+        {
+          "word": "짙어져",
+          "reading": "ちちょじょ",
+          "meaning": "濃くなって"
+        },
+        {
+          "word": "있는",
+          "reading": "いんぬん",
+          "meaning": "いる"
+        },
+        {
+          "word": "걸",
+          "reading": "ごr",
+          "meaning": "ことを"
+        }
+      ]
+    },
+    {
+      "startTime": 29.27,
+      "text": "나의 시간이 됐어",
+      "reading": "なえ しがに とぇっそ",
+      "translation": "私の時間がきた",
+      "vocabulary": [
+        {
+          "word": "나",
+          "reading": "な",
+          "meaning": "私"
+        },
+        {
+          "word": "의",
+          "reading": "え",
+          "meaning": "の"
+        },
+        {
+          "word": "시간",
+          "reading": "しがん",
+          "meaning": "時間"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "が"
+        },
+        {
+          "word": "됐어",
+          "reading": "とぇっそ",
+          "meaning": "なった(来た)"
+        }
+      ]
+    },
+    {
+      "startTime": 31.69,
+      "text": "아침에게 말해 oh 오늘이 좋을 것 같아",
+      "reading": "あちめげ まれ oh おぬり ちょうr ごっ かた",
+      "translation": "朝に言って 今日が良さそう",
+      "vocabulary": [
+        {
+          "word": "아침",
+          "reading": "あちm",
+          "meaning": "朝"
+        },
+        {
+          "word": "에게",
+          "reading": "えげ",
+          "meaning": "に"
+        },
+        {
+          "word": "말해",
+          "reading": "まれ",
+          "meaning": "言って"
+        },
+        {
+          "word": "오늘",
+          "reading": "おぬr",
+          "meaning": "今日"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "が"
+        },
+        {
+          "word": "좋을 것 같아",
+          "reading": "ちょうr ごっ かた",
+          "meaning": "良さそう"
+        }
+      ]
+    },
+    {
+      "startTime": 35.31,
+      "text": "이젠 아득했던 꿈들이 멀지가 않아",
+      "reading": "いじぇん あとぅけっとん っくmどぅり もrちが あな",
+      "translation": "もう果てなく遠かった夢たちが遠くはないわ",
+      "vocabulary": [
+        {
+          "word": "이젠",
+          "reading": "いじぇん",
+          "meaning": "もう"
+        },
+        {
+          "word": "아득했던",
+          "reading": "あとぅけっとん",
+          "meaning": "遥かだった"
+        },
+        {
+          "word": "꿈",
+          "reading": "っくm",
+          "meaning": "夢"
+        },
+        {
+          "word": "들",
+          "reading": "どぅr",
+          "meaning": "たち"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "が"
+        },
+        {
+          "word": "멀지",
+          "reading": "もrち",
+          "meaning": "遠く"
+        },
+        {
+          "word": "않아",
+          "reading": "あな",
+          "meaning": "ない"
+        }
+      ]
+    },
+    {
+      "startTime": 39.2,
+      "text": "오직 나를 위한 ooh 축제를 열어볼 거야",
+      "reading": "おじk なるr うぃはん Woo ちゅkちぇるr よろぼr こや",
+      "translation": "ひたすら私のために お祭りを開いてみるよ",
+      "vocabulary": [
+        {
+          "word": "오직",
+          "reading": "おじk",
+          "meaning": "ただ/ひたすら"
+        },
+        {
+          "word": "나",
+          "reading": "な",
+          "meaning": "私"
+        },
+        {
+          "word": "를",
+          "reading": "るr",
+          "meaning": "を"
+        },
+        {
+          "word": "위한",
+          "reading": "うぃはん",
+          "meaning": "ための"
+        },
+        {
+          "word": "축제",
+          "reading": "ちゅkちぇ",
+          "meaning": "祭り"
+        },
+        {
+          "word": "를",
+          "reading": "るr",
+          "meaning": "を"
+        },
+        {
+          "word": "열어볼 거야",
+          "reading": "よろぼr こや",
+          "meaning": "開いてみるよ"
+        }
+      ]
+    },
+    {
+      "startTime": 43.12,
+      "text": "좋을 때란 거 그것 역시 내가 정해",
+      "reading": "ちょうr ってらん ご くごっ よkし ねが ちょんへ",
+      "translation": "いい時ってこと それもやっぱり私が決めるわ",
+      "vocabulary": [
+        {
+          "word": "좋을",
+          "reading": "ちょうr",
+          "meaning": "良い"
+        },
+        {
+          "word": "때",
+          "reading": "って",
+          "meaning": "時"
+        },
+        {
+          "word": "란 거",
+          "reading": "らん ご",
+          "meaning": "というのは"
+        },
+        {
+          "word": "그것",
+          "reading": "くごっ",
+          "meaning": "それ"
+        },
+        {
+          "word": "역시",
+          "reading": "よkし",
+          "meaning": "やはり"
+        },
+        {
+          "word": "내가",
+          "reading": "ねが",
+          "meaning": "私が"
+        },
+        {
+          "word": "정해",
+          "reading": "ちょんへ",
+          "meaning": "決める"
+        }
+      ]
+    },
+    {
+      "startTime": 47.59,
+      "text": "색색의 꽃을 피우고 꽃가루가 흩날리면",
+      "reading": "せkせげ っこちゅr ぴうご っこっかるが ふっなrりみょん",
+      "translation": "色とりどりの花を咲かせ 花粉が舞い散ると",
+      "vocabulary": [
+        {
+          "word": "색색",
+          "reading": "せkせk",
+          "meaning": "色とりどり"
+        },
+        {
+          "word": "의",
+          "reading": "え",
+          "meaning": "の"
+        },
+        {
+          "word": "꽃",
+          "reading": "っこっ",
+          "meaning": "花"
+        },
+        {
+          "word": "을",
+          "reading": "うr",
+          "meaning": "を"
+        },
+        {
+          "word": "피우고",
+          "reading": "ぴうご",
+          "meaning": "咲かせて"
+        },
+        {
+          "word": "꽃가루",
+          "reading": "っこっかる",
+          "meaning": "花粉"
+        },
+        {
+          "word": "가",
+          "reading": "が",
+          "meaning": "が"
+        },
+        {
+          "word": "흩날리면",
+          "reading": "ふっなrりみょん",
+          "meaning": "舞い散れば"
+        }
+      ]
+    },
+    {
+      "startTime": 51.56,
+      "text": "축제는 절정인 걸 끝나지 않을 이건 climax",
+      "reading": "ちゅkちぇぬん ちょrじょんいん ごr くんなじ あぬr いごん Climax",
+      "translation": "お祭りはピークなのよ 終わらないこれは、最高潮",
+      "vocabulary": [
+        {
+          "word": "축제",
+          "reading": "ちゅkちぇ",
+          "meaning": "祭り"
+        },
+        {
+          "word": "는",
+          "reading": "ぬん",
+          "meaning": "は"
+        },
+        {
+          "word": "절정",
+          "reading": "ちょrじょん",
+          "meaning": "絶頂(ピーク)"
+        },
+        {
+          "word": "인 걸",
+          "reading": "いん ごr",
+          "meaning": "なのを(だよ)"
+        },
+        {
+          "word": "끝나지",
+          "reading": "くんなじ",
+          "meaning": "終わら"
+        },
+        {
+          "word": "않을",
+          "reading": "あぬr",
+          "meaning": "ない"
+        },
+        {
+          "word": "이건",
+          "reading": "いごん",
+          "meaning": "これは"
+        }
+      ]
+    },
+    {
+      "startTime": 55.62,
+      "text": "나의 모든 순간이 아름답고 눈부셔",
+      "reading": "なえ もどぅん すんがに あるmたpこ ぬんぶしょ",
+      "translation": "私の全ての瞬間が美しく眩しい",
+      "vocabulary": [
+        {
+          "word": "나",
+          "reading": "な",
+          "meaning": "私"
+        },
+        {
+          "word": "의",
+          "reading": "え",
+          "meaning": "の"
+        },
+        {
+          "word": "모든",
+          "reading": "もどぅん",
+          "meaning": "全ての"
+        },
+        {
+          "word": "순간",
+          "reading": "すんがん",
+          "meaning": "瞬間"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "が"
+        },
+        {
+          "word": "아름답고",
+          "reading": "あるmたpこ",
+          "meaning": "美しくて"
+        },
+        {
+          "word": "눈부셔",
+          "reading": "ぬんぶしょ",
+          "meaning": "眩しい"
+        }
+      ]
+    },
+    {
+      "startTime": 59.63,
+      "text": "이거 하나만 기억해 지금이라고",
+      "reading": "いご はなまん きおけ ちぐみらご",
+      "translation": "これ一つだけ覚えていてね 今だって",
+      "vocabulary": [
+        {
+          "word": "이거",
+          "reading": "いご",
+          "meaning": "これ"
+        },
+        {
+          "word": "하나",
+          "reading": "はな",
+          "meaning": "一つ"
+        },
+        {
+          "word": "만",
+          "reading": "まん",
+          "meaning": "だけ"
+        },
+        {
+          "word": "기억해",
+          "reading": "きおけ",
+          "meaning": "覚えて"
+        },
+        {
+          "word": "지금",
+          "reading": "ちぐm",
+          "meaning": "今"
+        },
+        {
+          "word": "이라고",
+          "reading": "いらご",
+          "meaning": "だと(だって)"
+        }
+      ]
+    },
+    {
+      "startTime": 65.35,
+      "text": "Fiesta 내 맘에 태양을 꾹 삼킨 채",
+      "reading": "Fiesta ね まめ てやんうr っくっ さmきん ちぇ",
+      "translation": "祝祭よ 私の心に太陽をぎゅっと飲み込んだまま",
+      "vocabulary": [
+        {
+          "word": "내",
+          "reading": "ね",
+          "meaning": "私の"
+        },
+        {
+          "word": "맘",
+          "reading": "まm",
+          "meaning": "心"
+        },
+        {
+          "word": "에",
+          "reading": "え",
+          "meaning": "に"
+        },
+        {
+          "word": "태양",
+          "reading": "てやん",
+          "meaning": "太陽"
+        },
+        {
+          "word": "을",
+          "reading": "うr",
+          "meaning": "を"
+        },
+        {
+          "word": "꾹",
+          "reading": "っくっ",
+          "meaning": "ぎゅっと"
+        },
+        {
+          "word": "삼킨",
+          "reading": "さmきん",
+          "meaning": "飲み込んだ"
+        },
+        {
+          "word": "채",
+          "reading": "ちぇ",
+          "meaning": "まま"
+        }
+      ]
+    },
+    {
+      "startTime": 69.0,
+      "text": "영원토록 뜨겁게 지지 않을게 이 모든 계절",
+      "reading": "よんうぉんとろk っとぅごpけ ちち あぬrけ い もどぅん けじょr",
+      "translation": "永遠に熱く負けないよ この全ての季節",
+      "vocabulary": [
+        {
+          "word": "영원토록",
+          "reading": "よんうぉんとろk",
+          "meaning": "永遠に"
+        },
+        {
+          "word": "뜨겁게",
+          "reading": "っとぅごpけ",
+          "meaning": "熱く"
+        },
+        {
+          "word": "지지 않을게",
+          "reading": "ちち あぬrけ",
+          "meaning": "負けないよ"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "この"
+        },
+        {
+          "word": "모든",
+          "reading": "もどぅん",
+          "meaning": "全ての"
+        },
+        {
+          "word": "계절",
+          "reading": "けじょr",
+          "meaning": "季節"
+        }
+      ]
+    },
+    {
+      "startTime": 73.61,
+      "text": "나의 모든 계절 매일 화려한 이 축제",
+      "reading": "なえ もどぅん けじょr めいr ふぁりょはん い ちゅkちぇ",
+      "translation": "私の全ての季節 毎日華やかなこのお祭り",
+      "vocabulary": [
+        {
+          "word": "나",
+          "reading": "な",
+          "meaning": "私"
+        },
+        {
+          "word": "의",
+          "reading": "え",
+          "meaning": "の"
+        },
+        {
+          "word": "모든",
+          "reading": "もどぅん",
+          "meaning": "全ての"
+        },
+        {
+          "word": "계절",
+          "reading": "けじょr",
+          "meaning": "季節"
+        },
+        {
+          "word": "매일",
+          "reading": "めいr",
+          "meaning": "毎日"
+        },
+        {
+          "word": "화려한",
+          "reading": "ふぁりょはん",
+          "meaning": "華やかな"
+        },
+        {
+          "word": "이",
+          "reading": "い",
+          "meaning": "この"
+        },
+        {
+          "word": "축제",
+          "reading": "ちゅkちぇ",
+          "meaning": "祭り"
+        }
+      ]
+    },
+    {
+      "startTime": 77.24,
+      "text": "한 번쯤은 꼭 놀러 와 it's my fiesta",
+      "reading": "はん ぼんっちゅむん っこっ のrろ わ It's my fiesta",
+      "translation": "一度くらいは必ず遊びに来てね ここは私の祝祭よ",
+      "vocabulary": [
+        {
+          "word": "한 번",
+          "reading": "はん ぼん",
+          "meaning": "一度"
+        },
+        {
+          "word": "쯤",
+          "reading": "っちゅm",
+          "meaning": "くらい"
+        },
+        {
+          "word": "은",
+          "reading": "うん",
+          "meaning": "は"
+        },
+        {
+          "word": "꼭",
+          "reading": "っこっ",
+          "meaning": "必ず"
+        },
+        {
+          "word": "놀러 와",
+          "reading": "のrろ わ",
+          "meaning": "遊びに来て"
+        }
+      ]
+    },
+    {
+      "startTime": 87.6,
+      "text": "온통 축제니까",
+      "reading": "おんとん ちゅkちぇにっか",
+      "translation": "すっかりお祭りだから",
+      "vocabulary": [
+        {
+          "word": "온통",
+          "reading": "おんとん",
+          "meaning": "すっかり/全て"
+        },
+        {
+          "word": "축제",
+          "reading": "ちゅkちぇ",
+          "meaning": "祭り"
+        },
+        {
+          "word": "니까",
+          "reading": "にっか",
+          "meaning": "だから"
+        }
+      ]
+    },
+    {
+      "startTime": 93.94,
+      "text": "It's my fiesta",
+      "reading": "It's my fiesta",
+      "translation": "ここは私の祝祭よ",
+      "vocabulary": []
+    }
+  ]
 }

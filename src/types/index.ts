@@ -49,17 +49,12 @@ export interface LyricLine {
 }
 
 // ページナビゲーション用のProps型
-export type PageName =
-  | "songList"
-  | "library"
-  | "lyricPlayer"
-  | "lyricProgress";
+export type PageName = "songList" | "library" | "lyricPlayer" | "lyricProgress";
 
 export interface PageNavigationProps {
   setPage: (page: PageName, songId?: string) => void;
   currentSongId?: string;
 }
-
 
 // クイズ関連の共通型定義
 
