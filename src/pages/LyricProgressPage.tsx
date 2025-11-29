@@ -255,7 +255,7 @@ export const LyricProgressPage = ({
       <div className="relative mx-auto max-w-4xl space-y-6">
         {/* Header */}
         <Card className="glass-card border-0 shadow-lg">
-          <CardHeader>
+          <CardHeader className="relative">
             <div className="flex items-center gap-3">
               <Button
                 onClick={() => setPage("songList")}
@@ -265,10 +265,10 @@ export const LyricProgressPage = ({
               >
                 <ArrowLeft className="h-4 w-4" />
               </Button>
-              <CardTitle className="flex-1 text-center text-2xl">
-                🎵 {song.title}
-              </CardTitle>
             </div>
+            <CardTitle className="absolute left-0 right-0 top-1/2 -translate-y-1/2 text-center text-2xl">
+              🎵 {song.title}
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Progress indicator */}
