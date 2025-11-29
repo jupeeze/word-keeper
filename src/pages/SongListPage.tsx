@@ -75,7 +75,7 @@ export const SongListPage = ({ setPage }: PageNavigationProps) => {
                 >
                     <div className="flex items-center justify-center gap-3">
                         <Sparkles className="w-8 h-8 text-purple-600" />
-                        <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+                        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
                             Word Keeper
                         </h1>
                         <Sparkles className="w-8 h-8 text-pink-600" />
