@@ -99,8 +99,6 @@ export const LyricProgressPage = ({
 
   const currentLineIndex = progress.currentLineIndex;
   const currentLyric = song.lyrics[currentLineIndex];
-  const progressPercentage =
-    (progress.totalCompletedLines / song.lyrics.length) * 100;
 
   // Helper functions to determine if a step is accessible
   const isStepAccessible = (step: LearningStep): boolean => {
