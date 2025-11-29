@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { NavigationControls } from "@/components/ui";
 import { Card, CardContent } from "@/components/ui/card";
-import { Lightbulb, RotateCcw, CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Lightbulb, CheckCircle2 } from "lucide-react";
 import { shuffleArray } from "@/utils/arrayUtils";
 
 interface Vocabulary {
@@ -181,10 +182,12 @@ export const SentenceReorderPuzzle = ({
 
             {/* Action buttons */}
             <div className="flex gap-3 w-full">
-                <Button onClick={handleReset} variant="outline" className="flex-1">
-                    <RotateCcw className="w-4 h-4 mr-2" />
-                    リセット
-                </Button>
+                <NavigationControls
+                    onReset={handleReset}
+                    resetLabel="リセット"
+                    buttonVariant="outline"
+                    className="flex-1"
+                />
                 {!showHint && !isCorrect && (
                     <Button
                         onClick={handleShowHint}

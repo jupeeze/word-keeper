@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import { QuizContainer } from "@/components/ui";
 import { QuizChoiceGrid } from "@/components/Quiz/QuizChoiceGrid";
 import { QuizFeedback } from "@/components/Quiz/QuizFeedback";
 import { FEEDBACK_CONFIG } from "@/constants/quiz";
@@ -136,71 +135,44 @@ export const VocabularyTest = ({
         }
     };
 
-    return (
-        <div className="flex flex-col items-center gap-6 w-full max-w-md mx-auto">
-            {/* Question card */}
-            <AnimatePresence mode="wait">
-                <motion.div
-                    key={currentQuestionIndex}
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -50 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full"
-                >
-                    <Card className="w-full shadow-lg">
-                        <CardContent>
-                            {/* Progress */}
-                            <div className="w-full">
-                                <div className="flex justify-between text-sm text-gray-600 mb-2">
-                                    <span>
-                                        問題 {currentQuestionIndex + 1} / {vocabulary.length}
-                                    </span>
-                                </div>
-                                <div className="w-full bg-gray-200 rounded-full h-2">
-                                    <div
-                                        className="bg-green-500 h-2 rounded-full transition-all duration-300"
-                                        style={{
-                                            width: `${((currentQuestionIndex + 1) / vocabulary.length) * 100}%`,
-                                        }}
-                                    />
-                                </div>
-                            </div>
-                        </CardContent>
-                        <CardContent className="p-8">
-                            <p className="text-center text-sm text-gray-600 mb-4">
-                                この意味の韓国語を選んでください
-                            </p>
-                            <div className="p-6 bg-gradient-to-br from-purple-100 to-pink-100 rounded-lg text-center mb-6">
-                                <p className="text-3xl font-bold text-purple-800">
-                                    {currentWord.meaning}
-                                </p>
-                            </div>
+    const questionContent = (
+        <p className="text-3xl font-bold text-purple-800">
+            {currentWord.meaning}
+        </p>
+    );
 
-                            {/* Choices */}
-                            <QuizChoiceGrid
-                                choices={choices}
-                                onChoiceClick={handleAnswer}
-                                className="grid-cols-2"
-                            />
-
-                            {/* Feedback */}
-                            <QuizFeedback feedback={feedback} className="text-xl mt-4" />
-                        </CardContent>
-                    </Card>
-                </motion.div>
-            </AnimatePresence>
-
-            {/* Instructions */}
-            <div className="text-center text-sm text-gray-500 space-y-1">
-                <p>💡 全問正解で次のステップへ進めます</p>
-                <p>間違えると最初からやり直しになります</p>
-                {onBackToStudy && (
-                    <p className="text-purple-600 font-semibold">
-                        📚 わからない単語があれば学習フェーズに戻れます
-                    </p>
-                )}
-            </div>
+    const instructions = (
+        <div className="space-y-1">
+            <p>💡 全問正解で次のステップへ進めます</p>
+            <p>間違えると最初からやり直しになります</p>
+            {onBackToStudy && (
+                <p className="text-purple-600 font-semibold">
+                    📚 わからない単語があれば学習フェーズに戻れます
+                </p>
+            )}
         </div>
+    );
+
+    return (
+        <QuizContainer
+            question="この意味の韓国語を選んでください"
+            questionContent={questionContent}
+            progress={{
+                current: currentQuestionIndex + 1,
+                total: vocabulary.length,
+            }}
+            instructions={instructions}
+            animationKey={currentQuestionIndex}
+        >
+            {/* Choices */}
+            <QuizChoiceGrid
+                choices={choices}
+                onChoiceClick={handleAnswer}
+                className="grid-cols-2"
+            />
+
+            {/* Feedback */}
+            <QuizFeedback feedback={feedback} className="text-xl mt-4" />
+        </QuizContainer>
     );
 };
