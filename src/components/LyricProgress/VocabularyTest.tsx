@@ -8,6 +8,7 @@ import type { Vocabulary, FeedbackType } from "@/types";
 import { generateChoices } from "@/utils/vocabularyUtils";
 import { useLibraryStore } from "@/stores/libraryStore";
 import { useSongStore } from "@/stores/songStore";
+import { Progress } from "@/components/ui/progress";
 
 // Fisher-Yates shuffle algorithm
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -150,22 +151,8 @@ export const VocabularyTest = ({
                 >
                     <Card className="w-full shadow-lg">
                         <CardContent>
-                            {/* Progress */}
-                            <div className="w-full">
-                                <div className="flex justify-between text-sm text-gray-600 mb-2">
-                                    <span>
-                                        問題 {currentQuestionIndex + 1} / {vocabulary.length}
-                                    </span>
-                                </div>
-                                <div className="w-full bg-gray-200 rounded-full h-2">
-                                    <div
-                                        className="bg-green-500 h-2 rounded-full transition-all duration-300"
-                                        style={{
-                                            width: `${((currentQuestionIndex + 1) / vocabulary.length) * 100}%`,
-                                        }}
-                                    />
-                                </div>
-                            </div>
+                            {/* Progress indicator */}
+                            <Progress current={currentQuestionIndex + 1} total={vocabulary.length} label="問題" />
                         </CardContent>
                         <CardContent className="p-8">
                             <p className="text-center text-sm text-gray-600 mb-4">

@@ -70,26 +70,9 @@ export const FlashcardStudy = ({
     return (
         <div className="flex flex-col items-center gap-6 w-full max-w-md mx-auto">
             {/* Progress indicator */}
-            <div className="w-full glass-card p-4 rounded-2xl">
-                <div className="flex justify-between text-sm text-gray-700 font-semibold mb-3">
-                    <span>
-                        単語 {currentIndex + 1} / {filteredVocabulary.length}
-                    </span>
-                    <span className="text-purple-600">
-                        確認済み: {viewedCards.size} / {filteredVocabulary.length}
-                    </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner">
-                    <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${((currentIndex + 1) / filteredVocabulary.length) * 100}%` }}
-                        transition={{ duration: 0.5 }}
-                        className="bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 h-3 rounded-full shadow-glow"
-                    />
-                </div>
+            <div className="w-full px-4">
+                <Progress current={currentIndex + 1} total={filteredVocabulary.length} label="単語" />
             </div>
-
-            <Progress current={currentIndex + 1} total={filteredVocabulary.length} label="単語"></Progress>
 
             {/* Flashcard */}
             <div

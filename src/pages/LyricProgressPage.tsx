@@ -11,6 +11,7 @@ import { RewardVideoPlayer } from "@/components/LyricProgress/RewardVideoPlayer"
 import { SingingChallenge } from "@/components/LyricProgress/SingingChallenge";
 import type { PageNavigationProps, Vocabulary } from "@/types";
 import { CheckCircle2, Circle, Lock, ArrowLeft, Mic } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 type LearningStep = "study" | "singing" | "test" | "puzzle" | "reward";
 
@@ -264,23 +265,8 @@ export const LyricProgressPage = ({ setPage, currentSongId }: LyricProgressPageP
                         </div>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                        {/* Overall progress */}
-                        <div>
-                            <div className="flex justify-between text-sm text-gray-600 mb-2">
-                                <span className="font-semibold">全体の進行状況</span>
-                                <span className="font-bold text-purple-600">
-                                    {progress.totalCompletedLines} / {song.lyrics.length} 行完了
-                                </span>
-                            </div>
-                            <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden shadow-inner">
-                                <motion.div
-                                    initial={{ width: 0 }}
-                                    animate={{ width: `${progressPercentage}%` }}
-                                    transition={{ duration: 0.5 }}
-                                    className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-4 rounded-full shadow-glow"
-                                />
-                            </div>
-                        </div>
+                        {/* Progress indicator */}
+                        <Progress current={progress.totalCompletedLines} total={song.lyrics.length} label="全体の進行状況" />
 
                         {/* Step progress */}
                         <div className="flex items-center justify-center gap-2 py-4">
