@@ -83,6 +83,8 @@ export interface QuizConfig {
 
 // 歌詞進行型学習モード用の型定義
 
+export type LearningStep = "study" | "sing" | "test" | "puzzle" | "reward";
+
 /**
  * 歌詞行の習得状態
  */

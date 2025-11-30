@@ -17,9 +17,7 @@ import {
 import { useLyricProgressStore } from "@/stores/lyricProgressStore";
 import { useSongStore } from "@/stores/songStore";
 
-import type { PageNavigationProps, Vocabulary } from "@/types";
-
-type LearningStep = "study" | "singing" | "test" | "puzzle" | "reward";
+import type { PageNavigationProps, Vocabulary, LearningStep } from "@/types";
 
 interface LyricProgressPageProps extends PageNavigationProps {
   currentSongId?: string;
