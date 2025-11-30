@@ -55,7 +55,7 @@ declare global {
   }
 }
 
-export const SingingChallenge = ({
+const SingingChallenge = ({
   lyricText,
   reading,
   translation,
@@ -300,3 +300,5 @@ export const SingingChallenge = ({
     </div>
   );
 };
+
+export default SingingChallenge;

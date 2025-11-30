@@ -31,7 +31,7 @@ interface VocabularyTestProps {
   currentLyricStartTime?: number;
 }
 
-export const VocabularyTest = ({
+const VocabularyTest = ({
   vocabulary,
   onComplete,
   onUpdateMastery,
@@ -198,3 +198,5 @@ export const VocabularyTest = ({
     </div>
   );
 };
+
+export default VocabularyTest;

@@ -13,7 +13,7 @@ interface FlashcardStudyProps {
   isReviewMode?: boolean; // If true, all cards are pre-marked as viewed
 }
 
-export const FlashcardStudy = ({
+const FlashcardStudy = ({
   vocabulary,
   onComplete,
   isReviewMode = false,
@@ -177,3 +177,5 @@ export const FlashcardStudy = ({
     </div>
   );
 };
+
+export default FlashcardStudy;

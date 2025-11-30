@@ -17,7 +17,7 @@ interface SentenceReorderPuzzleProps {
   onComplete: () => void;
 }
 
-export const SentenceReorderPuzzle = ({
+const SentenceReorderPuzzle = ({
   sentence,
   vocabulary,
   onComplete,
@@ -200,3 +200,5 @@ export const SentenceReorderPuzzle = ({
     </div>
   );
 };
+
+export default SentenceReorderPuzzle;

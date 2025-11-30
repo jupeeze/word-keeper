@@ -13,7 +13,7 @@ interface RewardVideoPlayerProps {
   onNext: () => void;
 }
 
-export const RewardVideoPlayer = ({
+const RewardVideoPlayer = ({
   youtubeUrl,
   startTime,
   nextStartTime,
@@ -96,3 +96,5 @@ export const RewardVideoPlayer = ({
     </div>
   );
 };
+
+export default RewardVideoPlayer;

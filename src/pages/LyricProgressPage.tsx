@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { CheckCircle2, Circle, Lock, ArrowLeft, Mic } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+
+import {
+  FlashcardStudy,
+  VocabularyTest,
+  SentenceReorderPuzzle,
+  RewardVideoPlayer,
+  SingingChallenge,
+} from "@/components/LyricProgress";
+
 import { useLyricProgressStore } from "@/stores/lyricProgressStore";
 import { useSongStore } from "@/stores/songStore";
-import { FlashcardStudy } from "@/components/LyricProgress/FlashcardStudy";
-import { VocabularyTest } from "@/components/LyricProgress/VocabularyTest";
-import { SentenceReorderPuzzle } from "@/components/LyricProgress/SentenceReorderPuzzle";
-import { RewardVideoPlayer } from "@/components/LyricProgress/RewardVideoPlayer";
-import { SingingChallenge } from "@/components/LyricProgress/SingingChallenge";
+
 import type { PageNavigationProps, Vocabulary } from "@/types";
-import { CheckCircle2, Circle, Lock, ArrowLeft, Mic } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
 
 type LearningStep = "study" | "singing" | "test" | "puzzle" | "reward";
 
