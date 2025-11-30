@@ -62,7 +62,7 @@ export const LyricProgressPage = ({
       if (!currentProgress.isStudied) {
         setCurrentStep("study");
       } else if (!currentProgress.isSingingCompleted) {
-        setCurrentStep("singing");
+        setCurrentStep("sing");
       } else if (!currentProgress.isTested) {
         setCurrentStep("test");
       } else if (!currentProgress.isPuzzleCompleted) {
@@ -111,7 +111,7 @@ export const LyricProgressPage = ({
     switch (step) {
       case "study":
         return true; // Study is always accessible
-      case "singing":
+      case "sing":
         return currentProgress.isStudied; // Can access if studied
       case "test":
         return currentProgress.isSingingCompleted; // Can access if singing completed
@@ -130,7 +130,7 @@ export const LyricProgressPage = ({
   const handleStudyComplete = () => {
     setIncorrectWord(null); // Reset incorrect word after completing review
     markLineStudied(currentLineIndex);
-    setCurrentStep("singing");
+    setCurrentStep("sing");
   };
 
   const handleSingingComplete = () => {
@@ -294,11 +294,11 @@ export const LyricProgressPage = ({
               <StepIndicator
                 label="歌唱"
                 isComplete={currentProgress?.isSingingCompleted || false}
-                isActive={currentStep === "singing"}
-                isAccessible={isStepAccessible("singing")}
+                isActive={currentStep === "sing"}
+                isAccessible={isStepAccessible("sing")}
                 icon={<Mic className="h-5 w-5" />}
                 onClick={() =>
-                  isStepAccessible("singing") && setCurrentStep("singing")
+                  isStepAccessible("sing") && setCurrentStep("sing")
                 }
               />
               <StepIndicator
@@ -350,7 +350,7 @@ export const LyricProgressPage = ({
                 isReviewMode={currentProgress?.isStudied || false}
               />
             )}
-            {currentStep === "singing" && (
+            {currentStep === "sing" && (
               <SingingChallenge
                 lyricText={currentLyric.text}
                 reading={currentLyric.reading}
