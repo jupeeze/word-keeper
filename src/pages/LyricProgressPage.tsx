@@ -264,7 +264,7 @@ export const LyricProgressPage = ({
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             </div>
-            <CardTitle className="absolute left-0 right-0 top-1/2 -translate-y-1/2 text-center text-2xl">
+            <CardTitle className="absolute top-1/2 right-0 left-0 -translate-y-1/2 text-center text-2xl">
               🎵 {song.title}
             </CardTitle>
           </CardHeader>
