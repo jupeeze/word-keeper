@@ -129,6 +129,7 @@ const SingingChallenge = ({
     if (recognitionRef.current) {
       recognitionRef.current.stop();
       setIsListening(false);
+      checkPronunciation(transcript);
     }
   };
 
@@ -180,39 +181,32 @@ const SingingChallenge = ({
 
   return (
     <div className="mx-auto flex w-full max-w-md flex-col items-center gap-6">
-      {/* Header */}
-      <div className="glass-card w-full rounded-2xl p-4 text-center">
-        <p className="text-sm font-semibold text-gray-700">
-          歌詞を歌ってみよう！
-        </p>
-      </div>
-
       {/* Card */}
       <Card className="glass-card relative w-full overflow-hidden border-0 shadow-2xl">
-        <CardContent className="flex min-h-[300px] flex-col items-center justify-center p-8">
-          <div className="mb-6 flex w-full flex-col items-center gap-4">
-            <div className="flex items-center gap-2">
-              <p className="text-gradient-primary text-center text-2xl leading-relaxed font-bold">
+        <CardContent className="flex min-h-[300px] flex-col items-center justify-center px-8">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handlePlayAudio}
+            className="shrink-0 rounded-full text-purple-600 hover:bg-purple-100"
+          >
+            <Volume2 className="h-6 w-6" />
+          </Button>
+
+          <div className="mb-6 flex w-full justify-center gap-4">
+            <div className="flex flex-col items-center">
+              <p className="text-xs font-medium text-purple-600">{reading}</p>
+              <p className="text-gradient-primary text-center text-xl leading-relaxed font-bold">
                 {lyricText}
               </p>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handlePlayAudio}
-                className="shrink-0 rounded-full text-purple-600 hover:bg-purple-100"
-              >
-                <Volume2 className="h-6 w-6" />
-              </Button>
+              <p className="text-sm text-gray-500">{translation}</p>
             </div>
-
-            <p className="text-lg font-medium text-purple-600">{reading}</p>
-            <p className="text-sm text-gray-500">{translation}</p>
           </div>
 
           {/* Feedback Area */}
           <div className="mb-6 flex min-h-[80px] w-full flex-col items-center justify-center">
             {transcript && (
-              <p className="mb-2 text-center text-lg font-medium text-gray-800">
+              <p className="text-center text-lg font-medium text-gray-800">
                 "{transcript}"
               </p>
             )}
@@ -289,14 +283,20 @@ const SingingChallenge = ({
         </CardContent>
       </Card>
 
-      {/* Skip button for testing/fallback */}
-      <Button
-        variant="ghost"
-        onClick={onComplete}
-        className="text-sm text-gray-400 hover:text-gray-600"
-      >
-        スキップ (音声認識が使えない場合)
-      </Button>
+      {/* Footer */}
+      <div className="glass-card w-full rounded-2xl text-center">
+        <p className="text-sm font-semibold text-gray-700">
+          歌詞を歌ってみよう！
+        </p>
+        {/* Skip button for testing/fallback */}
+        <Button
+          variant="ghost"
+          onClick={onComplete}
+          className="text-sm text-gray-400 hover:text-gray-600"
+        >
+          スキップ (音声認識が使えない場合)
+        </Button>
+      </div>
     </div>
   );
 };
