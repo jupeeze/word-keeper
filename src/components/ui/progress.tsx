@@ -12,7 +12,7 @@ export const Progress = ({ current, total, label }: ProgressProps) => {
   const progressPercentage = (current / total) * 100;
 
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-2">
       {label && (
         <div className="flex justify-between text-sm font-semibold">
           <span className="text-gray-700">{label}</span>

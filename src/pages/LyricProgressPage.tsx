@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowLeft,
+  Music,
   BookA,
   MicVocal,
   BookOpenCheck,
@@ -252,7 +253,7 @@ export const LyricProgressPage = ({
   }
 
   return (
-    <div className="gradient-secondary relative min-h-screen overflow-hidden p-4">
+    <div className="gradient-secondary relative min-h-screen overflow-hidden px-4 py-2">
       {/* Animated Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
@@ -265,31 +266,34 @@ export const LyricProgressPage = ({
         />
       </div>
 
-      <div className="relative mx-auto max-w-4xl space-y-6">
+      <div className="relative mx-auto max-w-4xl space-y-4">
         {/* Header */}
-        <Card className="glass-card border-0 shadow-lg">
-          <CardHeader className="relative">
-            <div className="flex items-center gap-3">
-              <Button
-                onClick={() => setPage("songList")}
-                variant="ghost"
-                size="sm"
-                className="glass-panel transition-all duration-300 hover:bg-white/40"
-              >
-                <ArrowLeft className="h-4 w-4" />
-              </Button>
-            </div>
-            <CardTitle className="absolute top-1/2 right-0 left-0 -translate-y-1/2 text-center text-2xl">
-              🎵 {song.title}
+        <Card className="glass-card gap-0 border-0 py-1 shadow-lg">
+          <CardHeader className="relative flex items-center">
+            <Button
+              onClick={() => setPage("songList")}
+              variant="ghost"
+              size="sm"
+              className="glass-panel shrink-0 transition-all duration-300 hover:bg-white/40"
+            >
+              <ArrowLeft className="h-6 w-6" />
+            </Button>
+            <CardTitle className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-2 text-2xl">
+              <Music className="h-6 w-6 shrink-0" />
+              <span className="truncate">{song.title}</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Progress indicator */}
-            <Progress
-              current={progress.totalCompletedLines}
-              total={song.lyrics.length}
-              label="全体の進行状況"
-            />
+            <div className="w-full flex items-center justify-between gap-3">
+              <Progress
+                current={progress.totalCompletedLines}
+                total={song.lyrics.length}
+              />
+              <span className="whitespace-nowrap text-center text-sm font-semibold text-purple-600">
+                {progress.totalCompletedLines} / {song.lyrics.length}
+              </span>
+            </div>
           </CardContent>
         </Card>
 
@@ -356,7 +360,7 @@ export const LyricProgressPage = ({
         </AnimatePresence>
 
         {/* Step progress */}
-        <div className="flex items-center justify-center gap-2 p-4">
+        <div className="flex items-center justify-center gap-2 px-4">
           <MenuDock
             items={
               [
