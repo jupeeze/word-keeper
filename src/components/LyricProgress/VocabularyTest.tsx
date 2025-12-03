@@ -161,7 +161,7 @@ const VocabularyTest = ({
                 label="問題"
               />
             </CardContent>
-            <CardContent className="p-8">
+            <CardContent className="px-8">
               <p className="mb-4 text-center text-sm text-gray-600">
                 この意味の韓国語を選んでください
               </p>
@@ -184,17 +184,6 @@ const VocabularyTest = ({
           </Card>
         </motion.div>
       </AnimatePresence>
-
-      {/* Instructions */}
-      <div className="space-y-1 text-center text-sm text-gray-500">
-        <p>💡 全問正解で次のステップへ進めます</p>
-        <p>間違えると最初からやり直しになります</p>
-        {onBackToStudy && (
-          <p className="font-semibold text-purple-600">
-            📚 わからない単語があれば学習フェーズに戻れます
-          </p>
-        )}
-      </div>
     </div>
   );
 };
