@@ -1,10 +1,21 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { CheckCircle2, Circle, Lock, ArrowLeft, Mic } from "lucide-react";
+import {
+  ArrowLeft,
+  BookA,
+  MicVocal,
+  BookOpenCheck,
+  Puzzle,
+  Youtube,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import {
+  MenuDock,
+  type MenuDockItem,
+} from "@/components/ui/shadcn-io/menu-dock";
 
 import {
   FlashcardStudy,
@@ -279,56 +290,6 @@ export const LyricProgressPage = ({
               total={song.lyrics.length}
               label="全体の進行状況"
             />
-
-            {/* Step progress */}
-            <div className="flex items-center justify-center gap-2 py-4">
-              <StepIndicator
-                label="学習"
-                isComplete={currentProgress?.isStudied || false}
-                isActive={currentStep === "study"}
-                isAccessible={isStepAccessible("study")}
-                onClick={() =>
-                  isStepAccessible("study") && setCurrentStep("study")
-                }
-              />
-              <StepIndicator
-                label="歌唱"
-                isComplete={currentProgress?.isSingingCompleted || false}
-                isActive={currentStep === "sing"}
-                isAccessible={isStepAccessible("sing")}
-                icon={<Mic className="h-5 w-5" />}
-                onClick={() =>
-                  isStepAccessible("sing") && setCurrentStep("sing")
-                }
-              />
-              <StepIndicator
-                label="テスト"
-                isComplete={currentProgress?.isTested || false}
-                isActive={currentStep === "test"}
-                isAccessible={isStepAccessible("test")}
-                onClick={() =>
-                  isStepAccessible("test") && setCurrentStep("test")
-                }
-              />
-              <StepIndicator
-                label="パズル"
-                isComplete={currentProgress?.isPuzzleCompleted || false}
-                isActive={currentStep === "puzzle"}
-                isAccessible={isStepAccessible("puzzle")}
-                onClick={() =>
-                  isStepAccessible("puzzle") && setCurrentStep("puzzle")
-                }
-              />
-              <StepIndicator
-                label="報酬"
-                isComplete={currentProgress?.isCompleted || false}
-                isActive={currentStep === "reward"}
-                isAccessible={isStepAccessible("reward")}
-                onClick={() =>
-                  isStepAccessible("reward") && setCurrentStep("reward")
-                }
-              />
-            </div>
           </CardContent>
         </Card>
 
@@ -393,69 +354,47 @@ export const LyricProgressPage = ({
             )}
           </motion.div>
         </AnimatePresence>
+
+        {/* Step progress */}
+        <div className="flex items-center justify-center gap-2 p-4">
+          <MenuDock
+            items={
+              [
+                {
+                  label: "study",
+                  icon: BookA,
+                  isComplete: currentProgress?.isStudied || false,
+                },
+                {
+                  label: "sing",
+                  icon: MicVocal,
+                  isComplete: currentProgress?.isSingingCompleted || false,
+                },
+                {
+                  label: "test",
+                  icon: BookOpenCheck,
+                  isComplete: currentProgress?.isTested || false,
+                },
+                {
+                  label: "puzzle",
+                  icon: Puzzle,
+                  isComplete: currentProgress?.isPuzzleCompleted || false,
+                },
+                {
+                  label: "reward",
+                  icon: Youtube,
+                  isComplete: currentProgress?.isCompleted || false,
+                },
+              ] as MenuDockItem[]
+            }
+            activeIndex={["study", "sing", "test", "puzzle", "reward"].indexOf(
+              currentStep,
+            )}
+            onItemClick={(_index, item) => setCurrentStep(item.label)}
+            isStepAccessible={isStepAccessible}
+          />
+        </div>
       </div>
     </div>
-  );
-};
-
-// Step indicator component
-interface StepIndicatorProps {
-  label: string;
-  isComplete: boolean;
-  isActive: boolean;
-  isAccessible: boolean;
-  icon?: React.ReactNode;
-  onClick?: () => void;
-}
-
-const StepIndicator = ({
-  label,
-  isComplete,
-  isActive,
-  isAccessible,
-  icon,
-  onClick,
-}: StepIndicatorProps) => {
-  const isClickable = isAccessible && onClick;
-
-  return (
-    <motion.div
-      className={`flex flex-col items-center ${isClickable ? "cursor-pointer" : ""}`}
-      whileHover={{ scale: isClickable ? 1.1 : 1.05 }}
-      whileTap={isClickable ? { scale: 0.95 } : {}}
-      transition={{ type: "spring", stiffness: 300 }}
-      onClick={onClick}
-    >
-      <div
-        className={`mx-1 flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 ${
-          isComplete
-            ? "bg-gradient-to-br from-green-400 to-emerald-500 text-white shadow-lg shadow-green-500/50"
-            : isActive
-              ? "animate-pulse bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-purple-500/50"
-              : isAccessible
-                ? "bg-gradient-to-br from-gray-300 to-gray-400 text-gray-600 shadow-md hover:from-gray-400 hover:to-gray-500"
-                : "glass-panel text-gray-400"
-        }`}
-      >
-        {isComplete ? (
-          <CheckCircle2 className="h-6 w-6" />
-        ) : isActive ? (
-          <Circle className="h-6 w-6 fill-current" />
-        ) : (
-          icon || <Lock className="h-5 w-5" />
-        )}
-      </div>
-      <p
-        className={`mt-2 text-xs font-semibold transition-colors ${
-          isActive
-            ? "text-purple-700"
-            : isAccessible
-              ? "text-gray-600"
-              : "text-gray-500"
-        }`}
-      >
-        {label}
-      </p>
-    </motion.div>
   );
 };

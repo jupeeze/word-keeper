@@ -1,33 +1,32 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useMemo } from "react";
-import { Home, Briefcase, Calendar, Shield, Settings } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { Lock } from "lucide-react";
+
 import { cn } from "@/lib/utils";
+
+import type { LearningStep } from "@/types";
 
 type IconComponentType = React.ElementType<{ className?: string }>;
 
 export interface MenuDockItem {
-  label: string;
+  label: LearningStep;
   icon: IconComponentType;
   onClick?: () => void;
+  isComplete?: boolean;
 }
 
 export interface MenuDockProps {
-  items?: MenuDockItem[];
+  items: MenuDockItem[];
   className?: string;
   variant?: "default" | "compact" | "large";
   orientation?: "horizontal" | "vertical";
   showLabels?: boolean;
   animated?: boolean;
+  activeIndex: number;
+  onItemClick?: (index: number, item: MenuDockItem) => void;
+  isStepAccessible: (label: LearningStep) => boolean;
 }
-
-const defaultItems: MenuDockItem[] = [
-  { label: "home", icon: Home },
-  { label: "work", icon: Briefcase },
-  { label: "calendar", icon: Calendar },
-  { label: "security", icon: Shield },
-  { label: "settings", icon: Settings },
-];
 
 export const MenuDock: React.FC<MenuDockProps> = ({
   items,
@@ -36,32 +35,15 @@ export const MenuDock: React.FC<MenuDockProps> = ({
   orientation = "horizontal",
   showLabels = true,
   animated = true,
+  activeIndex,
+  onItemClick,
+  isStepAccessible,
 }) => {
-  const finalItems = useMemo(() => {
-    const isValid =
-      items && Array.isArray(items) && items.length >= 2 && items.length <= 8;
-    if (!isValid) {
-      console.warn(
-        "MenuDock: 'items' prop is invalid or missing. Using default items.",
-        items,
-      );
-      return defaultItems;
-    }
-    return items;
-  }, [items]);
-
-  const [activeIndex, setActiveIndex] = useState(0);
   const [underlineWidth, setUnderlineWidth] = useState(0);
   const [underlineLeft, setUnderlineLeft] = useState(0);
 
   const textRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  useEffect(() => {
-    if (activeIndex >= finalItems.length) {
-      setActiveIndex(0);
-    }
-  }, [finalItems, activeIndex]);
 
   useEffect(() => {
     const updateUnderline = () => {
@@ -93,11 +75,14 @@ export const MenuDock: React.FC<MenuDockProps> = ({
     updateUnderline();
     window.addEventListener("resize", updateUnderline);
     return () => window.removeEventListener("resize", updateUnderline);
-  }, [activeIndex, finalItems, showLabels, orientation]);
+  }, [activeIndex, items, showLabels, orientation]);
 
   const handleItemClick = (index: number, item: MenuDockItem) => {
-    setActiveIndex(index);
-    item.onClick?.();
+    if (onItemClick) {
+      onItemClick(index, item);
+    } else {
+      item.onClick?.();
+    }
   };
 
   const getVariantStyles = () => {
@@ -138,9 +123,26 @@ export const MenuDock: React.FC<MenuDockProps> = ({
       )}
       role="navigation"
     >
-      {finalItems.map((item, index) => {
+      {items.map((item, index) => {
         const isActive = index === activeIndex;
         const IconComponent = item.icon;
+        const isComplete = item.isComplete ?? false;
+        const isAccessible = isStepAccessible(item.label);
+
+        const getButtonStyles = () => {
+          if (animated && isActive) {
+            return "animate-bounce";
+          }
+          if (showLabels) {
+            return "mb-1";
+          }
+        };
+
+        const getLabelStyles = () => {
+          if (!isActive) {
+            return "text-gray-500";
+          }
+        };
 
         return (
           <button
@@ -154,22 +156,29 @@ export const MenuDock: React.FC<MenuDockProps> = ({
               styles.item,
               isActive && "text-primary",
               !isActive && "text-muted-foreground hover:text-foreground",
+              isAccessible && "cursor-pointer",
+              !isAccessible && "cursor-not-allowed opacity-60",
             )}
-            onClick={() => handleItemClick(index, item)}
+            onClick={() => isAccessible && handleItemClick(index, item)}
             aria-label={item.label}
             type="button"
+            disabled={!isAccessible}
           >
             <div
               className={cn(
-                "flex items-center justify-center transition-all duration-200",
-                animated && isActive && "animate-bounce",
-                orientation === "horizontal" && showLabels ? "mb-1" : "",
-                orientation === "vertical" && showLabels ? "mb-1" : "",
+                "mb-1 flex items-center justify-center transition-all duration-200",
+                getButtonStyles(),
               )}
             >
-              <IconComponent
-                className={cn(styles.icon, "transition-colors duration-200")}
-              />
+              {isComplete || isActive ? (
+                <IconComponent
+                  className={cn(styles.icon, "transition-colors duration-200")}
+                />
+              ) : (
+                <Lock
+                  className={cn(styles.icon, "transition-colors duration-200")}
+                />
+              )}
             </div>
 
             {showLabels && (
@@ -178,8 +187,8 @@ export const MenuDock: React.FC<MenuDockProps> = ({
                   textRefs.current[index] = el;
                 }}
                 className={cn(
-                  "font-medium capitalize transition-colors duration-200",
-                  styles.text,
+                  "text-sm font-medium capitalize transition-colors duration-200",
+                  getLabelStyles(),
                   "whitespace-nowrap",
                 )}
               >
