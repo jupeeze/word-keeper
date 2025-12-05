@@ -131,7 +131,7 @@ const SentenceReorderPuzzle = ({
         {/* Available words */}
         <div className="w-full">
           <p className="mb-2 text-xs text-gray-500">利用可能な単語:</p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-2">
             <AnimatePresence>
               {words.map((word, index) => (
                 <motion.div
