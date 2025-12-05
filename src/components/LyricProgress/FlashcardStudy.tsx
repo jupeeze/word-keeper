@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import type { Vocabulary } from "@/types";
 import { speakKorean } from "@/utils/speechUtils";
@@ -68,18 +68,18 @@ const FlashcardStudy = ({
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-md flex-col items-center gap-6">
+    <Card className="mx-auto flex w-full max-w-md flex-col items-center gap-6">
       {/* Progress indicator */}
-      <div className="w-full px-4">
+      <CardHeader className="w-full px-4">
         <Progress
           current={currentIndex + 1}
           total={filteredVocabulary.length}
           label="単語"
         />
-      </div>
+      </CardHeader>
 
       {/* Flashcard */}
-      <div
+      <CardContent
         className="perspective-1000 relative h-80 w-full cursor-pointer"
         onClick={handleFlip}
       >
@@ -132,10 +132,10 @@ const FlashcardStudy = ({
             </Card>
           </motion.div>
         </AnimatePresence>
-      </div>
+      </CardContent>
 
       {/* Navigation buttons */}
-      <div className="flex w-full gap-4">
+      <CardFooter className="flex w-full gap-4">
         <Button
           onClick={handlePrevious}
           disabled={currentIndex === 0}
@@ -173,8 +173,8 @@ const FlashcardStudy = ({
             <ChevronRight className="ml-2 h-4 w-4" />
           </Button>
         )}
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 };
 
