@@ -97,7 +97,7 @@ const FlashcardStudy = ({
             transition={{ duration: 0.4, type: "spring" }}
             className="h-full w-full"
           >
-            <Card className="glass-card hover:shadow-glow h-full transition-all duration-300">
+            <Card className="glass-card hover:shadow-glow h-full transition-all duration-300 border-4 border-cyan-400">
               <CardContent className="flex h-full flex-col items-center justify-center">
                 {!isFlipped ? (
                   // Front: Korean word
