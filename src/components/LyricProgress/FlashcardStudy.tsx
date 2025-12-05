@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import type { Vocabulary } from "@/types";
 import { speakKorean } from "@/utils/speechUtils";
@@ -68,9 +73,9 @@ const FlashcardStudy = ({
   };
 
   return (
-    <Card className="mx-auto flex w-full max-w-md flex-col items-center gap-6">
+    <Card>
       {/* Progress indicator */}
-      <CardHeader className="w-full px-4">
+      <CardHeader>
         <Progress
           current={currentIndex + 1}
           total={filteredVocabulary.length}
@@ -80,7 +85,7 @@ const FlashcardStudy = ({
 
       {/* Flashcard */}
       <CardContent
-        className="perspective-1000 relative h-80 w-full cursor-pointer"
+        className="perspective-1000 relative w-full cursor-pointer"
         onClick={handleFlip}
       >
         <AnimatePresence mode="wait">
@@ -92,43 +97,36 @@ const FlashcardStudy = ({
             transition={{ duration: 0.4, type: "spring" }}
             className="h-full w-full"
           >
-            <Card className="glass-card hover:shadow-glow h-full w-full border-0 shadow-2xl transition-all duration-300">
-              <CardContent className="flex h-full flex-col items-center justify-center p-8">
+            <Card className="glass-card hover:shadow-glow h-full transition-all duration-300">
+              <CardContent className="flex h-full flex-col items-center justify-center">
                 {!isFlipped ? (
                   // Front: Korean word
                   <>
-                    <p className="text-gradient-primary mb-4 text-6xl font-bold">
+                    <p className="mb-2 text-3xl font-medium text-purple-600">
+                      {currentWord.reading}
+                    </p>
+                    <p className="text-gradient-primary mb-2 text-6xl font-bold">
                       {currentWord.word}
                     </p>
-                    <p className="mb-8 text-3xl font-medium text-purple-600">
-                      ({currentWord.reading})
-                    </p>
-                    <div className="glass-panel rounded-full px-6 py-3">
-                      <p className="text-sm font-medium text-gray-600">
-                        タップして意味を見る
-                      </p>
-                    </div>
                   </>
                 ) : (
                   // Back: Japanese meaning
                   <>
-                    <p className="mb-4 text-sm font-semibold text-gray-500">
-                      意味
-                    </p>
-                    <p className="mb-4 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-5xl font-bold text-transparent">
+                    <p className="mb-2 text-6xl font-bold text-emerald-600">
                       {currentWord.meaning}
                     </p>
-                    <div className="glass-panel mt-8 w-full rounded-2xl p-6">
-                      <p className="mb-2 text-2xl font-bold text-purple-700">
-                        {currentWord.word}
-                      </p>
-                      <p className="text-lg text-purple-500">
-                        ({currentWord.reading})
-                      </p>
-                    </div>
                   </>
                 )}
               </CardContent>
+              <CardFooter>
+                <div className="glass-panel flex w-full items-center justify-center py-3">
+                  <p className="text-sm font-medium text-gray-600">
+                    {!isFlipped
+                      ? "タップして意味を見る"
+                      : "タップして単語に戻る"}
+                  </p>
+                </div>
+              </CardFooter>
             </Card>
           </motion.div>
         </AnimatePresence>

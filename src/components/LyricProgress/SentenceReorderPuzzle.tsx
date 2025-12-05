@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Lightbulb, RotateCcw, CheckCircle2 } from "lucide-react";
 import { shuffleArray } from "@/utils/arrayUtils";
 
@@ -82,77 +87,75 @@ const SentenceReorderPuzzle = ({
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl flex-col items-center gap-6">
+    <Card className="items-center">
       {/* Instructions */}
-      <Card className="w-full bg-gradient-to-br from-blue-50 to-indigo-50">
-        <CardContent className="p-6">
-          <h3 className="mb-2 text-lg font-bold text-indigo-800">
-            🧩 正しい順序に並べてください
-          </h3>
-          <p className="text-sm text-gray-500">意味: {meaningText}</p>
-        </CardContent>
-      </Card>
+      <CardHeader>
+        <h3 className="text-lg font-semibold">正しい順序に並べてください</h3>
+      </CardHeader>
 
-      {/* Selected words area */}
-      <div className="min-h-24 w-full rounded-lg border-2 border-dashed border-gray-300 bg-white p-4">
-        <p className="mb-2 text-xs text-gray-500">選択した順序:</p>
-        <div className="flex flex-wrap gap-2">
-          <AnimatePresence>
-            {selectedWords.map((word, index) => (
-              <motion.div
-                key={`selected-${index}`}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Button
-                  onClick={() => handleRemoveWord(index)}
-                  variant="default"
-                  className="relative"
-                  disabled={isCorrect}
+      <CardContent className="space-y-4">
+        <p className="text-sm text-gray-500 text-center">{meaningText}</p>
+        <div className="min-h-24 w-full rounded-lg border-2 border-dashed border-gray-300 bg-white p-4">
+          {/* Selected words area */}
+          <p className="mb-2 text-xs text-gray-500">選択した順序:</p>
+          <div className="flex flex-wrap gap-2">
+            <AnimatePresence>
+              {selectedWords.map((word, index) => (
+                <motion.div
+                  key={`selected-${index}`}
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <span className="absolute -top-2 -left-2 flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-xs font-bold text-white">
-                    {index + 1}
-                  </span>
-                  {word}
-                </Button>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-          {selectedWords.length === 0 && (
-            <p className="text-gray-400 italic">単語をタップして選択...</p>
-          )}
+                  <Button
+                    onClick={() => handleRemoveWord(index)}
+                    variant="default"
+                    className="relative"
+                    disabled={isCorrect}
+                  >
+                    <span className="absolute -top-2 -left-2 flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-xs font-bold text-white">
+                      {index + 1}
+                    </span>
+                    {word}
+                  </Button>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+            {selectedWords.length === 0 && (
+              <p className="text-gray-400 italic">単語をタップして選択...</p>
+            )}
+          </div>
         </div>
-      </div>
 
-      {/* Available words */}
-      <div className="w-full">
-        <p className="mb-2 text-xs text-gray-500">利用可能な単語:</p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <AnimatePresence>
-            {words.map((word, index) => (
-              <motion.div
-                key={`word-${word}-${index}`}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Button
-                  onClick={() => handleWordClick(word, index)}
-                  variant="outline"
-                  size="lg"
-                  className="text-lg font-bold hover:border-blue-400 hover:bg-blue-100"
-                  disabled={isCorrect}
+        {/* Available words */}
+        <div className="w-full">
+          <p className="mb-2 text-xs text-gray-500">利用可能な単語:</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <AnimatePresence>
+              {words.map((word, index) => (
+                <motion.div
+                  key={`word-${word}-${index}`}
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  {word}
-                </Button>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+                  <Button
+                    onClick={() => handleWordClick(word, index)}
+                    variant="outline"
+                    size="lg"
+                    className="text-lg font-bold hover:border-blue-400 hover:bg-blue-100"
+                    disabled={isCorrect}
+                  >
+                    {word}
+                  </Button>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         </div>
-      </div>
+      </CardContent>
 
       {/* Hint */}
       {showHint && !isCorrect && (
@@ -180,7 +183,7 @@ const SentenceReorderPuzzle = ({
       )}
 
       {/* Action buttons */}
-      <div className="flex w-full gap-3">
+      <CardFooter className="flex w-full gap-3">
         <Button onClick={handleReset} variant="outline" className="flex-1">
           <RotateCcw className="mr-2 h-4 w-4" />
           リセット
@@ -196,8 +199,8 @@ const SentenceReorderPuzzle = ({
             確認
           </Button>
         )}
-      </div>
-    </div>
+      </CardFooter>
+    </Card>
   );
 };
 

@@ -1,7 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Mic, MicOff, ChevronRight, RotateCcw, Volume2 } from "lucide-react";
 import { speakKorean } from "@/utils/speechUtils";
 
@@ -180,124 +185,120 @@ const SingingChallenge = ({
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-md flex-col items-center gap-6">
-      {/* Card */}
-      <Card className="glass-card relative w-full overflow-hidden border-0 shadow-2xl">
-        <CardContent className="flex min-h-[300px] flex-col items-center justify-center px-8">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={handlePlayAudio}
-            className="shrink-0 rounded-full text-purple-600 hover:bg-purple-100"
-          >
-            <Volume2 className="h-6 w-6" />
-          </Button>
+    <Card>
+      <CardHeader className="text-sm font-semibold">
+        歌詞を歌ってみよう！
+      </CardHeader>
+      <CardContent className="flex h-72 flex-col items-center justify-center px-8">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handlePlayAudio}
+          className="shrink-0 rounded-full text-purple-600 hover:bg-purple-100"
+        >
+          <Volume2 className="h-6 w-6" />
+        </Button>
 
-          <div className="mb-6 flex w-full justify-center gap-4">
-            <div className="flex flex-col items-center">
-              <p className="text-xs font-medium text-purple-600">{reading}</p>
-              <p className="text-gradient-primary text-center text-xl leading-relaxed font-bold">
-                {lyricText}
-              </p>
-              <p className="text-sm text-gray-500">{translation}</p>
-            </div>
+        <div className="mb-6 flex w-full justify-center gap-4">
+          <div className="flex flex-col items-center">
+            <p className="text-xs font-medium text-purple-600">{reading}</p>
+            <p className="text-gradient-primary text-center text-xl leading-relaxed font-bold">
+              {lyricText}
+            </p>
+            <p className="text-sm text-gray-500">{translation}</p>
           </div>
+        </div>
 
-          {/* Feedback Area */}
-          <div className="mb-6 flex min-h-[80px] w-full flex-col items-center justify-center">
-            {transcript && (
-              <p className="text-center text-lg font-medium text-gray-800">
-                "{transcript}"
-              </p>
-            )}
+        {/* Feedback Area */}
+        <div className="mb-6 flex min-h-[80px] w-full flex-col items-center justify-center">
+          {transcript && (
+            <p className="text-center text-lg font-medium text-gray-800">
+              "{transcript}"
+            </p>
+          )}
 
-            <AnimatePresence mode="wait">
-              {feedback === "correct" && (
-                <motion.div
-                  key="correct"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0, opacity: 0 }}
-                  className="flex items-center gap-2 text-xl font-bold text-green-600"
-                >
-                  <span>Great Singing! 🎤</span>
-                </motion.div>
-              )}
-
-              {feedback === "incorrect" && (
-                <motion.div
-                  key="incorrect"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0, opacity: 0 }}
-                  className="text-lg font-bold text-red-500"
-                >
-                  もう一度トライ！
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {error && (
-              <p className="text-center text-sm text-red-500">{error}</p>
-            )}
-          </div>
-
-          {/* Controls */}
-          <div className="flex gap-4">
-            {feedback !== "correct" ? (
-              <Button
-                size="lg"
-                onClick={isListening ? stopListening : startListening}
-                className={`flex h-20 w-20 items-center justify-center rounded-full transition-all duration-300 ${
-                  isListening
-                    ? "animate-pulse bg-red-500 shadow-red-500/50 hover:bg-red-600"
-                    : "bg-gradient-to-r from-blue-500 to-purple-600 shadow-purple-500/50 hover:from-blue-600 hover:to-purple-700"
-                } shadow-lg`}
+          <AnimatePresence mode="wait">
+            {feedback === "correct" && (
+              <motion.div
+                key="correct"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0, opacity: 0 }}
+                className="flex items-center gap-2 text-xl font-bold text-green-600"
               >
-                {isListening ? (
-                  <MicOff className="h-10 w-10 text-white" />
-                ) : (
-                  <Mic className="h-10 w-10 text-white" />
-                )}
-              </Button>
-            ) : (
-              <Button
-                onClick={onComplete}
-                className="h-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 px-8 text-white shadow-lg transition-all duration-300 hover:from-green-600 hover:to-emerald-700 hover:shadow-xl"
-              >
-                次へ進む
-                <ChevronRight className="ml-2 h-5 w-5" />
-              </Button>
+                <span>Great Singing! 🎤</span>
+              </motion.div>
             )}
 
             {feedback === "incorrect" && (
-              <Button
-                variant="outline"
-                onClick={handleRetry}
-                className="glass-panel h-12 w-12 rounded-full border-0"
+              <motion.div
+                key="incorrect"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0, opacity: 0 }}
+                className="text-lg font-bold text-red-500"
               >
-                <RotateCcw className="h-5 w-5" />
-              </Button>
+                もう一度トライ！
+              </motion.div>
             )}
-          </div>
-        </CardContent>
-      </Card>
+          </AnimatePresence>
 
-      {/* Footer */}
-      <div className="glass-card w-full rounded-2xl text-center">
-        <p className="text-sm font-semibold text-gray-700">
-          歌詞を歌ってみよう！
-        </p>
-        {/* Skip button for testing/fallback */}
-        <Button
-          variant="ghost"
-          onClick={onComplete}
-          className="text-sm text-gray-400 hover:text-gray-600"
-        >
-          スキップ (音声認識が使えない場合)
-        </Button>
-      </div>
-    </div>
+          {error && <p className="text-center text-sm text-red-500">{error}</p>}
+        </div>
+
+        {/* Controls */}
+        <div className="flex gap-4">
+          {feedback !== "correct" ? (
+            <Button
+              size="lg"
+              onClick={isListening ? stopListening : startListening}
+              className={`flex h-20 w-20 items-center justify-center rounded-full transition-all duration-300 ${
+                isListening
+                  ? "animate-pulse bg-red-500 shadow-red-500/50 hover:bg-red-600"
+                  : "bg-gradient-to-r from-blue-500 to-purple-600 shadow-purple-500/50 hover:from-blue-600 hover:to-purple-700"
+              } shadow-lg`}
+            >
+              {isListening ? (
+                <MicOff className="h-10 w-10 text-white" />
+              ) : (
+                <Mic className="h-10 w-10 text-white" />
+              )}
+            </Button>
+          ) : (
+            <Button
+              onClick={onComplete}
+              className="h-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 px-8 text-white shadow-lg transition-all duration-300 hover:from-green-600 hover:to-emerald-700 hover:shadow-xl"
+            >
+              次へ進む
+              <ChevronRight className="ml-2 h-5 w-5" />
+            </Button>
+          )}
+
+          {feedback === "incorrect" && (
+            <Button
+              variant="outline"
+              onClick={handleRetry}
+              className="glass-panel h-12 w-12 rounded-full border-0"
+            >
+              <RotateCcw className="h-5 w-5" />
+            </Button>
+          )}
+        </div>
+      </CardContent>
+      <CardFooter className="h-9">
+        {/* Footer */}
+        <div className="glass-card w-full rounded-2xl text-center">
+          {/* Skip button for testing/fallback */}
+          <Button
+            variant="ghost"
+            onClick={onComplete}
+            className="text-sm text-gray-400 hover:text-gray-600"
+          >
+            スキップ (音声認識が使えない場合)
+          </Button>
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
 

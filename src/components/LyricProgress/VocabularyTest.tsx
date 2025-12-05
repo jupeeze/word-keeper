@@ -1,6 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { QuizChoiceGrid } from "@/components/Quiz/QuizChoiceGrid";
 import { QuizFeedback } from "@/components/Quiz/QuizFeedback";
 import { FEEDBACK_CONFIG } from "@/constants/quiz";
@@ -35,7 +40,6 @@ const VocabularyTest = ({
   vocabulary,
   onComplete,
   onUpdateMastery,
-  onBackToStudy,
   onIncorrectAnswer,
   currentSongId,
   currentLyricText,
@@ -141,50 +145,49 @@ const VocabularyTest = ({
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-md flex-col items-center gap-6">
-      {/* Question card */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentQuestionIndex}
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.3 }}
-          className="w-full"
-        >
-          <Card className="w-full shadow-lg">
-            <CardContent>
-              {/* Progress indicator */}
-              <Progress
-                current={currentQuestionIndex + 1}
-                total={vocabulary.length}
-                label="問題"
-              />
-            </CardContent>
-            <CardContent className="px-8">
-              <p className="mb-4 text-center text-sm text-gray-600">
-                この意味の韓国語を選んでください
+    <Card>
+      <CardHeader>
+        {/* Progress indicator */}
+        <Progress
+          current={currentQuestionIndex + 1}
+          total={vocabulary.length}
+          label="問題"
+        />
+      </CardHeader>
+      <CardContent className="px-8">
+        {/* Question card */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentQuestionIndex}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.3 }}
+            className="w-full"
+          >
+            <p className="mb-4 text-center text-sm text-gray-600">
+              この意味の韓国語を選んでください
+            </p>
+            <div className="mb-6 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 p-6 text-center">
+              <p className="text-3xl font-bold text-purple-800">
+                {currentWord.meaning}
               </p>
-              <div className="mb-6 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 p-6 text-center">
-                <p className="text-3xl font-bold text-purple-800">
-                  {currentWord.meaning}
-                </p>
-              </div>
+            </div>
 
-              {/* Choices */}
-              <QuizChoiceGrid
-                choices={choices}
-                onChoiceClick={handleAnswer}
-                className="grid-cols-2"
-              />
-
-              {/* Feedback */}
-              <QuizFeedback feedback={feedback} className="mt-4 text-xl" />
-            </CardContent>
-          </Card>
-        </motion.div>
-      </AnimatePresence>
-    </div>
+            {/* Choices */}
+            <QuizChoiceGrid
+              choices={choices}
+              onChoiceClick={handleAnswer}
+              className="grid-cols-2"
+            />
+          </motion.div>
+        </AnimatePresence>
+      </CardContent>
+      <CardFooter>
+        {/* Feedback */}
+        <QuizFeedback feedback={feedback} className="mt-4 text-xl" />
+      </CardFooter>
+    </Card>
   );
 };
 

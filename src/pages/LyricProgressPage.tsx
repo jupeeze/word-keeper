@@ -266,10 +266,10 @@ export const LyricProgressPage = ({
         />
       </div>
 
-      <div className="relative mx-auto max-w-4xl space-y-4">
+      <div className="relative mx-auto max-w-sm space-y-4">
         {/* Header */}
         <Card className="glass-card gap-0 border-0 py-1 shadow-lg">
-          <CardHeader className="relative flex items-center">
+          <CardHeader className="relative h-8 justify-start flex-row">
             <Button
               onClick={() => setPage("songList")}
               variant="ghost"
@@ -278,19 +278,19 @@ export const LyricProgressPage = ({
             >
               <ArrowLeft className="h-6 w-6" />
             </Button>
-            <CardTitle className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-2 text-2xl">
+            <CardTitle className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-2 text-2xl">
               <Music className="h-6 w-6 shrink-0" />
               <span className="truncate">{song.title}</span>
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 h-5">
             {/* Progress indicator */}
-            <div className="w-full flex items-center justify-between gap-3">
+            <div className="flex w-full items-center justify-between gap-3">
               <Progress
                 current={progress.totalCompletedLines}
                 total={song.lyrics.length}
               />
-              <span className="whitespace-nowrap text-center text-sm font-semibold text-purple-600">
+              <span className="text-center text-sm font-semibold whitespace-nowrap text-purple-600">
                 {progress.totalCompletedLines} / {song.lyrics.length}
               </span>
             </div>
@@ -351,6 +351,7 @@ export const LyricProgressPage = ({
                     ? song.lyrics[currentLineIndex + 1].startTime
                     : undefined
                 }
+                reading={currentLyric.reading}
                 lyricText={currentLyric.text}
                 translation={currentLyric.translation}
                 onNext={handleRewardComplete}
@@ -360,7 +361,7 @@ export const LyricProgressPage = ({
         </AnimatePresence>
 
         {/* Step progress */}
-        <div className="flex items-center justify-center gap-2 px-4">
+        <div className="flex items-center justify-center gap-2">
           <MenuDock
             items={
               [
