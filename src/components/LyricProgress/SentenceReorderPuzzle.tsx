@@ -94,7 +94,7 @@ const SentenceReorderPuzzle = ({
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <p className="text-sm text-gray-500 text-center">{meaningText}</p>
+        <p className="text-center text-sm text-gray-500">{meaningText}</p>
         <div className="min-h-24 w-full rounded-lg border-2 border-dashed border-gray-300 bg-white p-4">
           {/* Selected words area */}
           <p className="mb-2 text-xs text-gray-500">選択した順序:</p>

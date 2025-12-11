@@ -97,7 +97,7 @@ const FlashcardStudy = ({
             transition={{ duration: 0.4, type: "spring" }}
             className="h-full w-full"
           >
-            <Card className="glass-card hover:shadow-glow h-full transition-all duration-300 border-4 border-cyan-400">
+            <Card className="glass-card hover:shadow-glow h-full border-4 border-cyan-400 transition-all duration-300">
               <CardContent className="flex h-full flex-col items-center justify-center">
                 {!isFlipped ? (
                   // Front: Korean word
@@ -112,7 +112,7 @@ const FlashcardStudy = ({
                 ) : (
                   // Back: Japanese meaning
                   <>
-                    <p className="mb-2 text-6xl font-bold text-emerald-600">
+                    <p className="mb-2 text-center text-4xl font-bold text-blue-800">
                       {currentWord.meaning}
                     </p>
                   </>

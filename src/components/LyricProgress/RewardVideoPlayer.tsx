@@ -53,7 +53,7 @@ const RewardVideoPlayer = ({
     <Card className="items-center">
       <CardHeader>
         {/* Info */}
-        <div className="font-semibold text-lg">
+        <div className="text-lg font-semibold">
           報酬として、動画を視聴できます
         </div>
       </CardHeader>

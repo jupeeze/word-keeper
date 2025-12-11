@@ -96,56 +96,8 @@ export const SongListPage = ({ setPage }: PageNavigationProps) => {
               placeholder="曲名やアーティストで検索..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-14 rounded-2xl border-2 border-purple-200 bg-white/80 pl-12 text-lg shadow-lg backdrop-blur-sm transition-all duration-300 focus:border-purple-400 focus:shadow-xl"
+              className="h-12 rounded-2xl border-2 border-purple-200 bg-white/80 pl-12 text-lg shadow-lg backdrop-blur-sm transition-all duration-300 focus:border-purple-400 focus:shadow-xl"
             />
-          </div>
-
-          {/* Difficulty Filters */}
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <span className="text-sm font-semibold text-gray-600">難易度:</span>
-            {[
-              {
-                value: "beginner",
-                label: "初級",
-                color: "from-emerald-400 to-teal-500",
-              },
-              {
-                value: "intermediate",
-                label: "中級",
-                color: "from-amber-400 to-orange-500",
-              },
-              {
-                value: "advanced",
-                label: "上級",
-                color: "from-rose-400 to-pink-500",
-              },
-            ].map((difficulty) => (
-              <Button
-                key={difficulty.value}
-                onClick={() => handleDifficultyFilter(difficulty.value)}
-                variant={
-                  selectedDifficulty === difficulty.value
-                    ? "default"
-                    : "outline"
-                }
-                className={`rounded-full px-6 transition-all duration-300 ${
-                  selectedDifficulty === difficulty.value
-                    ? `bg-gradient-to-r ${difficulty.color} border-0 text-white shadow-lg hover:shadow-xl`
-                    : "hover:scale-105"
-                }`}
-              >
-                {difficulty.label}
-              </Button>
-            ))}
-            {selectedDifficulty && (
-              <Button
-                onClick={() => handleDifficultyFilter(selectedDifficulty)}
-                variant="ghost"
-                className="text-gray-500 hover:text-gray-700"
-              >
-                クリア
-              </Button>
-            )}
           </div>
         </motion.div>
 
