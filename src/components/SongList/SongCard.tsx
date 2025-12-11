@@ -2,11 +2,10 @@ import type { Song } from "@/types";
 
 interface SongCardProps {
   song: Song;
-  progress?: number;
   onClick: () => void;
 }
 
-export const SongCard = ({ song, progress = 0, onClick }: SongCardProps) => {
+export const SongCard = ({ song, onClick }: SongCardProps) => {
   return (
     <div onClick={onClick}>
       <div className="flex items-center gap-4">
