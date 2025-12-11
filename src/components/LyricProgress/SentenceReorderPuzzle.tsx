@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { Lightbulb, RotateCcw, CheckCircle2 } from "lucide-react";
+import { RotateCcw, CheckCircle2 } from "lucide-react";
 import { shuffleArray } from "@/utils/arrayUtils";
 
 interface Vocabulary {
@@ -31,7 +31,6 @@ const SentenceReorderPuzzle = ({
   const meaningText = vocabulary.map((v) => v.meaning).join(" ");
   const [words, setWords] = useState<string[]>([]);
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
-  const [showHint, setShowHint] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
 
   const correctWords = sentence.split(" ");
@@ -63,7 +62,6 @@ const SentenceReorderPuzzle = ({
   const handleReset = () => {
     setWords(shuffleArray([...correctWords]));
     setSelectedWords([]);
-    setShowHint(false);
     setIsCorrect(false);
   };
 
@@ -80,10 +78,6 @@ const SentenceReorderPuzzle = ({
         handleReset();
       }, 1000);
     }
-  };
-
-  const handleShowHint = () => {
-    setShowHint(true);
   };
 
   return (
@@ -138,7 +132,6 @@ const SentenceReorderPuzzle = ({
                   key={`word-${word}-${index}`}
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
                   <Button
@@ -156,19 +149,6 @@ const SentenceReorderPuzzle = ({
           </div>
         </div>
       </CardContent>
-
-      {/* Hint */}
-      {showHint && !isCorrect && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="w-full rounded-lg border border-yellow-200 bg-yellow-50 p-4"
-        >
-          <p className="text-sm text-yellow-800">
-            💡 ヒント: 最初の単語は <strong>{correctWords[0]}</strong> です
-          </p>
-        </motion.div>
-      )}
 
       {/* Success message */}
       {isCorrect && (
@@ -188,12 +168,6 @@ const SentenceReorderPuzzle = ({
           <RotateCcw className="mr-2 h-4 w-4" />
           リセット
         </Button>
-        {!showHint && !isCorrect && (
-          <Button onClick={handleShowHint} variant="outline" className="flex-1">
-            <Lightbulb className="mr-2 h-4 w-4" />
-            ヒント
-          </Button>
-        )}
         {selectedWords.length === correctWords.length && !isCorrect && (
           <Button onClick={handleCheck} className="flex-1">
             確認
