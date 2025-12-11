@@ -89,10 +89,10 @@ const SentenceReorderPuzzle = ({
 
       <CardContent className="space-y-4">
         <p className="text-center text-sm text-gray-500">{meaningText}</p>
-        <div className="min-h-24 w-full rounded-lg border-2 border-dashed border-gray-300 bg-white p-4">
+        <div className="min-h-24 rounded-lg border-2 border-dashed border-gray-300 bg-white p-4">
           {/* Selected words area */}
           <p className="mb-2 text-xs text-gray-500">選択した順序:</p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 w-64">
             <AnimatePresence>
               {selectedWords.map((word, index) => (
                 <motion.div
@@ -116,9 +116,6 @@ const SentenceReorderPuzzle = ({
                 </motion.div>
               ))}
             </AnimatePresence>
-            {selectedWords.length === 0 && (
-              <p className="text-gray-400 italic">単語をタップして選択...</p>
-            )}
           </div>
         </div>
 
