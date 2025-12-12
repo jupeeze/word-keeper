@@ -16,10 +16,7 @@ export interface SpeechOptions {
  * @param text 読み上げるテキスト
  * @param options 音声合成のオプション
  */
-export const speak = (
-  text: string,
-  options: SpeechOptions,
-): void => {
+export const speak = (text: string, options: SpeechOptions): void => {
   if (typeof window === "undefined" || !window.speechSynthesis) {
     console.warn("音声合成はサポートされていません。");
     return;

@@ -26,7 +26,7 @@ export const SongCard = ({
           />
           <span className="text-sm text-gray-500">{progress.toFixed(1)}%</span>
         </div>
-        <div className="w-full flex flex-col gap-2">
+        <div className="flex w-full flex-col gap-2">
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
               <span className="font-bold">{song.title}</span>

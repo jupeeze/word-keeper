@@ -92,7 +92,7 @@ const SentenceReorderPuzzle = ({
         <div className="min-h-24 rounded-lg border-2 border-dashed border-gray-300 bg-white p-4">
           {/* Selected words area */}
           <p className="mb-2 text-xs text-gray-500">選択した順序:</p>
-          <div className="flex flex-wrap gap-2 w-64">
+          <div className="flex w-64 flex-wrap gap-2">
             <AnimatePresence>
               {selectedWords.map((word, index) => (
                 <motion.div

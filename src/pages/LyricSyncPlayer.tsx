@@ -113,7 +113,7 @@ export const LyricSyncPlayer = ({
 
       {/* Video Player Section */}
       <Card className="glass-card hover-lift overflow-hidden border-0">
-        <CardContent className="space-y-4 h-full">
+        <CardContent className="h-full space-y-4">
           {/* React Player */}
           <div className="aspect-video overflow-hidden rounded-xl">
             <ReactPlayer
