@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { PageNavigationProps } from "@/types";
 import { useWordAction } from "@/hooks/useWordAction";
 import { useSongStore } from "@/stores/songStore";
@@ -9,6 +9,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { LyricLineDisplay } from "@/components/LyricPlayer/LyricLineDisplay";
 import { ArrowLeft, Music } from "lucide-react";
 import { motion } from "motion/react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 
 interface PlayerState {
   playing: boolean;
@@ -30,6 +36,13 @@ export const LyricSyncPlayer = ({
     playing: false,
   });
   const [currentLyricIndex, setCurrentLyricIndex] = useState(-1);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+
+  // Auto-scroll to active lyric in carousel
+  useEffect(() => {
+    if (!carouselApi || currentLyricIndex < 0) return;
+    carouselApi.scrollTo(currentLyricIndex);
+  }, [carouselApi, currentLyricIndex]);
 
   const song = currentSongId ? getSongById(currentSongId) : null;
 
@@ -117,24 +130,32 @@ export const LyricSyncPlayer = ({
               controls={true}
             />
           </div>
-          <ScrollArea className="h-80">
-            <div className="space-y-3">
+          <Carousel
+            setApi={setCarouselApi}
+            opts={{
+              align: "start",
+            }}
+            orientation="vertical"
+          >
+            <CarouselContent className="h-88">
               {song.lyrics.map((line, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  <LyricLineDisplay
-                    line={line}
-                    isActive={index === currentLyricIndex}
-                    onWordClick={handleWordClick}
-                  />
-                </motion.div>
+                <CarouselItem key={index} className="basis-1/4">
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <LyricLineDisplay
+                      line={line}
+                      isActive={index === currentLyricIndex}
+                      onWordClick={handleWordClick}
+                    />
+                  </motion.div>
+                </CarouselItem>
               ))}
-            </div>
-          </ScrollArea>
+            </CarouselContent>
+          </Carousel>
         </CardContent>
       </Card>
     </div>

@@ -25,7 +25,7 @@ export const LyricLineDisplay = ({
 }: LyricLineDisplayProps) => {
   return (
     <div
-      className={`mb-2 flex flex-wrap justify-center gap-2 rounded-lg p-4 transition-all duration-300 ${
+      className={`flex flex-wrap justify-center rounded-lg transition-all duration-300 ${
         isActive ? "scale-105 bg-blue-100 shadow-md" : "bg-white opacity-70"
       } ${className}`}
     >
