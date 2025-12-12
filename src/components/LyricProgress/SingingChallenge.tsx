@@ -9,9 +9,10 @@ import {
 } from "@/components/ui/card";
 import { Mic, MicOff, ChevronRight, RotateCcw, Volume2 } from "lucide-react";
 import { speak } from "@/utils/speechUtils";
+import type { Language } from "@/types";
 
 interface SingingChallengeProps {
-  language: "en" | "ko";
+  language: Language;
   lyricText: string;
   reading: string;
   translation: string;
@@ -84,7 +85,7 @@ const SingingChallenge = ({
       const recognition = new SpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = true;
-      recognition.lang = "ko-KR";
+      recognition.lang = language;
 
       recognition.onresult = (event: SpeechRecognitionEvent) => {
         const lastResult = event.results[event.results.length - 1];

@@ -5,7 +5,7 @@ export interface Song {
   artist: string;
   coverImage: string;
   difficulty: "beginner" | "intermediate" | "advanced";
-  language: "en" | "ko";
+  language: Language;
   youtubeUrl: string;
   lyrics: LyricLine[];
 }
@@ -51,6 +51,7 @@ export interface LyricLine {
 // ページナビゲーション用のProps型
 export type PageName = "songList" | "library" | "lyricPlayer" | "lyricProgress";
 
+export type Language = "en-US" | "ko-KR";
 export interface PageNavigationProps {
   setPage: (page: PageName, songId?: string) => void;
   currentSongId?: string;

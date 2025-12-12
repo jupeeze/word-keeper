@@ -2,28 +2,14 @@
  * 音声合成に関する共通ユーティリティ関数
  */
 
+import type { Language } from "@/types";
+
 export interface SpeechOptions {
-  lang: "en" | "ko";
+  lang: Language;
   rate?: number;
   pitch?: number;
   volume?: number;
 }
-
-/**
- * 言語コードをBCP 47形式に変換する
- * @param language Song型のlanguageプロパティ ("en" | "ko")
- * @returns BCP 47形式の言語コード (例: "en-US", "ko-KR")
- */
-export const getLanguageCode = (language: "en" | "ko"): string => {
-  console.log(language);
-
-  const languageMap: Record<string, string> = {
-    en: "en-US",
-    ko: "ko-KR",
-  };
-  console.log(languageMap[language]);
-  return languageMap[language];
-};
 
 /**
  * 多言語対応の音声合成を実行する
@@ -42,7 +28,7 @@ export const speak = (
   window.speechSynthesis.cancel(); // 既存の発話をキャンセル
 
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = getLanguageCode(options.lang); // デフォルトは韓国語（後方互換性）
+  utterance.lang = options.lang; // デフォルトは韓国語（後方互換性）
   utterance.rate = options.rate ?? 0.9; // デフォルトは少しゆっくり
   utterance.pitch = options.pitch ?? 1.0;
   utterance.volume = options.volume ?? 1.0;

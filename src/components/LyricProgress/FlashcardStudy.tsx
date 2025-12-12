@@ -8,12 +8,12 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
-import type { Vocabulary } from "@/types";
+import type { Language, Vocabulary } from "@/types";
 import { speak } from "@/utils/speechUtils";
 import { Progress } from "@/components/ui/progress";
 
 interface FlashcardStudyProps {
-  language: "en" | "ko";
+  language: Language;
   vocabulary: Vocabulary[];
   onComplete: () => void;
   isReviewMode?: boolean; // If true, all cards are pre-marked as viewed
