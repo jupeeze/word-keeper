@@ -109,6 +109,7 @@ export const SongListPage = ({ setPage }: PageNavigationProps) => {
                     song={song}
                     progress={getProgress(song.id)}
                     onClick={() => handleSongClick(song.id)}
+                    onPlay={() => setPage("lyricPlayer", song.id)}
                   />
                 </motion.div>
               ))}
