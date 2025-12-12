@@ -253,7 +253,7 @@ export const LyricProgressPage = ({
   }
 
   return (
-    <div className="gradient-secondary relative min-h-screen overflow-hidden px-4 py-2">
+    <div className="gradient-secondary relative min-h-screen overflow-hidden">
       {/* Animated Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div

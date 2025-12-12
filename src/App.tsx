@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-pink-50">
+    <div className="min-h-screen bg-pink-50 px-4 py-2">
       {currentPage === "songList" && <SongListPage setPage={setPage} />}
       {currentPage === "lyricPlayer" && (
         <LyricSyncPlayer
