@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import type { PageNavigationProps } from "@/types";
 import { useWordAction } from "@/hooks/useWordAction";
 import { useSongStore } from "@/stores/songStore";
 import ReactPlayer from "react-player";
@@ -20,9 +20,14 @@ interface PlayerState {
   playing: boolean;
 }
 
-export const LyricSyncPlayer = () => {
-  const { songId: currentSongId } = useParams<{ songId: string }>();
-  const navigate = useNavigate();
+interface LyricSyncPlayerProps extends PageNavigationProps {
+  currentSongId?: string;
+}
+
+export const LyricSyncPlayer = ({
+  setPage,
+  currentSongId,
+}: LyricSyncPlayerProps) => {
   const playerRef = useRef<HTMLVideoElement | null>(null);
   const { handleWordClick } = useWordAction(currentSongId);
   const { getSongById } = useSongStore();
@@ -79,7 +84,7 @@ export const LyricSyncPlayer = () => {
           </CardHeader>
           <CardContent className="text-center">
             <Button
-              onClick={() => navigate("/")}
+              onClick={() => setPage("songList")}
               size="lg"
               className="btn-premium"
             >
@@ -99,12 +104,12 @@ export const LyricSyncPlayer = () => {
       <Card>
         <CardHeader className="relative h-8 flex-row justify-start">
           <Button
-            onClick={() => navigate("/")}
+            onClick={() => setPage("songList")}
             variant="ghost"
             size="sm"
             className="glass-panel shrink-0 transition-all duration-300 hover:bg-white/40"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-6 w-6" />
           </Button>
           <CardTitle className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-2 text-2xl">
             <Music className="h-6 w-6 shrink-0" />

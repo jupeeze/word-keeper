@@ -1,11 +1,10 @@
 import { LibraryGrid } from "../components/Library/LibraryGrid";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import type { PageNavigationProps } from "@/types";
 import { ArrowLeft, BookOpen, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
 
-export const LibraryPage = () => {
-  const navigate = useNavigate();
+export const LibraryPage = ({ setPage }: PageNavigationProps) => {
   return (
     <div className="gradient-primary relative min-h-screen overflow-hidden">
       {/* Animated Background Elements */}
@@ -40,7 +39,7 @@ export const LibraryPage = () => {
         >
           <div className="flex items-center gap-4">
             <Button
-              onClick={() => navigate("/")}
+              onClick={() => setPage("songList")}
               variant="ghost"
               size="sm"
               className="glass-panel transition-all duration-300 hover:bg-white/40"
@@ -79,7 +78,7 @@ export const LibraryPage = () => {
           className="flex justify-center gap-4"
         >
           <Button
-            onClick={() => navigate("/")}
+            onClick={() => setPage("songList")}
             variant="outline"
             className="glass-panel rounded-full px-8 transition-all duration-300 hover:scale-105 hover:bg-white/40"
           >

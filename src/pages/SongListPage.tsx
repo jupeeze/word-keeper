@@ -1,14 +1,13 @@
 import { motion } from "motion/react";
 import { Search, Sparkles } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SongCard } from "@/components/SongList/SongCard";
 import { useSongStore } from "@/stores/songStore";
 import { useLyricProgressStore } from "@/stores/lyricProgressStore";
+import type { PageNavigationProps } from "@/types";
 
-export const SongListPage = () => {
-  const navigate = useNavigate();
+export const SongListPage = ({ setPage }: PageNavigationProps) => {
   const { searchQuery, setSearchQuery, getFilteredSongs } = useSongStore();
 
   const { progressBySong } = useLyricProgressStore();
@@ -16,7 +15,7 @@ export const SongListPage = () => {
   const filteredSongs = getFilteredSongs();
 
   const handleSongClick = (songId: string) => {
-    navigate(`/progress/${songId}`);
+    setPage("lyricProgress", songId);
   };
 
   const getProgress = (songId: string): number => {
@@ -110,7 +109,7 @@ export const SongListPage = () => {
                     song={song}
                     progress={getProgress(song.id)}
                     onClick={() => handleSongClick(song.id)}
-                    onPlay={() => navigate(`/player/${song.id}`)}
+                    onPlay={() => setPage("lyricPlayer", song.id)}
                   />
                 </motion.div>
               ))}
@@ -126,7 +125,7 @@ export const SongListPage = () => {
           className="flex justify-center gap-4 pt-8"
         >
           <Button
-            onClick={() => navigate("/library")}
+            onClick={() => setPage("library")}
             variant="outline"
             className="rounded-full px-8 transition-transform hover:scale-105"
           >
