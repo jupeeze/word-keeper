@@ -1,44 +1,12 @@
 // src/App.tsx
 
-import { useState, useEffect, useCallback } from "react";
-import { LyricSyncPlayer } from "./pages/LyricSyncPlayer";
-import { LibraryPage } from "./pages/LibraryPage";
-import { LyricProgressPage } from "./pages/LyricProgressPage";
-import { SongListPage } from "./pages/SongListPage";
 import { Toaster } from "./components/ui/toaster";
-import type { PageName } from "@/types";
+import { AppRoutes } from "./routes";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<PageName>("songList");
-  const [currentSongId, setCurrentSongId] = useState<string | null>(null);
-
-  useEffect(() => {
-    console.log(`Current page: ${currentPage}, Song ID: ${currentSongId}`);
-  }, [currentPage, currentSongId]);
-
-  const setPage = useCallback((page: PageName, songId?: string) => {
-    setCurrentPage(page);
-    if (songId) {
-      setCurrentSongId(songId);
-    }
-  }, []);
-
   return (
     <div className="min-h-screen bg-pink-50 px-4 py-2">
-      {currentPage === "songList" && <SongListPage setPage={setPage} />}
-      {currentPage === "lyricPlayer" && (
-        <LyricSyncPlayer
-          setPage={setPage}
-          currentSongId={currentSongId || undefined}
-        />
-      )}
-      {currentPage === "library" && <LibraryPage setPage={setPage} />}
-      {currentPage === "lyricProgress" && (
-        <LyricProgressPage
-          setPage={setPage}
-          currentSongId={currentSongId || undefined}
-        />
-      )}
+      <AppRoutes />
       <Toaster position="top-center" richColors />
     </div>
   );

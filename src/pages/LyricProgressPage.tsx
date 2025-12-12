@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowLeft,
@@ -29,16 +30,11 @@ import {
 import { useLyricProgressStore } from "@/stores/lyricProgressStore";
 import { useSongStore } from "@/stores/songStore";
 
-import type { PageNavigationProps, Vocabulary, LearningStep } from "@/types";
+import type { Vocabulary, LearningStep } from "@/types";
 
-interface LyricProgressPageProps extends PageNavigationProps {
-  currentSongId?: string;
-}
-
-export const LyricProgressPage = ({
-  setPage,
-  currentSongId,
-}: LyricProgressPageProps) => {
+export const LyricProgressPage = () => {
+  const { songId: currentSongId } = useParams<{ songId: string }>();
+  const navigate = useNavigate();
   const { getSongById } = useSongStore();
   const {
     initializeProgress,
@@ -96,7 +92,7 @@ export const LyricProgressPage = ({
             </CardTitle>
           </CardHeader>
           <CardContent className="text-center">
-            <Button onClick={() => setPage("songList")} size="lg">
+            <Button onClick={() => navigate("/")} size="lg">
               曲一覧に戻る
             </Button>
           </CardContent>
@@ -233,14 +229,14 @@ export const LyricProgressPage = ({
               className="mt-8 flex gap-4"
             >
               <Button
-                onClick={() => setPage("songList")}
+                onClick={() => navigate("/")}
                 variant="outline"
                 className="glass-panel h-12 flex-1 transition-all duration-300 hover:bg-white/40"
               >
                 曲一覧へ
               </Button>
               <Button
-                onClick={() => setPage("library")}
+                onClick={() => navigate("/library")}
                 className="h-12 flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg transition-all duration-300 hover:from-purple-700 hover:to-pink-700 hover:shadow-xl"
               >
                 図鑑を見る
@@ -271,7 +267,7 @@ export const LyricProgressPage = ({
         <Card className="glass-card gap-0 border-0 py-1 shadow-lg">
           <CardHeader className="relative h-8 flex-row justify-start">
             <Button
-              onClick={() => setPage("songList")}
+              onClick={() => navigate("/")}
               variant="ghost"
               size="sm"
               className="glass-panel shrink-0 transition-all duration-300 hover:bg-white/40"
