@@ -4,15 +4,24 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SongCard } from "@/components/SongList/SongCard";
 import { useSongStore } from "@/stores/songStore";
+import { useLyricProgressStore } from "@/stores/lyricProgressStore";
 import type { PageNavigationProps } from "@/types";
 
 export const SongListPage = ({ setPage }: PageNavigationProps) => {
   const { searchQuery, setSearchQuery, getFilteredSongs } = useSongStore();
 
+  const { progressBySong } = useLyricProgressStore();
+
   const filteredSongs = getFilteredSongs();
 
   const handleSongClick = (songId: string) => {
     setPage("lyricProgress", songId);
+  };
+
+  const getProgress = (songId: string): number => {
+    const progress = progressBySong[songId];
+    if (!progress) return 0;
+    return (progress.totalCompletedLines / progress.lineProgress.length) * 100;
   };
 
   return (
@@ -98,6 +107,7 @@ export const SongListPage = ({ setPage }: PageNavigationProps) => {
                 >
                   <SongCard
                     song={song}
+                    progress={getProgress(song.id)}
                     onClick={() => handleSongClick(song.id)}
                   />
                 </motion.div>
