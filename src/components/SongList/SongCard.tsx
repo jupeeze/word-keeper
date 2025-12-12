@@ -16,15 +16,35 @@ export const SongCard = ({
   onClick,
   onPlay,
 }: SongCardProps) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
-    <div onClick={onClick}>
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-all"
+      aria-label={`${song.title} by ${song.artist}, ${progress.toFixed(1)}% complete`}
+    >
       <div className="flex items-center gap-4">
         <div className="flex flex-col items-center gap-2">
-          <div
-            className="h-12 w-12 rounded-lg bg-cover bg-center"
-            style={{ backgroundImage: `url(${song.coverImage})` }}
+          <img
+            src={song.coverImage}
+            alt={`${song.title} by ${song.artist} album cover`}
+            className="h-12 w-12 flex-shrink-0 rounded-lg object-cover"
           />
-          <span className="text-sm text-gray-500">{progress.toFixed(1)}%</span>
+          <span
+            className="text-sm text-gray-500"
+            aria-label={`Progress: ${progress.toFixed(1)} percent`}
+          >
+            {progress.toFixed(1)}%
+          </span>
         </div>
         <div className="flex w-full flex-col gap-2">
           <div className="flex items-center justify-between">
@@ -37,8 +57,9 @@ export const SongCard = ({
                 e.stopPropagation();
                 onPlay();
               }}
+              aria-label={`Play ${song.title}`}
             >
-              <ListMusic />
+              <ListMusic aria-hidden="true" />
             </Button>
           </div>
           <Progress current={progress} total={100} label="" />

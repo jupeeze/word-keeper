@@ -5,6 +5,7 @@ import { LyricSyncPlayer } from "./pages/LyricSyncPlayer";
 import { LibraryPage } from "./pages/LibraryPage";
 import { LyricProgressPage } from "./pages/LyricProgressPage";
 import { SongListPage } from "./pages/SongListPage";
+import { Toaster } from "./components/ui/toaster";
 import type { PageName } from "@/types";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           currentSongId={currentSongId || undefined}
         />
       )}
+      <Toaster position="top-center" richColors />
     </div>
   );
 }

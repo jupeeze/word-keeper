@@ -21,9 +21,11 @@ export const VocabularyWord = ({
   };
 
   return (
-    <div
-      className={`group relative cursor-pointer rounded-md p-1 text-center transition-transform hover:scale-110 hover:bg-yellow-200 ${className}`}
+    <button
+      type="button"
+      className={`group relative cursor-pointer rounded-md p-1 text-center transition-transform hover:scale-110 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${className}`}
       onClick={handleClick}
+      aria-label={`${vocab.word}を単語帳に追加 - ${vocab.meaning}`}
     >
       <p className="mb-1 text-xs text-gray-500">{vocab.reading}</p>
       <p className="text-lg font-bold text-gray-800 group-hover:text-blue-600">
@@ -34,9 +36,12 @@ export const VocabularyWord = ({
       </p>
 
       {/* ホバー時に「＋」アイコンを表示 */}
-      <div className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-blue-500 text-xs text-white opacity-0 shadow-sm group-hover:opacity-100">
+      <div
+        className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-blue-500 text-xs text-white opacity-0 shadow-sm group-hover:opacity-100"
+        aria-hidden="true"
+      >
         +
       </div>
-    </div>
+    </button>
   );
 };

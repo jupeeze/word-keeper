@@ -3,12 +3,14 @@
  */
 
 import type { Language } from "@/types";
+import { toast } from "sonner";
 
 export interface SpeechOptions {
   lang: Language;
   rate?: number;
   pitch?: number;
   volume?: number;
+  onError?: (error: string) => void;
 }
 
 /**
@@ -18,7 +20,15 @@ export interface SpeechOptions {
  */
 export const speak = (text: string, options: SpeechOptions): void => {
   if (typeof window === "undefined" || !window.speechSynthesis) {
-    console.warn("音声合成はサポートされていません。");
+    const errorMsg = "音声合成はサポートされていません。";
+    console.warn(errorMsg);
+    if (options.onError) {
+      options.onError(errorMsg);
+    } else {
+      toast.warning("音声再生できません", {
+        description: "お使いのブラウザは音声合成をサポートしていません。",
+      });
+    }
     return;
   }
 
@@ -29,6 +39,18 @@ export const speak = (text: string, options: SpeechOptions): void => {
   utterance.rate = options.rate ?? 0.9; // デフォルトは少しゆっくり
   utterance.pitch = options.pitch ?? 1.0;
   utterance.volume = options.volume ?? 1.0;
+
+  utterance.onerror = (event) => {
+    const errorMsg = `音声合成エラー: ${event.error}`;
+    console.error(errorMsg);
+    if (options.onError) {
+      options.onError(errorMsg);
+    } else {
+      toast.error("音声再生エラー", {
+        description: "音声の再生中にエラーが発生しました。",
+      });
+    }
+  };
 
   window.speechSynthesis.speak(utterance);
 };

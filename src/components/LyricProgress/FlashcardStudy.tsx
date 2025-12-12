@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -45,7 +45,7 @@ const FlashcardStudy = ({
     if (!isFlipped) {
       speak(currentWord.word, { lang: language });
     }
-  }, [currentIndex, isFlipped]);
+  }, [currentIndex, isFlipped, currentWord.word, language]);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -74,6 +74,30 @@ const FlashcardStudy = ({
     // Don't clear viewedCards - preserve the history
   };
 
+  // Keyboard navigation
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === " " || e.key === "Spacebar") {
+        e.preventDefault();
+        handleFlip();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        if (viewedCards.has(currentIndex)) {
+          handleNext();
+        }
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        handlePrevious();
+      }
+    },
+    [currentIndex, isFlipped, viewedCards, filteredVocabulary.length],
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
   return (
     <Card>
       {/* Progress indicator */}
@@ -89,6 +113,20 @@ const FlashcardStudy = ({
       <CardContent
         className="perspective-1000 relative w-full cursor-pointer"
         onClick={handleFlip}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            handleFlip();
+          }
+        }}
+        aria-label={
+          !isFlipped
+            ? "フラッシュカードをめくって意味を見る"
+            : "フラッシュカードをめくって単語に戻る"
+        }
+        aria-pressed={isFlipped}
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -121,7 +159,11 @@ const FlashcardStudy = ({
                 )}
               </CardContent>
               <CardFooter>
-                <div className="glass-panel flex w-full items-center justify-center py-3">
+                <div
+                  className="glass-panel flex w-full items-center justify-center py-3"
+                  role="status"
+                  aria-live="polite"
+                >
                   <p className="text-sm font-medium text-gray-600">
                     {!isFlipped
                       ? "タップして意味を見る"

@@ -10,6 +10,7 @@ import {
 import { Mic, MicOff, ChevronRight, RotateCcw, Volume2 } from "lucide-react";
 import { speak } from "@/utils/speechUtils";
 import type { Language } from "@/types";
+import { toast } from "sonner";
 
 interface SingingChallengeProps {
   language: Language;
@@ -103,13 +104,22 @@ const SingingChallenge = ({
 
       recognition.onerror = (event: any) => {
         console.error("Speech recognition error", event.error);
-        setError("音声認識エラーが発生しました。もう一度試してください。");
+        const errorMsg =
+          "音声認識エラーが発生しました。もう一度試してください。";
+        setError(errorMsg);
+        toast.error("音声認識エラー", {
+          description: errorMsg,
+        });
         setIsListening(false);
       };
 
       recognitionRef.current = recognition;
     } else {
-      setError("お使いのブラウザは音声認識をサポートしていません。");
+      const errorMsg = "お使いのブラウザは音声認識をサポートしていません。";
+      setError(errorMsg);
+      toast.warning("音声認識が利用できません", {
+        description: errorMsg,
+      });
     }
 
     return () => {

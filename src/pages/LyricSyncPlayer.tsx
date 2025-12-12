@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LyricLineDisplay } from "@/components/LyricPlayer/LyricLineDisplay";
 import { ArrowLeft, Music } from "lucide-react";
 import { motion } from "motion/react";
+import { toast } from "sonner";
 import {
   Carousel,
   CarouselContent,
@@ -63,6 +64,13 @@ export const LyricSyncPlayer = ({
     const currentLineIdx =
       nextLineIdx >= 0 ? nextLineIdx - 1 : song.lyrics.length - 1;
     setCurrentLyricIndex(currentLineIdx);
+  };
+
+  const handlePlayerError = (error: any) => {
+    console.error("ReactPlayer error:", error);
+    toast.error("動画の読み込みエラー", {
+      description: "動画を再生できませんでした。URLを確認してください。",
+    });
   };
 
   if (!currentSongId || !song) {
@@ -126,6 +134,7 @@ export const LyricSyncPlayer = ({
               playing={playing}
               onStart={handleStart}
               onTimeUpdate={handleTimeUpdate}
+              onError={handlePlayerError}
               controls={true}
             />
           </div>
