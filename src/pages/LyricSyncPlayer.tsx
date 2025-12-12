@@ -5,7 +5,6 @@ import { useSongStore } from "@/stores/songStore";
 import ReactPlayer from "react-player";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { LyricLineDisplay } from "@/components/LyricPlayer/LyricLineDisplay";
 import { ArrowLeft, Music } from "lucide-react";
 import { motion } from "motion/react";
