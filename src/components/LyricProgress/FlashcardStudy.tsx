@@ -9,16 +9,18 @@ import {
 } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import type { Vocabulary } from "@/types";
-import { speakKorean } from "@/utils/speechUtils";
+import { speak } from "@/utils/speechUtils";
 import { Progress } from "@/components/ui/progress";
 
 interface FlashcardStudyProps {
+  language: "en" | "ko";
   vocabulary: Vocabulary[];
   onComplete: () => void;
   isReviewMode?: boolean; // If true, all cards are pre-marked as viewed
 }
 
 const FlashcardStudy = ({
+  language,
   vocabulary,
   onComplete,
   isReviewMode = false,
@@ -41,7 +43,7 @@ const FlashcardStudy = ({
 
   useEffect(() => {
     if (!isFlipped) {
-      speakKorean(currentWord.word);
+      speak(currentWord.word, { lang: language });
     }
   }, [currentIndex, isFlipped]);
 

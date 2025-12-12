@@ -8,9 +8,10 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Mic, MicOff, ChevronRight, RotateCcw, Volume2 } from "lucide-react";
-import { speakKorean } from "@/utils/speechUtils";
+import { speak } from "@/utils/speechUtils";
 
 interface SingingChallengeProps {
+  language: "en" | "ko";
   lyricText: string;
   reading: string;
   translation: string;
@@ -61,6 +62,7 @@ declare global {
 }
 
 const SingingChallenge = ({
+  language,
   lyricText,
   reading,
   translation,
@@ -181,7 +183,7 @@ const SingingChallenge = ({
   };
 
   const handlePlayAudio = () => {
-    speakKorean(lyricText);
+    speak(lyricText, { lang: language });
   };
 
   return (

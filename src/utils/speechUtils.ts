@@ -3,20 +3,36 @@
  */
 
 export interface SpeechOptions {
-  lang?: string;
+  lang: "en" | "ko";
   rate?: number;
   pitch?: number;
   volume?: number;
 }
 
 /**
- * 韓国語の音声合成を実行する
+ * 言語コードをBCP 47形式に変換する
+ * @param language Song型のlanguageプロパティ ("en" | "ko")
+ * @returns BCP 47形式の言語コード (例: "en-US", "ko-KR")
+ */
+export const getLanguageCode = (language: "en" | "ko"): string => {
+  console.log(language);
+
+  const languageMap: Record<string, string> = {
+    en: "en-US",
+    ko: "ko-KR",
+  };
+  console.log(languageMap[language]);
+  return languageMap[language];
+};
+
+/**
+ * 多言語対応の音声合成を実行する
  * @param text 読み上げるテキスト
  * @param options 音声合成のオプション
  */
-export const speakKorean = (
+export const speak = (
   text: string,
-  options: SpeechOptions = {},
+  options: SpeechOptions,
 ): void => {
   if (typeof window === "undefined" || !window.speechSynthesis) {
     console.warn("音声合成はサポートされていません。");
@@ -26,7 +42,7 @@ export const speakKorean = (
   window.speechSynthesis.cancel(); // 既存の発話をキャンセル
 
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = options.lang || "ko-KR"; // デフォルトは韓国語
+  utterance.lang = getLanguageCode(options.lang); // デフォルトは韓国語（後方互換性）
   utterance.rate = options.rate ?? 0.9; // デフォルトは少しゆっくり
   utterance.pitch = options.pitch ?? 1.0;
   utterance.volume = options.volume ?? 1.0;

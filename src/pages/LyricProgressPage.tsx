@@ -308,6 +308,7 @@ export const LyricProgressPage = ({
           >
             {currentStep === "study" && (
               <FlashcardStudy
+                language={song.language}
                 vocabulary={
                   incorrectWord ? [incorrectWord] : currentLyric.vocabulary
                 }
@@ -317,6 +318,7 @@ export const LyricProgressPage = ({
             )}
             {currentStep === "sing" && (
               <SingingChallenge
+                language={song.language}
                 lyricText={currentLyric.text}
                 reading={currentLyric.reading}
                 translation={currentLyric.translation}

@@ -5,7 +5,7 @@ export interface Song {
   artist: string;
   coverImage: string;
   difficulty: "beginner" | "intermediate" | "advanced";
-  language: string;
+  language: "en" | "ko";
   youtubeUrl: string;
   lyrics: LyricLine[];
 }
