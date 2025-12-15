@@ -166,7 +166,7 @@ const VocabularyTest = ({
             className="w-full"
           >
             <p className="mb-4 text-center text-sm text-gray-600">
-              この意味の韓国語を選んでください
+              この意味の単語を選んでください
             </p>
             <div className="mb-6 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 p-6 text-center">
               <p className="text-3xl font-bold text-purple-800">

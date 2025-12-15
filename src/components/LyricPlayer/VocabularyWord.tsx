@@ -27,8 +27,8 @@ export const VocabularyWord = ({
       onClick={handleClick}
       aria-label={`${vocab.word}を単語帳に追加 - ${vocab.meaning}`}
     >
-      <p className="mb-1 text-xs text-gray-500">{vocab.reading}</p>
-      <p className="text-lg font-bold text-gray-800 group-hover:text-blue-600">
+      <p className="text-xs text-gray-500">{vocab.reading}</p>
+      <p className="font-bold text-gray-800 group-hover:text-blue-600">
         {vocab.word}
       </p>
       <p className="text-xs text-gray-400 group-hover:text-gray-600">

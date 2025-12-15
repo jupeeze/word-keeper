@@ -23,7 +23,7 @@ export interface SavedWordContext {
 
 export interface SavedWord {
   id: string; // 単語自体のユニークID (word文字列をベースに生成)
-  word: string; // 韓国語単語
+  word: string; // 単語
   meaning: string; // 日本語の意味
   pronunciation: string; // ルビ
   contexts: SavedWordContext[]; // 複数のコンテキストを配列で保持

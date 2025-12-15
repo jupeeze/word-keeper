@@ -32,11 +32,11 @@ export const speak = (text: string, options: SpeechOptions): void => {
     return;
   }
 
-  window.speechSynthesis.cancel(); // 既存の発話をキャンセル
+  window.speechSynthesis.cancel();
 
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = options.lang; // デフォルトは韓国語（後方互換性）
-  utterance.rate = options.rate ?? 0.9; // デフォルトは少しゆっくり
+  utterance.lang = options.lang;
+  utterance.rate = options.rate ?? 1.0;
   utterance.pitch = options.pitch ?? 1.0;
   utterance.volume = options.volume ?? 1.0;
 
