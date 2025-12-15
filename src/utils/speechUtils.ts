@@ -40,18 +40,6 @@ export const speak = (text: string, options: SpeechOptions): void => {
   utterance.pitch = options.pitch ?? 1.0;
   utterance.volume = options.volume ?? 1.0;
 
-  utterance.onerror = (event) => {
-    const errorMsg = `音声合成エラー: ${event.error}`;
-    console.error(errorMsg);
-    if (options.onError) {
-      options.onError(errorMsg);
-    } else {
-      toast.error("音声再生エラー", {
-        description: "音声の再生中にエラーが発生しました。",
-      });
-    }
-  };
-
   window.speechSynthesis.speak(utterance);
 };
 
