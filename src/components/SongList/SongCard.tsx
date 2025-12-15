@@ -29,15 +29,15 @@ export const SongCard = ({
       tabIndex={0}
       onClick={onClick}
       onKeyDown={handleKeyDown}
-      className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-all"
+      className="cursor-pointer rounded-lg transition-all focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
       aria-label={`${song.title} by ${song.artist}, ${progress.toFixed(1)}% complete`}
     >
       <div className="flex items-center gap-4">
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-shrink-0 flex-col items-center gap-2">
           <img
             src={song.coverImage}
             alt={`${song.title} by ${song.artist} album cover`}
-            className="h-12 w-12 flex-shrink-0 rounded-lg object-cover"
+            className="h-12 w-12 rounded-lg object-cover"
           />
           <span
             className="text-sm text-gray-500"

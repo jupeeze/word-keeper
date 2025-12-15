@@ -68,4 +68,3 @@ beforeAll(() => {
     window.webkitSpeechRecognition = MockSpeechRecognition as any;
   }
 });
-

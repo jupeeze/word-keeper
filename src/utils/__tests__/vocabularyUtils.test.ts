@@ -91,14 +91,10 @@ describe("vocabularyUtils", () => {
       const songData = {
         lyrics: [
           {
-            vocabulary: [
-              { word: "사랑", reading: "サラン", meaning: "愛" },
-            ],
+            vocabulary: [{ word: "사랑", reading: "サラン", meaning: "愛" }],
           },
           {
-            vocabulary: [
-              { word: "사랑", reading: "サラン", meaning: "愛" },
-            ],
+            vocabulary: [{ word: "사랑", reading: "サラン", meaning: "愛" }],
           },
         ],
       };
@@ -114,9 +110,7 @@ describe("vocabularyUtils", () => {
         {
           lyrics: [
             {
-              vocabulary: [
-                { word: "사랑", reading: "サラン", meaning: "愛" },
-              ],
+              vocabulary: [{ word: "사랑", reading: "サラン", meaning: "愛" }],
             },
           ],
         },
@@ -152,9 +146,7 @@ describe("vocabularyUtils", () => {
       const songData = {
         lyrics: [
           {
-            vocabulary: [
-              { word: "사랑", reading: "サラン", meaning: "愛" },
-            ],
+            vocabulary: [{ word: "사랑", reading: "サラン", meaning: "愛" }],
           },
         ],
       };

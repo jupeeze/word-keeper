@@ -23,7 +23,7 @@ export const VocabularyWord = ({
   return (
     <button
       type="button"
-      className={`group relative cursor-pointer rounded-md p-1 text-center transition-transform hover:scale-110 hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${className}`}
+      className={`group relative cursor-pointer rounded-md p-1 text-center transition-transform hover:scale-110 hover:bg-yellow-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none ${className}`}
       onClick={handleClick}
       aria-label={`${vocab.word}を単語帳に追加 - ${vocab.meaning}`}
     >

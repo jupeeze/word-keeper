@@ -48,7 +48,7 @@ export const SongListPage = ({ setPage }: PageNavigationProps) => {
         />
       </div>
 
-      <div className="relative mx-auto max-w-7xl space-y-8 p-6">
+      <div className="relative mx-auto max-w-7xl space-y-8 p-4">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
