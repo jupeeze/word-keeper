@@ -14,9 +14,26 @@
       "translation": "君は自信がなくて、その理由もわかっていない",
       "vocabulary": [
         {
+          "word": "you're",
+          "reading": "ユア",
+          "meaning": "あなたは",
+          "note": "you areの短縮形"
+        },
+        {
           "word": "insecure",
           "reading": "インセキュア",
-          "meaning": "自信がない、不安定な"
+          "meaning": "自信がない"
+        },
+        {
+          "word": "don't",
+          "reading": "ドント",
+          "meaning": "～しない",
+          "note": "do notの短縮形"
+        },
+        {
+          "word": "know",
+          "reading": "ノウ",
+          "meaning": "知る"
         },
         {
           "word": "what for",
@@ -32,14 +49,41 @@
       "translation": "ドアを通って入ってくると、みんなが振り返る",
       "vocabulary": [
         {
-          "word": "turn heads",
-          "reading": "ターン ヘッズ",
-          "meaning": "（人を）振り向かせる、注目を集める"
+          "word": "you're",
+          "reading": "ユア",
+          "meaning": "あなたは",
+          "note": "you areの短縮形"
+        },
+        {
+          "word": "turning heads",
+          "reading": "ターニング ヘッズ",
+          "meaning": "注目を集める",
+          "note": "人を"
+        },
+        {
+          "word": "when",
+          "reading": "ウェン",
+          "meaning": "～する時"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
         },
         {
           "word": "walk through",
           "reading": "ウォーク スルー",
-          "meaning": "通り抜ける、歩いて入る"
+          "meaning": "を通り抜ける"
+        },
+        {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "その"
+        },
+        {
+          "word": "door",
+          "reading": "ドア",
+          "meaning": "扉"
         }
       ]
     },
@@ -50,14 +94,30 @@
       "translation": "隠すためのメイクなんて必要ないよ",
       "vocabulary": [
         {
+          "word": "don't",
+          "reading": "ドント",
+          "meaning": "～しない",
+          "note": "do notの短縮形"
+        },
+        {
+          "word": "need",
+          "reading": "ニード",
+          "meaning": "必要とする"
+        },
+        {
           "word": "makeup",
           "reading": "メイクアップ",
           "meaning": "化粧"
         },
         {
+          "word": "to",
+          "reading": "トゥ",
+          "meaning": "～するために"
+        },
+        {
           "word": "cover up",
           "reading": "カバー アップ",
-          "meaning": "隠す、覆い隠す"
+          "meaning": "覆い隠す"
         }
       ]
     },
@@ -68,9 +128,20 @@
       "translation": "ありのままの君で十分なんだ",
       "vocabulary": [
         {
+          "word": "bein'",
+          "reading": "ビーイング",
+          "meaning": "～であること",
+          "note": "beingの略"
+        },
+        {
           "word": "the way you are",
           "reading": "ザ ウェイ ユー アー",
-          "meaning": "ありのままの君、君のあり方"
+          "meaning": "ありのままの君"
+        },
+        {
+          "word": "is",
+          "reading": "イズ",
+          "meaning": "です"
         },
         {
           "word": "enough",
@@ -91,9 +162,34 @@
           "meaning": "他の全員"
         },
         {
+          "word": "in",
+          "reading": "イン",
+          "meaning": "～の中に"
+        },
+        {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "その"
+        },
+        {
           "word": "room",
           "reading": "ルーム",
           "meaning": "部屋"
+        },
+        {
+          "word": "can",
+          "reading": "キャン",
+          "meaning": "～できる"
+        },
+        {
+          "word": "see",
+          "reading": "シー",
+          "meaning": "見る"
+        },
+        {
+          "word": "it",
+          "reading": "イット",
+          "meaning": "それ"
         }
       ]
     },
@@ -104,9 +200,25 @@
       "translation": "君以外の全員がね",
       "vocabulary": [
         {
+          "word": "everyone",
+          "reading": "エヴリワン",
+          "meaning": "誰でも、全員"
+        },
+        {
+          "word": "else",
+          "reading": "エルス",
+          "meaning": "他の"
+        },
+        {
           "word": "but",
           "reading": "バット",
-          "meaning": "～以外（ここではexceptの意味）"
+          "meaning": "～以外",
+          "note": "ここではexceptの意味"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
         }
       ]
     },
@@ -117,9 +229,34 @@
       "translation": "ベイビー、君は他の誰よりも僕の世界を照らしてくれる",
       "vocabulary": [
         {
+          "word": "baby",
+          "reading": "ベイビー",
+          "meaning": "恋人"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
+        },
+        {
           "word": "light up",
           "reading": "ライト アップ",
-          "meaning": "照らす、明るくする"
+          "meaning": "明るくする"
+        },
+        {
+          "word": "my",
+          "reading": "マイ",
+          "meaning": "私の"
+        },
+        {
+          "word": "world",
+          "reading": "ワールド",
+          "meaning": "世界"
+        },
+        {
+          "word": "like",
+          "reading": "ライク",
+          "meaning": "～のように"
         },
         {
           "word": "nobody else",
@@ -135,14 +272,55 @@
       "translation": "髪をかき上げる仕草に僕は参ってしまうよ",
       "vocabulary": [
         {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "その"
+        },
+        {
+          "word": "way",
+          "reading": "ウェイ",
+          "meaning": "様子"
+        },
+        {
+          "word": "that",
+          "reading": "ザット",
+          "meaning": "～という"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
+        },
+        {
           "word": "flip",
           "reading": "フリップ",
-          "meaning": "はじく、サッとかき上げる"
+          "meaning": "サッとかき上げる"
+        },
+        {
+          "word": "your",
+          "reading": "ユア",
+          "meaning": "あなたの"
+        },
+        {
+          "word": "hair",
+          "reading": "ヘア",
+          "meaning": "髪"
+        },
+        {
+          "word": "gets",
+          "reading": "ゲッツ",
+          "meaning": "～にする",
+          "note": "getの三人称単数形"
+        },
+        {
+          "word": "me",
+          "reading": "ミー",
+          "meaning": "私を"
         },
         {
           "word": "overwhelmed",
           "reading": "オーヴァーウェルムド",
-          "meaning": "圧倒された、参った"
+          "meaning": "圧倒された"
         }
       ]
     },
@@ -153,14 +331,57 @@
       "translation": "でも君がうつむいて微笑む時、すぐにわかるんだ",
       "vocabulary": [
         {
+          "word": "but",
+          "reading": "バット",
+          "meaning": "しかし"
+        },
+        {
+          "word": "when",
+          "reading": "ウェン",
+          "meaning": "～する時"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
+        },
+        {
+          "word": "smile",
+          "reading": "スマイル",
+          "meaning": "微笑む"
+        },
+        {
+          "word": "at",
+          "reading": "アット",
+          "meaning": "～に向かって"
+        },
+        {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "その"
+        },
+        {
           "word": "ground",
           "reading": "グラウンド",
           "meaning": "地面"
         },
         {
+          "word": "it",
+          "reading": "イット",
+          "meaning": "それ"
+        },
+        {
+          "word": "ain't",
+          "reading": "エイント",
+          "meaning": "～ではない",
+          "note": "isn'tの略"
+        },
+
+        {
           "word": "hard to tell",
           "reading": "ハード トゥ テル",
-          "meaning": "見分けるのが難しい（ここでは否定なので「簡単だ」）"
+          "meaning": "見分けるのが難しい",
+          "note": "ここでは否定なので「簡単だ」"
         }
       ]
     },
@@ -170,6 +391,28 @@
       "reading": "ユー ドント ノウ オーオー ユー ドント ノウ ユア ビューティフル",
       "translation": "君は気づいていない、自分が美しいってことを",
       "vocabulary": [
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
+        },
+        {
+          "word": "don't",
+          "reading": "ドント",
+          "meaning": "～しない",
+          "note": "do notの短縮形"
+        },
+        {
+          "word": "know",
+          "reading": "ノウ",
+          "meaning": "知る、気づく"
+        },
+        {
+          "word": "you're",
+          "reading": "ユア",
+          "meaning": "あなたは",
+          "note": "you areの短縮形"
+        },
         {
           "word": "beautiful",
           "reading": "ビューティフル",
@@ -186,12 +429,38 @@
         {
           "word": "if only",
           "reading": "イフ オンリー",
-          "meaning": "ただ～でさえあれば、～ならいいのに"
+          "meaning": "～ならいいのに"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
         },
         {
           "word": "saw",
           "reading": "ソー",
-          "meaning": "見た（seeの過去形）"
+          "meaning": "見た",
+          "note": "seeの過去形"
+        },
+        {
+          "word": "what",
+          "reading": "ホワット",
+          "meaning": "何"
+        },
+        {
+          "word": "I",
+          "reading": "アイ",
+          "meaning": "私"
+        },
+        {
+          "word": "can",
+          "reading": "キャン",
+          "meaning": "～できる"
+        },
+        {
+          "word": "see",
+          "reading": "シー",
+          "meaning": "見る"
         }
       ]
     },
@@ -202,14 +471,45 @@
       "translation": "なぜ僕がこんなにも君を求めているのかわかるはずさ",
       "vocabulary": [
         {
+          "word": "you'll",
+          "reading": "ユール",
+          "meaning": "あなたは～でしょう",
+          "note": "you willの短縮形"
+        },
+        {
           "word": "understand",
           "reading": "アンダースタンド",
           "meaning": "理解する"
         },
         {
+          "word": "why",
+          "reading": "ホワイ",
+          "meaning": "なぜ"
+        },
+        {
+          "word": "I",
+          "reading": "アイ",
+          "meaning": "私"
+        },
+        {
+          "word": "want",
+          "reading": "ウォント",
+          "meaning": "求める"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
+        },
+        {
+          "word": "so",
+          "reading": "ソー",
+          "meaning": "とても"
+        },
+        {
           "word": "desperately",
           "reading": "デスパレートリー",
-          "meaning": "必死に、どうしても"
+          "meaning": "必死に"
         }
       ]
     },
@@ -222,7 +522,45 @@
         {
           "word": "right now",
           "reading": "ライト ナウ",
-          "meaning": "たった今、現在"
+          "meaning": "たった今"
+        },
+        {
+          "word": "I'm",
+          "reading": "アイム",
+          "meaning": "私は",
+          "note": "I amの短縮形"
+        },
+        {
+          "word": "lookin'",
+          "reading": "ルッキング",
+          "meaning": "見ている",
+          "note": "lookingの略"
+        },
+        {
+          "word": "at",
+          "reading": "アット",
+          "meaning": "～を"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
+        },
+        {
+          "word": "and",
+          "reading": "アンド",
+          "meaning": "そして"
+        },
+        {
+          "word": "I",
+          "reading": "アイ",
+          "meaning": "私"
+        },
+        {
+          "word": "can't",
+          "reading": "キャント",
+          "meaning": "～できない",
+          "note": "cannotの短縮形"
         },
         {
           "word": "believe",
@@ -238,9 +576,31 @@
       "translation": "君は気づいていない、自分が美しいってことを",
       "vocabulary": [
         {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
+        },
+        {
+          "word": "don't",
+          "reading": "ドント",
+          "meaning": "～しない",
+          "note": "do notの短縮形"
+        },
+        {
           "word": "know",
           "reading": "ノウ",
-          "meaning": "知る、気づく"
+          "meaning": "気づく"
+        },
+        {
+          "word": "you're",
+          "reading": "ユア",
+          "meaning": "あなたは",
+          "note": "you areの短縮形"
+        },
+        {
+          "word": "beautiful",
+          "reading": "ビューティフル",
+          "meaning": "美しい"
         }
       ]
     },
@@ -250,15 +610,27 @@
       "reading": "ザッツ ホワット メイクス ユー ビューティフル",
       "translation": "それこそが君を美しくしているんだ",
       "vocabulary": [
-        {
-          "word": "make",
-          "reading": "メイク",
-          "meaning": "～にする、作る"
-        },
+
         {
           "word": "that's what",
           "reading": "ザッツ ホワット",
           "meaning": "それが～なことだ"
+        },
+        {
+          "word": "makes",
+          "reading": "メイクス",
+          "meaning": "～にする",
+          "note": "makeの三人称単数形"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "あなた"
+        },
+        {
+          "word": "beautiful",
+          "reading": "ビューティフル",
+          "meaning": "美しい"
         }
       ]
     }
