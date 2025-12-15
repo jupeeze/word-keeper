@@ -122,20 +122,17 @@ export const LyricSyncPlayer = ({
       <Card className="glass-card hover-lift overflow-hidden border-0">
         <CardContent className="h-full space-y-4">
           {/* React Player */}
-          <div className="aspect-video overflow-hidden rounded-xl">
+          <div>
             <ReactPlayer
               ref={playerRef}
-              style={{
-                width: "100%",
-                height: "100%",
-                aspectRatio: "16/9",
-              }}
+              className="aspect-video overflow-hidden rounded-xl"
+              style={{ width: "100%", height: "auto" }}
               src={song.youtubeUrl}
               playing={playing}
-              onStart={handleStart}
-              onTimeUpdate={handleTimeUpdate}
-              onError={handlePlayerError}
               controls={true}
+              onStart={handleStart}
+              onError={handlePlayerError}
+              onTimeUpdate={handleTimeUpdate}
             />
           </div>
           <Carousel

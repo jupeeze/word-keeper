@@ -57,28 +57,23 @@ const RewardVideoPlayer = ({
           報酬として、動画を視聴できます
         </div>
       </CardHeader>
-      <CardContent className="px-2 text-center">
+      <CardContent className="text-center">
         {/* Lyric display */}
         <div className="my-2">
           <p className="text-xs font-medium text-purple-600">{reading}</p>
-
-          <p className="font-bold text-blue-800">{lyricText}</p>
+          <p className="text-lg font-bold text-blue-800">{lyricText}</p>
           <p className="text-sm text-gray-600">{translation}</p>
         </div>
 
         {/* Video player */}
-        <div className="relative aspect-video">
+        <div className="relative">
           <ReactPlayer
             ref={playerRef}
+            className="aspect-video overflow-hidden rounded-xl"
+            style={{ width: "100%", height: "auto" }}
             src={youtubeUrl}
             playing={isPlaying}
             controls={false}
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "1rem",
-              overflow: "hidden",
-            }}
             onStart={handleStart}
             onTimeUpdate={handleTimeUpdate}
           />

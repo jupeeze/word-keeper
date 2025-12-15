@@ -92,10 +92,11 @@ export const WordPlaybackModal = ({ wordData, isOpen, onClose }: Props) => {
         )}
 
         {/* 動画プレーヤーエリア */}
-        <div className="relative aspect-video w-full overflow-hidden rounded-md">
+        <div className="relative">
           <ReactPlayer
             ref={playerRef}
-            style={{ width: "100%", height: "100%" }}
+            className="aspect-video overflow-hidden rounded-xl"
+            style={{ width: "100%", height: "auto" }}
             src={currentContext.youtubeUrl}
             playing={playing}
             controls={true}

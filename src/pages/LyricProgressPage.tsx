@@ -254,27 +254,15 @@ export const LyricProgressPage = ({
 
   return (
     <div className="gradient-secondary relative min-h-screen overflow-hidden">
-      {/* Animated Background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 15, repeat: Infinity }}
-          className="absolute -top-1/4 -right-1/4 h-1/2 w-1/2 rounded-full bg-gradient-to-br from-blue-300/30 to-purple-300/30 blur-3xl"
-        />
-      </div>
-
       <div className="relative mx-auto max-w-sm space-y-4">
         {/* Header */}
-        <Card className="glass-card gap-0 border-0 py-1 shadow-lg">
+        <Card className="glass-card gap-0 py-1">
           <CardHeader className="relative h-8 flex-row justify-start">
             <Button
               onClick={() => setPage("songList")}
               variant="ghost"
               size="sm"
-              className="glass-panel shrink-0 transition-all duration-300 hover:bg-white/40"
+              className="glass-panel shrink-0 transition-all duration-300"
             >
               <ArrowLeft className="h-6 w-6" />
             </Button>
