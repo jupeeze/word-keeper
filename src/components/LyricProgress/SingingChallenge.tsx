@@ -202,7 +202,7 @@ const SingingChallenge = ({
       <CardHeader className="text-sm font-semibold">
         歌詞を歌ってみよう！
       </CardHeader>
-      <CardContent className="flex h-72 flex-col items-center justify-center px-8">
+      <CardContent className="flex flex-col items-center justify-center">
         <Button
           variant="ghost"
           size="icon"
@@ -215,7 +215,7 @@ const SingingChallenge = ({
         <div className="mb-6 flex w-full justify-center gap-4">
           <div className="flex flex-col items-center">
             <p className="text-xs font-medium text-purple-600">{reading}</p>
-            <p className="text-gradient-primary text-center text-xl leading-relaxed font-bold">
+            <p className="text-gradient-primary text-center leading-relaxed font-bold">
               {lyricText}
             </p>
             <p className="text-sm text-gray-500">{translation}</p>

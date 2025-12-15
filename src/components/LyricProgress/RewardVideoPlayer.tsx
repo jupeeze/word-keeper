@@ -62,8 +62,8 @@ const RewardVideoPlayer = ({
         <div className="my-2">
           <p className="text-xs font-medium text-purple-600">{reading}</p>
 
-          <p className="text-2xl font-bold text-blue-800">{lyricText}</p>
-          <p className="text-lg text-gray-600">{translation}</p>
+          <p className="font-bold text-blue-800">{lyricText}</p>
+          <p className="text-sm text-gray-600">{translation}</p>
         </div>
 
         {/* Video player */}

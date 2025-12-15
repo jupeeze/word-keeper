@@ -154,7 +154,7 @@ const VocabularyTest = ({
           label="問題"
         />
       </CardHeader>
-      <CardContent className="px-8">
+      <CardContent>
         {/* Question card */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -165,7 +165,7 @@ const VocabularyTest = ({
             transition={{ duration: 0.3 }}
             className="w-full"
           >
-            <p className="mb-4 text-center text-sm text-gray-600">
+            <p className="my-2 text-center text-sm text-gray-600">
               この意味の単語を選んでください
             </p>
             <div className="mb-6 rounded-lg bg-gradient-to-br from-purple-100 to-pink-100 p-6 text-center">
@@ -185,7 +185,7 @@ const VocabularyTest = ({
       </CardContent>
       <CardFooter>
         {/* Feedback */}
-        <QuizFeedback feedback={feedback} className="mt-4 text-xl" />
+        <QuizFeedback feedback={feedback} className="mt-2 text-xl" />
       </CardFooter>
     </Card>
   );

@@ -87,7 +87,7 @@ const SentenceReorderPuzzle = ({
         <h3 className="text-lg font-semibold">正しい順序に並べてください</h3>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-2">
         <p className="text-center text-sm text-gray-500">{meaningText}</p>
         <div className="min-h-24 rounded-lg border-2 border-dashed border-gray-300 bg-white p-4">
           {/* Selected words area */}
