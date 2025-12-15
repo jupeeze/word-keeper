@@ -58,7 +58,7 @@ export const LyricSyncPlayer = ({
 
     const playedSeconds = (event.target as HTMLVideoElement).currentTime;
     const nextLineIdx = song.lyrics.findIndex(
-      (lyric) => lyric.startTime > playedSeconds,
+      (lyric) => lyric.startTime + 1.5 > playedSeconds,
     );
 
     const currentLineIdx =
