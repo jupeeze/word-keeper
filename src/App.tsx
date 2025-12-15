@@ -1,6 +1,6 @@
 // src/App.tsx
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { LyricSyncPlayer } from "./pages/LyricSyncPlayer";
 import { LibraryPage } from "./pages/LibraryPage";
 import { LyricProgressPage } from "./pages/LyricProgressPage";
@@ -11,10 +11,6 @@ import type { PageName } from "@/types";
 function App() {
   const [currentPage, setCurrentPage] = useState<PageName>("songList");
   const [currentSongId, setCurrentSongId] = useState<string | null>(null);
-
-  useEffect(() => {
-    console.log(`Current page: ${currentPage}, Song ID: ${currentSongId}`);
-  }, [currentPage, currentSongId]);
 
   const setPage = useCallback((page: PageName, songId?: string) => {
     setCurrentPage(page);
