@@ -7,7 +7,7 @@ import type { SavedWord } from "@/types";
 
 export const LibraryGrid = () => {
   // 新しいストアから savedWords を取得
-  const { savedWords, removeWord } = useLibraryStore();
+  const { savedWords } = useLibraryStore();
 
   // 再生中の単語データを管理するState
   const [selectedWord, setSelectedWord] = useState<SavedWord | null>(null);
@@ -36,15 +36,10 @@ export const LibraryGrid = () => {
 
   return (
     <>
-      <motion.div className="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4">
+      <motion.div className="grid grid-cols-2 gap-2">
         <AnimatePresence mode="popLayout">
           {savedWords.map((item) => (
-            <AnimatedWordCard
-              key={item.id}
-              data={item}
-              onPlay={handlePlay}
-              onDelete={removeWord}
-            />
+            <AnimatedWordCard key={item.id} data={item} onPlay={handlePlay} />
           ))}
         </AnimatePresence>
       </motion.div>
