@@ -7,8 +7,9 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { RotateCcw, CheckCircle2 } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { shuffleArray } from "@/utils/arrayUtils";
+import { toast } from "sonner";
 
 interface Vocabulary {
   word: string;
@@ -69,6 +70,9 @@ const SentenceReorderPuzzle = ({
     const userAnswer = selectedWords.join(" ");
     if (userAnswer === sentence) {
       setIsCorrect(true);
+      toast.success("正解です！🎉", {
+        description: "よくできました！",
+      });
       setTimeout(() => {
         onComplete();
       }, 1500);
@@ -146,18 +150,6 @@ const SentenceReorderPuzzle = ({
           </div>
         </div>
       </CardContent>
-
-      {/* Success message */}
-      {isCorrect && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="w-full rounded-lg border-2 border-green-400 bg-green-50 p-6 text-center"
-        >
-          <CheckCircle2 className="mx-auto mb-2 h-16 w-16 text-green-500" />
-          <p className="text-2xl font-bold text-green-700">正解です！🎉</p>
-        </motion.div>
-      )}
 
       {/* Action buttons */}
       <CardFooter className="flex w-full gap-3">
