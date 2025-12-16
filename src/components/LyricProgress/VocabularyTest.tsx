@@ -9,11 +9,12 @@ import {
 import { QuizChoiceGrid } from "@/components/Quiz/QuizChoiceGrid";
 import { QuizFeedback } from "@/components/Quiz/QuizFeedback";
 import { FEEDBACK_CONFIG } from "@/constants/quiz";
-import type { Vocabulary, FeedbackType } from "@/types";
+import type { Vocabulary, FeedbackType, WordMasteryState } from "@/types";
 import { generateChoices } from "@/utils/vocabularyUtils";
 import { useLibraryStore } from "@/stores/libraryStore";
 import { useSongStore } from "@/stores/songStore";
 import { Progress } from "@/components/ui/progress";
+import { toast } from "sonner";
 
 // Fisher-Yates shuffle algorithm
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -34,6 +35,7 @@ interface VocabularyTestProps {
   currentSongId?: string;
   currentLyricText?: string;
   currentLyricStartTime?: number;
+  wordMastery?: Record<string, WordMasteryState>; // Word mastery state from other lyric lines
 }
 
 const VocabularyTest = ({
@@ -44,21 +46,46 @@ const VocabularyTest = ({
   currentSongId,
   currentLyricText,
   currentLyricStartTime,
+  wordMastery = {},
 }: VocabularyTestProps) => {
   const { addWord } = useLibraryStore();
   const { getSongById } = useSongStore();
+
+  // Filter out already memorized words
+  const filteredVocabulary = vocabulary.filter(
+    (word) => !wordMastery[word.word]?.isMemorized,
+  );
+
+  const skippedCount = vocabulary.filter(
+    (word) => word.reading && wordMastery[word.word]?.isMemorized,
+  ).length;
+
   // Initialize with shuffled vocabulary
   const [shuffledVocabulary, setShuffledVocabulary] = useState(() =>
-    shuffleArray(vocabulary),
+    shuffleArray(filteredVocabulary),
+  );
+  // Store the initial total count to prevent it from changing during the test
+  const [totalQuestions, setTotalQuestions] = useState(
+    filteredVocabulary.length,
   );
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [choices, setChoices] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<FeedbackType | null>(null);
   const [incorrectWords, setIncorrectWords] = useState<string[]>([]);
 
+  // Show toast notification for skipped words
+  useEffect(() => {
+    if (skippedCount > 0) {
+      toast.info(`既に習得済みの単語 ${skippedCount} 個をスキップしました`, {
+        duration: 3000,
+      });
+    }
+  }, []); // Only run once on mount
+
   // Update shuffled vocabulary when prop changes
   useEffect(() => {
-    setShuffledVocabulary(shuffleArray(vocabulary));
+    setShuffledVocabulary(shuffleArray(filteredVocabulary));
+    setTotalQuestions(filteredVocabulary.length);
     setCurrentQuestionIndex(0);
   }, [vocabulary]);
 
@@ -85,6 +112,39 @@ const VocabularyTest = ({
       setChoices(generateChoices(currentWord.word, allMeanings, 4));
     }
   }, [currentQuestionIndex, currentWord, allMeanings]);
+
+  // If no vocabulary to test, automatically complete
+  if (filteredVocabulary.length === 0) {
+    // Automatically call onComplete when there are no words to test
+    useEffect(() => {
+      onComplete();
+    }, [onComplete]);
+
+    return (
+      <Card>
+        <CardHeader>
+          <Progress
+            current={vocabulary.length}
+            total={vocabulary.length}
+            label="問題"
+          />
+        </CardHeader>
+        <CardContent className="flex flex-col items-center justify-center gap-4 py-8">
+          <p className="text-2xl font-bold text-gray-800">
+            すべての単語を習得済みです！
+          </p>
+          <p className="text-gray-600">
+            この歌詞行の単語はすべて学習済みです。
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Guard against undefined currentWord
+  if (!currentWord) {
+    return null;
+  }
 
   const handleAnswer = (selectedWord: string) => {
     const isCorrect = selectedWord === currentWord.word;
@@ -117,7 +177,7 @@ const VocabularyTest = ({
       setTimeout(() => {
         setFeedback(null);
         // Move to next question
-        if (currentQuestionIndex < vocabulary.length - 1) {
+        if (currentQuestionIndex < totalQuestions - 1) {
           setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
           // All questions answered correctly
@@ -139,7 +199,7 @@ const VocabularyTest = ({
         // Restart from beginning on incorrect answer
         setCurrentQuestionIndex(0);
         setIncorrectWords([]);
-        setShuffledVocabulary(shuffleArray(vocabulary));
+        setShuffledVocabulary(shuffleArray(filteredVocabulary));
       }, FEEDBACK_CONFIG.DISPLAY_DURATION_MS * 2);
     }
   };
@@ -150,7 +210,7 @@ const VocabularyTest = ({
         {/* Progress indicator */}
         <Progress
           current={currentQuestionIndex + 1}
-          total={vocabulary.length}
+          total={totalQuestions}
           label="問題"
         />
       </CardHeader>

@@ -324,6 +324,7 @@ export const LyricProgressPage = ({
                 currentSongId={currentSongId}
                 currentLyricText={currentLyric.text}
                 currentLyricStartTime={currentLyric.startTime}
+                wordMastery={progress?.wordMastery}
               />
             )}
             {currentStep === "puzzle" && (
