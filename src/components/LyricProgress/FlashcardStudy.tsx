@@ -8,15 +8,17 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
-import type { Language, Vocabulary } from "@/types";
+import type { Language, Vocabulary, WordMasteryState } from "@/types";
 import { speak } from "@/utils/speechUtils";
 import { Progress } from "@/components/ui/progress";
+import { toast } from "sonner";
 
 interface FlashcardStudyProps {
   language: Language;
   vocabulary: Vocabulary[];
   onComplete: () => void;
   isReviewMode?: boolean; // If true, all cards are pre-marked as viewed
+  wordMastery?: Record<string, WordMasteryState>; // Word mastery state from other lyric lines
 }
 
 const FlashcardStudy = ({
@@ -24,14 +26,19 @@ const FlashcardStudy = ({
   vocabulary,
   onComplete,
   isReviewMode = false,
+  wordMastery = {},
 }: FlashcardStudyProps) => {
-  // Filter out words without reading property
-  const filteredVocabulary = vocabulary.filter((word) => word.reading);
+  const filteredVocabulary = vocabulary.filter(
+    (word) => !wordMastery[word.word]?.isMemorized,
+  );
+
+  const skippedCount = vocabulary.filter(
+    (word) => word.reading && wordMastery[word.word]?.isMemorized,
+  ).length;
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [viewedCards, setViewedCards] = useState<Set<number>>(() => {
-    // In review mode, mark all cards as viewed from the start
     if (isReviewMode) {
       return new Set(filteredVocabulary.map((_, index) => index));
     }
@@ -40,6 +47,15 @@ const FlashcardStudy = ({
 
   const currentWord = filteredVocabulary[currentIndex];
   const allViewed = viewedCards.size === filteredVocabulary.length;
+
+  // Show toast notification for skipped words
+  useEffect(() => {
+    if (skippedCount > 0) {
+      toast.info(`既に習得済みの単語 ${skippedCount} 個をスキップしました`, {
+        duration: 3000,
+      });
+    }
+  }, []); // Only run once on mount
 
   useEffect(() => {
     if (!isFlipped) {

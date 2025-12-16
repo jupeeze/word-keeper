@@ -302,6 +302,7 @@ export const LyricProgressPage = ({
                 }
                 onComplete={handleStudyComplete}
                 isReviewMode={currentProgress?.isStudied || false}
+                wordMastery={progress?.wordMastery}
               />
             )}
             {currentStep === "sing" && (

@@ -274,10 +274,7 @@ export const useLyricProgressStore = create(
             ? currentMastery.incorrectCount + 1
             : currentMastery.incorrectCount,
           lastTestedAt: new Date().toISOString(),
-          isMemorized:
-            isCorrect && currentMastery.correctCount + 1 >= 2
-              ? true
-              : currentMastery.isMemorized,
+          isMemorized: isCorrect ? true : currentMastery.isMemorized,
         };
 
         set({
