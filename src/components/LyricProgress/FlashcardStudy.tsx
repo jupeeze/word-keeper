@@ -57,42 +57,18 @@ const FlashcardStudy = ({
     }
   }, []); // Only run once on mount
 
+  // Auto-skip to next line if all words are already learned (Proposal 1)
+  useEffect(() => {
+    if (filteredVocabulary.length === 0) {
+      onComplete();
+    }
+  }, [filteredVocabulary.length, onComplete]);
+
   useEffect(() => {
     if (!isFlipped && currentWord) {
       speak(currentWord.word, { lang: language });
     }
   }, [currentIndex, isFlipped, currentWord?.word, language]);
-
-  // If no vocabulary to study, show completion message and exit
-  if (filteredVocabulary.length === 0) {
-    return (
-      <Card>
-        <CardHeader>
-          <Progress
-            current={vocabulary.length}
-            total={vocabulary.length}
-            label="単語"
-          />
-        </CardHeader>
-        <CardContent className="flex flex-col items-center justify-center gap-4 py-8">
-          <p className="text-2xl font-bold text-gray-800">
-            すべての単語を習得済みです！
-          </p>
-          <p className="text-gray-600">
-            この歌詞行の単語はすべて学習済みです。
-          </p>
-        </CardContent>
-        <CardFooter className="flex w-full gap-4">
-          <Button
-            onClick={onComplete}
-            className="h-full flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:from-purple-700 hover:to-pink-700 hover:shadow-xl"
-          >
-            次へ進む ✓
-          </Button>
-        </CardFooter>
-      </Card>
-    );
-  }
 
   // Guard against undefined currentWord
   if (!currentWord) {

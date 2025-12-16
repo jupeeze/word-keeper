@@ -113,33 +113,12 @@ const VocabularyTest = ({
     }
   }, [currentQuestionIndex, currentWord, allMeanings]);
 
-  // If no vocabulary to test, automatically complete
-  if (filteredVocabulary.length === 0) {
-    // Automatically call onComplete when there are no words to test
-    useEffect(() => {
+  // Auto-skip to next line if all words are already learned
+  useEffect(() => {
+    if (filteredVocabulary.length === 0) {
       onComplete();
-    }, [onComplete]);
-
-    return (
-      <Card>
-        <CardHeader>
-          <Progress
-            current={vocabulary.length}
-            total={vocabulary.length}
-            label="問題"
-          />
-        </CardHeader>
-        <CardContent className="flex flex-col items-center justify-center gap-4 py-8">
-          <p className="text-2xl font-bold text-gray-800">
-            すべての単語を習得済みです！
-          </p>
-          <p className="text-gray-600">
-            この歌詞行の単語はすべて学習済みです。
-          </p>
-        </CardContent>
-      </Card>
-    );
-  }
+    }
+  }, [filteredVocabulary.length, onComplete]);
 
   // Guard against undefined currentWord
   if (!currentWord) {
