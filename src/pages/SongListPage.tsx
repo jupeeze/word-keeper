@@ -117,19 +117,25 @@ export const SongListPage = ({ setPage }: PageNavigationProps) => {
           )}
         </motion.div>
 
-        {/* Footer Navigation */}
+        {/* Floating Action Button */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex justify-center gap-4 pt-8"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.5,
+            delay: 0.3,
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+          className="fixed bottom-8 right-8 z-50"
         >
           <Button
             onClick={() => setPage("library")}
-            variant="outline"
-            className="rounded-full px-8 transition-transform hover:scale-105"
+            size="lg"
+            className="h-16 w-16 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-2xl shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-purple-500/50 hover:from-purple-700 hover:to-pink-700"
           >
-            📚 単語辞書
+            📚
           </Button>
         </motion.div>
       </div>
