@@ -73,12 +73,12 @@ export const LyricProgressPage = ({
     if (currentProgress) {
       if (!currentProgress.isStudied) {
         setCurrentStep("study");
-      } else if (!currentProgress.isSingingCompleted) {
-        setCurrentStep("sing");
       } else if (!currentProgress.isTested) {
         setCurrentStep("test");
       } else if (!currentProgress.isPuzzleCompleted) {
         setCurrentStep("puzzle");
+      } else if (!currentProgress.isSingingCompleted) {
+        setCurrentStep("sing");
       } else if (!currentProgress.isCompleted) {
         setCurrentStep("reward");
       }
@@ -123,14 +123,14 @@ export const LyricProgressPage = ({
     switch (step) {
       case "study":
         return true; // Study is always accessible
-      case "sing":
-        return currentProgress.isStudied; // Can access if studied
       case "test":
-        return currentProgress.isSingingCompleted; // Can access if singing completed
+        return currentProgress.isStudied; // Can access if studied
       case "puzzle":
         return currentProgress.isTested; // Can access if tested
-      case "reward":
+      case "sing":
         return currentProgress.isPuzzleCompleted; // Can access if puzzle completed
+      case "reward":
+        return currentProgress.isSingingCompleted; // Can access if singing completed
       default:
         return false;
     }
@@ -142,11 +142,6 @@ export const LyricProgressPage = ({
   const handleStudyComplete = () => {
     setIncorrectWord(null); // Reset incorrect word after completing review
     markLineStudied(currentLineIndex);
-    setCurrentStep("sing");
-  };
-
-  const handleSingingComplete = () => {
-    markSingingCompleted(currentLineIndex);
     setCurrentStep("test");
   };
 
@@ -157,6 +152,11 @@ export const LyricProgressPage = ({
 
   const handlePuzzleComplete = () => {
     markPuzzleCompleted(currentLineIndex);
+    setCurrentStep("sing");
+  };
+
+  const handleSingingComplete = () => {
+    markSingingCompleted(currentLineIndex);
     setCurrentStep("reward");
   };
 
@@ -304,15 +304,6 @@ export const LyricProgressPage = ({
                 isReviewMode={currentProgress?.isStudied || false}
               />
             )}
-            {currentStep === "sing" && (
-              <SingingChallenge
-                language={song.language}
-                lyricText={currentLyric.text}
-                reading={currentLyric.reading}
-                translation={currentLyric.translation}
-                onComplete={handleSingingComplete}
-              />
-            )}
             {currentStep === "test" && (
               <VocabularyTest
                 vocabulary={currentLyric.vocabulary}
@@ -330,6 +321,15 @@ export const LyricProgressPage = ({
                 sentence={currentLyric.text}
                 vocabulary={currentLyric.vocabulary}
                 onComplete={handlePuzzleComplete}
+              />
+            )}
+            {currentStep === "sing" && (
+              <SingingChallenge
+                language={song.language}
+                lyricText={currentLyric.text}
+                reading={currentLyric.reading}
+                translation={currentLyric.translation}
+                onComplete={handleSingingComplete}
               />
             )}
             {currentStep === "reward" && (
@@ -361,11 +361,6 @@ export const LyricProgressPage = ({
                   isComplete: currentProgress?.isStudied || false,
                 },
                 {
-                  label: "sing",
-                  icon: MicVocal,
-                  isComplete: currentProgress?.isSingingCompleted || false,
-                },
-                {
                   label: "test",
                   icon: BookOpenCheck,
                   isComplete: currentProgress?.isTested || false,
@@ -376,13 +371,18 @@ export const LyricProgressPage = ({
                   isComplete: currentProgress?.isPuzzleCompleted || false,
                 },
                 {
+                  label: "sing",
+                  icon: MicVocal,
+                  isComplete: currentProgress?.isSingingCompleted || false,
+                },
+                {
                   label: "reward",
                   icon: Youtube,
                   isComplete: currentProgress?.isCompleted || false,
                 },
               ] as MenuDockItem[]
             }
-            activeIndex={["study", "sing", "test", "puzzle", "reward"].indexOf(
+            activeIndex={["study", "test", "puzzle", "sing", "reward"].indexOf(
               currentStep,
             )}
             onItemClick={(_index, item) => setCurrentStep(item.label)}
