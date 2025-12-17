@@ -9,74 +9,93 @@
 - YouTubeの動画と歌詞を同期して表示
 - 単語をクリックして単語帳に保存
 - リアルタイムで歌詞がハイライト表示
+- 自動スクロール機能で現在の歌詞を追跡
 
-### 📝 歌詞翻訳クイズ
+### 🎯 Lyric Progress - 段階的学習システム
 
-- 歌詞の翻訳を4択から選ぶクイズ
-- 即座にフィードバックを表示
-- スコア記録機能
+歌詞単位で進める包括的な学習プログラム:
 
-### ⚡ スピード単語クイズ
-
-- 制限時間内に単語の意味を当てるクイズ
-- 反応時間を記録
-- 履歴表示機能
+1. **📖 Flashcard Study** - フラッシュカード学習
+   - 歌詞に含まれる単語をカード形式で学習
+   - トースト通知でスキップした単語数を表示
+2. **✅ Vocabulary Test** - 語彙テスト
+   - 学習した単語の4択クイズ
+   - 正解率に応じた習熟度トラッキング
+   - 進捗バー表示
+3. **🧩 Sentence Reorder Puzzle** - 文章並び替えパズル
+   - 歌詞の文章を正しい順序に並び替え
+   - ドラッグ&ドロップ操作
+   - 成功時のトースト通知
+4. **🎤 Singing Challenge** - 歌唱チャレンジ
+   - YouTubeの動画を見ながら歌詞を確認
+   - 単語の発音を音声合成で確認
+   - 多言語対応（英語、韓国語など）
+5. **🎁 Reward Video Player** - ご褒美動画
+   - 全ステップ完了後のご褒美として動画を視聴
 
 ### 📚 単語辞書
 
 - 保存した単語を一覧表示
-- 音声再生機能
+- 音声再生機能（多言語対応）
 - 習熟度管理
+- 単語の補足情報表示（短縮形の解説など）
 
 ## 技術スタック
 
-- **フレームワーク**: React 18 + TypeScript
+- **フレームワーク**: React 19 + TypeScript
 - **ビルドツール**: Vite
 - **状態管理**: Zustand
-- **UIコンポーネント**: shadcn/ui
-- **スタイリング**: Tailwind CSS
+- **UIコンポーネント**: shadcn/ui (Radix UI)
+- **スタイリング**: Tailwind CSS v4
 - **動画プレイヤー**: react-player
+- **アニメーション**: Motion (Framer Motion)
+- **通知**: Sonner (トースト通知)
+- **テスティング**: Vitest + Testing Library
 
 ## プロジェクト構造
 
 ```
 src/
 ├── components/          # 再利用可能なUIコンポーネント
-│   ├── Quiz/           # クイズ関連コンポーネント
-│   │   ├── QuizFeedback.tsx      # フィードバック表示
-│   │   ├── QuizChoiceGrid.tsx    # 選択肢グリッド
-│   │   ├── QuizTimer.tsx         # タイマー表示
-│   │   └── ...
-│   ├── LyricPlayer/    # 歌詞プレイヤー関連コンポーネント
-│   │   ├── LyricLineDisplay.tsx  # 歌詞行表示
-│   │   ├── VocabularyWord.tsx    # 単語表示
-│   │   └── ...
-│   ├── Library/        # 単語辞書関連コンポーネント
-│   └── ui/             # 基本UIコンポーネント (shadcn/ui)
-├── pages/              # ページコンポーネント
-│   ├── Dashboard.tsx
-│   ├── SpeedReadingTrainer.tsx
-│   ├── LyricQuizPage.tsx
-│   └── LyricSyncPlayer.tsx
-├── hooks/              # カスタムフック
-│   ├── useSpeedReadingQuiz.ts
+│   ├── LyricProgress/   # 学習進捗関連コンポーネント
+│   │   ├── FlashcardStudy.tsx      # フラッシュカード学習
+│   │   ├── VocabularyTest.tsx      # 語彙テスト
+│   │   ├── SingingChallenge.tsx    # 歌唱チャレンジ
+│   │   ├── SentenceReorderPuzzle.tsx # 文章並び替えパズル
+│   │   └── RewardVideoPlayer.tsx   # ご褒美動画プレイヤー
+│   ├── LyricPlayer/     # 歌詞プレイヤー関連コンポーネント
+│   │   ├── LyricLineDisplay.tsx    # 歌詞行表示
+│   │   └── VocabularyWord.tsx      # 単語表示
+│   ├── SongList/        # 曲リスト関連コンポーネント
+│   │   └── SongCard.tsx            # 曲カード表示
+│   ├── Library/         # 単語辞書関連コンポーネント
+│   ├── Quiz/            # クイズ関連コンポーネント
+│   └── ui/              # 基本UIコンポーネント (shadcn/ui)
+├── pages/               # ページコンポーネント
+│   ├── SongListPage.tsx         # 曲一覧ページ
+│   ├── LyricSyncPlayer.tsx      # 歌詞同期プレイヤー
+│   ├── LyricProgressPage.tsx    # 学習進捗ページ
+│   └── LibraryPage.tsx          # 単語辞書ページ
+├── hooks/               # カスタムフック
 │   └── useWordAction.ts
-├── stores/             # Zustand状態管理
-│   ├── lyricQuizStore.ts
-│   ├── libraryStore.ts
-│   └── ...
-├── utils/              # ユーティリティ関数
-│   ├── arrayUtils.ts         # 配列操作
-│   ├── vocabularyUtils.ts    # 語彙データ処理
-│   ├── speechUtils.ts        # 音声合成
-│   └── quizUtils.ts          # クイズ関連ユーティリティ
-├── constants/          # 定数定義
-│   ├── quiz.ts              # クイズ設定
-│   └── ui.ts                # UI設定
-├── types/              # TypeScript型定義
+├── stores/              # Zustand状態管理
+│   ├── lyricProgressStore.ts    # 学習進捗状態管理
+│   ├── libraryStore.ts          # 単語辞書状態管理
+│   ├── songStore.ts             # 曲データ状態管理
+│   ├── quizStore.ts             # クイズ状態管理
+│   └── streakStore.ts           # 連続学習記録
+├── utils/               # ユーティリティ関数
+│   ├── arrayUtils.ts            # 配列操作
+│   ├── vocabularyUtils.ts       # 語彙データ処理
+│   ├── speechUtils.ts           # 音声合成（多言語対応）
+│   └── quizUtils.ts             # クイズ関連ユーティリティ
+├── constants/           # 定数定義
+│   ├── quiz.ts                  # クイズ設定
+│   └── ui.ts                    # UI設定
+├── types/               # TypeScript型定義
 │   └── index.ts
-└── data/               # データファイル
-    └── song_data.json
+└── data/                # データファイル
+    └── songs/                   # 曲データ（JSON形式）
 ```
 
 ## 開発ガイドライン
@@ -103,6 +122,18 @@ npm run build
 
 # プレビュー
 npm run preview
+
+# テストの実行
+npm run test
+
+# テストUIの起動
+npm run test:ui
+
+# テストカバレッジの確認
+npm run test:coverage
+
+# デプロイ (GitHub Pages)
+npm run deploy
 ```
 
 ## ライセンス
