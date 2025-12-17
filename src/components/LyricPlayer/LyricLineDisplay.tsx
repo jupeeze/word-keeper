@@ -4,12 +4,6 @@ import { VocabularyWord } from "./VocabularyWord";
 interface LyricLineDisplayProps {
   line: LyricLine;
   isActive: boolean;
-  onWordClick: (
-    word: string,
-    reading: string,
-    meaning: string,
-    lyricLine: LyricLine,
-  ) => void;
   className?: string;
 }
 
@@ -20,7 +14,6 @@ interface LyricLineDisplayProps {
 export const LyricLineDisplay = ({
   line,
   isActive,
-  onWordClick,
   className = "",
 }: LyricLineDisplayProps) => {
   return (
@@ -30,13 +23,7 @@ export const LyricLineDisplay = ({
       } ${className}`}
     >
       {line.vocabulary.map((vocab, vocabIdx) => (
-        <VocabularyWord
-          key={vocabIdx}
-          vocab={vocab}
-          onClick={() => {
-            onWordClick(vocab.word, vocab.reading, vocab.meaning, line);
-          }}
-        />
+        <VocabularyWord key={vocabIdx} vocab={vocab} />
       ))}
     </div>
   );
