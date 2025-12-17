@@ -50,6 +50,7 @@ export const LyricProgressPage = ({
     markLineCompleted,
     moveToNextLine,
     updateWordMastery,
+    markWordsAsMemorized,
     getCurrentLine,
   } = useLyricProgressStore();
 
@@ -161,6 +162,10 @@ export const LyricProgressPage = ({
   };
 
   const handleRewardComplete = () => {
+    // Mark all words in the current lyric line as memorized
+    const words = currentLyric.vocabulary.map((vocab) => vocab.word);
+    markWordsAsMemorized(words);
+
     markLineCompleted(currentLineIndex);
     moveToNextLine();
     setCurrentStep("study");
