@@ -8,33 +8,24 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
-import type { Language, Vocabulary } from "@/types";
 import { speak } from "@/utils/speechUtils";
 import { Progress } from "@/components/ui/progress";
-import { useLyricProgressStore } from "@/stores/lyricProgressStore";
-import { toast } from "sonner";
+import type { FlashcardStudyProps } from "./types";
+import { useFilteredVocabulary } from "./hooks/useFilteredVocabulary";
+import { useKeyboardNavigation } from "./hooks/useKeyboardNavigation";
 
-interface FlashcardStudyProps {
-  language: Language;
-  vocabulary: Vocabulary[];
-  onComplete: () => void;
-  isReviewMode?: boolean; // If true, all cards are pre-marked as viewed
-}
-
-const FlashcardStudy = ({
+export const FlashcardStudy = ({
   language,
   vocabulary,
   onComplete,
   isReviewMode = false,
 }: FlashcardStudyProps) => {
-  const { getCurrentProgress } = useLyricProgressStore();
-  const progress = getCurrentProgress();
-  const wordMastery = progress?.wordMastery || {};
-
-  // Filter out already memorized words
-  const filteredVocabulary = vocabulary.filter(
-    (word) => !wordMastery[word.word]?.isMemorized,
-  );
+  // Use custom hook for vocabulary filtering
+  const { filteredVocabulary } = useFilteredVocabulary({
+    vocabulary,
+    showToast: true,
+    reviewMode: isReviewMode,
+  });
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -46,83 +37,61 @@ const FlashcardStudy = ({
     return new Set();
   });
 
-  // Auto-complete if all words are already memorized
-  useEffect(() => {
-    const skippedCount = vocabulary.length - filteredVocabulary.length;
-    if (filteredVocabulary.length !== 0 && skippedCount > 0) {
-      toast.info(`既に習得済みの単語 ${skippedCount} 個をスキップしました`, {
-        duration: 3000,
-      });
-    }
-  }, []);
-
   const currentWord = filteredVocabulary[currentIndex];
   const allViewed = viewedCards.size === filteredVocabulary.length;
 
+  // Auto-speak current word
   useEffect(() => {
     if (!isFlipped && currentWord) {
       speak(currentWord.word, { lang: language });
     }
   }, [currentIndex, isFlipped, currentWord?.word, language]);
 
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
+  // Auto-complete if all words are already memorized
+  useEffect(() => {
+    if (filteredVocabulary.length === 0) {
+      onComplete();
+    }
+  }, [filteredVocabulary.length, onComplete]);
+
+  const handleFlip = useCallback(() => {
+    setIsFlipped((prev) => !prev);
     if (!isFlipped) {
       setViewedCards((prev) => new Set(prev).add(currentIndex));
     }
-  };
+  }, [isFlipped, currentIndex]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (currentIndex < filteredVocabulary.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+      setCurrentIndex((prev) => prev + 1);
       setIsFlipped(false);
     }
-  };
+  }, [currentIndex, filteredVocabulary.length]);
 
-  const handlePrevious = () => {
+  const handlePrevious = useCallback(() => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+      setCurrentIndex((prev) => prev - 1);
       setIsFlipped(false);
     }
-  };
+  }, [currentIndex]);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setCurrentIndex(0);
     setIsFlipped(false);
     // Don't clear viewedCards - preserve the history
-  };
+  }, []);
 
-  // Keyboard navigation
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === " " || e.key === "Spacebar") {
-        e.preventDefault();
-        handleFlip();
-      } else if (e.key === "ArrowRight") {
-        e.preventDefault();
-        if (viewedCards.has(currentIndex)) {
-          handleNext();
-        }
-      } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        handlePrevious();
-      }
-    },
-    [currentIndex, isFlipped, viewedCards, filteredVocabulary.length],
-  );
+  // Use keyboard navigation hook
+  useKeyboardNavigation({
+    onFlip: handleFlip,
+    onNext: handleNext,
+    onPrevious: handlePrevious,
+    canNavigateNext: viewedCards.has(currentIndex),
+    enabled: filteredVocabulary.length > 0,
+  });
 
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
-
-  // If no vocabulary to test, automatically complete
+  // If no vocabulary to test, show empty state
   if (filteredVocabulary.length === 0) {
-    // Automatically call onComplete when there are no words to test
-    useEffect(() => {
-      onComplete();
-    }, [onComplete]);
-
     return (
       <Card>
         <CardHeader></CardHeader>
@@ -174,7 +143,7 @@ const FlashcardStudy = ({
             <Card className="glass-card hover:shadow-glow h-full border-4 border-cyan-400 transition-all duration-300">
               <CardContent className="flex h-full flex-col items-center justify-center">
                 {!isFlipped ? (
-                  // Front: Korean word
+                  // Front: Word and reading
                   <>
                     <p className="mb-2 text-3xl font-medium text-purple-600">
                       {currentWord.reading}
@@ -184,7 +153,7 @@ const FlashcardStudy = ({
                     </p>
                   </>
                 ) : (
-                  // Back: Japanese meaning
+                  // Back: Meaning
                   <>
                     <p className="mb-2 text-center text-4xl font-bold text-blue-800">
                       {currentWord.meaning}
@@ -253,5 +222,3 @@ const FlashcardStudy = ({
     </Card>
   );
 };
-
-export default FlashcardStudy;

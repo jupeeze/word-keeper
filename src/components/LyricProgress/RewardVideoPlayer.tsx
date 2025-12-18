@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,18 +8,9 @@ import {
 } from "@/components/ui/card";
 import { Play, ArrowRight } from "lucide-react";
 import ReactPlayer from "react-player";
+import type { RewardVideoPlayerProps } from "./types";
 
-interface RewardVideoPlayerProps {
-  youtubeUrl: string;
-  startTime: number;
-  nextStartTime?: number;
-  reading: string;
-  lyricText: string;
-  translation: string;
-  onNext: () => void;
-}
-
-const RewardVideoPlayer = ({
+export const RewardVideoPlayer = ({
   youtubeUrl,
   startTime,
   nextStartTime,
@@ -32,22 +23,24 @@ const RewardVideoPlayer = ({
   const playerRef = useRef<HTMLVideoElement>(null);
 
   const handleTimeUpdate = () => {
+  const handleTimeUpdate = useCallback(() => {
     if (!playerRef.current) return;
-    if (nextStartTime && playerRef.current.currentTime >= nextStartTime) {
+    const currentTime = playerRef.current.currentTime;
+    if (nextStartTime && currentTime >= nextStartTime) {
       setIsPlaying(false);
     }
-  };
+  }, [nextStartTime]);
 
-  const handleStart = () => {
+  const handleStart = useCallback(() => {
     if (playerRef.current) {
       playerRef.current.currentTime = startTime;
     }
-  };
+  }, [startTime]);
 
-  const handleReplay = () => {
+  const handleReplay = useCallback(() => {
     setIsPlaying(true);
     handleStart();
-  };
+  }, [handleStart]);
 
   return (
     <Card className="items-center">
@@ -100,5 +93,3 @@ const RewardVideoPlayer = ({
     </Card>
   );
 };
-
-export default RewardVideoPlayer;

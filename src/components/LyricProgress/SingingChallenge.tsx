@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,193 +9,92 @@ import {
 } from "@/components/ui/card";
 import { Mic, MicOff, ChevronRight, RotateCcw, Volume2 } from "lucide-react";
 import { speak } from "@/utils/speechUtils";
-import type { Language } from "@/types";
 import { toast } from "sonner";
+import type { SingingChallengeProps } from "./types";
+import { useSpeechRecognition } from "./hooks/useSpeechRecognition";
 
-interface SingingChallengeProps {
-  language: Language;
-  lyricText: string;
-  reading: string;
-  translation: string;
-  onComplete: () => void;
-}
-
-// Web Speech API types
-interface SpeechRecognitionEvent extends Event {
-  results: SpeechRecognitionResultList;
-}
-
-interface SpeechRecognitionResultList {
-  [index: number]: SpeechRecognitionResult;
-  length: number;
-}
-
-interface SpeechRecognitionResult {
-  [index: number]: SpeechRecognitionAlternative;
-  isFinal: boolean;
-}
-
-interface SpeechRecognitionAlternative {
-  transcript: string;
-  confidence: number;
-}
-
-interface SpeechRecognition extends EventTarget {
-  continuous: boolean;
-  interimResults: boolean;
-  lang: string;
-  start: () => void;
-  stop: () => void;
-  abort: () => void;
-  onresult: (event: SpeechRecognitionEvent) => void;
-  onend: () => void;
-  onerror: (event: Event) => void;
-}
-
-declare global {
-  interface Window {
-    SpeechRecognition: {
-      new (): SpeechRecognition;
-    };
-    webkitSpeechRecognition: {
-      new (): SpeechRecognition;
-    };
-  }
-}
-
-const SingingChallenge = ({
+export const SingingChallenge = ({
   language,
   lyricText,
   reading,
   translation,
   onComplete,
 }: SingingChallengeProps) => {
-  const [isListening, setIsListening] = useState(false);
-  const [transcript, setTranscript] = useState("");
   const [feedback, setFeedback] = useState<"idle" | "correct" | "incorrect">(
     "idle",
   );
-  const [error, setError] = useState<string | null>(null);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
-  useEffect(() => {
-    // Initialize Speech Recognition
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SpeechRecognition) {
-      const recognition = new SpeechRecognition();
-      recognition.continuous = false;
-      recognition.interimResults = true;
-      recognition.lang = language;
+  const checkPronunciation = useCallback(
+    (spokenText: string) => {
+      const cleanSpoken = spokenText.trim().toLowerCase().replace(/\s+/g, "");
+      const cleanTarget = lyricText.trim().toLowerCase().replace(/\s+/g, "");
 
-      recognition.onresult = (event: SpeechRecognitionEvent) => {
-        const lastResult = event.results[event.results.length - 1];
-        const text = lastResult[0].transcript;
-        setTranscript(text);
+      // Word overlap matching
+      const targetWords = lyricText.toLowerCase().split(/\s+/);
+      const spokenWords = spokenText.toLowerCase().split(/\s+/);
 
-        if (lastResult.isFinal) {
-          checkPronunciation(text);
+      let matchCount = 0;
+      targetWords.forEach((tWord) => {
+        if (
+          spokenWords.some(
+            (sWord) => sWord.includes(tWord) || tWord.includes(sWord),
+          )
+        ) {
+          matchCount++;
         }
-      };
-
-      recognition.onend = () => {
-        setIsListening(false);
-      };
-
-      recognition.onerror = (event: any) => {
-        console.error("Speech recognition error", event.error);
-        const errorMsg =
-          "音声認識エラーが発生しました。もう一度試してください。";
-        setError(errorMsg);
-        toast.error("音声認識エラー", {
-          description: errorMsg,
-        });
-        setIsListening(false);
-      };
-
-      recognitionRef.current = recognition;
-    } else {
-      const errorMsg = "お使いのブラウザは音声認識をサポートしていません。";
-      setError(errorMsg);
-      toast.warning("音声認識が利用できません", {
-        description: errorMsg,
       });
-    }
 
-    return () => {
-      if (recognitionRef.current) {
-        recognitionRef.current.abort();
-      }
-    };
-  }, [lyricText]);
+      const matchRate = matchCount / targetWords.length;
 
-  const startListening = () => {
-    if (recognitionRef.current) {
-      setError(null);
-      setTranscript("");
-      setFeedback("idle");
-      try {
-        recognitionRef.current.start();
-        setIsListening(true);
-      } catch (e) {
-        console.error("Failed to start recognition", e);
-      }
-    }
-  };
-
-  const stopListening = () => {
-    if (recognitionRef.current) {
-      recognitionRef.current.stop();
-      setIsListening(false);
-      checkPronunciation(transcript);
-    }
-  };
-
-  const checkPronunciation = (spokenText: string) => {
-    const cleanSpoken = spokenText.trim().toLowerCase().replace(/\s+/g, "");
-    const cleanTarget = lyricText.trim().toLowerCase().replace(/\s+/g, "");
-
-    // Simple fuzzy matching: check if at least 50% of the target characters are present in the spoken text
-    // This is very basic. For better results, we'd use Levenshtein distance.
-    // But for "singing", maybe just checking if it's non-empty and has some overlap is enough for a prototype.
-
-    // Let's try a slightly better approach: Word overlap
-    const targetWords = lyricText.toLowerCase().split(/\s+/);
-    const spokenWords = spokenText.toLowerCase().split(/\s+/);
-
-    let matchCount = 0;
-    targetWords.forEach((tWord) => {
       if (
-        spokenWords.some(
-          (sWord) => sWord.includes(tWord) || tWord.includes(sWord),
-        )
+        matchRate >= 0.5 ||
+        cleanSpoken.includes(cleanTarget) ||
+        cleanTarget.includes(cleanSpoken)
       ) {
-        matchCount++;
+        setFeedback("correct");
+      } else {
+        setFeedback("incorrect");
       }
-    });
+    },
+    [lyricText],
+  );
 
-    const matchRate = matchCount / targetWords.length;
+  // Use speech recognition hook
+  const {
+    isListening,
+    isSupported,
+    transcript,
+    startListening,
+    stopListening,
+  } = useSpeechRecognition({
+    language,
+    onResult: checkPronunciation,
+    continuous: false,
+  });
 
-    if (
-      matchRate >= 0.5 ||
-      cleanSpoken.includes(cleanTarget) ||
-      cleanTarget.includes(cleanSpoken)
-    ) {
-      setFeedback("correct");
-    } else {
-      setFeedback("incorrect");
-    }
-  };
-
-  const handleRetry = () => {
-    setTranscript("");
+  const handleStartListening = useCallback(() => {
     setFeedback("idle");
     startListening();
-  };
+  }, [startListening]);
 
-  const handlePlayAudio = () => {
+  const handleStopListening = useCallback(() => {
+    stopListening();
+  }, [stopListening]);
+
+  const handleRetry = useCallback(() => {
+    setFeedback("idle");
+    startListening();
+  }, [startListening]);
+
+  const handlePlayAudio = useCallback(() => {
     speak(lyricText, { lang: language });
-  };
+  }, [lyricText, language]);
+
+  if (!isSupported) {
+    toast.warning("音声認識が利用できません", {
+      description: "お使いのブラウザは音声認識をサポートしていません。",
+    });
+  }
 
   return (
     <Card>
@@ -255,8 +154,6 @@ const SingingChallenge = ({
               </motion.div>
             )}
           </AnimatePresence>
-
-          {error && <p className="text-center text-sm text-red-500">{error}</p>}
         </div>
 
         {/* Controls */}
@@ -264,7 +161,7 @@ const SingingChallenge = ({
           {feedback !== "correct" ? (
             <Button
               size="lg"
-              onClick={isListening ? stopListening : startListening}
+              onClick={isListening ? handleStopListening : handleStartListening}
               className={`flex h-20 w-20 items-center justify-center rounded-full transition-all duration-300 ${
                 isListening
                   ? "animate-pulse bg-red-500 shadow-red-500/50 hover:bg-red-600"
@@ -314,5 +211,3 @@ const SingingChallenge = ({
     </Card>
   );
 };
-
-export default SingingChallenge;

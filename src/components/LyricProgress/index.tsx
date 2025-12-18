@@ -1,5 +1,11 @@
-export { default as FlashcardStudy } from "./FlashcardStudy";
-export { default as RewardVideoPlayer } from "./RewardVideoPlayer";
-export { default as SentenceReorderPuzzle } from "./SentenceReorderPuzzle";
-export { default as SingingChallenge } from "./SingingChallenge";
-export { default as VocabularyTest } from "./VocabularyTest";
+export { FlashcardStudy } from "./FlashcardStudy";
+export { RewardVideoPlayer } from "./RewardVideoPlayer";
+export { SentenceReorderPuzzle } from "./SentenceReorderPuzzle";
+export { SingingChallenge } from "./SingingChallenge";
+export { VocabularyTest } from "./VocabularyTest";
+
+// Export shared types
+export * from "./types";
+
+// Export shared hooks
+export * from "./hooks";
