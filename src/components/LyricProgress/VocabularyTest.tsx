@@ -13,7 +13,9 @@ import type { Vocabulary, FeedbackType } from "@/types";
 import { generateChoices } from "@/utils/vocabularyUtils";
 import { useLibraryStore } from "@/stores/libraryStore";
 import { useSongStore } from "@/stores/songStore";
+import { useLyricProgressStore } from "@/stores/lyricProgressStore";
 import { Progress } from "@/components/ui/progress";
+import { toast } from "sonner";
 
 // Fisher-Yates shuffle algorithm
 const shuffleArray = <T,>(array: T[]): T[] => {
@@ -47,21 +49,48 @@ const VocabularyTest = ({
 }: VocabularyTestProps) => {
   const { addWord } = useLibraryStore();
   const { getSongById } = useSongStore();
+  const { getCurrentProgress } = useLyricProgressStore();
+  const progress = getCurrentProgress();
+  const wordMastery = progress?.wordMastery || {};
 
-  const filteredVocabulary = vocabulary.filter((word) => word.reading);
+  // Filter out already memorized words
+  const filteredVocabulary = vocabulary.filter(
+    (word) => !wordMastery[word.word]?.isMemorized,
+  );
+
+  // Use original vocabulary for review if all words are memorized
+  const vocabularyToUse =
+    filteredVocabulary.length > 0 ? filteredVocabulary : vocabulary;
 
   // Initialize with shuffled vocabulary
   const [shuffledVocabulary, setShuffledVocabulary] = useState(() =>
-    shuffleArray(filteredVocabulary),
+    shuffleArray(vocabularyToUse),
   );
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [choices, setChoices] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<FeedbackType | null>(null);
   const [incorrectWords, setIncorrectWords] = useState<string[]>([]);
 
-  // Update shuffled vocabulary when prop changes
+  // Show message based on memorization status
   useEffect(() => {
-    setShuffledVocabulary(shuffleArray(filteredVocabulary));
+    const skippedCount = vocabulary.length - filteredVocabulary.length;
+    if (filteredVocabulary.length === 0 && vocabulary.length > 0) {
+      toast.info("復習モード", {
+        description: "すべての単語を習得済みです。復習しましょう！",
+        duration: 3000,
+      });
+    } else if (skippedCount > 0) {
+      toast.info(`既に習得済みの単語 ${skippedCount} 個をスキップしました`, {
+        duration: 3000,
+      });
+    }
+  }, []);
+
+  // Update shuffled vocabulary when vocabulary changes
+  useEffect(() => {
+    const newVocabularyToUse =
+      filteredVocabulary.length > 0 ? filteredVocabulary : vocabulary;
+    setShuffledVocabulary(shuffleArray(newVocabularyToUse));
     setCurrentQuestionIndex(0);
   }, [vocabulary]);
 
@@ -120,7 +149,7 @@ const VocabularyTest = ({
       setTimeout(() => {
         setFeedback(null);
         // Move to next question
-        if (currentQuestionIndex < filteredVocabulary.length - 1) {
+        if (currentQuestionIndex < vocabularyToUse.length - 1) {
           setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
           // All questions answered correctly
@@ -142,7 +171,9 @@ const VocabularyTest = ({
         // Restart from beginning on incorrect answer
         setCurrentQuestionIndex(0);
         setIncorrectWords([]);
-        setShuffledVocabulary(shuffleArray(filteredVocabulary));
+        const newVocabularyToUse =
+          filteredVocabulary.length > 0 ? filteredVocabulary : vocabulary;
+        setShuffledVocabulary(shuffleArray(newVocabularyToUse));
       }, FEEDBACK_CONFIG.DISPLAY_DURATION_MS * 2);
     }
   };
@@ -153,7 +184,7 @@ const VocabularyTest = ({
         {/* Progress indicator */}
         <Progress
           current={currentQuestionIndex + 1}
-          total={filteredVocabulary.length}
+          total={vocabularyToUse.length}
           label="問題"
         />
       </CardHeader>

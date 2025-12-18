@@ -11,6 +11,8 @@ import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import type { Language, Vocabulary } from "@/types";
 import { speak } from "@/utils/speechUtils";
 import { Progress } from "@/components/ui/progress";
+import { useLyricProgressStore } from "@/stores/lyricProgressStore";
+import { toast } from "sonner";
 
 interface FlashcardStudyProps {
   language: Language;
@@ -25,8 +27,14 @@ const FlashcardStudy = ({
   onComplete,
   isReviewMode = false,
 }: FlashcardStudyProps) => {
-  // Filter out words without reading property
-  const filteredVocabulary = vocabulary.filter((word) => word.reading);
+  const { getCurrentProgress } = useLyricProgressStore();
+  const progress = getCurrentProgress();
+  const wordMastery = progress?.wordMastery || {};
+
+  // Filter out already memorized words
+  const filteredVocabulary = vocabulary.filter(
+    (word) => !wordMastery[word.word]?.isMemorized,
+  );
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -38,14 +46,24 @@ const FlashcardStudy = ({
     return new Set();
   });
 
+  // Auto-complete if all words are already memorized
+  useEffect(() => {
+    const skippedCount = vocabulary.length - filteredVocabulary.length;
+    if (filteredVocabulary.length !== 0 && skippedCount > 0) {
+      toast.info(`既に習得済みの単語 ${skippedCount} 個をスキップしました`, {
+        duration: 3000,
+      });
+    }
+  }, []);
+
   const currentWord = filteredVocabulary[currentIndex];
   const allViewed = viewedCards.size === filteredVocabulary.length;
 
   useEffect(() => {
-    if (!isFlipped) {
+    if (!isFlipped && currentWord) {
       speak(currentWord.word, { lang: language });
     }
-  }, [currentIndex, isFlipped, currentWord.word, language]);
+  }, [currentIndex, isFlipped, currentWord?.word, language]);
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -97,6 +115,22 @@ const FlashcardStudy = ({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
+
+  // If no vocabulary to test, automatically complete
+  if (filteredVocabulary.length === 0) {
+    // Automatically call onComplete when there are no words to test
+    useEffect(() => {
+      onComplete();
+    }, [onComplete]);
+
+    return (
+      <Card>
+        <CardHeader></CardHeader>
+        <CardContent></CardContent>
+        <CardFooter></CardFooter>
+      </Card>
+    );
+  }
 
   return (
     <Card>
