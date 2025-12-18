@@ -47,9 +47,12 @@ const VocabularyTest = ({
 }: VocabularyTestProps) => {
   const { addWord } = useLibraryStore();
   const { getSongById } = useSongStore();
+
+  const filteredVocabulary = vocabulary.filter((word) => word.reading);
+
   // Initialize with shuffled vocabulary
   const [shuffledVocabulary, setShuffledVocabulary] = useState(() =>
-    shuffleArray(vocabulary),
+    shuffleArray(filteredVocabulary),
   );
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [choices, setChoices] = useState<string[]>([]);
@@ -58,7 +61,7 @@ const VocabularyTest = ({
 
   // Update shuffled vocabulary when prop changes
   useEffect(() => {
-    setShuffledVocabulary(shuffleArray(vocabulary));
+    setShuffledVocabulary(shuffleArray(filteredVocabulary));
     setCurrentQuestionIndex(0);
   }, [vocabulary]);
 
@@ -117,7 +120,7 @@ const VocabularyTest = ({
       setTimeout(() => {
         setFeedback(null);
         // Move to next question
-        if (currentQuestionIndex < vocabulary.length - 1) {
+        if (currentQuestionIndex < filteredVocabulary.length - 1) {
           setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
           // All questions answered correctly
@@ -139,7 +142,7 @@ const VocabularyTest = ({
         // Restart from beginning on incorrect answer
         setCurrentQuestionIndex(0);
         setIncorrectWords([]);
-        setShuffledVocabulary(shuffleArray(vocabulary));
+        setShuffledVocabulary(shuffleArray(filteredVocabulary));
       }, FEEDBACK_CONFIG.DISPLAY_DURATION_MS * 2);
     }
   };
@@ -150,7 +153,7 @@ const VocabularyTest = ({
         {/* Progress indicator */}
         <Progress
           current={currentQuestionIndex + 1}
-          total={vocabulary.length}
+          total={filteredVocabulary.length}
           label="問題"
         />
       </CardHeader>
