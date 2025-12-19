@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Card,
@@ -9,36 +9,16 @@ import {
 import { QuizChoiceGrid } from "@/components/Quiz/QuizChoiceGrid";
 import { QuizFeedback } from "@/components/Quiz/QuizFeedback";
 import { FEEDBACK_CONFIG } from "@/constants/quiz";
-import type { Vocabulary, FeedbackType, WordMasteryState } from "@/types";
+import type { FeedbackType } from "@/types";
 import { generateChoices } from "@/utils/vocabularyUtils";
+import { shuffleArray } from "@/utils/arrayUtils";
 import { useLibraryStore } from "@/stores/libraryStore";
 import { useSongStore } from "@/stores/songStore";
 import { Progress } from "@/components/ui/progress";
-import { toast } from "sonner";
+import type { VocabularyTestProps } from "./types";
+import { useFilteredVocabulary } from "./hooks/useFilteredVocabulary";
 
-// Fisher-Yates shuffle algorithm
-const shuffleArray = <T,>(array: T[]): T[] => {
-  const newArray = [...array];
-  for (let i = newArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-  }
-  return newArray;
-};
-
-interface VocabularyTestProps {
-  vocabulary: Vocabulary[];
-  onComplete: () => void;
-  onUpdateMastery: (word: string, isCorrect: boolean) => void;
-  onBackToStudy?: () => void;
-  onIncorrectAnswer?: (word: Vocabulary) => void;
-  currentSongId?: string;
-  currentLyricText?: string;
-  currentLyricStartTime?: number;
-  wordMastery?: Record<string, WordMasteryState>; // Word mastery state from other lyric lines
-}
-
-const VocabularyTest = ({
+export const VocabularyTest = ({
   vocabulary,
   onComplete,
   onUpdateMastery,
@@ -46,46 +26,33 @@ const VocabularyTest = ({
   currentSongId,
   currentLyricText,
   currentLyricStartTime,
-  wordMastery = {},
 }: VocabularyTestProps) => {
   const { addWord } = useLibraryStore();
   const { getSongById } = useSongStore();
 
-  // Filter out already memorized words
-  const filteredVocabulary = vocabulary.filter(
-    (word) => !wordMastery[word.word]?.isMemorized,
-  );
+  // Use custom hook for vocabulary filtering
+  const { filteredVocabulary, isAllMemorized } = useFilteredVocabulary({
+    vocabulary,
+    showToast: true,
+    reviewMode: false,
+  });
 
-  const skippedCount = vocabulary.filter(
-    (word) => word.reading && wordMastery[word.word]?.isMemorized,
-  ).length;
+  // Use original vocabulary for review if all words are memorized
+  const vocabularyToUse = isAllMemorized ? vocabulary : filteredVocabulary;
 
   // Initialize with shuffled vocabulary
   const [shuffledVocabulary, setShuffledVocabulary] = useState(() =>
-    shuffleArray(filteredVocabulary),
-  );
-  // Store the initial total count to prevent it from changing during the test
-  const [totalQuestions, setTotalQuestions] = useState(
-    filteredVocabulary.length,
+    shuffleArray(vocabularyToUse),
   );
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [choices, setChoices] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<FeedbackType | null>(null);
   const [incorrectWords, setIncorrectWords] = useState<string[]>([]);
 
-  // Show toast notification for skipped words
+  // Update shuffled vocabulary when vocabulary changes
   useEffect(() => {
-    if (skippedCount > 0) {
-      toast.info(`既に習得済みの単語 ${skippedCount} 個をスキップしました`, {
-        duration: 3000,
-      });
-    }
-  }, []); // Only run once on mount
-
-  // Update shuffled vocabulary when prop changes
-  useEffect(() => {
-    setShuffledVocabulary(shuffleArray(filteredVocabulary));
-    setTotalQuestions(filteredVocabulary.length);
+    const newVocabularyToUse = isAllMemorized ? vocabulary : filteredVocabulary;
+    setShuffledVocabulary(shuffleArray(newVocabularyToUse));
     setCurrentQuestionIndex(0);
   }, [vocabulary]);
 
@@ -113,96 +80,90 @@ const VocabularyTest = ({
     }
   }, [currentQuestionIndex, currentWord, allMeanings]);
 
-  // If no vocabulary to test, automatically complete
-  if (filteredVocabulary.length === 0) {
-    // Automatically call onComplete when there are no words to test
-    useEffect(() => {
-      onComplete();
-    }, [onComplete]);
+  const handleAnswer = useCallback(
+    (selectedWord: string) => {
+      const isCorrect = selectedWord === currentWord.word;
 
-    return (
-      <Card>
-        <CardHeader>
-          <Progress
-            current={vocabulary.length}
-            total={vocabulary.length}
-            label="問題"
-          />
-        </CardHeader>
-        <CardContent className="flex flex-col items-center justify-center gap-4 py-8">
-          <p className="text-2xl font-bold text-gray-800">
-            すべての単語を習得済みです！
-          </p>
-          <p className="text-gray-600">
-            この歌詞行の単語はすべて学習済みです。
-          </p>
-        </CardContent>
-      </Card>
-    );
-  }
+      // Update word mastery
+      onUpdateMastery(currentWord.word, isCorrect);
 
-  // Guard against undefined currentWord
-  if (!currentWord) {
-    return null;
-  }
-
-  const handleAnswer = (selectedWord: string) => {
-    const isCorrect = selectedWord === currentWord.word;
-
-    // Update word mastery
-    onUpdateMastery(currentWord.word, isCorrect);
-
-    if (isCorrect) {
-      // Register word to library when answered correctly
-      if (
-        currentSongId &&
-        currentLyricText !== undefined &&
-        currentLyricStartTime !== undefined
-      ) {
-        const song = getSongById(currentSongId);
-        if (song) {
-          addWord(currentWord.word, currentWord.meaning, currentWord.reading, {
-            songId: currentSongId,
-            songTitle: song.title,
-            artistName: song.artist,
-            youtubeUrl: song.youtubeUrl,
-            timestamp: currentLyricStartTime,
-            sourceLyric: currentLyricText,
-          });
+      if (isCorrect) {
+        // Register word to library when answered correctly
+        if (
+          currentSongId &&
+          currentLyricText !== undefined &&
+          currentLyricStartTime !== undefined
+        ) {
+          const song = getSongById(currentSongId);
+          if (song) {
+            addWord(
+              currentWord.word,
+              currentWord.meaning,
+              currentWord.reading,
+              {
+                songId: currentSongId,
+                songTitle: song.title,
+                artistName: song.artist,
+                youtubeUrl: song.youtubeUrl,
+                timestamp: currentLyricStartTime,
+                sourceLyric: currentLyricText,
+              },
+            );
+          }
         }
-      }
 
-      // Show correct feedback
-      setFeedback("correct");
-      setTimeout(() => {
-        setFeedback(null);
-        // Move to next question
-        if (currentQuestionIndex < totalQuestions - 1) {
-          setCurrentQuestionIndex(currentQuestionIndex + 1);
-        } else {
-          // All questions answered correctly
-          onComplete();
+        // Show correct feedback
+        setFeedback("correct");
+        setTimeout(() => {
+          setFeedback(null);
+          // Move to next question
+          if (currentQuestionIndex < vocabularyToUse.length - 1) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+          } else {
+            // All questions answered correctly
+            onComplete();
+          }
+        }, FEEDBACK_CONFIG.DISPLAY_DURATION_MS);
+      } else {
+        // Show incorrect feedback
+        setFeedback("incorrect");
+        setIncorrectWords([...incorrectWords, currentWord.word]);
+
+        // Notify parent about incorrect answer
+        if (onIncorrectAnswer) {
+          onIncorrectAnswer(currentWord);
         }
-      }, FEEDBACK_CONFIG.DISPLAY_DURATION_MS);
-    } else {
-      // Show incorrect feedback
-      setFeedback("incorrect");
-      setIncorrectWords([...incorrectWords, currentWord.word]);
 
-      // Notify parent about incorrect answer
-      if (onIncorrectAnswer) {
-        onIncorrectAnswer(currentWord);
+        setTimeout(() => {
+          setFeedback(null);
+          // Restart from beginning on incorrect answer
+          setCurrentQuestionIndex(0);
+          setIncorrectWords([]);
+          const newVocabularyToUse = isAllMemorized
+            ? vocabulary
+            : filteredVocabulary;
+          setShuffledVocabulary(shuffleArray(newVocabularyToUse));
+        }, FEEDBACK_CONFIG.DISPLAY_DURATION_MS * 2);
       }
-
-      setTimeout(() => {
-        setFeedback(null);
-        // Restart from beginning on incorrect answer
-        setCurrentQuestionIndex(0);
-        setIncorrectWords([]);
-        setShuffledVocabulary(shuffleArray(filteredVocabulary));
-      }, FEEDBACK_CONFIG.DISPLAY_DURATION_MS * 2);
-    }
-  };
+    },
+    [
+      currentWord,
+      onUpdateMastery,
+      currentSongId,
+      currentLyricText,
+      currentLyricStartTime,
+      getSongById,
+      addWord,
+      currentQuestionIndex,
+      vocabularyToUse.length,
+      onComplete,
+      incorrectWords,
+      onIncorrectAnswer,
+      vocabulary,
+      filteredVocabulary,
+      isAllMemorized,
+    ],
+  );
 
   return (
     <Card>
@@ -210,7 +171,7 @@ const VocabularyTest = ({
         {/* Progress indicator */}
         <Progress
           current={currentQuestionIndex + 1}
-          total={totalQuestions}
+          total={vocabularyToUse.length}
           label="問題"
         />
       </CardHeader>
@@ -250,5 +211,3 @@ const VocabularyTest = ({
     </Card>
   );
 };
-
-export default VocabularyTest;

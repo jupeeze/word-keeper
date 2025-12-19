@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import type { PageNavigationProps } from "@/types";
-import { useWordAction } from "@/hooks/useWordAction";
 import { useSongStore } from "@/stores/songStore";
 import ReactPlayer from "react-player";
 import { Button } from "@/components/ui/button";
@@ -29,7 +28,6 @@ export const LyricSyncPlayer = ({
   currentSongId,
 }: LyricSyncPlayerProps) => {
   const playerRef = useRef<HTMLVideoElement | null>(null);
-  const { handleWordClick } = useWordAction(currentSongId);
   const { getSongById } = useSongStore();
 
   const [state, setState] = useState<PlayerState>({
@@ -154,7 +152,6 @@ export const LyricSyncPlayer = ({
                     <LyricLineDisplay
                       line={line}
                       isActive={index === currentLyricIndex}
-                      onWordClick={handleWordClick}
                     />
                   </motion.div>
                 </CarouselItem>

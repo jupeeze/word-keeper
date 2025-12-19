@@ -26,6 +26,7 @@ interface LyricProgressStore {
   markLineCompleted: (lineIndex: number) => void;
   moveToNextLine: () => void;
   updateWordMastery: (word: string, isCorrect: boolean) => void;
+  markWordsAsMemorized: (words: string[]) => void;
   resetProgress: (songId: string) => void;
 
   // Getters
@@ -274,7 +275,6 @@ export const useLyricProgressStore = create(
             ? currentMastery.incorrectCount + 1
             : currentMastery.incorrectCount,
           lastTestedAt: new Date().toISOString(),
-          isMemorized: isCorrect ? true : currentMastery.isMemorized,
         };
 
         set({
@@ -286,6 +286,41 @@ export const useLyricProgressStore = create(
                 ...progress.wordMastery,
                 [word]: updatedMastery,
               },
+            },
+          },
+        });
+      },
+
+      markWordsAsMemorized: (words) => {
+        const state = get();
+        const songId = state.currentSongId;
+        if (!songId) return;
+
+        const progress = state.progressBySong[songId];
+        if (!progress) return;
+
+        const updatedWordMastery = { ...progress.wordMastery };
+
+        words.forEach((word) => {
+          const currentMastery = updatedWordMastery[word] || {
+            word,
+            isMemorized: false,
+            correctCount: 0,
+            incorrectCount: 0,
+          };
+
+          updatedWordMastery[word] = {
+            ...currentMastery,
+            isMemorized: true,
+          };
+        });
+
+        set({
+          progressBySong: {
+            ...state.progressBySong,
+            [songId]: {
+              ...progress,
+              wordMastery: updatedWordMastery,
             },
           },
         });

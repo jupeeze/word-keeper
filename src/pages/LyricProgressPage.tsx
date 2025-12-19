@@ -50,6 +50,7 @@ export const LyricProgressPage = ({
     markLineCompleted,
     moveToNextLine,
     updateWordMastery,
+    markWordsAsMemorized,
     getCurrentLine,
   } = useLyricProgressStore();
 
@@ -161,6 +162,10 @@ export const LyricProgressPage = ({
   };
 
   const handleRewardComplete = () => {
+    // Mark all words in the current lyric line as memorized
+    const words = currentLyric.vocabulary.map((vocab) => vocab.word);
+    markWordsAsMemorized(words);
+
     markLineCompleted(currentLineIndex);
     moveToNextLine();
     setCurrentStep("study");
@@ -302,7 +307,6 @@ export const LyricProgressPage = ({
                 }
                 onComplete={handleStudyComplete}
                 isReviewMode={currentProgress?.isStudied || false}
-                wordMastery={progress?.wordMastery}
               />
             )}
             {currentStep === "test" && (
@@ -315,7 +319,6 @@ export const LyricProgressPage = ({
                 currentSongId={currentSongId}
                 currentLyricText={currentLyric.text}
                 currentLyricStartTime={currentLyric.startTime}
-                wordMastery={progress?.wordMastery}
               />
             )}
             {currentStep === "puzzle" && (

@@ -8,33 +8,24 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
-import type { Language, Vocabulary, WordMasteryState } from "@/types";
 import { speak } from "@/utils/speechUtils";
 import { Progress } from "@/components/ui/progress";
-import { toast } from "sonner";
+import type { FlashcardStudyProps } from "./types";
+import { useFilteredVocabulary } from "./hooks/useFilteredVocabulary";
+import { useKeyboardNavigation } from "./hooks/useKeyboardNavigation";
 
-interface FlashcardStudyProps {
-  language: Language;
-  vocabulary: Vocabulary[];
-  onComplete: () => void;
-  isReviewMode?: boolean; // If true, all cards are pre-marked as viewed
-  wordMastery?: Record<string, WordMasteryState>; // Word mastery state from other lyric lines
-}
-
-const FlashcardStudy = ({
+export const FlashcardStudy = ({
   language,
   vocabulary,
   onComplete,
   isReviewMode = false,
-  wordMastery = {},
 }: FlashcardStudyProps) => {
-  const filteredVocabulary = vocabulary.filter(
-    (word) => !wordMastery[word.word]?.isMemorized,
-  );
-
-  const skippedCount = vocabulary.filter(
-    (word) => word.reading && wordMastery[word.word]?.isMemorized,
-  ).length;
+  // Use custom hook for vocabulary filtering
+  const { filteredVocabulary } = useFilteredVocabulary({
+    vocabulary,
+    showToast: true,
+    reviewMode: isReviewMode,
+  });
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -48,107 +39,69 @@ const FlashcardStudy = ({
   const currentWord = filteredVocabulary[currentIndex];
   const allViewed = viewedCards.size === filteredVocabulary.length;
 
-  // Show toast notification for skipped words
-  useEffect(() => {
-    if (skippedCount > 0) {
-      toast.info(`既に習得済みの単語 ${skippedCount} 個をスキップしました`, {
-        duration: 3000,
-      });
-    }
-  }, []); // Only run once on mount
-
+  // Auto-speak current word
   useEffect(() => {
     if (!isFlipped && currentWord) {
       speak(currentWord.word, { lang: language });
     }
   }, [currentIndex, isFlipped, currentWord?.word, language]);
 
-  // If no vocabulary to study, show completion message and exit
+  // Auto-complete if all words are already memorized
+  useEffect(() => {
+    if (filteredVocabulary.length === 0) {
+      onComplete();
+    }
+  }, [filteredVocabulary.length, onComplete]);
+
+  // If no vocabulary to test, show empty state
   if (filteredVocabulary.length === 0) {
     return (
       <Card>
-        <CardHeader>
-          <Progress
-            current={vocabulary.length}
-            total={vocabulary.length}
-            label="単語"
-          />
-        </CardHeader>
-        <CardContent className="flex flex-col items-center justify-center gap-4 py-8">
-          <p className="text-2xl font-bold text-gray-800">
-            すべての単語を習得済みです！
-          </p>
-          <p className="text-gray-600">
-            この歌詞行の単語はすべて学習済みです。
-          </p>
-        </CardContent>
-        <CardFooter className="flex w-full gap-4">
-          <Button
-            onClick={onComplete}
-            className="h-full flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:from-purple-700 hover:to-pink-700 hover:shadow-xl"
-          >
-            次へ進む ✓
-          </Button>
-        </CardFooter>
+        <CardHeader></CardHeader>
+        <CardContent></CardContent>
+        <CardFooter></CardFooter>
       </Card>
     );
   }
 
-  // Guard against undefined currentWord
-  if (!currentWord) {
-    return null;
-  }
-
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
+  const handleFlip = useCallback(() => {
+    setIsFlipped((prev) => !prev);
     if (!isFlipped) {
       setViewedCards((prev) => new Set(prev).add(currentIndex));
     }
-  };
+  }, [isFlipped, currentIndex]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (currentIndex < filteredVocabulary.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+      setCurrentIndex((prev) => prev + 1);
       setIsFlipped(false);
     }
-  };
+  }, [currentIndex, filteredVocabulary.length]);
 
-  const handlePrevious = () => {
+  const handlePrevious = useCallback(() => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+      setCurrentIndex((prev) => prev - 1);
       setIsFlipped(false);
     }
-  };
+  }, [currentIndex]);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setCurrentIndex(0);
     setIsFlipped(false);
     // Don't clear viewedCards - preserve the history
-  };
+  }, []);
 
-  // Keyboard navigation
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === " " || e.key === "Spacebar") {
-        e.preventDefault();
-        handleFlip();
-      } else if (e.key === "ArrowRight") {
-        e.preventDefault();
-        if (viewedCards.has(currentIndex)) {
-          handleNext();
-        }
-      } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        handlePrevious();
-      }
-    },
-    [currentIndex, isFlipped, viewedCards, filteredVocabulary.length],
-  );
+  // Use keyboard navigation hook
+  useKeyboardNavigation({
+    onFlip: handleFlip,
+    onNext: handleNext,
+    onPrevious: handlePrevious,
+    canNavigateNext: viewedCards.has(currentIndex),
+    enabled: filteredVocabulary.length > 0,
+  });
 
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
+  console.log("vocabulary", vocabulary);
+  console.log("filteredVocabulary", filteredVocabulary);
 
   return (
     <Card>
@@ -192,7 +145,7 @@ const FlashcardStudy = ({
             <Card className="glass-card hover:shadow-glow h-full border-4 border-cyan-400 transition-all duration-300">
               <CardContent className="flex h-full flex-col items-center justify-center">
                 {!isFlipped ? (
-                  // Front: Korean word
+                  // Front: Word and reading
                   <>
                     <p className="mb-2 text-3xl font-medium text-purple-600">
                       {currentWord.reading}
@@ -202,7 +155,7 @@ const FlashcardStudy = ({
                     </p>
                   </>
                 ) : (
-                  // Back: Japanese meaning
+                  // Back: Meaning
                   <>
                     <p className="mb-2 text-center text-4xl font-bold text-blue-800">
                       {currentWord.meaning}
@@ -271,5 +224,3 @@ const FlashcardStudy = ({
     </Card>
   );
 };
-
-export default FlashcardStudy;

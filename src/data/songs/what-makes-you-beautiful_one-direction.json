@@ -200,14 +200,9 @@
       "translation": "君以外の全員がね",
       "vocabulary": [
         {
-          "word": "everyone",
-          "reading": "エヴリワン",
-          "meaning": "誰でも、全員"
-        },
-        {
-          "word": "else",
-          "reading": "エルス",
-          "meaning": "他の"
+          "word": "everyone else",
+          "reading": "エヴリワン エルス",
+          "meaning": "他の全員"
         },
         {
           "word": "but",

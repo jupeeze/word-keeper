@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,63 +10,58 @@ import {
 import { RotateCcw } from "lucide-react";
 import { shuffleArray } from "@/utils/arrayUtils";
 import { toast } from "sonner";
+import type { SentenceReorderPuzzleProps } from "./types";
 
-interface Vocabulary {
-  word: string;
-  reading: string;
-  meaning: string;
-}
-
-interface SentenceReorderPuzzleProps {
-  sentence: string; // 正しい文章（スペース区切り）
-  vocabulary: Vocabulary[]; // 語彙データ
-  onComplete: () => void;
-}
-
-const SentenceReorderPuzzle = ({
+export const SentenceReorderPuzzle = ({
   sentence,
   vocabulary,
   onComplete,
 }: SentenceReorderPuzzleProps) => {
   // 語彙の意味を正しい語順で並べた文章を作成
   const meaningText = vocabulary.map((v) => v.meaning).join(" ");
+  const correctWords = sentence.split(" ");
+
   const [words, setWords] = useState<string[]>([]);
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const [isCorrect, setIsCorrect] = useState(false);
-
-  const correctWords = sentence.split(" ");
 
   // Initialize shuffled words
   useEffect(() => {
     setWords(shuffleArray([...correctWords]));
   }, [sentence]);
 
-  const handleWordClick = (word: string, index: number) => {
-    if (isCorrect) return;
+  const handleWordClick = useCallback(
+    (word: string, index: number) => {
+      if (isCorrect) return;
 
-    // Add word to selected list
-    setSelectedWords([...selectedWords, word]);
-    // Remove word from available words
-    setWords(words.filter((_, i) => i !== index));
-  };
+      // Add word to selected list
+      setSelectedWords((prev) => [...prev, word]);
+      // Remove word from available words
+      setWords((prev) => prev.filter((_, i) => i !== index));
+    },
+    [isCorrect],
+  );
 
-  const handleRemoveWord = (index: number) => {
-    if (isCorrect) return;
+  const handleRemoveWord = useCallback(
+    (index: number) => {
+      if (isCorrect) return;
 
-    const word = selectedWords[index];
-    // Remove from selected
-    setSelectedWords(selectedWords.filter((_, i) => i !== index));
-    // Add back to available words
-    setWords([...words, word]);
-  };
+      const word = selectedWords[index];
+      // Remove from selected
+      setSelectedWords((prev) => prev.filter((_, i) => i !== index));
+      // Add back to available words
+      setWords((prev) => [...prev, word]);
+    },
+    [isCorrect, selectedWords],
+  );
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setWords(shuffleArray([...correctWords]));
     setSelectedWords([]);
     setIsCorrect(false);
-  };
+  }, [correctWords]);
 
-  const handleCheck = () => {
+  const handleCheck = useCallback(() => {
     const userAnswer = selectedWords.join(" ");
     if (userAnswer === sentence) {
       setIsCorrect(true);
@@ -82,7 +77,7 @@ const SentenceReorderPuzzle = ({
         handleReset();
       }, 1000);
     }
-  };
+  }, [selectedWords, sentence, onComplete, handleReset]);
 
   return (
     <Card className="items-center">
@@ -166,5 +161,3 @@ const SentenceReorderPuzzle = ({
     </Card>
   );
 };
-
-export default SentenceReorderPuzzle;
