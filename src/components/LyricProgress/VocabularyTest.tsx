@@ -33,7 +33,7 @@ export const VocabularyTest = ({
   // Use custom hook for vocabulary filtering
   const { filteredVocabulary, isAllMemorized } = useFilteredVocabulary({
     vocabulary,
-    showToast: true,
+    showToast: false,
     reviewMode: false,
   });
 
