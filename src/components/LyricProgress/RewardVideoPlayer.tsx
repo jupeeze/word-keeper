@@ -22,7 +22,6 @@ export const RewardVideoPlayer = ({
   const [isPlaying, setIsPlaying] = useState(true);
   const playerRef = useRef<HTMLVideoElement>(null);
 
-  const handleTimeUpdate = () => {
   const handleTimeUpdate = useCallback(() => {
     if (!playerRef.current) return;
     const currentTime = playerRef.current.currentTime;
