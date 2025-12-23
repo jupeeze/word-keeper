@@ -1,0 +1,1023 @@
+{
+  "id": "payphone_maroon-5",
+  "title": "Payphone",
+  "artist": "Maroon 5",
+  "coverImage": "https://i.scdn.co/image/ab67616d0000b2733119f490f02fcee6514e8604",
+  "difficulty": "beginner",
+  "language": "en-US",
+  "youtubeUrl": "https://youtu.be/KRaWnd3LJfs",
+  "lyrics": [
+    {
+      "startTime": null,
+      "text": "I'm at a payphone trying to call home",
+      "reading": "アイマタ ペイフォン トライン トゥ コール ホーム",
+      "translation": "君に電話するために公衆電話にいるんだ",
+      "vocabulary": [
+        {
+            "word": "I'm",
+            "reading": "アイム",
+            "meaning": "私は"
+        },
+        {
+            "word": "at",
+            "reading": "アット",
+            "meaning": "〜に"
+        },
+        {
+            "word": "a",
+            "reading": "ア",
+            "meaning": "(一つの)",
+            "note": "不定冠詞"
+        },
+        {
+          "word": "payphone",
+          "reading": "ペイフォン",
+          "meaning": "公衆電話"
+        },
+        {
+            "word": "trying to",
+            "reading": "トライイング トゥ",
+            "meaning": "を試みる"
+        },
+        {
+          "word": "call",
+          "reading": "コール",
+          "meaning": "〜に電話する"
+        },
+        {
+          "word": "home",
+          "reading": "ホーム",
+          "meaning": "家"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "All of my change I spent on you",
+      "reading": "オール オブ マイ チェンジ アイ スペント オン ユー",
+      "translation": "小銭は全て使ってしまったよ",
+      "vocabulary": [
+        {
+          "word": "all of",
+          "reading": "オール オブ",
+          "meaning": "～のすべて"
+        },
+        {
+          "word": "my",
+          "reading": "マイ",
+          "meaning": "私の"
+        },
+        {
+          "word": "change",
+          "reading": "チェンジ",
+          "meaning": "小銭"
+        },
+        {
+          "word": "I",
+          "reading": "アイ",
+          "meaning": "私"
+        },
+        {
+          "word": "spent on",
+          "reading": "スペント オン",
+          "meaning": "～に費やした",
+          "note": "spendの過去形"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "君"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "Where have the times gone?",
+      "reading": "ウェア ハヴ ザ タイムズ ゴーン",
+      "translation": "あの日々はどこに行ってしまったの？",
+      "vocabulary": [
+        {
+          "word": "where",
+          "reading": "ウェア",
+          "meaning": "どこ"
+        },
+        {
+          "word": "have",
+          "reading": "ハヴ",
+          "meaning": "～してしまった",
+          "note": "完了形を作る助動詞"
+        },
+        {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "その",
+          "note": "不定冠詞"
+        },
+        {
+          "word": "times",
+          "reading": "タイムズ",
+          "meaning": "日々"
+        },
+        {
+          "word": "gone",
+          "reading": "ゴーン",
+          "meaning": "行ってしまった",
+          "note": "goの過去分詞"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "Baby, it's all wrong",
+      "reading": "ベイビー イッツ オール ロング",
+      "translation": "全て間違っていたのかな",
+      "vocabulary": [
+        {
+          "word": "baby",
+          "reading": "ベイビー",
+          "meaning": "ねえ",
+          "note": "呼びかけ"
+        },
+        {
+          "word": "it's",
+          "reading": "イッツ",
+          "meaning": "それは"
+        },
+        {
+          "word": "all",
+          "reading": "オール",
+          "meaning": "すべて"
+        },
+        {
+          "word": "wrong",
+          "reading": "ロング",
+          "meaning": "間違っている"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "Where are the plans we made for two?",
+      "reading": "ウェア アー ザ プランズ ウィ メイド フォー トゥー",
+      "translation": "二人で立てた計画はどこに行っちゃったんだろう",
+      "vocabulary": [
+        {
+          "word": "where",
+          "reading": "ウェア",
+          "meaning": "どこ"
+        },
+        {
+          "word": "are",
+          "reading": "アー",
+          "meaning": "～である",
+          "note": "youのbe動詞"
+        },
+        {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "その"
+        },
+        {
+          "word": "plans",
+          "reading": "プランズ",
+          "meaning": "計画",
+          "note": "planの複数形"
+        },
+        {
+          "word": "we",
+          "reading": "ウィ",
+          "meaning": "私たちは"
+        },
+        {
+          "word": "made",
+          "reading": "メイド",
+          "meaning": "作った",
+          "note": "makeの過去形"
+        },
+        {
+          "word": "for",
+          "reading": "フォー",
+          "meaning": "～のために"
+        },
+        {
+          "word": "two",
+          "reading": "トゥー",
+          "meaning": "二人"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "Yeah, I, I know it's hard to remember",
+      "reading": "イェア アイ アイ ノウ イッツ ハード トゥ リメンバー",
+      "translation": "昔の僕らをさ",
+      "vocabulary": [
+        {
+          "word": "yeah",
+          "reading": "イェア",
+          "meaning": "イェア"
+        },
+        {
+          "word": "I",
+          "reading": "アイ",
+          "meaning": "私"
+        },
+        {
+          "word": "I",
+          "reading": "アイ",
+          "meaning": "私"
+        },
+        {
+          "word": "know",
+          "reading": "ノウ",
+          "meaning": "知る"
+        },
+        {
+          "word": "it's",
+          "reading": "イッツ",
+          "meaning": "それは"
+        },
+        {
+          "word": "hard",
+          "reading": "ハード",
+          "meaning": "難しい"
+        },
+        {
+          "word": "to remember",
+          "reading": "トゥ リメンバー",
+          "meaning": "思い出すこと"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "The people we used to be...",
+      "reading": "ザ ピープル ウィ ユースト トゥ ビー",
+      "translation": "思い出すのは難しいってわかるけど",
+      "vocabulary": [
+        {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "その"
+        },
+        {
+          "word": "people",
+          "reading": "ピープル",
+          "meaning": "人々"
+        },
+        {
+          "word": "we",
+          "reading": "ウィ",
+          "meaning": "私たちは"
+        },
+        {
+          "word": "used to be",
+          "reading": "ユースト トゥ ビー",
+          "meaning": "かつて～だった"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "It's even harder to picture,",
+      "reading": "イッツ イーヴン ハーダー トゥ ピクチャー",
+      "translation": "今や君が僕の隣にいることを",
+      "vocabulary": [
+        {
+          "word": "it's",
+          "reading": "イッツ",
+          "meaning": "それは"
+        },
+        {
+          "word": "even",
+          "reading": "イーヴン",
+          "meaning": "～でさえ"
+        },
+        {
+          "word": "harder",
+          "reading": "ハーダー",
+          "meaning": "より難しい",
+          "note": "hardの比較級"
+        },
+        {
+          "word": "to picture",
+          "reading": "トゥ ピクチャー",
+          "meaning": "想像すること",
+          "note": "pictureの不定詞"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "That you're not here next to me.",
+      "reading": "ザット ユア ノット ヒア ネクスト トゥ ミー",
+      "translation": "想像する方がよっぽど難しいよ",
+      "vocabulary": [
+        {
+          "word": "that",
+          "reading": "ザット",
+          "meaning": "～である",
+          "note": "関係副詞"
+        },
+        {
+          "word": "you're",
+          "reading": "ユア",
+          "meaning": "君は",
+          "note": "'you are'の縮約"
+        },
+        {
+          "word": "not",
+          "reading": "ノット",
+          "meaning": "～ではない"
+        },
+        {
+          "word": "here",
+          "reading": "ヒア",
+          "meaning": "～にいる"
+        },
+        {
+          "word": "next to",
+          "reading": "ネクスト トゥ",
+          "meaning": "～の隣に"
+        },
+        {
+          "word": "me",
+          "reading": "ミー",
+          "meaning": "私",
+          "note": "Iの代名詞"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "You say it's too late to make it,",
+      "reading": "ユー セイ イッツ トゥー レイト トゥ メイク イット",
+      "translation": "もう手遅れと君は言うけれど",
+      "vocabulary": [
+        {
+          "word": "you say",
+          "reading": "ユー セイ",
+          "meaning": "君は言う"
+        },
+        {
+          "word": "it's",
+          "reading": "イッツ",
+          "meaning": "それは"
+        },
+        {
+          "word": "too late",
+          "reading": "トゥー レイト",
+          "meaning": "遅すぎる"
+        },
+        {
+          "word": "to",
+          "reading": "トゥ",
+          "meaning": "",
+          "note": "to不定詞"
+        },
+        {
+          "word": "make it",
+          "reading": "メイク イット",
+          "meaning": "うまくやる"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "But is it too late to try?",
+      "reading": "バット イズ イット トゥー レイト トゥ トライ",
+      "translation": "やってみようとするのもダメかな",
+      "vocabulary": [
+        {
+          "word": "but",
+          "reading": "バット",
+          "meaning": "しかし"
+        },
+        {
+          "word": "is",
+          "reading": "イズ",
+          "meaning": "～である",
+          "note": "三人称単数のbe動詞"
+        },
+        {
+          "word": "it",
+          "reading": "イット",
+          "meaning": "",
+          "note": "it's too … to ~ 構文"
+        },
+        {
+          "word": "too late",
+          "reading": "トゥー レイト",
+          "meaning": "遅すぎる"
+        },
+        {
+          "word": "to",
+          "reading": "トゥ",
+          "meaning": "～に"
+        },
+        {
+          "word": "try",
+          "reading": "トライ",
+          "meaning": "やってみる"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "And in our time that you wasted",
+      "reading": "アンド イン アワ タイム ザット ユー ウェイステッド",
+      "translation": "君が無駄にした僕たちの時間",
+      "vocabulary": [
+        {
+          "word": "and",
+          "reading": "アンド",
+          "meaning": "～と"
+        },
+        {
+          "word": "in",
+          "reading": "イン",
+          "meaning": "～に"
+        },
+        {
+          "word": "our",
+          "reading": "アワ",
+          "meaning": "私たちは"
+        },
+        {
+          "word": "time",
+          "reading": "タイム",
+          "meaning": "時間"
+        },
+        {
+          "word": "that",
+          "reading": "ザット",
+          "meaning": "～である"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "君"
+        },
+        {
+          "word": "wasted",
+          "reading": "ウェイステッド",
+          "meaning": "無駄にした",
+          "note": "wasteの過去形"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "All of our bridges burned down",
+      "reading": "オール オブ アワ ブリッジズ バーンド ダウン",
+      "translation": "僕たちを繋いでいた絆は壊れてしまったよ",
+      "vocabulary": [
+        {
+          "word": "all of",
+          "reading": "オール オブ",
+          "meaning": "～すべて"
+        },
+        {
+          "word": "our",
+          "reading": "アワ",
+          "meaning": "私たちは"
+        },
+        {
+          "word": "bridges",
+          "reading": "ブリッジズ",
+          "meaning": "橋"
+        },
+        {
+          "word": "burned down",
+          "reading": "バーンド ダウン",
+          "meaning": "焼け落ちた"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "I've wasted my nights,",
+      "reading": "アイヴ ウェイステッド マイ ナイツ",
+      "translation": "幾多の眠れぬ夜を過ごしてきた",
+      "vocabulary": [
+        {
+          "word": "i've wasted",
+          "reading": "アイヴ ウェイステッド",
+          "meaning": "ずっと無駄にしてきた"
+        },
+        {
+          "word": "my",
+          "reading": "マイ",
+          "meaning": "私"
+        },
+        {
+          "word": "nights",
+          "reading": "ナイツ",
+          "meaning": "夜"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "You turned out the lights",
+      "reading": "ユー ターンド アウト ザ ライツ",
+      "translation": "君は明かりを消した",
+      "vocabulary": [
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "君"
+        },
+        {
+          "word": "turned out",
+          "reading": "ターンド アウト",
+          "meaning": "（明かりを）消した"
+        },
+        {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "～の"
+        },
+        {
+          "word": "lights",
+          "reading": "ライツ",
+          "meaning": "明かり"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "Now I'm paralyzed.",
+      "reading": "ナウ アイム パラライズド",
+      "translation": "今や僕は動けなくなってしまった",
+      "vocabulary": [
+        {
+          "word": "now",
+          "reading": "ナウ",
+          "meaning": "今では"
+        },
+        {
+          "word": "I'm",
+          "reading": "アイム",
+          "meaning": "私は"
+        },
+        {
+          "word": "paralyzed",
+          "reading": "パラライズド",
+          "meaning": "麻痺した、動けない"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "Still stuck in that time",
+      "reading": "スティル スタック イン ザット タイム",
+      "translation": "僕らが愛と呼んでいた",
+      "vocabulary": [
+        {
+          "word": "still",
+          "reading": "スティル",
+          "meaning": "～に"
+        },
+        {
+          "word": "stuck",
+          "reading": "スタック",
+          "meaning": "行き詰まった、動けない"
+        },
+        {
+          "word": "in",
+          "reading": "イン",
+          "meaning": "～に"
+        },
+        {
+          "word": "that",
+          "reading": "ザット",
+          "meaning": "～である"
+        },
+        {
+          "word": "time",
+          "reading": "タイム",
+          "meaning": "時間"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "When we called it love",
+      "reading": "ホウェン ウィ コールド イット ラヴ",
+      "translation": "あの時間に取り残されたまま",
+      "vocabulary": [
+        {
+          "word": "when",
+          "reading": "ホウェン",
+          "meaning": "～に"
+        },
+        {
+          "word": "we",
+          "reading": "ウィ",
+          "meaning": "私たちは"
+        },
+        {
+          "word": "called",
+          "reading": "コールド",
+          "meaning": "呼んだ"
+        },
+        {
+          "word": "it",
+          "reading": "イット",
+          "meaning": "～である"
+        },
+        {
+          "word": "love",
+          "reading": "ラヴ",
+          "meaning": "愛"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "But even the sun sets in paradise",
+      "reading": "バット イーヴン ザ サン セッツ イン パラダイス",
+      "translation": "それでも楽園でも太陽は沈むんだね",
+      "vocabulary": [
+        {
+          "word": "but",
+          "reading": "バット",
+          "meaning": "～だが"
+        },
+        {
+          "word": "even",
+          "reading": "イーヴン",
+          "meaning": "～でも"
+        },
+        {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "～の"
+        },
+        {
+          "word": "sun",
+          "reading": "サン",
+          "meaning": "太陽"
+        },
+        {
+          "word": "sets",
+          "reading": "セッツ",
+          "meaning": "沈む"
+        },
+        {
+          "word": "in",
+          "reading": "イン",
+          "meaning": "～に"
+        },
+        {
+          "word": "paradise",
+          "reading": "パラダイス",
+          "meaning": "楽園"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "I'm at a payphone trying to call home",
+      "reading": "アイマタ ペイフォン トライン トゥ コール ホーム",
+      "translation": "君に電話するために公衆電話にいるんだ",
+      "vocabulary": [
+        {
+          "word": "I'm",
+          "reading": "アイム",
+          "meaning": "私",
+          "note": "I am の縮約"
+        },
+        {
+          "word": "at",
+          "reading": "アット",
+          "meaning": "～に"
+        },
+        {
+          "word": "a",
+          "reading": "ア",
+          "meaning": "～の"
+        },
+        {
+          "word": "payphone",
+          "reading": "ペイフォン",
+          "meaning": "公衆電話"
+        },
+        {
+          "word": "trying",
+          "reading": "トライイング",
+          "meaning": "～しようとしている"
+        },
+        {
+          "word": "to",
+          "reading": "トゥ",
+          "meaning": "～する"
+        },
+        {
+          "word": "call",
+          "reading": "コール",
+          "meaning": "電話する"
+        },
+        {
+          "word": "home",
+          "reading": "ホーム",
+          "meaning": "家"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "All of my change I spent on you",
+      "reading": "オール オブ マイ チェンジ アイ スペント オン ユー",
+      "translation": "小銭は全て使ってしまったよ",
+      "vocabulary": [
+        {
+          "word": "all",
+          "reading": "オール",
+          "meaning": "～すべて"
+        },
+        {
+          "word": "of",
+          "reading": "オブ",
+          "meaning": "～の"
+        },
+        {
+          "word": "my",
+          "reading": "マイ",
+          "meaning": "私"
+        },
+        {
+          "word": "change",
+          "reading": "チェンジ",
+          "meaning": "小銭"
+        },
+        {
+          "word":"I",
+          "reading": "アイ",
+          "meaning": "私"
+        },
+        {
+          "word": "spent",
+          "reading": "スペント",
+          "meaning": "使った"
+        },
+        {
+          "word": "on",
+          "reading": "オン",
+          "meaning": "～に"
+        },
+        {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "君"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "Where have the times gone?",
+      "reading": "ウェア ハヴ ザ タイムズ ゴーン",
+      "translation": "あの日々はどこに行ってしまったの？",
+      "vocabulary": [
+        {
+          "word": "where",
+          "reading": "ウェア",
+          "meaning": "～に"
+        },
+        {
+          "word": "have",
+          "reading": "ハヴ",
+          "meaning": "～してしまった",
+          "note": "完了形を作る助動詞"
+        },
+        {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "～の"
+        },
+        {
+          "word": "times",
+          "reading": "タイムズ",
+          "meaning": "時間"
+        },
+        {
+          "word": "gone",
+          "reading": "ゴーン",
+          "meaning": "行ってしまった"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "Baby, it's all wrong",
+      "reading": "ベイビー イッツ オール ロング",
+      "translation": "全て間違っていたのかな",
+      "vocabulary": [
+        {
+          "word": "baby",
+          "reading": "ベイビー",
+          "meaning": "ねえ",
+          "note": "呼びかけ"
+        },
+        {
+          "word": "it's",
+          "reading": "イッツ",
+          "meaning": "～である"
+        },
+        {
+          "word": "all",
+          "reading": "オール",
+          "meaning": "～すべて"
+        },
+        {
+          "word": "wrong",
+          "reading": "ロング",
+          "meaning": "間違った"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "Where are the plans we made for two?",
+      "reading": "ウェア アー ザ プランズ ウィ メイド フォー トゥー",
+      "translation": "二人で立てた計画はどこに行っちゃったんだろう",
+      "vocabulary": [
+        {
+          "word": "where",
+          "reading": "ウェア",
+          "meaning": "～に"
+        },
+        {
+          "word": "are",
+          "reading": "アー",
+          "meaning": "～である"
+        },
+        {
+          "word": "the",
+          "reading": "ザ",
+          "meaning": "～の"
+        },
+        {
+          "word": "plans",
+          "reading": "プランズ",
+          "meaning": "計画"
+        },
+        {
+          "word": "we",
+          "reading": "ウィ",
+          "meaning": "私たちは"
+        },
+        {
+          "word": "made",
+          "reading": "メイド",
+          "meaning": "作った"
+        },
+        {
+          "word": "for",
+          "reading": "フォー",
+          "meaning": "～のために"
+        },
+        {
+          "word": "two",
+          "reading": "トゥー",
+          "meaning": "二人"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "If 'Happy Ever After' did exist,",
+      "reading": "イフ ハッピー エヴァー アフター ディド イグジスト",
+      "translation": "もし'めでたしめでたし'が本当に存在するなら",
+      "vocabulary": [
+        {
+          "word": "if",
+          "reading": "イフ",
+          "meaning": "もし"
+        },
+        {
+          "word": "happy ever after",
+          "reading": "ハッピー エヴァー アフター",
+          "meaning": "めでたしめでたし"
+        },
+        {
+          "word": "did",
+          "reading": "ディド",
+          "meaning": "～していた"
+        },
+        {
+          "word": "exist",
+          "reading": "イグジスト",
+          "meaning": "存在する"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "I would still be holding you like this",
+      "reading": "アイ ウド スティル ビー ホールディング ユー ライク ディス",
+      "translation": "今もこんな風に君を抱きしめているのに",
+      "vocabulary": [
+        {
+          "word": "I",
+          "reading": "アイ",
+          "meaning": "私"
+        },
+        {
+          "word": "would",
+          "reading": "ウッド",
+          "meaning": "～だろう"
+        },
+        {
+          "word": "still",
+          "reading": "スティル",
+          "meaning": "まだ"
+        },
+        {
+          "word": "be",
+          "reading": "ビー",
+          "meaning": "～である"
+        },
+        {
+          "word": "holding",
+          "reading": "ホールディング",
+          "meaning": "抱きしめている"
+        },
+        {
+          "word": "like this",
+          "reading": "ライク ディス",
+          "meaning": "このように"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "All those fairy tales are full of shit.",
+      "reading": "オール ゾーズ フェアリー テイルズ アー フル オブ シット",
+      "translation": "こんなおとぎ話なんてもううんざりだ",
+      "vocabulary": [
+        {
+          "word": "all",
+          "reading": "オール",
+          "meaning": "～すべて"
+        },
+        {
+          "word": "those",
+          "reading": "ザーズ",
+          "meaning": "～の"
+        },
+        {
+          "word": "fairy tales",
+          "reading": "フェアリー テイルズ",
+          "meaning": "おとぎ話"
+        },
+        {
+          "word": "are",
+          "reading": "アー",
+          "meaning": "～である"
+        },
+        {
+          "word": "full of shit",
+          "reading": "フル オブ シット",
+          "meaning": "嘘つき",
+          "note": "非常に汚い言葉"
+        }
+      ]
+    },
+    {
+      "startTime": null,
+      "text": "One more fucking love song, I'll be sick.",
+      "reading": "ワン モア ファッキング ラヴ ソング アイル ビー シック",
+      "translation": "これ以上恋愛ソングを聞いたら病んでしまいそうだ",
+      "vocabulary": [
+        {
+          "word": "one more",
+          "reading": "ワン モア",
+          "meaning": "もう一つの"
+        },
+        {
+          "word": "fucking",
+          "reading": "ファッキング",
+          "meaning": "クソみたいな",
+          "note": "強調語"
+        },
+        {
+          "word": "love song",
+          "reading": "ラヴ ソング",
+          "meaning": "恋愛ソング"
+        },
+        {
+          "word": "I'll be",
+          "reading": "アイル ビー",
+          "meaning": "〜になりそうだ"
+        },
+        {
+          "word": "sick",
+          "reading": "シック",
+          "meaning": "病気、うんざり"
+        }
+      ]
+    }
+  ]
+}
