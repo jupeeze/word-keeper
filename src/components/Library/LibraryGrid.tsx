@@ -9,6 +9,11 @@ export const LibraryGrid = () => {
   // 新しいストアから savedWords を取得
   const { savedWords } = useLibraryStore();
 
+  // 単語を名前の昇順にソート
+  const sortedWords = [...savedWords].sort((a, b) =>
+    a.word.toLowerCase().localeCompare(b.word.toLowerCase()),
+  );
+
   // 再生中の単語データを管理するState
   const [selectedWord, setSelectedWord] = useState<SavedWord | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +30,7 @@ export const LibraryGrid = () => {
     setTimeout(() => setSelectedWord(null), 300);
   };
 
-  if (savedWords.length === 0) {
+  if (sortedWords.length === 0) {
     return (
       <div className="py-20 text-center text-gray-500">
         <p className="mb-2 text-xl font-bold">グリモワールはまだ白紙です</p>
@@ -38,7 +43,7 @@ export const LibraryGrid = () => {
     <>
       <motion.div className="grid grid-cols-2 gap-2">
         <AnimatePresence mode="popLayout">
-          {savedWords.map((item) => (
+          {sortedWords.map((item) => (
             <AnimatedWordCard key={item.id} data={item} onPlay={handlePlay} />
           ))}
         </AnimatePresence>
