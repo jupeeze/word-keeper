@@ -65,13 +65,9 @@ export const generateChoices = (
   const sameLengthDistractors = distractors.filter(
     (option) => option.length === correctAnswerLength,
   );
-  const otherDistractors = distractors.filter(
-    (option) => option.length !== correctAnswerLength,
-  );
 
   // シャッフルして順序をランダムにする
   const shuffledSameLength = shuffleArray([...sameLengthDistractors]);
-  const shuffledOthers = shuffleArray([...otherDistractors]);
 
   // まず同じ文字数の選択肢から追加
   for (const option of shuffledSameLength) {
@@ -81,10 +77,31 @@ export const generateChoices = (
     }
   }
 
-  // 足りない場合は他の文字数の選択肢から追加
-  for (const option of shuffledOthers) {
-    if (choices.length >= count) break;
-    if (!choices.includes(option)) {
+  // 足りない場合は文字数が近い順に探す（±1, ±2, ±3...）
+  const maxDiff = Math.max(
+    ...distractors.map((d) => Math.abs(d.length - correctAnswerLength)),
+  );
+
+  for (let diff = 1; diff <= maxDiff && choices.length < count; diff++) {
+    // 正解より短い単語（-diff）
+    const shorterOptions = distractors.filter(
+      (option) =>
+        option.length === correctAnswerLength - diff &&
+        !choices.includes(option),
+    );
+    for (const option of shuffleArray([...shorterOptions])) {
+      if (choices.length >= count) break;
+      choices.push(option);
+    }
+
+    // 正解より長い単語（+diff）
+    const longerOptions = distractors.filter(
+      (option) =>
+        option.length === correctAnswerLength + diff &&
+        !choices.includes(option),
+    );
+    for (const option of shuffleArray([...longerOptions])) {
+      if (choices.length >= count) break;
       choices.push(option);
     }
   }
