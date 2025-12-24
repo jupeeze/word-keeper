@@ -193,6 +193,7 @@ export const VocabularyTest = ({
               <p className="text-3xl font-bold text-purple-800">
                 {currentWord.meaning}
               </p>
+              <p className="text-sm text-gray-600">{currentWord.note || ""}</p>
             </div>
 
             {/* Choices */}

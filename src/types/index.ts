@@ -37,6 +37,7 @@ export interface Vocabulary {
   word: string;
   reading: string;
   meaning: string;
+  note?: string;
 }
 
 // 歌詞行の型定義

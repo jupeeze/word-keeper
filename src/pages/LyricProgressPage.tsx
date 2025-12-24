@@ -324,7 +324,7 @@ export const LyricProgressPage = ({
             {currentStep === "puzzle" && (
               <SentenceReorderPuzzle
                 sentence={currentLyric.text}
-                vocabulary={currentLyric.vocabulary}
+                translation={currentLyric.translation}
                 onComplete={handlePuzzleComplete}
               />
             )}

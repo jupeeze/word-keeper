@@ -14,11 +14,9 @@ import type { SentenceReorderPuzzleProps } from "./types";
 
 export const SentenceReorderPuzzle = ({
   sentence,
-  vocabulary,
+  translation,
   onComplete,
 }: SentenceReorderPuzzleProps) => {
-  // 語彙の意味を正しい語順で並べた文章を作成
-  const meaningText = vocabulary.map((v) => v.meaning).join(" ");
   const correctWords = sentence.split(" ");
 
   const [words, setWords] = useState<string[]>([]);
@@ -87,7 +85,7 @@ export const SentenceReorderPuzzle = ({
       </CardHeader>
 
       <CardContent className="space-y-2">
-        <p className="text-center text-sm text-gray-500">{meaningText}</p>
+        <p className="text-center text-sm text-gray-500">{translation}</p>
         <div className="min-h-24 rounded-lg border-2 border-dashed border-gray-300 bg-white p-4">
           {/* Selected words area */}
           <p className="mb-2 text-xs text-gray-500">選択した順序:</p>
