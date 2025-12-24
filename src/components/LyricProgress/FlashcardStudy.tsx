@@ -100,9 +100,6 @@ export const FlashcardStudy = ({
     enabled: filteredVocabulary.length > 0,
   });
 
-  console.log("vocabulary", vocabulary);
-  console.log("filteredVocabulary", filteredVocabulary);
-
   return (
     <Card>
       {/* Progress indicator */}
