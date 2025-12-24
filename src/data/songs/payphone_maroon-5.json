@@ -14,20 +14,20 @@
       "translation": "君に電話するために公衆電話にいるんだ",
       "vocabulary": [
         {
-            "word": "I'm",
-            "reading": "アイム",
-            "meaning": "私は"
+          "word": "I'm",
+          "reading": "アイム",
+          "meaning": "私は"
         },
         {
-            "word": "at",
-            "reading": "アット",
-            "meaning": "〜に"
+          "word": "at",
+          "reading": "アット",
+          "meaning": "〜に"
         },
         {
-            "word": "a",
-            "reading": "ア",
-            "meaning": "(一つの)",
-            "note": "不定冠詞"
+          "word": "a",
+          "reading": "ア",
+          "meaning": "(一つの)",
+          "note": "不定冠詞"
         },
         {
           "word": "payphone",
@@ -35,9 +35,9 @@
           "meaning": "公衆電話"
         },
         {
-            "word": "trying to",
-            "reading": "トライイング トゥ",
-            "meaning": "を試みる"
+          "word": "trying to",
+          "reading": "トライイング トゥ",
+          "meaning": "を試みる"
         },
         {
           "word": "call",
@@ -483,7 +483,7 @@
           "word": "bridges",
           "reading": "ブリッジズ",
           "meaning": "繋がり",
-          "note":"bridgeの複数形"
+          "note": "bridgeの複数形"
         },
         {
           "word": "burned down",
@@ -751,7 +751,7 @@
           "meaning": "小銭"
         },
         {
-          "word":"I",
+          "word": "I",
           "reading": "アイ",
           "meaning": "私"
         },

@@ -30,11 +30,12 @@ export const useFilteredVocabulary = ({
 
   // Filter out already memorized words
   const filteredVocabulary = vocabulary.filter(
-    (word) => !wordMastery[word.word]?.isMemorized
+    (word) => !wordMastery[word.word]?.isMemorized,
   );
 
   const skippedCount = vocabulary.length - filteredVocabulary.length;
-  const isAllMemorized = filteredVocabulary.length === 0 && vocabulary.length > 0;
+  const isAllMemorized =
+    filteredVocabulary.length === 0 && vocabulary.length > 0;
 
   // Show toast notification when component mounts
   useEffect(() => {
@@ -54,7 +55,8 @@ export const useFilteredVocabulary = ({
   }, []); // Only run on mount
 
   return {
-    filteredVocabulary: reviewMode || isAllMemorized ? vocabulary : filteredVocabulary,
+    filteredVocabulary:
+      reviewMode || isAllMemorized ? vocabulary : filteredVocabulary,
     skippedCount,
     isAllMemorized,
   };

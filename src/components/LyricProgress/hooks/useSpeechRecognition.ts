@@ -42,9 +42,10 @@ export const useSpeechRecognition = ({
     recognition.lang = language;
 
     recognition.onresult = (event) => {
-      const currentTranscript = event.results[event.results.length - 1][0].transcript;
+      const currentTranscript =
+        event.results[event.results.length - 1][0].transcript;
       setTranscript(currentTranscript);
-      
+
       if (event.results[event.results.length - 1].isFinal) {
         onResult?.(currentTranscript);
       }

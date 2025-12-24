@@ -36,7 +36,7 @@ export const useKeyboardNavigation = ({
         onPrevious?.();
       }
     },
-    [onFlip, onNext, onPrevious, canNavigateNext, enabled]
+    [onFlip, onNext, onPrevious, canNavigateNext, enabled],
   );
 
   useEffect(() => {
