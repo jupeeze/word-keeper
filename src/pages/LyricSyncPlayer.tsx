@@ -64,7 +64,7 @@ export const LyricSyncPlayer = ({
     setCurrentLyricIndex(currentLineIdx);
   };
 
-  const handlePlayerError = (error: any) => {
+  const handlePlayerError = () => {
     toast.error("動画の読み込みエラー", {
       description: "動画を再生できませんでした。URLを確認してください。",
     });
