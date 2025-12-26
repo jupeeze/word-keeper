@@ -13,7 +13,7 @@ interface LibraryState {
   addWord: (
     word: string,
     meaning: string,
-    pronunciation: string,
+    reading: string,
     context: Omit<SavedWordContext, "id" | "addedAt">,
   ) => void;
   removeWord: (id: string) => void;
@@ -27,7 +27,7 @@ export const useLibraryStore = create(
     (set, get) => ({
       savedWords: [],
 
-      addWord: (word, meaning, pronunciation, context) => {
+      addWord: (word, meaning, reading, context) => {
         const wordId = generateWordId(word);
         const existingWord = get().savedWords.find((w) => w.id === wordId);
 
@@ -65,7 +65,7 @@ export const useLibraryStore = create(
             id: wordId,
             word,
             meaning,
-            pronunciation,
+            reading,
             contexts: [newContext],
             masteryLevel: 0,
             registeredAt: new Date().toISOString(),

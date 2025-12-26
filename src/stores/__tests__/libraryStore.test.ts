@@ -27,7 +27,7 @@ describe("libraryStore", () => {
       expect(state.savedWords).toHaveLength(1);
       expect(state.savedWords[0].word).toBe("사랑");
       expect(state.savedWords[0].meaning).toBe("愛");
-      expect(state.savedWords[0].pronunciation).toBe("サラン");
+      expect(state.savedWords[0].reading).toBe("サラン");
       expect(state.savedWords[0].contexts).toHaveLength(1);
       expect(state.savedWords[0].contexts[0].songTitle).toBe("Test Song");
     });
