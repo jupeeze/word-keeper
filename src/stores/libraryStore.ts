@@ -15,6 +15,7 @@ interface LibraryState {
     meaning: string,
     reading: string,
     context: Omit<SavedWordContext, "id" | "addedAt">,
+    note?: string,
   ) => void;
   removeWord: (id: string) => void;
   removeContext: (wordId: string, contextId: string) => void;
@@ -27,7 +28,7 @@ export const useLibraryStore = create(
     (set, get) => ({
       savedWords: [],
 
-      addWord: (word, meaning, reading, context) => {
+      addWord: (word, meaning, reading, context, note) => {
         const wordId = generateWordId(word);
         const existingWord = get().savedWords.find((w) => w.id === wordId);
 
@@ -52,10 +53,10 @@ export const useLibraryStore = create(
             savedWords: get().savedWords.map((w) =>
               w.id === wordId
                 ? {
-                    ...w,
-                    contexts: [...w.contexts, newContext],
-                    lastUpdatedAt: newContext.addedAt,
-                  }
+                  ...w,
+                  contexts: [...w.contexts, newContext],
+                  lastUpdatedAt: newContext.addedAt,
+                }
                 : w,
             ),
           });
@@ -66,6 +67,7 @@ export const useLibraryStore = create(
             word,
             meaning,
             reading,
+            note,
             contexts: [newContext],
             masteryLevel: 0,
             registeredAt: new Date().toISOString(),
@@ -110,9 +112,9 @@ export const useLibraryStore = create(
           savedWords: get().savedWords.map((w) =>
             w.id === id
               ? {
-                  ...w,
-                  masteryLevel: w.masteryLevel >= 2 ? 0 : w.masteryLevel + 1,
-                }
+                ...w,
+                masteryLevel: w.masteryLevel >= 2 ? 0 : w.masteryLevel + 1,
+              }
               : w,
           ),
         });

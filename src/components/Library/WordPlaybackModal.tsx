@@ -64,12 +64,14 @@ export const WordPlaybackModal = ({ wordData, isOpen, onClose }: Props) => {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-lg">
-        <DialogHeader>
-          <DialogTitle className="text-center text-xl font-bold">
-            {wordData.word}
+        <DialogHeader className="text-center">
+          <DialogTitle>
+            <p className="text-xl font-bold">{wordData.word}</p>
+            <p className="text-xs text-gray-500">{wordData.reading}</p>
           </DialogTitle>
-          <DialogDescription className="text-center">
-            {wordData.meaning}
+          <DialogDescription>
+            <p className="text-sm text-gray-700">{wordData.meaning}</p>
+            <p className="text-xs text-gray-500">{wordData.note || ""}</p>
           </DialogDescription>
         </DialogHeader>
 

@@ -11,6 +11,7 @@ export const useWordAction = (songId?: string) => {
     reading: string,
     meaning: string,
     lyricLine: LyricLine,
+    note?: string,
   ) => {
     if (!songId) return;
 
@@ -24,7 +25,7 @@ export const useWordAction = (songId?: string) => {
       youtubeUrl: song.youtubeUrl,
       timestamp: lyricLine.startTime,
       sourceLyric: lyricLine.text,
-    });
+    }, note);
 
     alert(`「${word}」を単語帳に保存しました！📖`);
   };

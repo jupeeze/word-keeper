@@ -108,6 +108,7 @@ export const VocabularyTest = ({
                 timestamp: currentLyricStartTime,
                 sourceLyric: currentLyricText,
               },
+              currentWord.note,
             );
           }
         }
