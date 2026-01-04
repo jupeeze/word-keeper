@@ -28,9 +28,9 @@ export const useFilteredVocabulary = ({
   const progress = getCurrentProgress();
   const wordMastery = progress?.wordMastery || {};
 
-  // Filter out already memorized words
+  // Filter out already memorized words and skipped words
   const filteredVocabulary = vocabulary.filter(
-    (word) => !wordMastery[word.word]?.isMemorized,
+    (word) => !wordMastery[word.word]?.isMemorized && !word.skip,
   );
 
   const skippedCount = vocabulary.length - filteredVocabulary.length;

@@ -35,6 +35,7 @@ export interface Vocabulary {
   reading: string;
   meaning: string;
   note?: string;
+  skip?: boolean; // trueの場合、学習対象から除外
 }
 
 // 歌詞行の型定義

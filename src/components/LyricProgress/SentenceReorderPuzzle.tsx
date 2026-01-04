@@ -12,6 +12,11 @@ import { shuffleArray } from "@/utils/arrayUtils";
 import { toast } from "sonner";
 import type { SentenceReorderPuzzleProps } from "./types";
 
+// Remove trailing punctuation from word for display
+const removeTrailingPunctuation = (word: string) => {
+  return word.replace(/[.,!?;:]+$/, "");
+};
+
 export const SentenceReorderPuzzle = ({
   sentence,
   translation,
@@ -89,7 +94,7 @@ export const SentenceReorderPuzzle = ({
         <div className="min-h-24 rounded-lg border-2 border-dashed border-gray-300 bg-white p-4">
           {/* Selected words area */}
           <p className="mb-2 text-xs text-gray-500">選択した順序:</p>
-          <div className="flex w-64 flex-wrap gap-2">
+          <div className="flex w-64 flex-wrap gap-1">
             <AnimatePresence>
               {selectedWords.map((word, index) => (
                 <motion.div
@@ -105,10 +110,7 @@ export const SentenceReorderPuzzle = ({
                     className="relative"
                     disabled={isCorrect}
                   >
-                    <span className="absolute -top-2 -left-2 flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-xs font-bold text-white">
-                      {index + 1}
-                    </span>
-                    {word}
+                    {removeTrailingPunctuation(word)}
                   </Button>
                 </motion.div>
               ))}
@@ -119,7 +121,7 @@ export const SentenceReorderPuzzle = ({
         {/* Available words */}
         <div className="w-full">
           <p className="mb-2 text-xs text-gray-500">利用可能な単語:</p>
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="flex flex-wrap justify-center gap-1">
             <AnimatePresence>
               {words.map((word, index) => (
                 <motion.div
@@ -135,7 +137,7 @@ export const SentenceReorderPuzzle = ({
                     className="text-lg font-bold hover:border-blue-400 hover:bg-blue-100"
                     disabled={isCorrect}
                   >
-                    {word}
+                    {removeTrailingPunctuation(word)}
                   </Button>
                 </motion.div>
               ))}

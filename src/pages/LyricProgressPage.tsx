@@ -273,7 +273,7 @@ export const LyricProgressPage = ({
             </Button>
             <CardTitle className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-2">
               <Music className="h-4 w-4 shrink-0" />
-              <span className="truncate">{song.title}</span>
+              <span className="truncate leading-normal">{song.title}</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="h-5 space-y-4">
