@@ -8,7 +8,7 @@
   "youtubeUrl": "https://youtu.be/KRaWnd3LJfs",
   "lyrics": [
     {
-      "startTime": null,
+      "startTime": 38.04,
       "text": "I'm at a payphone trying to call home",
       "reading": "アイマタ ペイフォン トライン トゥ コール ホーム",
       "translation": "君に電話するために公衆電話にいるんだ",
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 42.28,
       "text": "All of my change I spent on you",
       "reading": "オール オブ マイ チェンジ アイ スペント オン ユー",
       "translation": "小銭は全て使ってしまったよ",
@@ -91,7 +91,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 46.84,
       "text": "Where have the times gone?",
       "reading": "ウェア ハヴ ザ タイムズ ゴーン",
       "translation": "あの日々はどこに行ってしまったの？",
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 48.94,
       "text": "Baby, it's all wrong",
       "reading": "ベイビー イッツ オール ロング",
       "translation": "全て間違っていたのかな",
@@ -156,7 +156,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 51.09,
       "text": "Where are the plans we made for two?",
       "reading": "ウェア アー ザ プランズ ウィ メイド フォー トゥー",
       "translation": "二人で立てた計画はどこに行っちゃったんだろう",
@@ -207,7 +207,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 55.60,
       "text": "Yeah, I know it's hard to remember",
       "reading": "イェア アイ ノウ イッツ ハード トゥ リメンバー",
       "translation": "昔の僕らをさ",
@@ -245,7 +245,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 59.05,
       "text": "The people we used to be...",
       "reading": "ザ ピープル ウィ ユースト トゥ ビー",
       "translation": "思い出すのは難しいってわかるけど",
@@ -273,7 +273,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 61.24,
       "text": "It's even harder to picture,",
       "reading": "イッツ イーヴン ハーダー トゥ ピクチャー",
       "translation": "今や君が僕の隣にいることを",
@@ -303,7 +303,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 63.31,
       "text": "That you're not here next to me.",
       "reading": "ザット ユア ノット ヒア ネクスト トゥ ミー",
       "translation": "想像する方がよっぽど難しいよ",
@@ -344,7 +344,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 65.63,
       "text": "You say it's too late to make it,",
       "reading": "ユー セイ イッツ トゥー レイト トゥ メイク イット",
       "translation": "もう手遅れだって君は言う",
@@ -378,7 +378,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 67.86,
       "text": "But is it too late to try?",
       "reading": "バット イズ イット トゥー レイト トゥ トライ",
       "translation": "でも、試すには遅すぎるのか？",
@@ -419,7 +419,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 69.95,
       "text": "And in our time that you wasted",
       "reading": "アンド イン アワ タイム ザット ユー ウェイステッド",
       "translation": "そして、君が無駄にしたあの時間の中で",
@@ -464,7 +464,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 71.75,
       "text": "All of our bridges burned down",
       "reading": "オール オブ アワ ブリッジズ バーンド ダウン",
       "translation": "僕たちを繋いでいた絆は壊れてしまったよ",
@@ -493,7 +493,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 74.40,
       "text": "I've wasted my nights,",
       "reading": "アイヴ ウェイステッド マイ ナイツ",
       "translation": "幾多の眠れぬ夜を過ごしてきた",
@@ -516,7 +516,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 76.56,
       "text": "You turned out the lights",
       "reading": "ユー ターンド アウト ザ ライツ",
       "translation": "君は明かりを消した",
@@ -544,7 +544,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 78.60,
       "text": "Now I'm paralyzed.",
       "reading": "ナウ アイム パラライズド",
       "translation": "今や僕は動けなくなってしまった",
@@ -567,7 +567,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 81.09,
       "text": "Still stuck in that time",
       "reading": "スティル スタック イン ザット タイム",
       "translation": "僕らが愛と呼んでいた",
@@ -600,7 +600,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 83.22,
       "text": "When we called it love",
       "reading": "ホウェン ウィ コールド イット ラヴ",
       "translation": "あの時間に取り残されたまま",
@@ -633,7 +633,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 85.36,
       "text": "But even the sun sets in paradise",
       "reading": "バット イーヴン ザ サン セッツ イン パラダイス",
       "translation": "それでも楽園でも太陽は沈むんだね",
@@ -676,7 +676,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 90.48,
       "text": "I'm at a payphone trying to call home",
       "reading": "アイマタ ペイフォン トライン トゥ コール ホーム",
       "translation": "君に電話するために公衆電話にいるんだ",
@@ -725,7 +725,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 94.67,
       "text": "All of my change I spent on you",
       "reading": "オール オブ マイ チェンジ アイ スペント オン ユー",
       "translation": "小銭は全て使ってしまったよ",
@@ -773,7 +773,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 98.92,
       "text": "Where have the times gone?",
       "reading": "ウェア ハヴ ザ タイムズ ゴーン",
       "translation": "あの日々はどこに行ってしまったの？",
@@ -807,7 +807,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 101.02,
       "text": "Baby, it's all wrong",
       "reading": "ベイビー イッツ オール ロング",
       "translation": "全て間違っていたのかな",
@@ -836,7 +836,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 103.47,
       "text": "Where are the plans we made for two?",
       "reading": "ウェア アー ザ プランズ ウィ メイド フォー トゥー",
       "translation": "二人で立てた計画はどこに行っちゃったんだろう",
@@ -884,7 +884,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 107.46,
       "text": "If 'Happy Ever After' did exist,",
       "reading": "イフ ハッピー エヴァー アフター ディド イグジスト",
       "translation": "もし'めでたしめでたし'が本当に存在するなら",
@@ -912,7 +912,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 111.94,
       "text": "I would still be holding you like this",
       "reading": "アイ ウド スティル ビー ホールディング ユー ライク ディス",
       "translation": "今もこんな風に君を抱きしめているのに",
@@ -943,6 +943,11 @@
           "meaning": "抱きしめている"
         },
         {
+          "word": "you",
+          "reading": "ユー",
+          "meaning": "君"
+        },
+        {
           "word": "like this",
           "reading": "ライク ディス",
           "meaning": "このように"
@@ -950,7 +955,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 116.26,
       "text": "All those fairy tales are full of shit.",
       "reading": "オール ゾーズ フェアリー テイルズ アー フル オブ シット",
       "translation": "こんなおとぎ話なんてもううんざりだ",
@@ -984,7 +989,7 @@
       ]
     },
     {
-      "startTime": null,
+      "startTime": 120.91,
       "text": "One more fucking love song, I'll be sick.",
       "reading": "ワン モア ファッキング ラヴ ソング アイル ビー シック",
       "translation": "これ以上恋愛ソングを聞いたら病んでしまいそうだ",
