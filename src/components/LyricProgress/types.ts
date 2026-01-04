@@ -32,7 +32,7 @@ export interface SingingChallengeProps {
 // SentenceReorderPuzzle component props
 export interface SentenceReorderPuzzleProps {
   sentence: string;
-  vocabulary: Vocabulary[];
+  translation: string;
   onComplete: () => void;
 }
 

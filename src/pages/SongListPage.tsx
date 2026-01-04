@@ -128,12 +128,12 @@ export const SongListPage = ({ setPage }: PageNavigationProps) => {
             stiffness: 260,
             damping: 20,
           }}
-          className="fixed bottom-8 right-8 z-50"
+          className="fixed right-8 bottom-8 z-50"
         >
           <Button
             onClick={() => setPage("library")}
             size="lg"
-            className="h-16 w-16 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-2xl shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-purple-500/50 hover:from-purple-700 hover:to-pink-700"
+            className="h-16 w-16 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-2xl shadow-2xl transition-all duration-300 hover:scale-110 hover:from-purple-700 hover:to-pink-700 hover:shadow-purple-500/50"
           >
             📚
           </Button>

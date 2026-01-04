@@ -42,9 +42,10 @@ export const useSpeechRecognition = ({
     recognition.lang = language;
 
     recognition.onresult = (event) => {
-      const currentTranscript = event.results[event.results.length - 1][0].transcript;
+      const currentTranscript =
+        event.results[event.results.length - 1][0].transcript;
       setTranscript(currentTranscript);
-      
+
       if (event.results[event.results.length - 1].isFinal) {
         onResult?.(currentTranscript);
       }
@@ -56,7 +57,6 @@ export const useSpeechRecognition = ({
     };
 
     recognition.onerror = (event: any) => {
-      console.error("Speech recognition error:", event.error);
       setIsListening(false);
 
       if (event.error === "not-allowed") {
@@ -87,7 +87,6 @@ export const useSpeechRecognition = ({
       recognitionRef.current.start();
       setIsListening(true);
     } catch (error) {
-      console.error("Failed to start speech recognition:", error);
       toast.error("音声認識の開始に失敗しました");
     }
   }, [isListening]);
@@ -98,7 +97,7 @@ export const useSpeechRecognition = ({
     try {
       recognitionRef.current.stop();
     } catch (error) {
-      console.error("Failed to stop speech recognition:", error);
+      toast.error("音声認識の停止に失敗しました");
     }
   }, [isListening]);
 

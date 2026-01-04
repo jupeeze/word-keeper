@@ -100,9 +100,6 @@ export const FlashcardStudy = ({
     enabled: filteredVocabulary.length > 0,
   });
 
-  console.log("vocabulary", vocabulary);
-  console.log("filteredVocabulary", filteredVocabulary);
-
   return (
     <Card>
       {/* Progress indicator */}
@@ -143,24 +140,27 @@ export const FlashcardStudy = ({
             className="h-full w-full"
           >
             <Card className="glass-card hover:shadow-glow h-full border-4 border-cyan-400 transition-all duration-300">
-              <CardContent className="flex h-full flex-col items-center justify-center">
+              <CardContent className="flex h-full flex-col items-center justify-center text-center">
                 {!isFlipped ? (
                   // Front: Word and reading
-                  <>
-                    <p className="mb-2 text-3xl font-medium text-purple-600">
+                  <div className="space-y-2 font-bold">
+                    <p className="text-3xl text-purple-600">
                       {currentWord.reading}
                     </p>
-                    <p className="text-gradient-primary mb-2 text-6xl font-bold">
+                    <p className="text-gradient-primary text-6xl">
                       {currentWord.word}
                     </p>
-                  </>
+                  </div>
                 ) : (
                   // Back: Meaning
-                  <>
-                    <p className="mb-2 text-center text-4xl font-bold text-blue-800">
+                  <div className="space-y-2 font-bold">
+                    <p className="text-4xl text-blue-800">
                       {currentWord.meaning}
                     </p>
-                  </>
+                    <p className="text-xl text-gray-600">
+                      {currentWord.note || ""}
+                    </p>
+                  </div>
                 )}
               </CardContent>
               <CardFooter>

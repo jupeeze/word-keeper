@@ -21,7 +21,6 @@ export interface SpeechOptions {
 export const speak = (text: string, options: SpeechOptions): void => {
   if (typeof window === "undefined" || !window.speechSynthesis) {
     const errorMsg = "音声合成はサポートされていません。";
-    console.warn(errorMsg);
     if (options.onError) {
       options.onError(errorMsg);
     } else {

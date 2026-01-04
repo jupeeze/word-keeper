@@ -52,7 +52,7 @@ export const migrateOldWordData = (oldWords: any[]): SavedWord[] => {
           id: wordId,
           word: oldWord.word,
           meaning: oldWord.meaning,
-          pronunciation: oldWord.pronunciation,
+          reading: oldWord.reading,
           contexts: [contextWithId],
           masteryLevel: oldWord.masteryLevel || 0,
           registeredAt: oldWord.registeredAt || new Date().toISOString(),

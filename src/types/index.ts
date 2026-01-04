@@ -21,11 +21,8 @@ export interface SavedWordContext {
   addedAt: string; // このコンテキストが追加された日時
 }
 
-export interface SavedWord {
+export interface SavedWord extends Vocabulary {
   id: string; // 単語自体のユニークID (word文字列をベースに生成)
-  word: string; // 単語
-  meaning: string; // 日本語の意味
-  pronunciation: string; // ルビ
   contexts: SavedWordContext[]; // 複数のコンテキストを配列で保持
   masteryLevel: number; // 習熟度 (例: 0=未習得, 1=学習中, 2=覚えた)
   registeredAt: string; // 最初に登録された日時 (JSON保存用にstring型)
@@ -37,6 +34,8 @@ export interface Vocabulary {
   word: string;
   reading: string;
   meaning: string;
+  note?: string;
+  skip?: boolean; // trueの場合、学習対象から除外
 }
 
 // 歌詞行の型定義
